@@ -1,0 +1,73 @@
+---
+const navItems = [
+  { label: '01 // DOSSIER', href: '/' },
+  { label: '02 // RESEARCH', href: '/research' },
+  { label: '03 // SYSTEMS', href: '/systems' },
+  { label: '04 // LEDGER', href: '/ledger' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 backdrop-blur-md bg-[#020611]/85 border-b border-[#1e293b]">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <!-- Brand / Node Handle -->
+    <a href="/" class="flex items-center gap-2 group">
+      <span class="w-2.5 h-2.5 rounded-full bg-[#00e5ff] animate-pulse"></span>
+      <span class="font-bold text-sm tracking-widest text-[#f8fafc] group-hover:text-[#00e5ff] transition-colors">
+        AAYUSH<span class="text-[#38bdf8]">.BANKAR</span>
+      </span>
+      <span class="text-xs text-[#64748b] hidden sm:inline">[NODE: TTY0]</span>
+    </a>
+
+    <!-- Navigation Menu -->
+    <nav class="hidden md:flex items-center gap-6">
+      {navItems.map((item) => {
+        const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+        return (
+          <a
+            href={item.href}
+            class={`text-xs font-mono tracking-wider transition-colors py-1 ${
+              isActive
+                ? 'text-[#00e5ff] border-b-2 border-[#00e5ff]'
+                : 'text-[#94a3b8] hover:text-[#f8fafc]'
+            }`}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Right HUD status -->
+    <div class="flex items-center gap-3">
+      <div class="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded bg-[#040914] border border-[#1e293b] text-[11px] text-[#64748b]">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>
+        <span>CYPHERMATRIX ANALYST</span>
+      </div>
+      <a
+        href="https://github.com/Aayushbankar"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-xs px-3 py-1.5 rounded bg-[#07111e] border border-[#1e293b] text-[#38bdf8] hover:border-[#00e5ff] hover:text-[#00e5ff] transition-all"
+      >
+        GITHUB ↗
+      </a>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Bar -->
+  <div class="md:hidden flex items-center justify-around py-2 border-t border-[#1e293b]/50 bg-[#020611] text-[11px]">
+    {navItems.map((item) => {
+      const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+      return (
+        <a
+          href={item.href}
+          class={`font-mono px-2 py-1 ${isActive ? 'text-[#00e5ff] font-bold' : 'text-[#94a3b8]'}`}
+        >
+          {item.label.split(' // ')[1]}
+        </a>
+      );
+    })}
+  </div>
+</header>

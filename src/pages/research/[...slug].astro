@@ -1,0 +1,85 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('research');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'research'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout
+  title={`${post.data.title} — Aayush Bankar`}
+  description={post.data.description}
+>
+  <div class="mb-8">
+    <a
+      href="/research"
+      class="text-xs text-[#64748b] hover:text-[#00e5ff] inline-flex items-center gap-1 transition-colors mb-6"
+    >
+      &larr; BACK TO RESEARCH INDEX
+    </a>
+
+    <div class="flex flex-wrap items-center gap-2 mb-3 text-xs">
+      <span class="px-2.5 py-0.5 rounded bg-[#0284c7]/20 text-[#38bdf8] font-bold">
+        {post.data.category}
+      </span>
+      {post.data.cveId && (
+        <span class="px-2 py-0.5 rounded bg-[#ef4444]/20 text-[#ef4444] font-bold font-mono">
+          {post.data.cveId}
+        </span>
+      )}
+      <span class="text-[#64748b]">&bull;</span>
+      <time class="text-[#64748b]">
+        {post.data.publishDate.toISOString().split('T')[0]}
+      </time>
+    </div>
+
+    <h1 class="text-2xl sm:text-4xl font-extrabold text-[#f8fafc] tracking-tight mb-4 leading-tight">
+      {post.data.title}
+    </h1>
+
+    <p class="text-sm sm:text-base text-[#94a3b8] leading-relaxed border-l-2 border-[#00e5ff] pl-4 my-4 font-mono">
+      {post.data.description}
+    </p>
+
+    {post.data.verifiableLedgerUrl && (
+      <div class="mt-4 p-3 rounded bg-[#040914] border border-[#1e293b] flex items-center justify-between text-xs">
+        <span class="text-[#10b981] font-bold">VERIFICATION LEDGER ACTIVE</span>
+        <a
+          href={post.data.verifiableLedgerUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[#38bdf8] hover:text-[#00e5ff] font-bold"
+        >
+          INSPECT SOURCE ARTIFACTS ↗
+        </a>
+      </div>
+    )}
+  </div>
+
+  <div class="border-t border-[#1e293b] pt-8">
+    <div class="prose prose-invert max-w-none prose-headings:font-mono prose-headings:tracking-tight prose-headings:text-[#f8fafc] prose-a:text-[#00e5ff] prose-code:text-[#38bdf8] prose-pre:bg-[#040914] prose-pre:border prose-pre:border-[#1e293b] prose-p:text-[#cbd5e1] prose-p:leading-relaxed prose-li:text-[#cbd5e1]">
+      <Content />
+    </div>
+  </div>
+
+  <div class="mt-14 pt-6 border-t border-[#1e293b] flex items-center justify-between text-xs text-[#64748b]">
+    <div>
+      AUTHOR: <span class="text-[#f8fafc]">{post.data.author}</span>
+    </div>
+    <a href="/research" class="text-[#38bdf8] hover:text-[#00e5ff]">
+      &uarr; BACK TO TOP
+    </a>
+  </div>
+</BaseLayout>

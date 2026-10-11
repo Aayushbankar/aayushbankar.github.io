@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 250" width="580" height="250" role="img" aria-label="Wolvie Local Voice Companion">
+<title>Wolvie Voice Companion</title>
+<defs>
+  <linearGradient id="wv-bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#110a1c"/><stop offset="1" stop-color="#05030a"/>
+  </linearGradient>
+  <radialGradient id="wv-glow" cx="80%" cy="52%" r="55%">
+    <stop offset="0%" stop-color="#a855f7" stop-opacity="0.16"/><stop offset="1" stop-color="#000" stop-opacity="0"/>
+  </radialGradient>
+  <pattern id="wv-grid" width="26" height="26" patternUnits="userSpaceOnUse">
+    <path d="M26 0 V26 M0 26 H26" stroke="#1f1133" stroke-width="1" fill="none"/>
+  </pattern>
+  <filter id="wv-g" x="-80%" y="-80%" width="260%" height="260%">
+    <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <style>
+    .m { font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace; }
+    .d { font-size: 11px; fill: #94a3b8; }
+    .chip { font-size: 9px; letter-spacing: 1.1px; fill: #e9d5ff; }
+  </style>
+</defs>
+
+<rect x="1" y="1" width="578" height="248" rx="12" fill="url(#wv-bg)" stroke="#1e293b"/>
+<rect x="1" y="1" width="578" height="248" rx="12" fill="url(#wv-grid)" opacity="0.55"/>
+<rect x="1" y="1" width="578" height="248" rx="12" fill="url(#wv-glow)"/>
+<rect x="1" y="1" width="5" height="248" rx="2.5" fill="#a855f7" opacity="0.85"/>
+
+<g class="m">
+  <rect x="24" y="20" width="34" height="18" rx="4" fill="#24113b" stroke="#6b21a8"/>
+  <text x="41" y="33" font-size="10" font-weight="700" fill="#a855f7" text-anchor="middle">04</text>
+  <circle cx="72" cy="29" r="3.5" fill="#a855f7">
+    <animate attributeName="opacity" values="1;0.2;1" dur="1.6s" repeatCount="indefinite"/>
+  </circle>
+  <text x="84" y="33" font-size="9.5" letter-spacing="1.8" fill="#c084fc">EDGE AI &#183; AUDIO PIPELINE</text>
+
+  <text x="24" y="72" font-size="24" font-weight="800" letter-spacing="1.4" fill="#f8fafc">WOLVIE</text>
+  <text x="24" y="93" font-size="10" letter-spacing="2" fill="#a855f7">REAL-TIME LOCAL VOICE COMPANION</text>
+  <path d="M24 104 H352" stroke="#1e293b"/>
+
+  <text class="d" x="24" y="124">End-to-end local speech pipeline with voice call UI.</text>
+  <text class="d" x="24" y="141">Silero VAD + faster-whisper + llama.cpp + Piper.</text>
+  <text class="d" x="24" y="158">Zero cloud dependency; runs entirely on-device.</text>
+  <text class="d" x="24" y="175">Conversational persona fine-tuning via prompt chains.</text>
+
+  <g>
+    <rect x="24" y="196" width="62" height="17" rx="3.5" fill="#24113b" stroke="#6b21a8"/><text class="chip" x="55" y="208" text-anchor="middle">PYTHON</text>
+    <rect x="92" y="196" width="68" height="17" rx="3.5" fill="#24113b" stroke="#6b21a8"/><text class="chip" x="126" y="208" text-anchor="middle">WEBRTC</text>
+    <rect x="166" y="196" width="66" height="17" rx="3.5" fill="#24113b" stroke="#6b21a8"/><text class="chip" x="199" y="208" text-anchor="middle">WHISPER</text>
+    <rect x="238" y="196" width="76" height="17" rx="3.5" fill="#24113b" stroke="#6b21a8"/><text class="chip" x="276" y="208" text-anchor="middle">LLAMA.CPP</text>
+  </g>
+
+  <text x="556" y="234" font-size="9.5" letter-spacing="1.6" fill="#64748b" text-anchor="end">github.com/Aayushbankar/wolvie</text>
+</g>
+
+<!-- Audio Waveform / VAD Spectrum Graphic -->
+<g transform="translate(466,126)" class="m">
+  <circle r="64" fill="#0d0817" stroke="#1e293b"/>
+  <!-- Frequency Bars -->
+  <g fill="#a855f7" opacity="0.85">
+    <rect x="-42" y="-12" width="6" height="24" rx="2">
+      <animate attributeName="height" values="14;34;18;28;14" dur="1.2s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="-7;-17;-9;-14;-7" dur="1.2s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="-30" y="-18" width="6" height="36" rx="2">
+      <animate attributeName="height" values="24;46;30;20;24" dur="0.9s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="-12;-23;-15;-10;-12" dur="0.9s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="-18" y="-24" width="6" height="48" rx="2">
+      <animate attributeName="height" values="32;58;42;26;32" dur="1.4s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="-16;-29;-21;-13;-16" dur="1.4s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="-6" y="-30" width="6" height="60" rx="2" fill="#c084fc">
+      <animate attributeName="height" values="40;68;50;34;40" dur="1.1s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="-20;-34;-25;-17;-20" dur="1.1s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="6" y="-22" width="6" height="44" rx="2">
+      <animate attributeName="height" values="28;52;36;22;28" dur="1.3s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="-14;-26;-18;-11;-14" dur="1.3s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="18" y="-16" width="6" height="32" rx="2">
+      <animate attributeName="height" values="20;40;26;16;20" dur="1.0s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="-10;-20;-13;-8;-10" dur="1.0s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="30" y="-10" width="6" height="20" rx="2">
+      <animate attributeName="height" values="12;28;16;10;12" dur="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="-6;-14;-8;-5;-6" dur="1.5s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <text x="0" y="46" font-size="8.5" fill="#c084fc" font-weight="700" text-anchor="middle">VAD &amp; WEBRTC STREAM</text>
+
+  <circle cx="42" cy="-38" r="3" fill="#a855f7">
+    <animate attributeName="opacity" values="1;0.2;1" dur="1.4s" repeatCount="indefinite"/>
+  </circle>
+</g>
+</svg>

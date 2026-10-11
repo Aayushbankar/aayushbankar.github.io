@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const certifications = [
+  {
+    title: 'Certified AppSec Practitioner (CAP v2)',
+    issuer: 'The SecOps Group',
+    status: 'ACTIVE & VERIFIED',
+    credentialId: 'TSG-CAP-V2',
+    desc: 'Web application security, OWASP Top 10, API vulnerability exploitation, and business logic bypasses.',
+  },
+  {
+    title: 'Certified Network Security Practitioner (CNSP)',
+    issuer: 'The SecOps Group',
+    status: 'ACTIVE & VERIFIED',
+    credentialId: 'TSG-CNSP',
+    desc: 'Network architecture audits, protocol dissection, traffic analysis, firewall boundary traversal.',
+  },
+  {
+    title: 'IBM SkillsBuild Professional Pathways',
+    issuer: 'IBM',
+    status: 'COMPLETED (48/50 MODULES)',
+    credentialId: 'IBM-SB-48',
+    desc: 'Comprehensive coursework covering enterprise cybersecurity fundamentals, cloud environments, and agile delivery.',
+  },
+];
+
+const competencies = [
+  {
+    category: 'SYSTEMS & KERNEL',
+    skills: ['Linux Kernel Internals', 'SLUB Allocator Mechanics', 'epoll / IPC Subsystems', 'QEMU/KVM Testing', 'GDB Scripting', 'C / x86_64 ASM', 'eBPF Tracepoints'],
+  },
+  {
+    category: 'SECURITY AUDITING & EXPLOITATION',
+    skills: ['ROP Chain Synthesis', 'Cross-Cache Slab Reclamation', 'Retpoline & kCFI Audits', 'Android Binder IPC Analysis', 'ContentProvider Injection', 'Burp Suite Pro', 'YARA & Suricata Rules'],
+  },
+  {
+    category: 'CRYPTOGRAPHY & PROVENANCE',
+    skills: ['BLAKE3 Hashing', 'RFC 6962 Merkle Trees', 'Ed25519 Quorum Signatures', 'OCSF Schema Normalization', 'Zero-Copy SIMD Ingestion', 'Audit Log Immutability'],
+  },
+  {
+    category: 'APPLIED AI & EDGE PIPELINES',
+    skills: ['Autonomous Agent Orchestration', 'Prompt Architecture', 'llama.cpp Local Quantization', 'faster-whisper VAD Pipeline', 'Piper Neural TTS', 'WebRTC Audio Streaming'],
+  },
+];
+---
+
+<BaseLayout
+  title="Technical Skill & Asset Ledger — Aayush Bankar"
+  description="Audited inventory of verified credentials, research claims, kernel competencies, and hardware lab infrastructure."
+>
+  <div class="mb-10">
+    <div class="text-xs text-[#00e5ff] font-bold tracking-widest mb-1">&gt; AUDITED ASSET INVENTORY // EVIDENCE LEDGER</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-[#f8fafc] tracking-tight">
+      TECHNICAL SKILL <span class="text-[#38bdf8]">LEDGER</span>
+    </h1>
+    <p class="text-sm text-[#94a3b8] mt-2 max-w-2xl leading-relaxed">
+      A ground-truth inventory of validated credentials, verified research claims, systems architecture competencies, and laboratory infrastructure.
+    </p>
+  </div>
+
+  <!-- Verified Certifications -->
+  <section class="mb-14">
+    <div class="flex items-center gap-3 mb-6 border-b border-[#1e293b] pb-3">
+      <span class="text-[#00e5ff] font-bold text-lg">&#9608;&#9617;</span>
+      <h2 class="text-lg font-bold tracking-wider text-[#f8fafc]">01 // VERIFIED CREDENTIALS &amp; CERTIFICATIONS</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {certifications.map((c) => (
+        <div class="p-5 rounded-lg bg-[#040914] border border-[#1e293b] flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] mb-2">
+              <span class="text-[#10b981] font-bold">{c.status}</span>
+              <span class="text-[#64748b]">{c.credentialId}</span>
+            </div>
+            <h3 class="text-base font-bold text-[#f8fafc] mb-1">{c.title}</h3>
+            <div class="text-xs text-[#38bdf8] font-bold mb-3">{c.issuer}</div>
+            <p class="text-xs text-[#94a3b8] leading-relaxed mb-4">
+              {c.desc}
+            </p>
+          </div>
+          <div class="pt-3 border-t border-[#1e293b]/60 text-[11px] text-[#64748b]">
+            VERIFIED VIA ISSUER REPOSITORY
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Technical Competency Matrix -->
+  <section class="mb-14">
+    <div class="flex items-center gap-3 mb-6 border-b border-[#1e293b] pb-3">
+      <span class="text-[#00e5ff] font-bold text-lg">&#9608;&#9617;</span>
+      <h2 class="text-lg font-bold tracking-wider text-[#f8fafc]">02 // TECHNICAL COMPETENCY MATRIX</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {competencies.map((group) => (
+        <div class="p-6 rounded-lg bg-[#040914] border border-[#1e293b]">
+          <h3 class="text-xs font-bold tracking-wider text-[#38bdf8] mb-4">
+            {group.category}
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            {group.skills.map((skill) => (
+              <span class="px-2.5 py-1 rounded bg-[#07111e] border border-[#1e293b] text-xs text-[#cbd5e1] font-mono">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Academic Background & Lab Infrastructure -->
+  <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="p-6 rounded-lg bg-[#040914] border border-[#1e293b]">
+      <div class="text-xs font-bold tracking-wider text-[#00e5ff] mb-3">03 // ACADEMIC PROFILE</div>
+      <h3 class="text-lg font-bold text-[#f8fafc] mb-1">Govt. Polytechnic Gandhinagar</h3>
+      <div class="text-xs text-[#38bdf8] font-bold mb-3">Diploma in Information Technology</div>
+      <div class="p-3 rounded bg-[#020611] border border-[#1e293b] text-xs space-y-1 mb-4 font-mono">
+        <div>&bull; Cumulative Performance Index: <span class="text-[#f59e0b] font-bold">8.60 / 10.0</span></div>
+        <div>&bull; Department Web Portal Lead (itgpg.github.io)</div>
+        <div>&bull; Directing Lateral Entry B.E./B.Tech DDCET Pathway</div>
+      </div>
+    </div>
+
+    <div class="p-6 rounded-lg bg-[#040914] border border-[#1e293b]">
+      <div class="text-xs font-bold tracking-wider text-[#00e5ff] mb-3">04 // RESEARCH LAB RIG</div>
+      <h3 class="text-lg font-bold text-[#f8fafc] mb-1">Local Laboratory Hardware</h3>
+      <div class="text-xs text-[#38bdf8] font-bold mb-3">HP EliteBook 840 G5 / Fedora &amp; Arch Linux</div>
+      <div class="p-3 rounded bg-[#020611] border border-[#1e293b] text-xs space-y-1 mb-4 font-mono">
+        <div>&bull; CPU: Intel Core i5-8350U (4C/8T @ 3.6GHz)</div>
+        <div>&bull; RAM: 16 GB DDR4-2400 MHz Dual-Channel</div>
+        <div>&bull; Virtualization: QEMU/KVM with GDB &amp; KASAN telemetry</div>
+        <div>&bull; Edge AI: llama.cpp GGUF 4-bit CPU quantization</div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,70 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Aayush Bankar — Systems Security Researcher & AI-Augmented Engineer',
+  description = 'Offensive security research, Linux kernel & Android vulnerabilities, and sovereign high-throughput architectures.',
+  image = '/assets/hero.svg',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Aayush Bankar" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site)} />
+
+    <!-- Alternate RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Aayush Bankar Research Feed" href="/rss.xml" />
+  </head>
+  <body class="min-h-screen flex flex-col bg-[#020611] text-[#f8fafc] font-mono selection:bg-[#00e5ff]/20 selection:text-[#00e5ff]">
+    <!-- Ambient Cyber Background Grid -->
+    <div class="fixed inset-0 pointer-events-none z-[-1] opacity-25">
+      <div class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px]"></div>
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#00e5ff]/5 blur-[120px] rounded-full"></div>
+    </div>
+
+    <Navbar />
+
+    <main class="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 py-10">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

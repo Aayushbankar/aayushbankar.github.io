@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const flagships = [
+  {
+    title: 'CVE-2026-46242: Bad Epoll',
+    domain: 'Kernel Exploit Research',
+    status: 'COMPLETED & VERIFIED',
+    desc: 'Linux kernel epoll subsystem race condition and UAF root exploit on x86_64, coupled with an Android ARM64 GKI research port under kCFI and ARM64 PAC/BTI mitigations.',
+    highlights: [
+      'kmalloc-192 cross-cache slab reclamation using msg_msg headers',
+      'KASLR bypass via out-of-bounds msg_msg heap leak',
+      'Two-stage ROP pivot under CONFIG_RETPOLINE executing commit_creds',
+      'Automated QEMU/KVM test harness with GDB script telemetry',
+    ],
+    repo: 'https://github.com/Aayushbankar/bad_epoll_ab_tier2',
+    accent: '#ef4444',
+  },
+  {
+    title: 'CVE-2026-28576: Android SQLi',
+    domain: 'Android Framework Security',
+    status: 'COMPLETED & VERIFIED',
+    desc: 'Framework-level ContentProvider arbitrary SQL projection injection in ContactsProvider2.java, enabling unauthorized cross-UID data exfiltration across process boundaries.',
+    highlights: [
+      'Bypasses Android sandbox without READ_CONTACTS permission',
+      'Tested across Android 11 through Android 15 Developer Preview',
+      'Extracts encrypted auth tokens and internal sqlite_master schemas',
+      'Complete empirical verification ledger with vendor remediation pass',
+    ],
+    repo: 'https://github.com/Aayushbankar/cve-2026-28576',
+    accent: '#f59e0b',
+  },
+  {
+    title: 'SPECTRE-PRISM: Sovereign Log Engine',
+    domain: 'High-Throughput Systems',
+    status: 'SIH 2026 SCREENING ROUND',
+    desc: '5-plane sovereign log processing engine built with zero-copy SIMD ingestion, OCSF normalization, and RFC 6962 verifiable transparency ledgers with BLAKE3 hashing.',
+    highlights: [
+      'Zero-copy SIMD ingestion sustained at 13,000+ events/sec/core',
+      'RFC 6962 Merkle audit paths with logarithmic inclusion proofs',
+      'Ed25519 multi-signature cryptographic consensus attestations',
+      'Cleared internal college round; active in national SIH screening',
+    ],
+    repo: 'https://github.com/Aayushbankar/spectre-prism',
+    accent: '#00e5ff',
+  },
+  {
+    title: 'Wolvie: Local Edge Voice Companion',
+    domain: 'Applied AI & Audio',
+    status: 'ACTIVE DEVELOPMENT',
+    desc: 'End-to-end real-time local voice companion pipeline running completely on consumer edge hardware with WebRTC streaming call UI and zero cloud dependencies.',
+    highlights: [
+      'Silero VAD + faster-whisper + llama.cpp + Piper TTS chained pipeline',
+      'Optimized sub-second conversational latency over WebRTC audio',
+      'Custom fine-tuned voice personas via structured prompt orchestration',
+      '100% offline execution; zero telemetry leaves the host machine',
+    ],
+    repo: 'https://github.com/Aayushbankar/wolvie',
+    accent: '#a855f7',
+  },
+];
+
+const secondarySystems = [
+  {
+    name: 'QuantLab',
+    domain: 'Fintech Simulation',
+    desc: 'Algorithmic trading backtesting engine explicitly modeling execution slippage, exchange fees, and out-of-sample decay curves.',
+    repo: 'https://github.com/Aayushbankar/Quantlab',
+  },
+  {
+    name: 'cve_aggregator',
+    domain: 'Threat Intelligence',
+    desc: 'Unified threat intel ingestion engine consolidating NVD API v2.0, CISA KEV, and GitHub Security Advisories with composite risk ranking.',
+    repo: 'https://github.com/Aayushbankar/cve_aggregator',
+  },
+  {
+    name: 'onetimeshare',
+    domain: 'Secure Backend',
+    desc: 'Ephemeral file-sharing microservice using atomic Redis TTL transactions to eliminate race conditions on one-time secure downloads.',
+    repo: 'https://github.com/Aayushbankar/onetimeshare',
+  },
+  {
+    name: 'privata',
+    domain: 'Applied AI / RAG',
+    desc: 'Privacy-preserving local document query engine using offline embeddings (Sentence Transformers) and ChromaDB vector search.',
+    repo: 'https://github.com/Aayushbankar/privata',
+  },
+  {
+    name: 'it (itgpg.github.io)',
+    domain: 'Production Web',
+    desc: 'Official production portal for Govt. Polytechnic Gandhinagar IT Department serving 500+ daily academic students and faculty.',
+    repo: 'https://itgpg.github.io/it/',
+  },
+];
+---
+
+<BaseLayout
+  title="Systems Architecture & Flagships — Aayush Bankar"
+  description="Engineering specifications, exploit primitives, and sovereign pipeline blueprints for flagship security systems."
+>
+  <div class="mb-10">
+    <div class="text-xs text-[#00e5ff] font-bold tracking-widest mb-1">&gt; SYSTEM SPECIFICATIONS // PRODUCTION REPOSITORIES</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-[#f8fafc] tracking-tight">
+      FLAGSHIP <span class="text-[#38bdf8]">SYSTEMS</span>
+    </h1>
+    <p class="text-sm text-[#94a3b8] mt-2 max-w-2xl leading-relaxed">
+      Sovereign data engines, kernel exploit research harnesses, framework-level IPC security tooling, and edge applied AI pipelines.
+    </p>
+  </div>
+
+  <!-- Flagship Projects Deep Dive -->
+  <div class="space-y-8 mb-16">
+    {flagships.map((f) => (
+      <div class="p-6 sm:p-8 rounded-lg bg-[#040914] border border-[#1e293b] hover:border-[#38bdf8]/50 transition-all">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded font-bold" style={{ backgroundColor: `${f.accent}20`, color: f.accent }}>
+              {f.domain}
+            </span>
+          </div>
+          <span class="text-[#10b981] font-bold text-[11px] font-mono">
+            STATUS: {f.status}
+          </span>
+        </div>
+
+        <h2 class="text-2xl font-bold text-[#f8fafc] mb-3">
+          {f.title}
+        </h2>
+
+        <p class="text-xs sm:text-sm text-[#94a3b8] leading-relaxed mb-6 font-mono">
+          {f.desc}
+        </p>
+
+        <div class="mb-6">
+          <div class="text-xs font-bold text-[#38bdf8] mb-3 tracking-wider">TECHNICAL SPECIFICATIONS &amp; DELIVERABLES:</div>
+          <ul class="space-y-2 text-xs text-[#cbd5e1]">
+            {f.highlights.map((h) => (
+              <li class="flex items-start gap-2">
+                <span class="text-[#00e5ff]">&bull;</span>
+                <span>{h}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-[#1e293b] flex items-center justify-between text-xs">
+          <span class="text-[#64748b]">LICENSED UNDER AUTHORIZED RESEARCH PROTOCOL</span>
+          <a
+            href={f.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-3.5 py-1.5 rounded bg-[#07111e] border border-[#1e293b] text-[#00e5ff] hover:bg-[#00e5ff]/10 font-bold transition-all"
+          >
+            INSPECT REPOSITORY ↗
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Secondary Systems Table -->
+  <section class="p-6 rounded-lg bg-[#040914] border border-[#1e293b]">
+    <div class="flex items-center gap-3 mb-6 border-b border-[#1e293b] pb-3">
+      <span class="text-[#00e5ff] font-bold text-lg">&#9608;&#9617;</span>
+      <h2 class="text-lg font-bold tracking-wider text-[#f8fafc]">ADDITIONAL PRODUCTION REPOSITORIES</h2>
+    </div>
+
+    <div class="divide-y divide-[#1e293b]/60">
+      {secondarySystems.map((s) => (
+        <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-bold text-[#f8fafc] text-sm">{s.name}</span>
+              <span class="px-2 py-0.5 rounded bg-[#07111e] border border-[#1e293b] text-[#38bdf8] text-[10px]">
+                {s.domain}
+              </span>
+            </div>
+            <p class="text-[#94a3b8] max-w-xl">
+              {s.desc}
+            </p>
+          </div>
+
+          <a
+            href={s.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[#38bdf8] hover:text-[#00e5ff] font-bold whitespace-nowrap"
+          >
+            REPOSITORY ↗
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

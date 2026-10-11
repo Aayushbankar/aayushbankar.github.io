@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('research');
+const sortedPosts = posts.sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+
+const categories = [
+  'All',
+  'Kernel & Exploitation',
+  'Android Internals',
+  'Sovereign Systems',
+  'AI Engineering',
+];
+---
+
+<BaseLayout
+  title="Research & Publications — Aayush Bankar"
+  description="Technical papers, kernel vulnerability reproductions, Android exploit deep-dives, and sovereign systems architecture specifications."
+>
+  <div class="mb-10">
+    <div class="text-xs text-[#00e5ff] font-bold tracking-widest mb-1">&gt; PUBLICATION INDEX // DECLASSIFIED PAPERS</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-[#f8fafc] tracking-tight">
+      RESEARCH &amp; <span class="text-[#38bdf8]">PUBLICATIONS</span>
+    </h1>
+    <p class="text-sm text-[#94a3b8] mt-2 max-w-2xl leading-relaxed">
+      Formal technical writeups, deterministic vulnerability teardowns, empirical verification ledgers, and sovereign system architecture blueprints.
+    </p>
+  </div>
+
+  <!-- Category List -->
+  <div class="flex flex-wrap gap-2 mb-8 border-b border-[#1e293b] pb-4 text-xs font-mono">
+    {categories.map((c, i) => (
+      <span class={`px-3 py-1 rounded cursor-pointer transition-colors ${
+        i === 0
+          ? 'bg-[#00e5ff]/15 text-[#00e5ff] border border-[#00e5ff]/40 font-bold'
+          : 'bg-[#040914] text-[#94a3b8] border border-[#1e293b] hover:text-[#f8fafc]'
+      }`}>
+        {c}
+      </span>
+    ))}
+  </div>
+
+  <!-- Articles List -->
+  <div class="space-y-6">
+    {sortedPosts.map((post) => (
+      <article class="p-6 rounded-lg bg-[#040914] border border-[#1e293b] hover:border-[#00e5ff]/60 hover:bg-[#07111e]/40 transition-all group">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded bg-[#0284c7]/20 text-[#38bdf8] font-bold">
+              {post.data.category}
+            </span>
+            {post.data.cveId && (
+              <span class="px-2 py-0.5 rounded bg-[#ef4444]/20 text-[#ef4444] font-bold font-mono">
+                {post.data.cveId}
+              </span>
+            )}
+          </div>
+          <time class="text-[#64748b]">
+            {post.data.publishDate.toISOString().split('T')[0]}
+          </time>
+        </div>
+
+        <a href={`/research/${post.id}`}>
+          <h2 class="text-xl font-bold text-[#f8fafc] group-hover:text-[#00e5ff] transition-colors mb-2">
+            {post.data.title}
+          </h2>
+        </a>
+
+        <p class="text-xs sm:text-sm text-[#94a3b8] leading-relaxed mb-4">
+          {post.data.description}
+        </p>
+
+        <div class="flex items-center justify-between pt-4 border-t border-[#1e293b]/60 text-xs">
+          <div class="flex flex-wrap gap-2 text-[10px] text-[#64748b]">
+            {post.data.tags.map((tag) => (
+              <span>#{tag}</span>
+            ))}
+          </div>
+
+          <a
+            href={`/research/${post.id}`}
+            class="text-[#38bdf8] group-hover:text-[#00e5ff] font-bold flex items-center gap-1"
+          >
+            READ PAPER &rarr;
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+</BaseLayout>

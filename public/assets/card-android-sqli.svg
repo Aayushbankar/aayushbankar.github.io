@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 250" width="580" height="250" role="img" aria-label="CVE-2026-28576 Android Contacts SQL Injection Research">
+<title>CVE-2026-28576 Android SQLi</title>
+<defs>
+  <linearGradient id="as-bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#071419"/><stop offset="1" stop-color="#02080c"/>
+  </linearGradient>
+  <radialGradient id="as-glow" cx="80%" cy="52%" r="55%">
+    <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.15"/><stop offset="1" stop-color="#000" stop-opacity="0"/>
+  </radialGradient>
+  <pattern id="as-grid" width="26" height="26" patternUnits="userSpaceOnUse">
+    <path d="M26 0 V26 M0 26 H26" stroke="#0e232c" stroke-width="1" fill="none"/>
+  </pattern>
+  <filter id="as-g" x="-80%" y="-80%" width="260%" height="260%">
+    <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <style>
+    .m { font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace; }
+    .d { font-size: 11px; fill: #94a3b8; }
+    .chip { font-size: 9px; letter-spacing: 1.1px; fill: #fde68a; }
+  </style>
+</defs>
+
+<rect x="1" y="1" width="578" height="248" rx="12" fill="url(#as-bg)" stroke="#1e293b"/>
+<rect x="1" y="1" width="578" height="248" rx="12" fill="url(#as-grid)" opacity="0.55"/>
+<rect x="1" y="1" width="578" height="248" rx="12" fill="url(#as-glow)"/>
+<rect x="1" y="1" width="5" height="248" rx="2.5" fill="#f59e0b" opacity="0.85"/>
+
+<g class="m">
+  <rect x="24" y="20" width="34" height="18" rx="4" fill="#2d1c07" stroke="#78350f"/>
+  <text x="41" y="33" font-size="10" font-weight="700" fill="#f59e0b" text-anchor="middle">02</text>
+  <circle cx="72" cy="29" r="3.5" fill="#f59e0b">
+    <animate attributeName="opacity" values="1;0.2;1" dur="1.7s" repeatCount="indefinite"/>
+  </circle>
+  <text x="84" y="33" font-size="9.5" letter-spacing="1.8" fill="#fbbf24">RESEARCH &#183; ANDROID FRAMEWORK</text>
+
+  <text x="24" y="72" font-size="24" font-weight="800" letter-spacing="1.4" fill="#f8fafc">ANDROID SQLI</text>
+  <text x="24" y="93" font-size="10" letter-spacing="2" fill="#f59e0b">CVE-2026-28576 &#183; CONTACTS PROVIDER IPC BYPASS</text>
+  <path d="M24 104 H352" stroke="#1e293b"/>
+
+  <text class="d" x="24" y="124">Android ContactsProvider ContentProvider query flaw.</text>
+  <text class="d" x="24" y="141">Arbitrary projection injection across UID sandboxes.</text>
+  <text class="d" x="24" y="158">Validated on Android 11 through Android 15 DP.</text>
+  <text class="d" x="24" y="175">Formal verification ledger with complete reproduction.</text>
+
+  <g>
+    <rect x="24" y="196" width="56" height="17" rx="3.5" fill="#2d1c07" stroke="#78350f"/><text class="chip" x="52" y="208" text-anchor="middle">JAVA</text>
+    <rect x="86" y="196" width="94" height="17" rx="3.5" fill="#2d1c07" stroke="#78350f"/><text class="chip" x="133" y="208" text-anchor="middle">BINDER IPC</text>
+    <rect x="186" y="196" width="86" height="17" rx="3.5" fill="#2d1c07" stroke="#78350f"/><text class="chip" x="229" y="208" text-anchor="middle">CONTENT URI</text>
+    <rect x="278" y="196" width="68" height="17" rx="3.5" fill="#2d1c07" stroke="#78350f"/><text class="chip" x="312" y="208" text-anchor="middle">SQLITE</text>
+  </g>
+
+  <text x="556" y="234" font-size="9.5" letter-spacing="1.6" fill="#64748b" text-anchor="end">github.com/Aayushbankar/cve-2026-28576</text>
+</g>
+
+<!-- Android IPC Query Injection Graphic -->
+<g transform="translate(466,126)" class="m">
+  <circle r="64" fill="#09131a" stroke="#1e293b"/>
+  <!-- Untrusted App UID -->
+  <rect x="-50" y="-46" width="100" height="20" rx="3" fill="#1b2533" stroke="#38bdf8" stroke-width="1.2"/>
+  <text x="-42" y="-32" font-size="8.5" fill="#38bdf8" font-weight="700">App (u0_a182)</text>
+
+  <!-- Binder IPC Call -->
+  <path d="M0 -26 V -6" stroke="#38bdf8" stroke-width="1.5">
+    <animate attributeName="stroke-dasharray" values="0,20;20,0" dur="2.2s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Injected Projection Payload -->
+  <rect x="-50" y="-6" width="100" height="22" rx="3" fill="#2d1c07" stroke="#f59e0b" stroke-width="1.2"/>
+  <text x="-42" y="8" font-size="8.5" fill="#f59e0b" font-weight="700">query(projection')</text>
+
+  <!-- DB Query Execution -->
+  <path d="M0 16 V 34" stroke="#f59e0b" stroke-width="1.5"/>
+
+  <!-- ContactsProvider SQLite DB -->
+  <rect x="-50" y="34" width="100" height="20" rx="3" fill="#1b2b1a" stroke="#10b981" stroke-width="1.2"/>
+  <text x="-42" y="48" font-size="8.5" fill="#10b981" font-weight="700">contacts2.db [EXFIL]</text>
+
+  <circle cx="42" cy="-38" r="3" fill="#f59e0b">
+    <animate attributeName="opacity" values="1;0.2;1" dur="1.3s" repeatCount="indefinite"/>
+  </circle>
+</g>
+</svg>

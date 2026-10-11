@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 240" width="1200" height="240" role="img" aria-label="Sign-off: handshake open, all work is for authorized testing, low-level systems research and responsible disclosure">
+<title>end of transmission</title>
+<defs>
+  <linearGradient id="ft-bg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#020610"/>
+    <stop offset="60%" stop-color="#040c1a"/>
+    <stop offset="1" stop-color="#01040a"/>
+  </linearGradient>
+  <radialGradient id="ft-glow" cx="50%" cy="78%" r="62%">
+    <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.14"/>
+    <stop offset="1" stop-color="#000" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="ft-fade" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#fff" stop-opacity="0.55"/>
+    <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+  </linearGradient>
+  <mask id="ft-mask"><rect width="1200" height="120" fill="url(#ft-fade)"/></mask>
+  <pattern id="ft-crt" width="3" height="3" patternUnits="userSpaceOnUse">
+    <rect width="3" height="1" fill="#38bdf8" opacity="0.025"/>
+  </pattern>
+  <filter id="ft-g" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+
+  <clipPath id="f0"><rect x="300" y="30" width="0" height="20"><animate attributeName="width" values="0;0;620;620" keyTimes="0;0.02;0.13;1" dur="16s" repeatCount="indefinite"/></rect></clipPath>
+  <clipPath id="f1"><rect x="300" y="54" width="0" height="20"><animate attributeName="width" values="0;0;620;620" keyTimes="0;0.15;0.23;1" dur="16s" repeatCount="indefinite"/></rect></clipPath>
+  <clipPath id="f2"><rect x="300" y="78" width="0" height="20"><animate attributeName="width" values="0;0;620;620" keyTimes="0;0.25;0.36;1" dur="16s" repeatCount="indefinite"/></rect></clipPath>
+  <clipPath id="f3"><rect x="300" y="102" width="0" height="20"><animate attributeName="width" values="0;0;620;620" keyTimes="0;0.38;0.46;1" dur="16s" repeatCount="indefinite"/></rect></clipPath>
+
+  <style>
+    .m { font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace; font-size: 13.5px; }
+    .ok { fill: #00e5ff; font-weight: 700; }
+    .kk { fill: #38bdf8; }
+    .vv { fill: #cbd5e1; }
+  </style>
+</defs>
+
+<rect width="1200" height="240" fill="url(#ft-bg)"/>
+<rect width="1200" height="240" fill="url(#ft-glow)"/>
+
+<!-- Ceiling Perspective Grid -->
+<g mask="url(#ft-mask)" stroke="#0369a1" fill="none" opacity="0.32">
+  <path d="M600 -10 L-160 120"/><path d="M600 -10 L60 120"/><path d="M600 -10 L260 120"/>
+  <path d="M600 -10 L430 120"/><path d="M600 -10 L600 120"/><path d="M600 -10 L770 120"/>
+  <path d="M600 -10 L940 120"/><path d="M600 -10 L1140 120"/><path d="M600 -10 L1360 120"/>
+  <path d="M0 24 H1200"/><path d="M0 46 H1200"/><path d="M0 74 H1200"/><path d="M0 110 H1200"/>
+</g>
+
+<!-- Animated Handshake Protocol -->
+<g class="m">
+  <text y="46" clip-path="url(#f0)"><tspan x="300" class="ok">$</tspan><tspan class="vv"> ./handshake.sh --peer Aayushbankar</tspan></text>
+  <text y="70" clip-path="url(#f1)"><tspan x="300" class="ok">[+]</tspan><tspan class="kk"> channel  </tspan><tspan class="vv">: open</tspan></text>
+  <text y="94" clip-path="url(#f2)"><tspan x="300" class="ok">[+]</tspan><tspan class="kk"> intent   </tspan><tspan class="vv">: kernel research &#183; sovereign pipelines &#183; verify everything</tspan></text>
+  <text y="118" clip-path="url(#f3)"><tspan x="300" class="ok">[+]</tspan><tspan class="kk"> response </tspan><tspan class="vv">: evidence-backed only</tspan></text>
+</g>
+
+<path d="M240 142 H960" stroke="#0e2a47"/>
+
+<!-- End of Transmission Banner -->
+<g class="m" text-anchor="middle">
+  <text x="600" y="186" font-size="26" font-weight="800" letter-spacing="8" fill="#00e5ff" filter="url(#ft-g)" opacity="0.95">END OF TRANSMISSION</text>
+</g>
+<rect x="888" y="168" width="11" height="22" fill="#00e5ff">
+  <animate attributeName="opacity" values="1;1;0;0" dur="1.1s" repeatCount="indefinite"/>
+</rect>
+
+<text class="m" x="600" y="220" font-size="10.5" letter-spacing="2.4" text-anchor="middle" fill="#64748b">
+  ALL RESEARCH PERFORMED UNDER CONTROLLED LAB ENVIRONMENTS &#183; RESPONSIBLE DISCLOSURE COMPLIANT
+</text>
+
+<rect width="1200" height="240" fill="url(#ft-crt)"/>
+<g stroke="#00e5ff" fill="none" stroke-width="1.6" opacity="0.45">
+  <path d="M14 208 L14 226 L44 226"/><path d="M1186 208 L1186 226 L1156 226"/>
+</g>
+</svg>

@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 185" width="1200" height="185" role="img" aria-label="Research and Verification Lifecycle: Threat Model, Lab Harness, AI Synthesis, Proof Ledger, Harden and Release">
+<title>Research &amp; Verification Lifecycle</title>
+
+<defs>
+  <linearGradient id="pbg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#040914"/>
+    <stop offset="100%" stop-color="#02050b"/>
+  </linearGradient>
+  <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#00e5ff" stop-opacity="0"/>
+    <stop offset="50%" stop-color="#38bdf8" stop-opacity="1"/>
+    <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+  </linearGradient>
+  <pattern id="pgrid" width="30" height="30" patternUnits="userSpaceOnUse">
+    <path d="M30 0 V30 M0 30 H30" stroke="#0e1a2b" stroke-width="1" fill="none"/>
+  </pattern>
+  <filter id="pglow" x="-90%" y="-90%" width="280%" height="280%">
+    <feGaussianBlur stdDeviation="4.5" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+
+  <path id="hexP" d="M26 0 L13 22.5 L-13 22.5 L-26 0 L-13 -22.5 L13 -22.5 Z"/>
+  <g id="hexDim"><use href="#hexP" fill="#06101f" stroke="#17304f" stroke-width="1.6"/></g>
+  <g id="hexLit" filter="url(#pglow)"><use href="#hexP" fill="#042038" stroke="#00e5ff" stroke-width="2.2"/></g>
+
+  <style>
+    .m { font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace; }
+  </style>
+</defs>
+
+<rect width="1200" height="185" rx="10" fill="url(#pbg)" stroke="#1e293b"/>
+<rect width="1200" height="185" rx="10" fill="url(#pgrid)" opacity="0.6"/>
+
+<!-- Pipeline Central Rail -->
+<path d="M120 72 H1080" stroke="#132742" stroke-width="2.2"/>
+<path d="M120 72 H1080" stroke="url(#flow)" stroke-width="3" stroke-dasharray="160 960" stroke-linecap="round">
+  <animate attributeName="stroke-dashoffset" values="1120;0" dur="10s" repeatCount="indefinite"/>
+</path>
+
+<!-- Traveling Light Packet -->
+<circle cy="72" r="5.5" fill="#e0f2fe" filter="url(#pglow)">
+  <animate attributeName="cx" values="120;1080" dur="10s" repeatCount="indefinite"/>
+</circle>
+
+<!-- 5 Research Nodes -->
+<g class="m">
+  <!-- Base Inactive Hexagons -->
+  <g transform="translate(120,72)"><use href="#hexDim"/></g>
+  <g transform="translate(360,72)"><use href="#hexDim"/></g>
+  <g transform="translate(600,72)"><use href="#hexDim"/></g>
+  <g transform="translate(840,72)"><use href="#hexDim"/></g>
+  <g transform="translate(1080,72)"><use href="#hexDim"/></g>
+
+  <!-- Glowing Lit Hexagons Triggered in Sequence -->
+  <g transform="translate(120,72)" opacity="0"><use href="#hexLit"/>
+    <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.02;0.16;0.19;1" dur="10s" repeatCount="indefinite"/></g>
+  <g transform="translate(360,72)" opacity="0"><use href="#hexLit"/>
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.22;0.25;0.39;0.42;1" dur="10s" repeatCount="indefinite"/></g>
+  <g transform="translate(600,72)" opacity="0"><use href="#hexLit"/>
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.45;0.48;0.62;0.65;1" dur="10s" repeatCount="indefinite"/></g>
+  <g transform="translate(840,72)" opacity="0"><use href="#hexLit"/>
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.68;0.71;0.85;0.88;1" dur="10s" repeatCount="indefinite"/></g>
+  <g transform="translate(1080,72)" opacity="0"><use href="#hexLit"/>
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.90;0.93;0.98;1;1" dur="10s" repeatCount="indefinite"/></g>
+
+  <!-- Step Numbers -->
+  <g font-size="12" font-weight="700" text-anchor="middle" fill="#64748b">
+    <text x="120" y="77">01</text>
+    <text x="360" y="77">02</text>
+    <text x="600" y="77">03</text>
+    <text x="840" y="77">04</text>
+    <text x="1080" y="77">05</text>
+  </g>
+
+  <!-- Inactive Subtitles -->
+  <g font-size="11.5" letter-spacing="1.8" text-anchor="middle" fill="#475569">
+    <text x="120" y="126">THREAT MODEL</text>
+    <text x="360" y="126">LAB HARNESS</text>
+    <text x="600" y="126">AI SYNTHESIS</text>
+    <text x="840" y="126">PROOF LEDGER</text>
+    <text x="1080" y="126">HARDEN &amp; DISCLOSE</text>
+  </g>
+
+  <!-- Synchronized Cyan Glowing Labels -->
+  <g font-size="11.5" letter-spacing="1.8" text-anchor="middle" fill="#00e5ff">
+    <text x="120" y="126" opacity="0">THREAT MODEL
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.02;0.16;0.19;1" dur="10s" repeatCount="indefinite"/></text>
+    <text x="360" y="126" opacity="0">LAB HARNESS
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.22;0.25;0.39;0.42;1" dur="10s" repeatCount="indefinite"/></text>
+    <text x="600" y="126" opacity="0">AI SYNTHESIS
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.45;0.48;0.62;0.65;1" dur="10s" repeatCount="indefinite"/></text>
+    <text x="840" y="126" opacity="0">PROOF LEDGER
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.68;0.71;0.85;0.88;1" dur="10s" repeatCount="indefinite"/></text>
+    <text x="1080" y="126" opacity="0">HARDEN &amp; DISCLOSE
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.90;0.93;0.98;1;1" dur="10s" repeatCount="indefinite"/></text>
+  </g>
+</g>
+
+<!-- Footer Telemetry Micro-Rail -->
+<path d="M40 156 H1160" stroke="#0e1a2b"/>
+<text class="m" x="600" y="173" font-size="10.5" letter-spacing="2.8" text-anchor="middle" fill="#475569">
+  RECON &amp; THREAT MODEL &#160;&#183;&#160; LAB HARNESS &#160;&#183;&#160; AI SYNTHESIS &#160;&#183;&#160; EMPIRICAL LEDGER &#160;&#183;&#160; HARDEN &amp; DISCLOSE
+</text>
+</svg>

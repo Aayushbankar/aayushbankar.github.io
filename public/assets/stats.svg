@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 290" width="1200" height="290" role="img" aria-label="GitHub statistics for Aayush Bankar">
+<title>Aayush Bankar · Systems Security Telemetry</title>
+<defs>
+  <linearGradient id="st-bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#040914"/><stop offset="1" stop-color="#02050b"/>
+  </linearGradient>
+  <pattern id="st-grid" width="30" height="30" patternUnits="userSpaceOnUse">
+    <path d="M30 0 V30 M0 30 H30" stroke="#0e1a2b" stroke-width="0.8" fill="none"/>
+  </pattern>
+  <clipPath id="st-reveal">
+    <rect x="640" y="118" width="0" height="18" rx="4">
+      <animate attributeName="width" values="0;510;510" keyTimes="0;0.45;1" dur="5s" repeatCount="indefinite"/>
+    </rect>
+  </clipPath>
+</defs>
+
+<rect width="1200" height="290" rx="10" fill="url(#st-bg)" stroke="#1e293b"/>
+<rect width="1200" height="290" rx="10" fill="url(#st-grid)" opacity="0.6"/>
+
+<rect x="30" y="26" width="4" height="16" fill="#00e5ff"/>
+<text x="46" y="39" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" font-weight="700"
+      letter-spacing="3" fill="#f8fafc">SYSTEMS &amp; GITHUB TELEMETRY</text>
+<text x="320" y="39" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="10" letter-spacing="2"
+      fill="#64748b">VERIFIED ACTIVITY &amp; ARTIFACTS</text>
+<circle cx="1150" cy="34" r="4" fill="#00e5ff">
+  <animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite"/>
+</circle>
+<text x="1136" y="38" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="10" letter-spacing="1.8"
+      fill="#00e5ff" text-anchor="end">LIVE RECORD</text>
+<path d="M30 54 H1170" stroke="#1e293b"/>
+
+  <!-- Card 1: Repositories -->
+  <g>
+    <rect x="30" y="74" width="180" height="88" rx="8" fill="#07111f" stroke="#1e293b"/>
+    <rect x="30" y="74" width="180" height="2.5" rx="1.25" fill="#00e5ff"/>
+    <text x="46" y="106" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.5" fill="#64748b">REPOSITORIES</text>
+    <text x="46" y="142" font-family="ui-monospace,monospace" font-size="28" font-weight="700" fill="#f8fafc">38</text>
+  </g>
+  <!-- Card 2: Contributions -->
+  <g>
+    <rect x="220" y="74" width="180" height="88" rx="8" fill="#07111f" stroke="#1e293b"/>
+    <rect x="220" y="74" width="180" height="2.5" rx="1.25" fill="#38bdf8"/>
+    <text x="236" y="106" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.5" fill="#64748b">CONTRIBUTIONS</text>
+    <text x="236" y="142" font-family="ui-monospace,monospace" font-size="28" font-weight="700" fill="#f8fafc">366+</text>
+  </g>
+  <!-- Card 3: Research CVEs -->
+  <g>
+    <rect x="410" y="74" width="180" height="88" rx="8" fill="#07111f" stroke="#1e293b"/>
+    <rect x="410" y="74" width="180" height="2.5" rx="1.25" fill="#ef4444"/>
+    <text x="426" y="106" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.5" fill="#64748b">CVE TRACKS</text>
+    <text x="426" y="142" font-family="ui-monospace,monospace" font-size="28" font-weight="700" fill="#ef4444">2</text>
+  </g>
+
+  <!-- Card 4: Followers -->
+  <g>
+    <rect x="30" y="172" width="180" height="88" rx="8" fill="#07111f" stroke="#1e293b"/>
+    <rect x="30" y="172" width="180" height="2.5" rx="1.25" fill="#10b981"/>
+    <text x="46" y="204" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.5" fill="#64748b">FOLLOWERS</text>
+    <text x="46" y="240" font-family="ui-monospace,monospace" font-size="28" font-weight="700" fill="#f8fafc">14</text>
+  </g>
+  <!-- Card 5: Certifications -->
+  <g>
+    <rect x="220" y="172" width="180" height="88" rx="8" fill="#07111f" stroke="#1e293b"/>
+    <rect x="220" y="172" width="180" height="2.5" rx="1.25" fill="#f59e0b"/>
+    <text x="236" y="204" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.5" fill="#64748b">CERTIFICATIONS</text>
+    <text x="236" y="240" font-family="ui-monospace,monospace" font-size="28" font-weight="700" fill="#f8fafc">4+</text>
+  </g>
+  <!-- Card 6: Hackathons -->
+  <g>
+    <rect x="410" y="172" width="180" height="88" rx="8" fill="#07111f" stroke="#1e293b"/>
+    <rect x="410" y="172" width="180" height="2.5" rx="1.25" fill="#a855f7"/>
+    <text x="426" y="204" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.5" fill="#64748b">SIH 2026 STATUS</text>
+    <text x="426" y="240" font-family="ui-monospace,monospace" font-size="24" font-weight="700" fill="#a855f7">SCREENING</text>
+  </g>
+
+<path d="M605 74 V260" stroke="#1e293b"/>
+
+<!-- Right Column: Language & Domain Distribution -->
+<text x="640" y="98" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.8" fill="#64748b">SYSTEM &amp; REPO COMPOSITION</text>
+
+<g clip-path="url(#st-reveal)">
+    <rect x="640" y="118" width="230" height="18" fill="#38bdf8"/>
+    <rect x="870" y="118" width="115" height="18" fill="#f59e0b"/>
+    <rect x="985" y="118" width="85" height="18" fill="#10b981"/>
+    <rect x="1070" y="118" width="50" height="18" fill="#818cf8"/>
+    <rect x="1120" y="118" width="30" height="18" fill="#64748b"/>
+</g>
+<rect x="640" y="118" width="510" height="18" rx="4" fill="none" stroke="#1e293b"/>
+
+<g><circle cx="645" cy="172" r="5" fill="#38bdf8"/><text x="658" y="176" font-family="ui-monospace,monospace" font-size="11.5" fill="#94a3b8">Python (Security Tooling &amp; AI)</text><text x="872" y="176" font-family="ui-monospace,monospace" font-size="11.5" font-weight="700" fill="#f8fafc" text-anchor="end">45.0%</text></g>
+<g><circle cx="907" cy="172" r="5" fill="#f59e0b"/><text x="920" y="176" font-family="ui-monospace,monospace" font-size="11.5" fill="#94a3b8">C / Kernel Exploits</text><text x="1134" y="176" font-family="ui-monospace,monospace" font-size="11.5" font-weight="700" fill="#f8fafc" text-anchor="end">22.5%</text></g>
+
+<g><circle cx="645" cy="202" r="5" fill="#10b981"/><text x="658" y="206" font-family="ui-monospace,monospace" font-size="11.5" fill="#94a3b8">Java (Android Internals)</text><text x="872" y="206" font-family="ui-monospace,monospace" font-size="11.5" font-weight="700" fill="#f8fafc" text-anchor="end">16.5%</text></g>
+<g><circle cx="907" cy="202" r="5" fill="#818cf8"/><text x="920" y="206" font-family="ui-monospace,monospace" font-size="11.5" fill="#94a3b8">JavaScript / TypeScript</text><text x="1134" y="206" font-family="ui-monospace,monospace" font-size="11.5" font-weight="700" fill="#f8fafc" text-anchor="end">10.0%</text></g>
+
+<g><circle cx="645" cy="232" r="5" fill="#64748b"/><text x="658" y="236" font-family="ui-monospace,monospace" font-size="11.5" fill="#94a3b8">Shell / GDB / ASM</text><text x="872" y="236" font-family="ui-monospace,monospace" font-size="11.5" font-weight="700" fill="#f8fafc" text-anchor="end">6.0%</text></g>
+<g><circle cx="907" cy="232" r="5" fill="#00e5ff"/><text x="920" y="236" font-family="ui-monospace,monospace" font-size="11.5" fill="#94a3b8">Architectures Documented</text><text x="1134" y="236" font-family="ui-monospace,monospace" font-size="11.5" font-weight="700" fill="#00e5ff" text-anchor="end">100%</text></g>
+</svg>

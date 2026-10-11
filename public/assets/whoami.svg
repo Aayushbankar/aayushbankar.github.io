@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" width="1200" height="380" role="img" aria-label="Terminal output describing Aayush Bankar: identity, role, academics, domains, flagships, and engineering mindset">
+<title>whoami --verbose</title>
+
+<defs>
+  <linearGradient id="tbar" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#0c1726"/>
+    <stop offset="100%" stop-color="#060d17"/>
+  </linearGradient>
+  <linearGradient id="tbody" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#040913"/>
+    <stop offset="100%" stop-color="#02050b"/>
+  </linearGradient>
+  <radialGradient id="tglow" cx="14%" cy="8%" r="70%">
+    <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.08"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+  </radialGradient>
+  <pattern id="crt2" width="3" height="3" patternUnits="userSpaceOnUse">
+    <rect width="3" height="1" fill="#38bdf8" opacity="0.025"/>
+  </pattern>
+
+  <clipPath id="c0"><rect x="70" y="58"  width="0" height="22"><animate attributeName="width" values="0;0;1120;1120" keyTimes="0;0.015;0.065;1" dur="20s" repeatCount="indefinite"/></rect></clipPath>
+  <clipPath id="c1"><rect x="70" y="83"  width="0" height="22"><animate attributeName="width" values="0;0;1120;1120" keyTimes="0;0.075;0.100;1" dur="20s" repeatCount="indefinite"/></rect></clipPath>
+  <clipPath id="c2"><rect x="70" y="108" width="0" height="22"><animate attributeName="width" values="0;0;1120;1120" keyTimes="0;0.105;0.145;1" dur="20s" repeatCount="indefinite"/></rect></clipPath>
+  <clipPath id="c3"><rect x="70" y="133" width="0" height="22"><animate attributeName="width" values="0;0;1120;1120" keyTimes="0;0.150;0.190;1" dur="20s" repeatCount="indefinite"/></rect></clipPath>
+  <clipPath id="c4"><rect x="70" y="158" width="0" height="22"><animate attributeName="width" values="0;0;1120;1120" keyTimes="0;0.195;0.235;1" dur="20s" repeatCount="indefinite"/></rect></clipPath>
+  <clipPath id="c5"><rect x="70" y="183" width="0" height="22"><animate attributeName="width" values="0;0;1120;1120" keyTimes="0;0.240;0.290;1" dur="20s" repeatCount="indefinite"/></rect></clipPath>
+  <clipPath id="c6"><rect x="70" y="208" width="0" height="22"><animate attributeName="width" values="0;0;1120;1120" keyTimes="0;0.295;0.345;1" dur="20s" repeatCount="indefinite"/></rect></clipPath>
+  <clipPath id="c7"><rect x="70" y="233" width="0" height="22"><animate attributeName="width" values="0;0;1120;1120" keyTimes="0;0.350;0.395;1" dur="20s" repeatCount="indefinite"/></rect></clipPath>
+  <clipPath id="c8"><rect x="70" y="258" width="0" height="22"><animate attributeName="width" values="0;0;1120;1120" keyTimes="0;0.400;0.450;1" dur="20s" repeatCount="indefinite"/></rect></clipPath>
+  <clipPath id="c9"><rect x="70" y="283" width="0" height="22"><animate attributeName="width" values="0;0;1120;1120" keyTimes="0;0.455;0.485;1" dur="20s" repeatCount="indefinite"/></rect></clipPath>
+  <clipPath id="c10"><rect x="70" y="312" width="0" height="22"><animate attributeName="width" values="0;0;1120;1120" keyTimes="0;0.490;0.510;1" dur="20s" repeatCount="indefinite"/></rect></clipPath>
+
+  <style>
+    .m { font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace; font-size: 14px; }
+    .k { fill: #00e5ff; font-weight: 600; }
+    .v { fill: #e2e8f0; }
+    .s { fill: #f59e0b; }
+    .p { fill: #38bdf8; font-weight: 700; }
+    .c { fill: #475569; }
+    .w { fill: #f8fafc; font-weight: 600; }
+    .acc { fill: #10b981; }
+  </style>
+</defs>
+
+<!-- Terminal Shell Frame -->
+<rect x="1" y="1" width="1198" height="378" rx="10" fill="url(#tbody)" stroke="#1e293b"/>
+<rect x="1" y="1" width="1198" height="378" rx="10" fill="url(#tglow)"/>
+<path d="M1 11 a10 10 0 0 1 10 -10 h1178 a10 10 0 0 1 10 10 v29 h-1198 z" fill="url(#tbar)"/>
+<path d="M1 40 H1199" stroke="#1e293b"/>
+
+<!-- Traffic Dots -->
+<g>
+  <circle cx="26" cy="21" r="5.5" fill="#ef4444" opacity="0.85"/>
+  <circle cx="46" cy="21" r="5.5" fill="#f59e0b" opacity="0.85"/>
+  <circle cx="66" cy="21" r="5.5" fill="#10b981" opacity="0.85"/>
+</g>
+<text class="m" x="96" y="26" fill="#64748b" font-size="13">aayush@research-node</text>
+<text class="m" x="252" y="26" fill="#334155" font-size="13">:</text>
+<text class="m" x="264" y="26" fill="#38bdf8" font-size="13">~/sec/identity</text>
+<text class="m" x="1176" y="26" fill="#475569" font-size="12" text-anchor="end">zsh &#8212; 120x24</text>
+
+<!-- Line Number Gutter -->
+<path d="M52 48 V368" stroke="#0f172a"/>
+<g class="m" font-size="11" fill="#334155" text-anchor="end">
+  <text x="42" y="74">01</text><text x="42" y="99">02</text><text x="42" y="124">03</text>
+  <text x="42" y="149">04</text><text x="42" y="174">05</text><text x="42" y="199">06</text>
+  <text x="42" y="224">07</text><text x="42" y="249">08</text><text x="42" y="274">09</text>
+  <text x="42" y="299">10</text><text x="42" y="328">11</text>
+</g>
+
+<!-- Animated Terminal Output -->
+<g class="m">
+  <text y="74" clip-path="url(#c0)"><tspan x="70" class="p">$</tspan><tspan class="w"> whoami --verbose</tspan></text>
+
+  <text y="99" clip-path="url(#c1)"><tspan x="70" class="c">&#183;&#183; IDENTITY &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</tspan></text>
+
+  <text y="124" clip-path="url(#c2)"><tspan x="70" class="k">handle</tspan><tspan class="c">    :  </tspan><tspan class="v">Aayushbankar</tspan><tspan class="c">   &#8226;   </tspan><tspan class="v">Gandhinagar, Gujarat, India</tspan><tspan class="c"> (UTC+05:30)</tspan></text>
+
+  <text y="149" clip-path="url(#c3)"><tspan x="70" class="k">role</tspan><tspan class="c">      :  </tspan><tspan class="v">Cybersecurity Analyst @ </tspan><tspan class="acc">CypherMatrix</tspan></text>
+
+  <text y="174" clip-path="url(#c4)"><tspan x="70" class="k">academics</tspan><tspan class="c"> :  </tspan><tspan class="v">Diploma in IT, Govt. Polytechnic Gandhinagar</tspan><tspan class="c"> &#8226; </tspan><tspan class="s">CPI: 8.60 / 10</tspan></text>
+
+  <text y="199" clip-path="url(#c5)"><tspan x="70" class="k">domains</tspan><tspan class="c">   :  </tspan><tspan class="v">Linux Kernel UAF, Android Framework SQLi, Sovereign Ingestion, Voice AI</tspan></text>
+
+  <text y="224" clip-path="url(#c6)"><tspan x="70" class="k">flagships</tspan><tspan class="c"> :  </tspan><tspan class="v">CVE-2026-46242 (Bad Epoll), CVE-2026-28576, SPECTRE-PRISM (SIH 2026)</tspan></text>
+
+  <text y="249" clip-path="url(#c7)"><tspan x="70" class="k">creds</tspan><tspan class="c">     :  </tspan><tspan class="acc">CAP v2, CNSP</tspan><tspan class="c"> (The SecOps Group) &#8226; </tspan><tspan class="v">IBM SkillsBuild (48/50)</tspan></text>
+
+  <text y="274" clip-path="url(#c8)"><tspan x="70" class="k">mindset</tspan><tspan class="c">   :  </tspan><tspan class="s">"Evidence over assertion. Documented reproductions that succeed on first run."</tspan></text>
+
+  <text y="299" clip-path="url(#c9)"><tspan x="70" class="c">&#183;&#183; EOF &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</tspan></text>
+
+  <text y="328" clip-path="url(#c10)"><tspan x="70" class="p">$</tspan></text>
+</g>
+
+<!-- Blinking Cyan Cursor -->
+<rect x="86" y="314" width="9" height="17" fill="#00e5ff" opacity="0">
+  <animate attributeName="opacity" values="0;0;1;0;1;0;1;0;1;0;1" keyTimes="0;0.50;0.55;0.60;0.65;0.70;0.75;0.80;0.85;0.90;1" dur="20s" repeatCount="indefinite"/>
+</rect>
+
+<rect x="1" y="1" width="1198" height="378" rx="10" fill="url(#crt2)"/>
+</svg>
