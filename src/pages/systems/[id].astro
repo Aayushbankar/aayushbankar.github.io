@@ -1,0 +1,326 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import { allSystems, type SystemProject } from '../../data/systems';
+
+export async function getStaticPaths() {
+  return allSystems.map((sys, idx) => ({
+    params: { id: sys.id },
+    props: {
+      system: sys,
+      prevSystem: allSystems[(idx - 1 + allSystems.length) % allSystems.length],
+      nextSystem: allSystems[(idx + 1) % allSystems.length],
+    },
+  }));
+}
+
+interface Props {
+  system: SystemProject;
+  prevSystem: SystemProject;
+  nextSystem: SystemProject;
+}
+
+const { system, prevSystem, nextSystem } = Astro.props;
+
+const badgeClass =
+  system.badgeType === 'ember'
+    ? 'stamp'
+    : system.badgeType === 'brass'
+      ? 'stamp stamp-brass'
+      : system.badgeType === 'moss'
+        ? 'chip !border-moss-500/50 !text-moss-400 !bg-moss-500/10'
+        : 'chip';
+---
+
+<BaseLayout
+  title={`${system.name} — Technical Spec Sheet & Architecture — Aayush Bankar`}
+  description={system.description}
+>
+  <div class="wrap-wide py-10 sm:py-16">
+    <!-- Breadcrumb & Back Navigation -->
+    <nav class="flex items-center justify-between gap-4 mb-8 text-xs font-micro rise" aria-label="Breadcrumbs">
+      <a href="/systems" class="inline-flex items-center gap-2 text-bone-400 hover:text-ember-400 transition-colors">
+        <span class="text-ember-400 font-bold">←</span>
+        <span class="uppercase tracking-wider">All Systems Directory</span>
+      </a>
+      <div class="hidden sm:flex items-center gap-2 text-bone-600">
+        <span>SYS</span>
+        <span>/</span>
+        <span class="text-bone-400 uppercase tracking-wider">{system.domain}</span>
+        <span>/</span>
+        <span class="text-bone-200">{system.id}</span>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-10 rise">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <div class="flex items-center gap-3">
+          <span class="card-index text-4xl sm:text-5xl">{system.index}</span>
+          <div>
+            <p class="font-micro text-xs text-ember-400 uppercase tracking-widest font-semibold">{system.category}</p>
+            <p class="font-micro text-[11px] text-bone-500 uppercase tracking-wider mt-0.5">{system.domain}</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class={badgeClass}>{system.status}</span>
+        </div>
+      </div>
+
+      <h1 class="display text-4xl sm:text-5xl lg:text-6xl text-bone-50 leading-[1.05]">
+        {system.name}
+      </h1>
+
+      <p class="font-display italic text-xl sm:text-2xl text-brass-400 mt-3 leading-snug">
+        {system.tagline}
+      </p>
+
+      <p class="lede mt-4 max-w-3xl text-base sm:text-lg text-bone-300 leading-relaxed">
+        {system.description}
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center gap-3 mt-6 pt-6 border-t border-bone-50/10 font-micro text-xs">
+        <a href={system.repoUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          Inspect Source on GitHub ↗
+        </a>
+        {system.liveUrl && (
+          <a href={system.liveUrl} target="_blank" rel="noopener noreferrer" class="btn btn-ember">
+            Launch Live Deployment ↗
+          </a>
+        )}
+        {system.articleSlug && (
+          <a href={`/research/${system.articleSlug}`} class="btn btn-ghost">
+            Read Architecture Note →
+          </a>
+        )}
+      </div>
+    </header>
+
+    <!-- Visual Architecture Exhibition Plate -->
+    <div class="mb-12 rounded-2xl overflow-hidden bg-ink-950 border border-bone-50/15 p-3 sm:p-6 shadow-2xl group card-glare" data-reveal>
+      <div class="flex items-center justify-between pb-3 mb-3 border-b border-bone-50/10 font-micro text-[10px] tracking-wider text-bone-500 uppercase">
+        <span>Architectural Plate // {system.name}</span>
+        <span class="text-ember-400">Hardware Telemetry &amp; Dataflow</span>
+      </div>
+      <div class="flex items-center justify-center bg-black/40 rounded-xl p-2 sm:p-4 min-h-[220px]">
+        <img
+          src={system.plateImage}
+          alt={`${system.name} Visual Architectural Plate`}
+          class="w-full h-auto max-h-[380px] object-contain rounded transition-transform duration-500 group-hover:scale-[1.01]"
+          loading="eager"
+        />
+      </div>
+    </div>
+
+    <!-- Benchmarks Grid -->
+    <section class="mb-12" data-reveal>
+      <div class="flex items-center gap-3 mb-6 pb-3 border-b border-bone-50/10">
+        <span class="font-display italic text-2xl text-brass-400 font-semibold">01</span>
+        <h2 class="font-display text-xl sm:text-2xl text-bone-50">Hardware-Verified Benchmarks</h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        {system.benchmarks.map((b) => (
+          <div class="card card-glare p-4 flex flex-col justify-between">
+            <div>
+              <p class="font-display text-xl sm:text-2xl text-brass-400 font-semibold">{b.value}</p>
+              <p class="font-micro text-[10px] tracking-wider uppercase text-bone-400 mt-1.5 font-medium">{b.label}</p>
+            </div>
+            <p class="text-[11px] text-bone-500 mt-2 line-clamp-3 leading-relaxed">{b.detail}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Technical Spec Sheet Matrix -->
+    <section class="mb-12" data-reveal>
+      <div class="flex items-center gap-3 mb-6 pb-3 border-b border-bone-50/10">
+        <span class="font-display italic text-2xl text-ember-400 font-semibold">02</span>
+        <h2 class="font-display text-xl sm:text-2xl text-bone-50">Technical Specification Sheet</h2>
+      </div>
+
+      <div class="card overflow-hidden">
+        <div class="divide-y divide-bone-50/10">
+          {system.specSheet.map((spec) => (
+            <div class="p-4 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-ink-800/40 transition-colors">
+              <span class="font-micro text-xs tracking-wider uppercase text-ember-400 sm:w-1/3 shrink-0">
+                {spec.key}
+              </span>
+              <span class="text-sm text-bone-200 font-mono sm:w-2/3">
+                {spec.value}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Deep-Dive Narrative & Highlights -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12" data-reveal>
+      <div class="lg:col-span-7 space-y-6">
+        <div class="card card-glare p-6 sm:p-8">
+          <p class="eyebrow mb-3"><span class="tick">ARC</span><span>Architectural Overview</span></p>
+          <h3 class="display text-2xl text-bone-50 mb-4">Engineering Architecture</h3>
+          <p class="text-sm sm:text-base text-bone-300 leading-relaxed font-sans">
+            {system.overview}
+          </p>
+
+          <div class="mt-6 pt-6 border-t border-bone-50/10">
+            <p class="font-micro text-xs uppercase tracking-wider text-bone-500 mb-3">Key Technical Innovations:</p>
+            <ul class="space-y-2.5 text-xs sm:text-sm text-bone-300">
+              {system.highlights.map((h) => (
+                <li class="flex items-start gap-2.5">
+                  <span class="text-ember-400 font-bold text-sm">›</span>
+                  <span class="leading-relaxed">{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 space-y-6">
+        <!-- Verification Rig Card -->
+        <div class="card card-glare p-6 sm:p-7 border-l-4 border-l-brass-500">
+          <p class="eyebrow mb-3"><span class="tick">VFD</span><span>Ground-Truth Verification</span></p>
+          <h3 class="display text-xl text-bone-50 mb-2">Empirical Test Record</h3>
+          <p class="text-xs sm:text-sm text-bone-300 leading-relaxed">
+            {system.verification}
+          </p>
+          <div class="mt-4 pt-4 border-t border-bone-50/10 flex flex-wrap gap-1.5">
+            {system.tech.map((t) => (
+              <span class="chip !text-[9px] !py-0.5 !px-2">{t}</span>
+            ))}
+          </div>
+        </div>
+
+        <!-- Quick Repository Card -->
+        <div class="card p-6">
+          <p class="eyebrow mb-3"><span class="tick">SRC</span><span>Source &amp; Artifacts</span></p>
+          <div class="space-y-3 font-micro text-xs">
+            <a
+              href={system.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="p-3 rounded-lg bg-ink-950 border border-bone-50/10 hover:border-ember-500 transition-colors flex items-center justify-between group block"
+            >
+              <span class="text-bone-300 group-hover:text-ember-400 transition-colors truncate">
+                {system.repoUrl.replace('https://', '')}
+              </span>
+              <span class="text-ember-400 shrink-0 ml-2">↗</span>
+            </a>
+            {system.liveUrl && (
+              <a
+                href={system.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-3 rounded-lg bg-ink-950 border border-bone-50/10 hover:border-brass-400 transition-colors flex items-center justify-between group block"
+              >
+                <span class="text-bone-300 group-hover:text-brass-400 transition-colors truncate">
+                  {system.liveUrl.replace('https://', '')}
+                </span>
+                <span class="text-brass-400 shrink-0 ml-2">↗</span>
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Specific Sections: 5-Planes (SPECTRE-PRISM) -->
+    {system.planes && (
+      <section class="card card-glare p-6 sm:p-10 mb-12" data-reveal>
+        <p class="eyebrow mb-4"><span class="tick">PLN</span><span>5-Plane System Architecture</span></p>
+        <div class="space-y-3">
+          {system.planes.map((p) => (
+            <div class="p-4 rounded-lg bg-ink-800/50 border border-bone-50/10 flex flex-col sm:flex-row sm:items-start gap-3">
+              <span class="font-micro text-xs tracking-widest uppercase text-ember-400 font-semibold shrink-0 w-16">
+                {p.id}
+              </span>
+              <div class="flex-1">
+                <p class="font-display text-sm text-bone-50 font-semibold">{p.name}</p>
+                <p class="text-xs sm:text-sm text-bone-400 leading-relaxed mt-1">{p.detail}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Specific Sections: Pipeline (Wolvie) -->
+    {system.pipeline && (
+      <section class="card card-glare p-6 sm:p-10 mb-12" data-reveal>
+        <p class="eyebrow mb-4"><span class="tick">STG</span><span>Sub-Second Latency Waterfall</span></p>
+        <div class="space-y-2.5">
+          {system.pipeline.map((p) => (
+            <div class="p-3.5 rounded-lg bg-ink-800/50 border border-bone-50/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-3 min-w-0">
+                <span class="font-display italic text-lg text-bone-50/30 w-8">{p.stage}</span>
+                <span class="font-micro text-xs tracking-wider uppercase text-ember-400 shrink-0 w-20">{p.component}</span>
+                <p class="text-xs sm:text-sm text-bone-300 leading-relaxed">{p.detail}</p>
+              </div>
+              <span class="font-micro text-xs tracking-wider text-brass-400 shrink-0 font-semibold bg-ink-950 px-2.5 py-1 rounded border border-bone-50/10">
+                {p.latency}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Specific Sections: Charts (QuantLab) -->
+    {system.charts && (
+      <section class="card p-6 sm:p-10 mb-12" data-reveal>
+        <p class="eyebrow mb-4"><span class="tick">CHT</span><span>6 Simulation Exhibits (Full Uncropped Curves)</span></p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {system.charts.map((c) => (
+            <div class="rounded-xl overflow-hidden bg-ink-950 border border-bone-50/10 flex flex-col justify-between">
+              <div class="p-3 flex items-center justify-center bg-black/40 min-h-[200px]">
+                <img
+                  src={`/evidence/${c.file}`}
+                  alt={c.title}
+                  loading="lazy"
+                  class="w-full h-auto max-h-[190px] object-contain rounded"
+                />
+              </div>
+              <div class="p-4 border-t border-bone-50/10">
+                <p class="font-display text-sm text-bone-50 font-semibold">{c.title}</p>
+                <p class="text-xs text-bone-500 mt-1 leading-relaxed">{c.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Navigation Pager (Next / Previous System) -->
+    <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-10 border-t border-bone-50/10 font-micro" aria-label="Systems pagination">
+      <a
+        href={`/systems/${prevSystem.id}`}
+        class="card p-5 group flex flex-col justify-between hover:border-ember-500 transition-colors"
+      >
+        <span class="text-[10px] tracking-wider uppercase text-bone-500 group-hover:text-ember-400 transition-colors">
+          ← Previous System
+        </span>
+        <div class="mt-2">
+          <span class="text-xs text-ember-400 mr-2">{prevSystem.index}</span>
+          <span class="text-sm text-bone-100 font-medium group-hover:text-bone-50">{prevSystem.name}</span>
+        </div>
+      </a>
+
+      <a
+        href={`/systems/${nextSystem.id}`}
+        class="card p-5 group flex flex-col justify-between text-right hover:border-ember-500 transition-colors"
+      >
+        <span class="text-[10px] tracking-wider uppercase text-bone-500 group-hover:text-ember-400 transition-colors">
+          Next System →
+        </span>
+        <div class="mt-2">
+          <span class="text-sm text-bone-100 font-medium group-hover:text-bone-50">{nextSystem.name}</span>
+          <span class="text-xs text-ember-400 ml-2">{nextSystem.index}</span>
+        </div>
+      </a>
+    </nav>
+  </div>
+</BaseLayout>

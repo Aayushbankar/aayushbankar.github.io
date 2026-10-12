@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
 import { getCollection } from 'astro:content';
 
 const posts = await getCollection('research');
@@ -11,83 +12,200 @@ const categories = [
   'All',
   'Kernel & Exploitation',
   'Android Internals',
-  'Sovereign Systems',
+  'Verifiable Systems',
   'AI Engineering',
 ];
+
+// Group posts by year
+const postsByYear = sortedPosts.reduce(
+  (acc, post) => {
+    const year = post.data.publishDate.getFullYear().toString();
+    if (!acc[year]) acc[year] = [];
+    acc[year].push(post);
+    return acc;
+  },
+  {} as Record<string, typeof sortedPosts>
+);
+
+const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 ---
 
 <BaseLayout
-  title="Research & Publications — Aayush Bankar"
-  description="Technical papers, kernel vulnerability reproductions, Android exploit deep-dives, and sovereign systems architecture specifications."
+  title="Field Notes & Breakdowns — Aayush Bankar"
+  description="Working technical field notes, kernel vulnerability teardowns, and verifiable systems breakdowns with reproducible proof."
 >
-  <div class="mb-10">
-    <div class="text-xs text-[#00e5ff] font-bold tracking-widest mb-1">&gt; PUBLICATION INDEX // DECLASSIFIED PAPERS</div>
-    <h1 class="text-3xl sm:text-4xl font-extrabold text-[#f8fafc] tracking-tight">
-      RESEARCH &amp; <span class="text-[#38bdf8]">PUBLICATIONS</span>
-    </h1>
-    <p class="text-sm text-[#94a3b8] mt-2 max-w-2xl leading-relaxed">
-      Formal technical writeups, deterministic vulnerability teardowns, empirical verification ledgers, and sovereign system architecture blueprints.
-    </p>
-  </div>
+  <div class="wrap-wide py-10 sm:py-16">
+    <!-- Header -->
+    <header class="mb-12 rise">
+      <p class="eyebrow mb-3">
+        <span class="tick">FN–00</span>
+        <span>Working Field Notes · Notes with Proof</span>
+      </p>
+      <h1 class="display text-4xl sm:text-5xl lg:text-6xl text-bone-50 leading-[1.05]">
+        Field Notes &amp; <em class="text-ember-400">Teardowns.</em>
+      </h1>
+      <p class="lede mt-4 max-w-2xl text-base text-bone-400 leading-relaxed">
+        Working technical notes and vulnerability teardowns written as I verify —
+        <strong>not published academic papers</strong>, but empirical engineering logs.
+        Every note links to code repositories, GDB trace logs, and verification ledgers.
+      </p>
 
-  <!-- Category List -->
-  <div class="flex flex-wrap gap-2 mb-8 border-b border-[#1e293b] pb-4 text-xs font-mono">
-    {categories.map((c, i) => (
-      <span class={`px-3 py-1 rounded cursor-pointer transition-colors ${
-        i === 0
-          ? 'bg-[#00e5ff]/15 text-[#00e5ff] border border-[#00e5ff]/40 font-bold'
-          : 'bg-[#040914] text-[#94a3b8] border border-[#1e293b] hover:text-[#f8fafc]'
-      }`}>
-        {c}
-      </span>
-    ))}
-  </div>
-
-  <!-- Articles List -->
-  <div class="space-y-6">
-    {sortedPosts.map((post) => (
-      <article class="p-6 rounded-lg bg-[#040914] border border-[#1e293b] hover:border-[#00e5ff]/60 hover:bg-[#07111e]/40 transition-all group">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 text-xs">
-          <div class="flex items-center gap-2">
-            <span class="px-2.5 py-0.5 rounded bg-[#0284c7]/20 text-[#38bdf8] font-bold">
-              {post.data.category}
-            </span>
-            {post.data.cveId && (
-              <span class="px-2 py-0.5 rounded bg-[#ef4444]/20 text-[#ef4444] font-bold font-mono">
-                {post.data.cveId}
-              </span>
-            )}
-          </div>
-          <time class="text-[#64748b]">
-            {post.data.publishDate.toISOString().split('T')[0]}
-          </time>
+      <!-- Proof Counts Strip (Kogler style) -->
+      <div class="flex flex-wrap items-center gap-3 sm:gap-6 mt-6 pt-6 border-t border-bone-50/10 font-micro text-xs">
+        <div class="flex items-center gap-2">
+          <span class="font-display italic text-lg text-brass-400 font-semibold">{sortedPosts.length}</span>
+          <span class="text-bone-500 uppercase tracking-wider">Field Notes</span>
         </div>
+        <span class="text-bone-700 hidden sm:inline">/</span>
+        <div class="flex items-center gap-2">
+          <span class="font-display italic text-lg text-ember-400 font-semibold">2</span>
+          <span class="text-bone-500 uppercase tracking-wider">Active CVE Tracks</span>
+        </div>
+        <span class="text-bone-700 hidden sm:inline">/</span>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-moss-500"></span>
+          <span class="text-bone-400 uppercase tracking-wider">100% Locally Reproducible</span>
+        </div>
+      </div>
+    </header>
 
-        <a href={`/research/${post.id}`}>
-          <h2 class="text-xl font-bold text-[#f8fafc] group-hover:text-[#00e5ff] transition-colors mb-2">
-            {post.data.title}
-          </h2>
-        </a>
+    <!-- Interactive Category Filter (Works with and without JS) -->
+    <nav class="flex flex-wrap gap-2 mb-10 pb-4 border-b border-bone-50/10" aria-label="Filter field notes by category" id="category-filter">
+      {categories.map((c, i) => (
+        <button
+          type="button"
+          data-filter-btn={c}
+          class={`filter-btn px-3.5 py-1.5 rounded-full font-micro text-xs tracking-wider transition-all duration-200 cursor-pointer ${
+            i === 0
+              ? 'bg-bone-50 text-ink-950 font-semibold shadow-sm active'
+              : 'bg-ink-850 text-bone-400 border border-bone-50/10 hover:border-bone-50/30 hover:text-bone-50'
+          }`}
+        >
+          {c}
+        </button>
+      ))}
+    </nav>
 
-        <p class="text-xs sm:text-sm text-[#94a3b8] leading-relaxed mb-4">
-          {post.data.description}
-        </p>
+    <!-- Year-Grouped Timeline Entries (Lukas Maar style) -->
+    <div class="space-y-14" id="posts-container">
+      {years.map((year) => (
+        <section class="space-y-6">
+          <div class="flex items-center gap-4">
+            <h2 class="font-display italic text-3xl sm:text-4xl text-bone-50/40 select-none">
+              {year}
+            </h2>
+            <div class="h-px flex-1 bg-gradient-to-r from-bone-50/15 to-transparent"></div>
+          </div>
 
-        <div class="flex items-center justify-between pt-4 border-t border-[#1e293b]/60 text-xs">
-          <div class="flex flex-wrap gap-2 text-[10px] text-[#64748b]">
-            {post.data.tags.map((tag) => (
-              <span>#{tag}</span>
+          <div class="space-y-4">
+            {postsByYear[year].map((post) => (
+              <article
+                class="post-card card card-glare p-6 sm:p-8 transition-all group"
+                data-category={post.data.category}
+              >
+                <!-- Card Header: Meta Badges + Date -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 text-xs">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="chip chip-brass text-[10px]">
+                      {post.data.category}
+                    </span>
+                    {post.data.cveId && (
+                      <span class="stamp !text-[9px] !py-0.5 !px-2">
+                        {post.data.cveId}
+                      </span>
+                    )}
+                    {post.data.featured && (
+                      <span class="chip chip-ember text-[10px]">FEATURED</span>
+                    )}
+                  </div>
+                  <time class="font-micro text-bone-500 text-[11px] tracking-wider" datetime={post.data.publishDate.toISOString()}>
+                    {post.data.publishDate.toISOString().split('T')[0]}
+                  </time>
+                </div>
+
+                <!-- Title -->
+                <h3 class="display text-xl sm:text-2xl text-bone-50 group-hover:text-ember-400 transition-colors leading-snug mb-3">
+                  <a href={`/research/${post.id}`}>
+                    {post.data.title}
+                  </a>
+                </h3>
+
+                <!-- 3-Line Honest Abstract -->
+                <p class="text-sm text-bone-400 leading-relaxed max-w-3xl mb-6 line-clamp-3">
+                  {post.data.description}
+                </p>
+
+                <!-- Footer: Tags & Artifact Links (Maar Style) -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-bone-50/10 font-micro text-xs">
+                  <div class="flex flex-wrap gap-2 text-[10px] text-bone-500">
+                    {post.data.tags.map((tag: string) => (
+                      <span class="px-2 py-0.5 rounded bg-ink-800/80 border border-bone-50/5">#{tag}</span>
+                    ))}
+                  </div>
+
+                  <div class="flex items-center gap-4 shrink-0">
+                    {post.data.verifiableLedgerUrl && (
+                      <a
+                        href={post.data.verifiableLedgerUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-brass-400 hover:text-bone-50 font-semibold transition-colors flex items-center gap-1"
+                      >
+                        [Ledger ↗]
+                      </a>
+                    )}
+                    <a
+                      href={`/research/${post.id}`}
+                      class="text-ember-400 group-hover:text-ember-300 font-semibold transition-colors flex items-center gap-1"
+                    >
+                      Read Note &rarr;
+                    </a>
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
-
-          <a
-            href={`/research/${post.id}`}
-            class="text-[#38bdf8] group-hover:text-[#00e5ff] font-bold flex items-center gap-1"
-          >
-            READ PAPER &rarr;
-          </a>
-        </div>
-      </article>
-    ))}
+        </section>
+      ))}
+    </div>
   </div>
+
+  <!-- Client-side Category Filter Script (Progressive Enhancement) -->
+  <script is:inline>
+    (function () {
+      function initFilter() {
+        const filterBtns = document.querySelectorAll('[data-filter-btn]');
+        const postCards = document.querySelectorAll('.post-card');
+
+        if (!filterBtns.length || !postCards.length) return;
+
+        filterBtns.forEach((btn) => {
+          btn.addEventListener('click', function () {
+            const selected = this.getAttribute('data-filter-btn');
+
+            // Update button styles
+            filterBtns.forEach((b) => {
+              b.classList.remove('bg-bone-50', 'text-ink-950', 'font-semibold', 'shadow-sm', 'active');
+              b.classList.add('bg-ink-850', 'text-bone-400', 'border', 'border-bone-50/10');
+            });
+            this.classList.remove('bg-ink-850', 'text-bone-400', 'border-bone-50/10');
+            this.classList.add('bg-bone-50', 'text-ink-950', 'font-semibold', 'shadow-sm', 'active');
+
+            // Filter cards
+            postCards.forEach((card) => {
+              const cardCategory = card.getAttribute('data-category');
+              if (selected === 'All' || cardCategory === selected) {
+                card.style.display = 'block';
+              } else {
+                card.style.display = 'none';
+              }
+            });
+          });
+        });
+      }
+
+      initFilter();
+      document.addEventListener('astro:after-swap', initFilter);
+    })();
+  </script>
 </BaseLayout>

@@ -19,67 +19,86 @@ const { Content } = await render(post);
 ---
 
 <BaseLayout
-  title={`${post.data.title} — Aayush Bankar`}
+  title={`${post.data.title} — Field Note by Aayush Bankar`}
   description={post.data.description}
 >
-  <div class="mb-8">
-    <a
-      href="/research"
-      class="text-xs text-[#64748b] hover:text-[#00e5ff] inline-flex items-center gap-1 transition-colors mb-6"
-    >
-      &larr; BACK TO RESEARCH INDEX
-    </a>
+  <div class="wrap-wide py-10 sm:py-16">
+    <div class="max-w-4xl mx-auto">
+      <!-- Back Link -->
+      <a
+        href="/research"
+        class="font-micro text-xs tracking-[0.16em] uppercase text-bone-500 hover:text-ember-400 inline-flex items-center gap-1.5 transition-colors mb-8"
+      >
+        &larr; Back to Field Notes
+      </a>
 
-    <div class="flex flex-wrap items-center gap-2 mb-3 text-xs">
-      <span class="px-2.5 py-0.5 rounded bg-[#0284c7]/20 text-[#38bdf8] font-bold">
-        {post.data.category}
-      </span>
-      {post.data.cveId && (
-        <span class="px-2 py-0.5 rounded bg-[#ef4444]/20 text-[#ef4444] font-bold font-mono">
-          {post.data.cveId}
-        </span>
-      )}
-      <span class="text-[#64748b]">&bull;</span>
-      <time class="text-[#64748b]">
-        {post.data.publishDate.toISOString().split('T')[0]}
-      </time>
+      <!-- Article Header -->
+      <header class="mb-10 rise">
+        <div class="flex flex-wrap items-center gap-2.5 mb-4">
+          <span class="chip chip-brass text-[10px]">
+            {post.data.category}
+          </span>
+          {post.data.cveId && (
+            <span class="stamp !text-[9px] !py-0.5 !px-2">
+              {post.data.cveId}
+            </span>
+          )}
+          <span class="text-bone-600 font-micro text-xs">&bull;</span>
+          <time class="font-micro text-bone-500 text-xs tracking-wider" datetime={post.data.publishDate.toISOString()}>
+            {post.data.publishDate.toISOString().split('T')[0]}
+          </time>
+        </div>
+
+        <h1 class="display text-3xl sm:text-4xl lg:text-5xl text-bone-50 leading-[1.08] mb-5">
+          {post.data.title}
+        </h1>
+
+        <!-- Abstract / Description -->
+        <div class="p-4 sm:p-5 rounded-xl bg-ink-900 border border-bone-50/10 border-l-4 border-l-ember-500">
+          <p class="text-sm sm:text-base text-bone-300 leading-relaxed font-sans">
+            {post.data.description}
+          </p>
+        </div>
+
+        <!-- Verification Ledger Banner -->
+        {post.data.verifiableLedgerUrl && (
+          <div class="mt-5 p-4 rounded-xl bg-ink-900/80 border border-brass-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-micro">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-brass-400"></span>
+              <span class="text-brass-400 font-semibold uppercase tracking-wider">VERIFICATION LEDGER ACTIVE</span>
+            </div>
+            <a
+              href={post.data.verifiableLedgerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-ghost !py-1.5 !px-3 !text-[10px]"
+            >
+              Inspect Source Artifacts ↗
+            </a>
+          </div>
+        )}
+      </header>
+
+      <!-- Paper Content (Rendered Markdown) -->
+      <article class="paper-body border-t border-bone-50/10 pt-10">
+        <Content />
+      </article>
+
+      <!-- Post Footer -->
+      <footer class="mt-16 pt-8 border-t border-bone-50/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-micro text-bone-500">
+        <div>
+          AUTHOR: <span class="text-bone-50 font-semibold">{post.data.author}</span> · Cybersecurity Analyst @ CypherMatrix
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="/research" class="text-ember-400 hover:text-bone-50 transition-colors">
+            &larr; ALL FIELD NOTES
+          </a>
+          <span>·</span>
+          <a href="#top" class="hover:text-bone-50 transition-colors">
+            TOP &uarr;
+          </a>
+        </div>
+      </footer>
     </div>
-
-    <h1 class="text-2xl sm:text-4xl font-extrabold text-[#f8fafc] tracking-tight mb-4 leading-tight">
-      {post.data.title}
-    </h1>
-
-    <p class="text-sm sm:text-base text-[#94a3b8] leading-relaxed border-l-2 border-[#00e5ff] pl-4 my-4 font-mono">
-      {post.data.description}
-    </p>
-
-    {post.data.verifiableLedgerUrl && (
-      <div class="mt-4 p-3 rounded bg-[#040914] border border-[#1e293b] flex items-center justify-between text-xs">
-        <span class="text-[#10b981] font-bold">VERIFICATION LEDGER ACTIVE</span>
-        <a
-          href={post.data.verifiableLedgerUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-[#38bdf8] hover:text-[#00e5ff] font-bold"
-        >
-          INSPECT SOURCE ARTIFACTS ↗
-        </a>
-      </div>
-    )}
-  </div>
-
-  <div class="border-t border-[#1e293b] pt-8">
-    <div class="prose prose-invert max-w-none prose-headings:font-mono prose-headings:tracking-tight prose-headings:text-[#f8fafc] prose-a:text-[#00e5ff] prose-code:text-[#38bdf8] prose-pre:bg-[#040914] prose-pre:border prose-pre:border-[#1e293b] prose-p:text-[#cbd5e1] prose-p:leading-relaxed prose-li:text-[#cbd5e1]">
-      <Content />
-    </div>
-  </div>
-
-  <div class="mt-14 pt-6 border-t border-[#1e293b] flex items-center justify-between text-xs text-[#64748b]">
-    <div>
-      AUTHOR: <span class="text-[#f8fafc]">{post.data.author}</span>
-    </div>
-    <a href="/research" class="text-[#38bdf8] hover:text-[#00e5ff]">
-      &uarr; BACK TO TOP
-    </a>
   </div>
 </BaseLayout>

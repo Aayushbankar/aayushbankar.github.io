@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 250" width="580" height="250" role="img" aria-label="CVE-2026-46242 Bad Epoll Kernel Exploit Research">
+<title>CVE-2026-46242 Bad Epoll</title>
+<defs>
+  <linearGradient id="be-bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#141412"/><stop offset="1" stop-color="#161614"/>
+  </linearGradient>
+  <radialGradient id="be-glow" cx="80%" cy="52%" r="55%">
+    <stop offset="0%" stop-color="#ff4d1c" stop-opacity="0.15"/><stop offset="1" stop-color="#000" stop-opacity="0"/>
+  </radialGradient>
+  <pattern id="be-grid" width="26" height="26" patternUnits="userSpaceOnUse">
+    <path d="M26 0 V26 M0 26 H26" stroke="#161614" stroke-width="1" fill="none"/>
+  </pattern>
+  <filter id="be-g" x="-80%" y="-80%" width="260%" height="260%">
+    <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <style>
+    .m { font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace; }
+    .d { font-size: 11px; fill: #a8a29a; }
+    .chip { font-size: 9px; letter-spacing: 1.1px; fill: #ff9a6b; }
+  </style>
+</defs>
+
+<rect x="1" y="1" width="578" height="248" rx="12" fill="url(#be-bg)" stroke="#2a2a26"/>
+<rect x="1" y="1" width="578" height="248" rx="12" fill="url(#be-grid)" opacity="0.55"/>
+<rect x="1" y="1" width="578" height="248" rx="12" fill="url(#be-glow)"/>
+<rect x="1" y="1" width="5" height="248" rx="2.5" fill="#ff4d1c" opacity="0.85"/>
+
+<g class="m">
+  <rect x="24" y="20" width="34" height="18" rx="4" fill="#241610" stroke="#7a2c12"/>
+  <text x="41" y="33" font-size="10" font-weight="700" fill="#ff4d1c" text-anchor="middle">01</text>
+  <circle cx="72" cy="29" r="3.5" fill="#ff4d1c">
+    <animate attributeName="opacity" values="1;0.2;1" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <text x="84" y="33" font-size="9.5" letter-spacing="1.8" fill="#ff7a45">FLAGSHIP &#183; KERNEL EXPLOIT</text>
+
+  <text x="24" y="72" font-size="24" font-weight="800" letter-spacing="1.4" fill="#ede8dc">BAD EPOLL</text>
+  <text x="24" y="93" font-size="10" letter-spacing="2" fill="#ff4d1c">CVE-2026-46242 &#183; LINUX KERNEL UAF TO ROOT</text>
+  <path d="M24 104 H352" stroke="#2a2a26"/>
+
+  <text class="d" x="24" y="124">Linux epoll subsystem race condition and UAF.</text>
+  <text class="d" x="24" y="141">SLUB cross-cache slab reclamation via msg_msg.</text>
+  <text class="d" x="24" y="158">Two-stage ROP pivot under CONFIG_RETPOLINE.</text>
+  <text class="d" x="24" y="175">Android ARM64 GKI research port under kCFI &amp; PAC.</text>
+
+  <g>
+    <rect x="24" y="196" width="46" height="17" rx="3.5" fill="#241610" stroke="#7a2c12"/><text class="chip" x="47" y="208" text-anchor="middle">C</text>
+    <rect x="76" y="196" width="76" height="17" rx="3.5" fill="#241610" stroke="#7a2c12"/><text class="chip" x="114" y="208" text-anchor="middle">LINUX 6.12</text>
+    <rect x="158" y="196" width="78" height="17" rx="3.5" fill="#241610" stroke="#7a2c12"/><text class="chip" x="197" y="208" text-anchor="middle">SLUB SPRAY</text>
+    <rect x="242" y="196" width="74" height="17" rx="3.5" fill="#241610" stroke="#7a2c12"/><text class="chip" x="279" y="208" text-anchor="middle">ROP PIVOT</text>
+    <rect x="322" y="196" width="42" height="17" rx="3.5" fill="#241610" stroke="#7a2c12"/><text class="chip" x="343" y="208" text-anchor="middle">GDB</text>
+  </g>
+
+  <text x="556" y="234" font-size="9.5" letter-spacing="1.6" fill="#6b675f" text-anchor="end">github.com/Aayushbankar/bad_epoll_ab_tier2</text>
+</g>
+
+<!-- SLUB Kernel Memory Heap Graphic -->
+<g transform="translate(466,126)" class="m">
+  <circle r="64" fill="#1c1a14" stroke="#2a2a26"/>
+  <!-- Memory Address Rail -->
+  <rect x="-52" y="-48" width="104" height="20" rx="3" fill="#101010" stroke="#ff4d1c" stroke-width="1.2"/>
+  <text x="-44" y="-34" font-size="8.5" fill="#ff4d1c" font-weight="700">epitem (kmalloc-192)</text>
+
+  <!-- Poisoned Pointer Arrow -->
+  <path d="M0 -28 V -8" stroke="#ff4d1c" stroke-width="1.5" marker-end="url(#arr)">
+    <animate attributeName="stroke-dasharray" values="0,20;20,0" dur="2s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Reclaimed msg_msg slab -->
+  <rect x="-52" y="-6" width="104" height="22" rx="3" fill="#0c0c0b" stroke="#c8a24b" stroke-width="1.2"/>
+  <text x="-44" y="9" font-size="8.5" fill="#c8a24b" font-weight="700">msg_msg spray</text>
+
+  <!-- Pointer to ROP Payload -->
+  <path d="M0 16 V 32" stroke="#c8a24b" stroke-width="1.5"/>
+
+  <!-- ROP Pivot Chain block -->
+  <rect x="-52" y="34" width="104" height="20" rx="3" fill="#141412" stroke="#ede8dc" stroke-width="1.2"/>
+  <text x="-44" y="48" font-size="8.5" fill="#ede8dc" font-weight="700">ROP -&gt; commit_creds</text>
+
+  <!-- Pulsing Exploit Indicator -->
+  <circle cx="42" cy="-38" r="3" fill="#ff4d1c">
+    <animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite"/>
+  </circle>
+</g>
+</svg>

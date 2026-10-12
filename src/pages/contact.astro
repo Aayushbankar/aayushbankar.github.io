@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import { profile } from '../data/profile';
+import { collab } from '../data/collab';
+---
+
+<BaseLayout
+  title="Contact & Scoped Engagements — Aayush Bankar"
+  description="Numbered, scoped security research and verifiable systems engagements — evidence first, claims never."
+>
+  <div class="wrap-wide py-10 sm:py-16">
+    <!-- Header -->
+    <header class="mb-14 rise">
+      <p class="eyebrow mb-3">
+        <span class="tick">CNT–00</span>
+        <span>Open Channel · Scoped Collaborations</span>
+      </p>
+      <h1 class="display text-4xl sm:text-5xl lg:text-6xl text-bone-50 leading-[1.05]">
+        Contact &amp; <em class="text-ember-400">Engagements.</em>
+      </h1>
+      <p class="lede mt-4 max-w-2xl text-base text-bone-400 leading-relaxed">
+        {collab.subheadline} Every engagement is scoped with explicit timelines and reproducible test harnesses.
+      </p>
+    </header>
+
+    <!-- Current Availability Card -->
+    <section class="card card-glare p-8 sm:p-10 border-l-4 border-l-brass-500 mb-14" data-reveal>
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-moss-500 animate-pulse"></span>
+            <span class="font-micro text-xs tracking-wider uppercase text-brass-400 font-semibold">
+              {collab.availability.status}
+            </span>
+          </div>
+          <h2 class="display text-2xl sm:text-3xl text-bone-50 mb-3">
+            Available for Discrete Offensive Audits &amp; Systems Research
+          </h2>
+          <p class="text-sm sm:text-base text-bone-300 leading-relaxed max-w-3xl">
+            {collab.availability.note}
+          </p>
+          <p class="font-micro text-xs text-bone-500 uppercase tracking-wider mt-3">
+            Location: {collab.availability.location}
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
+          <a href={`mailto:${profile.email}`} class="btn btn-primary text-center justify-center">
+            Send Email Inquiry ↗
+          </a>
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="btn btn-ghost text-center justify-center">
+            LinkedIn Message ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Numbered Scoped Services -->
+    <section class="mb-14" data-reveal>
+      <p class="eyebrow mb-6"><span class="tick">SCP</span><span>Numbered Engagement Scopes</span></p>
+
+      <div class="space-y-6">
+        {collab.services.map((service) => (
+          <article class="card card-glare p-7 sm:p-9">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+              <div class="flex items-center gap-3">
+                <span class="font-micro text-sm text-ember-400 tracking-widest font-semibold">[{service.index}]</span>
+                <h3 class="display text-2xl text-bone-50">{service.title}</h3>
+              </div>
+              <span class="chip font-micro text-[11px]">{service.timeline}</span>
+            </div>
+
+            <p class="text-sm sm:text-base text-bone-300 leading-relaxed max-w-3xl mb-6">
+              {service.scope}
+            </p>
+
+            <div class="pt-5 border-t border-bone-50/10">
+              <p class="font-micro text-[10px] tracking-wider uppercase text-bone-500 mb-3">Audited Deliverables:</p>
+              <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-bone-300 font-sans">
+                {service.deliverables.map((d) => (
+                  <li class="flex items-start gap-2 p-2.5 rounded bg-ink-950 border border-bone-50/10">
+                    <span class="text-ember-400 font-bold">›</span>
+                    <span class="leading-relaxed">{d}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Direct Channels Matrix -->
+    <section class="card p-8 sm:p-10" data-reveal>
+      <p class="eyebrow mb-4"><span class="tick">DIR</span><span>Direct Communications</span></p>
+      <h3 class="display text-2xl text-bone-50 mb-6">Connect Directly</h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-micro text-xs">
+        <a
+          href={`mailto:${profile.email}`}
+          class="p-5 rounded-xl bg-ink-950 border border-bone-50/10 hover:border-ember-500 transition-colors group block"
+        >
+          <span class="text-bone-500 block uppercase tracking-wider text-[10px]">Email (Primary)</span>
+          <span class="text-bone-100 font-semibold text-sm group-hover:text-ember-400 transition-colors mt-1 block truncate">
+            {profile.email}
+          </span>
+          <span class="text-bone-500 mt-2 block text-[11px]">PGP key available on request</span>
+        </a>
+
+        <a
+          href={profile.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="p-5 rounded-xl bg-ink-950 border border-bone-50/10 hover:border-ember-500 transition-colors group block"
+        >
+          <span class="text-bone-500 block uppercase tracking-wider text-[10px]">Professional Network</span>
+          <span class="text-bone-100 font-semibold text-sm group-hover:text-ember-400 transition-colors mt-1 block">
+            LinkedIn / InMail ↗
+          </span>
+          <span class="text-bone-500 mt-2 block text-[11px]">in/aayushbankar</span>
+        </a>
+
+        <a
+          href={profile.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="p-5 rounded-xl bg-ink-950 border border-bone-50/10 hover:border-ember-500 transition-colors group block"
+        >
+          <span class="text-bone-500 block uppercase tracking-wider text-[10px]">Public Code &amp; Telemetry</span>
+          <span class="text-bone-100 font-semibold text-sm group-hover:text-ember-400 transition-colors mt-1 block">
+            GitHub / Repositories ↗
+          </span>
+          <span class="text-bone-500 mt-2 block text-[11px]">github.com/Aayushbankar</span>
+        </a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

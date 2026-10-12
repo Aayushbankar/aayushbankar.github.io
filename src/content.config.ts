@@ -11,7 +11,7 @@ const research = defineCollection({
     category: z.enum([
       'Kernel & Exploitation',
       'Android Internals',
-      'Sovereign Systems',
+      'Verifiable Systems',
       'AI Engineering',
     ]),
     tags: z.array(z.string()),

@@ -1,195 +1,208 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import { allSystems } from '../../data/systems';
 
-const flagships = [
-  {
-    title: 'CVE-2026-46242: Bad Epoll',
-    domain: 'Kernel Exploit Research',
-    status: 'COMPLETED & VERIFIED',
-    desc: 'Linux kernel epoll subsystem race condition and UAF root exploit on x86_64, coupled with an Android ARM64 GKI research port under kCFI and ARM64 PAC/BTI mitigations.',
-    highlights: [
-      'kmalloc-192 cross-cache slab reclamation using msg_msg headers',
-      'KASLR bypass via out-of-bounds msg_msg heap leak',
-      'Two-stage ROP pivot under CONFIG_RETPOLINE executing commit_creds',
-      'Automated QEMU/KVM test harness with GDB script telemetry',
-    ],
-    repo: 'https://github.com/Aayushbankar/bad_epoll_ab_tier2',
-    accent: '#ef4444',
-  },
-  {
-    title: 'CVE-2026-28576: Android SQLi',
-    domain: 'Android Framework Security',
-    status: 'COMPLETED & VERIFIED',
-    desc: 'Framework-level ContentProvider arbitrary SQL projection injection in ContactsProvider2.java, enabling unauthorized cross-UID data exfiltration across process boundaries.',
-    highlights: [
-      'Bypasses Android sandbox without READ_CONTACTS permission',
-      'Tested across Android 11 through Android 15 Developer Preview',
-      'Extracts encrypted auth tokens and internal sqlite_master schemas',
-      'Complete empirical verification ledger with vendor remediation pass',
-    ],
-    repo: 'https://github.com/Aayushbankar/cve-2026-28576',
-    accent: '#f59e0b',
-  },
-  {
-    title: 'SPECTRE-PRISM: Sovereign Log Engine',
-    domain: 'High-Throughput Systems',
-    status: 'SIH 2026 SCREENING ROUND',
-    desc: '5-plane sovereign log processing engine built with zero-copy SIMD ingestion, OCSF normalization, and RFC 6962 verifiable transparency ledgers with BLAKE3 hashing.',
-    highlights: [
-      'Zero-copy SIMD ingestion sustained at 13,000+ events/sec/core',
-      'RFC 6962 Merkle audit paths with logarithmic inclusion proofs',
-      'Ed25519 multi-signature cryptographic consensus attestations',
-      'Cleared internal college round; active in national SIH screening',
-    ],
-    repo: 'https://github.com/Aayushbankar/spectre-prism',
-    accent: '#00e5ff',
-  },
-  {
-    title: 'Wolvie: Local Edge Voice Companion',
-    domain: 'Applied AI & Audio',
-    status: 'ACTIVE DEVELOPMENT',
-    desc: 'End-to-end real-time local voice companion pipeline running completely on consumer edge hardware with WebRTC streaming call UI and zero cloud dependencies.',
-    highlights: [
-      'Silero VAD + faster-whisper + llama.cpp + Piper TTS chained pipeline',
-      'Optimized sub-second conversational latency over WebRTC audio',
-      'Custom fine-tuned voice personas via structured prompt orchestration',
-      '100% offline execution; zero telemetry leaves the host machine',
-    ],
-    repo: 'https://github.com/Aayushbankar/wolvie',
-    accent: '#a855f7',
-  },
-];
-
-const secondarySystems = [
-  {
-    name: 'QuantLab',
-    domain: 'Fintech Simulation',
-    desc: 'Algorithmic trading backtesting engine explicitly modeling execution slippage, exchange fees, and out-of-sample decay curves.',
-    repo: 'https://github.com/Aayushbankar/Quantlab',
-  },
-  {
-    name: 'cve_aggregator',
-    domain: 'Threat Intelligence',
-    desc: 'Unified threat intel ingestion engine consolidating NVD API v2.0, CISA KEV, and GitHub Security Advisories with composite risk ranking.',
-    repo: 'https://github.com/Aayushbankar/cve_aggregator',
-  },
-  {
-    name: 'onetimeshare',
-    domain: 'Secure Backend',
-    desc: 'Ephemeral file-sharing microservice using atomic Redis TTL transactions to eliminate race conditions on one-time secure downloads.',
-    repo: 'https://github.com/Aayushbankar/onetimeshare',
-  },
-  {
-    name: 'privata',
-    domain: 'Applied AI / RAG',
-    desc: 'Privacy-preserving local document query engine using offline embeddings (Sentence Transformers) and ChromaDB vector search.',
-    repo: 'https://github.com/Aayushbankar/privata',
-  },
-  {
-    name: 'it (itgpg.github.io)',
-    domain: 'Production Web',
-    desc: 'Official production portal for Govt. Polytechnic Gandhinagar IT Department serving 500+ daily academic students and faculty.',
-    repo: 'https://itgpg.github.io/it/',
-  },
+const flagships = allSystems.slice(0, 3);
+const domains = [
+  'All',
+  'Systems & Low-Level',
+  'Edge AI & Pipelines',
+  'Quantitative Finance',
+  'Security Intelligence',
+  'Production & Platforms',
+  'Creative Tech & WebGL',
 ];
 ---
 
 <BaseLayout
-  title="Systems Architecture & Flagships — Aayush Bankar"
-  description="Engineering specifications, exploit primitives, and sovereign pipeline blueprints for flagship security systems."
+  title="Systems & Technical Spec Sheets — Aayush Bankar"
+  description="Hardware-verified systems architectures, high-throughput log engines, offline edge AI pipelines, and production tools across the spectrum."
 >
-  <div class="mb-10">
-    <div class="text-xs text-[#00e5ff] font-bold tracking-widest mb-1">&gt; SYSTEM SPECIFICATIONS // PRODUCTION REPOSITORIES</div>
-    <h1 class="text-3xl sm:text-4xl font-extrabold text-[#f8fafc] tracking-tight">
-      FLAGSHIP <span class="text-[#38bdf8]">SYSTEMS</span>
-    </h1>
-    <p class="text-sm text-[#94a3b8] mt-2 max-w-2xl leading-relaxed">
-      Sovereign data engines, kernel exploit research harnesses, framework-level IPC security tooling, and edge applied AI pipelines.
-    </p>
-  </div>
+  <div class="wrap-wide py-10 sm:py-16">
+    <!-- Header -->
+    <header class="mb-14 rise">
+      <p class="eyebrow mb-3">
+        <span class="tick">SYS–00</span>
+        <span>Systems Architecture &amp; Empirical Telemetry</span>
+      </p>
+      <h1 class="display text-4xl sm:text-5xl lg:text-6xl text-bone-50 leading-[1.05]">
+        Systems &amp; <em class="text-ember-400">Spec Sheets.</em>
+      </h1>
+      <p class="lede mt-4 max-w-2xl text-base text-bone-400 leading-relaxed">
+        Production architectures, high-throughput Rust/eBPF pipelines, offline edge voice stacks,
+        and zero-cost campus portals. Every performance metric is measured on real hardware.
+      </p>
 
-  <!-- Flagship Projects Deep Dive -->
-  <div class="space-y-8 mb-16">
-    {flagships.map((f) => (
-      <div class="p-6 sm:p-8 rounded-lg bg-[#040914] border border-[#1e293b] hover:border-[#38bdf8]/50 transition-all">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 text-xs">
-          <div class="flex items-center gap-2">
-            <span class="px-2.5 py-0.5 rounded font-bold" style={{ backgroundColor: `${f.accent}20`, color: f.accent }}>
-              {f.domain}
-            </span>
-          </div>
-          <span class="text-[#10b981] font-bold text-[11px] font-mono">
-            STATUS: {f.status}
-          </span>
+      <div class="flex flex-wrap items-center gap-4 sm:gap-6 mt-6 pt-6 border-t border-bone-50/10 font-micro text-xs">
+        <div class="flex items-center gap-2">
+          <span class="font-display italic text-lg text-brass-400 font-semibold">{allSystems.length}</span>
+          <span class="text-bone-500 uppercase tracking-wider">Documented Systems</span>
         </div>
-
-        <h2 class="text-2xl font-bold text-[#f8fafc] mb-3">
-          {f.title}
-        </h2>
-
-        <p class="text-xs sm:text-sm text-[#94a3b8] leading-relaxed mb-6 font-mono">
-          {f.desc}
-        </p>
-
-        <div class="mb-6">
-          <div class="text-xs font-bold text-[#38bdf8] mb-3 tracking-wider">TECHNICAL SPECIFICATIONS &amp; DELIVERABLES:</div>
-          <ul class="space-y-2 text-xs text-[#cbd5e1]">
-            {f.highlights.map((h) => (
-              <li class="flex items-start gap-2">
-                <span class="text-[#00e5ff]">&bull;</span>
-                <span>{h}</span>
-              </li>
-            ))}
-          </ul>
+        <span class="text-bone-700">/</span>
+        <div class="flex items-center gap-2">
+          <span class="font-display italic text-lg text-ember-400 font-semibold">03</span>
+          <span class="text-bone-500 uppercase tracking-wider">Flagship Pipelines</span>
         </div>
-
-        <div class="pt-4 border-t border-[#1e293b] flex items-center justify-between text-xs">
-          <span class="text-[#64748b]">LICENSED UNDER AUTHORIZED RESEARCH PROTOCOL</span>
-          <a
-            href={f.repo}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="px-3.5 py-1.5 rounded bg-[#07111e] border border-[#1e293b] text-[#00e5ff] hover:bg-[#00e5ff]/10 font-bold transition-all"
-          >
-            INSPECT REPOSITORY ↗
-          </a>
+        <span class="text-bone-700">/</span>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-moss-500"></span>
+          <span class="text-bone-400 uppercase tracking-wider">100% Measured Locally</span>
         </div>
       </div>
-    ))}
+    </header>
+
+    <!-- Domain Filter Navigation (Progressive Enhancement) -->
+    <nav class="flex flex-wrap gap-2 mb-10 pb-4 border-b border-bone-50/10" aria-label="Filter systems by domain" id="domain-filter">
+      {domains.map((d, i) => (
+        <button
+          type="button"
+          data-filter-btn={d}
+          class={`filter-btn px-3.5 py-1.5 rounded-full font-micro text-xs tracking-wider transition-all duration-200 cursor-pointer ${
+            i === 0
+              ? 'bg-bone-50 text-ink-950 font-semibold shadow-sm active'
+              : 'bg-ink-850 text-bone-400 border border-bone-50/10 hover:border-bone-50/30 hover:text-bone-50'
+          }`}
+        >
+          {d}
+        </button>
+      ))}
+    </nav>
+
+    <!-- Complete Systems Catalog Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="systems-grid">
+      {allSystems.map((sys) => {
+        const badgeClass =
+          sys.badgeType === 'ember'
+            ? 'stamp'
+            : sys.badgeType === 'brass'
+              ? 'stamp stamp-brass'
+              : sys.badgeType === 'moss'
+                ? 'chip !border-moss-500/50 !text-moss-400 !bg-moss-500/10'
+                : 'chip';
+        return (
+          <article
+            id={sys.id}
+            class="system-card card card-glare p-6 sm:p-7 flex flex-col justify-between group scroll-mt-24"
+            data-domain={sys.domain}
+            data-reveal
+          >
+            <div>
+              <!-- Top Row: Index & Status -->
+              <div class="flex items-start justify-between gap-2 mb-4">
+                <span class="card-index text-3xl">{sys.index}</span>
+                <span class={badgeClass}>{sys.status}</span>
+              </div>
+
+              <!-- Visual Plate Preview -->
+              <a href={`/systems/${sys.id}`} class="block mb-4 rounded-xl overflow-hidden bg-ink-950 border border-bone-50/10 p-2 shadow-inner group-hover:border-bone-50/20 transition-all">
+                <img
+                  src={sys.plateImage}
+                  alt={`${sys.name} Visual Plate`}
+                  class="w-full h-36 object-contain rounded transition-transform duration-500 group-hover:scale-[1.02]"
+                  loading="lazy"
+                />
+              </a>
+
+              <!-- Title & Category -->
+              <h2 class="display text-xl text-bone-50 group-hover:text-ember-400 transition-colors leading-tight">
+                <a href={`/systems/${sys.id}`}>{sys.name}</a>
+              </h2>
+              <p class="font-micro text-[10px] tracking-wider uppercase text-ember-400 font-semibold mt-1">
+                {sys.category}
+              </p>
+              <p class="text-xs text-bone-400 leading-relaxed mt-2.5 line-clamp-3">
+                {sys.description}
+              </p>
+
+              <!-- Benchmarks Strip (First 2) -->
+              <div class="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-bone-50/10">
+                {sys.benchmarks.slice(0, 2).map((b) => (
+                  <div class="p-2.5 rounded bg-ink-950 border border-bone-50/10">
+                    <p class="font-display text-base text-brass-400 font-semibold">{b.value}</p>
+                    <p class="font-micro text-[9px] tracking-wider uppercase text-bone-500 mt-0.5 truncate">{b.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              <!-- Tech Chips -->
+              <div class="flex flex-wrap gap-1.5 mt-3">
+                {sys.tech.slice(0, 3).map((t) => (
+                  <span class="chip !text-[9px] !py-0.5 !px-2">{t}</span>
+                ))}
+              </div>
+            </div>
+
+            <!-- Bottom Action Row -->
+            <div class="mt-6 pt-4 border-t border-bone-50/10 flex items-center justify-between font-micro text-xs">
+              <a href={sys.repoUrl} target="_blank" rel="noopener noreferrer" class="text-bone-500 hover:text-ember-400 transition-colors">
+                GitHub ↗
+              </a>
+              <a href={`/systems/${sys.id}`} class="btn btn-ghost !py-1.5 !px-3 !text-[10px]">
+                Full Spec Sheet →
+              </a>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+
+    <!-- Related CVE & Kernel Research Callout -->
+    <div class="mt-16 card card-glare p-8 border-l-4 border-ember-500 flex flex-col md:flex-row md:items-center justify-between gap-6" data-reveal>
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="stamp !text-[9px] !py-0.5 !px-2">KERNEL AUDITS</span>
+          <span class="font-micro text-xs tracking-wider uppercase text-ember-400 font-semibold">Vulnerability Triage</span>
+        </div>
+        <h3 class="display text-xl sm:text-2xl text-bone-50 mb-2">
+          Looking for Low-Level Exploit Chains &amp; CVE Notes?
+        </h3>
+        <p class="text-xs sm:text-sm text-bone-300 max-w-2xl leading-relaxed">
+          Examine Bad Epoll (CVE-2026-46242) and Android Contacts SQLi (CVE-2026-28576) complete with GDB hardware watchpoint logs, ROP gadget chains, and verification registers.
+        </p>
+      </div>
+      <div class="shrink-0">
+        <a href="/research" class="btn btn-primary">
+          Explore Research Notes →
+        </a>
+      </div>
+    </div>
   </div>
 
-  <!-- Secondary Systems Table -->
-  <section class="p-6 rounded-lg bg-[#040914] border border-[#1e293b]">
-    <div class="flex items-center gap-3 mb-6 border-b border-[#1e293b] pb-3">
-      <span class="text-[#00e5ff] font-bold text-lg">&#9608;&#9617;</span>
-      <h2 class="text-lg font-bold tracking-wider text-[#f8fafc]">ADDITIONAL PRODUCTION REPOSITORIES</h2>
-    </div>
+  <!-- Domain Filtering Script (Progressive Enhancement) -->
+  <script is:inline>
+    (function () {
+      function initDomainFilter() {
+        const filterBtns = document.querySelectorAll('[data-filter-btn]');
+        const systemCards = document.querySelectorAll('.system-card');
 
-    <div class="divide-y divide-[#1e293b]/60">
-      {secondarySystems.map((s) => (
-        <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
-          <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="font-bold text-[#f8fafc] text-sm">{s.name}</span>
-              <span class="px-2 py-0.5 rounded bg-[#07111e] border border-[#1e293b] text-[#38bdf8] text-[10px]">
-                {s.domain}
-              </span>
-            </div>
-            <p class="text-[#94a3b8] max-w-xl">
-              {s.desc}
-            </p>
-          </div>
+        if (!filterBtns.length || !systemCards.length) return;
 
-          <a
-            href={s.repo}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-[#38bdf8] hover:text-[#00e5ff] font-bold whitespace-nowrap"
-          >
-            REPOSITORY ↗
-          </a>
-        </div>
-      ))}
-    </div>
-  </section>
+        filterBtns.forEach((btn) => {
+          btn.addEventListener('click', function () {
+            const selected = this.getAttribute('data-filter-btn');
+
+            filterBtns.forEach((b) => {
+              b.classList.remove('bg-bone-50', 'text-ink-950', 'font-semibold', 'shadow-sm', 'active');
+              b.classList.add('bg-ink-850', 'text-bone-400', 'border', 'border-bone-50/10');
+            });
+            this.classList.remove('bg-ink-850', 'text-bone-400', 'border-bone-50/10');
+            this.classList.add('bg-bone-50', 'text-ink-950', 'font-semibold', 'shadow-sm', 'active');
+
+            systemCards.forEach((card) => {
+              const cardDomain = card.getAttribute('data-domain');
+              if (selected === 'All' || cardDomain === selected) {
+                card.style.display = 'flex';
+              } else {
+                card.style.display = 'none';
+              }
+            });
+          });
+        });
+      }
+
+      initDomainFilter();
+      document.addEventListener('astro:after-swap', initDomainFilter);
+    })();
+  </script>
 </BaseLayout>

@@ -1,0 +1,248 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import MonogramSeal from '../components/ui/MonogramSeal.astro';
+import ProgressionTimeline from '../components/ui/ProgressionTimeline.astro';
+
+import { profile } from '../data/profile';
+import { methodology } from '../data/methodology';
+---
+
+<BaseLayout
+  title="About & Empirical Methodology — Aayush Bankar"
+  description="Ground truth biographical profile, 5-phase research lifecycle, local lab bench hardware, and academic trajectory."
+>
+  <div class="wrap-wide py-10 sm:py-16">
+    <!-- Header -->
+    <header class="mb-14 rise">
+      <p class="eyebrow mb-3">
+        <span class="tick">AB–00</span>
+        <span>Ground-Truth Profile · Gandhinagar (IST)</span>
+      </p>
+      <h1 class="display text-4xl sm:text-5xl lg:text-6xl text-bone-50 leading-[1.05]">
+        About &amp; <em class="text-ember-400">Methodology.</em>
+      </h1>
+      <p class="lede mt-4 max-w-2xl text-base text-bone-400 leading-relaxed">
+        18 years old, based in Gandhinagar, Gujarat. Systems security researcher, cybersecurity analyst,
+        and AI-augmented engineer working under strict verification ledgers.
+      </p>
+
+      <div class="flex flex-wrap items-center gap-3 mt-6 pt-6 border-t border-bone-50/10 font-micro text-xs">
+        <span class="chip chip-brass">Analyst @ CypherMatrix</span>
+        <span class="chip">Govt. Polytechnic Gandhinagar · CPI {profile.education.cpi}</span>
+        <span class="chip chip-ember">SIH 2026 · {profile.sih.status}</span>
+      </div>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <!-- Left Column: Bio Narrative & Reality -->
+      <div class="lg:col-span-7 space-y-8">
+        <!-- Background & Engineering Trajectory -->
+        <article class="card card-glare p-7 sm:p-9" data-reveal>
+          <div class="flex items-center gap-4 mb-6">
+            <MonogramSeal class="w-16 h-16 shrink-0" size={64} />
+            <div>
+              <h2 class="display text-2xl text-bone-50">Background &amp; Trajectory</h2>
+              <p class="font-micro text-xs text-bone-500 uppercase tracking-wider mt-0.5">Gandhinagar (IST) · Student &amp; Analyst</p>
+            </div>
+          </div>
+
+          <div class="space-y-4 text-sm sm:text-base text-bone-300 leading-relaxed font-sans">
+            <p>
+              I am an 18-year-old security researcher and student based in Gandhinagar, Gujarat. Currently, I conduct vulnerability research and systems analysis at <strong>CypherMatrix</strong>, focusing on kernel triage, exploit reproduction, and verifiable log pipelines.
+            </p>
+            <p>
+              I am in my final semester of a Diploma in Information Technology at <strong>Government Polytechnic Gandhinagar</strong> with a <strong>CPI of 8.60 / 10.0</strong>. Beyond coursework, I lead development for our department’s official web portal (serving 500+ daily users). My current academic focus is preparing for DDCET lateral-entry into B.E.
+            </p>
+            <p>
+              In competitive engineering, our team (Team Spectre) cleared the institutional screening for
+              <strong>Smart India Hackathon (SIH 2026)</strong> and is currently competing in the national
+              screening round for the NTRO problem statement (SIH26156). I state this factually: this is an active
+              evaluation stage, not a claimed win.
+            </p>
+          </div>
+        </article>
+
+        <!-- Technical Focus Across the Spectrum -->
+        <article class="card card-glare p-7 sm:p-9 border-l-4 border-l-brass-500" data-reveal>
+          <div class="flex items-center justify-between mb-4">
+            <p class="eyebrow mb-0"><span class="tick">ENG</span><span>Engineering Focus</span></p>
+            <span class="chip chip-brass !text-[9px] !py-0.5 !px-2">FULL SPECTRUM</span>
+          </div>
+
+          <h3 class="display text-2xl text-bone-50 mb-3">Ground-Truth Systems Engineering</h3>
+          <p class="font-display italic text-brass-400 mb-4">First-principles understanding before automation or abstraction.</p>
+
+          <p class="text-sm text-bone-300 leading-relaxed mb-5">
+            Rather than confining myself to a single narrow niche or relying on high-level abstractions, I focus on building and auditing systems across the low-level stack:
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+            <div class="p-3.5 rounded-lg bg-ink-950 border border-bone-50/10">
+              <span class="font-micro text-[10px] tracking-wider uppercase text-ember-400 font-semibold block mb-1">01 / Kernel &amp; Security</span>
+              <p class="text-xs text-bone-300 leading-relaxed">
+                Analyzing race conditions, memory allocators (SLUB), and Android IPC mechanisms under QEMU with GDB telemetry and KASAN.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-lg bg-ink-950 border border-bone-50/10">
+              <span class="font-micro text-[10px] tracking-wider uppercase text-brass-400 font-semibold block mb-1">02 / High-Throughput Systems</span>
+              <p class="text-xs text-bone-300 leading-relaxed">
+                Writing zero-copy SIMD ingestion pipelines in Rust and C, lock-free ring buffers, and RFC 6962 BLAKE3 Merkle ledgers.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-lg bg-ink-950 border border-bone-50/10">
+              <span class="font-micro text-[10px] tracking-wider uppercase text-moss-500 font-semibold block mb-1">03 / Edge AI &amp; Local Voice</span>
+              <p class="text-xs text-bone-300 leading-relaxed">
+                Chaining local voice activity detection (Silero), speech-to-text (Whisper), and quantized LLMs (llama.cpp) for offline low-latency execution.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-lg bg-ink-950 border border-bone-50/10">
+              <span class="font-micro text-[10px] tracking-wider uppercase text-bone-400 font-semibold block mb-1">04 / Modeling &amp; Real Tools</span>
+              <p class="text-xs text-bone-300 leading-relaxed">
+                Simulating realistic market execution with empirical friction models, and maintaining production utilities like our college department portal.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-lg bg-ink-950 border border-bone-50/10 font-micro text-xs text-bone-400 space-y-2">
+            <div class="flex items-center gap-2 text-bone-300">
+              <span class="text-ember-400">●</span>
+              <span>Evidence Over Claims: Every assertion must be reproducible in a local test harness.</span>
+            </div>
+            <div class="flex items-center gap-2 text-bone-300">
+              <span class="text-brass-400">●</span>
+              <span>Documenting Dead Ends: Failed exploitation attempts and unviable paths are cataloged openly.</span>
+            </div>
+            <div class="flex items-center gap-2 text-bone-300">
+              <span class="text-moss-500">●</span>
+              <span>Manual Fluency: Low-level C memory models and assembly are audited directly without blind trust in tools.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5-Phase Methodology Timeline -->
+        <article class="card card-glare p-7 sm:p-9" data-reveal>
+          <p class="eyebrow mb-2"><span class="tick">MTH</span><span>Research Cadence</span></p>
+          <h3 class="display text-2xl text-bone-50 mb-1">{methodology.subtitle}</h3>
+          <p class="font-display italic text-brass-400 mb-6">{methodology.creed}</p>
+
+          <div class="space-y-6 relative before:absolute before:inset-0 before:left-3.5 before:w-px before:bg-bone-50/10">
+            {methodology.phases.map((p) => (
+              <div class="relative flex items-start gap-5 pl-1">
+                <span class="w-7 h-7 rounded-full bg-ink-950 border border-ember-500/60 flex items-center justify-center font-display text-xs text-ember-400 shrink-0 z-10">
+                  {p.number}
+                </span>
+                <div class="flex-1 pb-2">
+                  <div class="flex flex-wrap items-baseline gap-2">
+                    <h4 class="font-display text-lg text-bone-50">{p.title}</h4>
+                    <span class="font-micro text-[10px] tracking-wider uppercase text-ember-400">({p.name})</span>
+                  </div>
+                  <p class="font-display italic text-xs text-bone-400 mt-1">"{p.motto}"</p>
+                  <p class="text-xs sm:text-sm text-bone-300 leading-relaxed mt-2">{p.description}</p>
+                  <div class="flex flex-wrap gap-1.5 mt-3">
+                    {p.artifacts.map((a) => (
+                      <span class="chip !text-[9px] !py-0.5 !px-2">{a}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </article>
+      </div>
+
+      <!-- Right Column: Lab Rig, Education & Verified Credentials -->
+      <div class="lg:col-span-5 space-y-6">
+        <!-- Lab Hardware Rig -->
+        <article class="card card-glare p-6 sm:p-7" data-reveal>
+          <p class="eyebrow mb-3"><span class="tick">RIG</span><span>Laboratory Hardware Rig</span></p>
+          <h3 class="display text-2xl text-bone-50 mb-1">{profile.labRig.model}</h3>
+          <p class="font-micro text-xs text-ember-400 uppercase tracking-wider mb-4">Every Exploit Reproduced Locally</p>
+
+          <div class="space-y-2.5 font-micro text-xs">
+            <div class="p-2.5 rounded bg-ink-950 border border-bone-50/10">
+              <span class="text-bone-500 block text-[10px] uppercase tracking-wider">Processor</span>
+              <span class="text-bone-200 mt-0.5 block">{profile.labRig.cpu}</span>
+            </div>
+            <div class="p-2.5 rounded bg-ink-950 border border-bone-50/10">
+              <span class="text-bone-500 block text-[10px] uppercase tracking-wider">Memory & Storage</span>
+              <span class="text-bone-200 mt-0.5 block">{profile.labRig.ram} · {profile.labRig.storage}</span>
+            </div>
+            <div class="p-2.5 rounded bg-ink-950 border border-bone-50/10">
+              <span class="text-bone-500 block text-[10px] uppercase tracking-wider">Operating Systems</span>
+              <span class="text-bone-200 mt-0.5 block">{profile.labRig.os}</span>
+            </div>
+            <div class="p-2.5 rounded bg-ink-950 border border-bone-50/10">
+              <span class="text-bone-500 block text-[10px] uppercase tracking-wider">Virtualization & Sanitizers</span>
+              <span class="text-bone-200 mt-0.5 block">{profile.labRig.virtualization}</span>
+            </div>
+            <div class="p-2.5 rounded bg-ink-950 border border-bone-50/10">
+              <span class="text-bone-500 block text-[10px] uppercase tracking-wider">Edge Inference</span>
+              <span class="text-bone-200 mt-0.5 block">{profile.labRig.edgeAi}</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Academic Profile -->
+        <article class="card card-glare p-6 sm:p-7" data-reveal>
+          <p class="eyebrow mb-3"><span class="tick">EDU</span><span>Academic Profile</span></p>
+          <h3 class="display text-xl text-bone-50 mb-1">{profile.education.institution}</h3>
+          <p class="font-micro text-xs text-brass-400 uppercase tracking-wider mb-3">
+            {profile.education.degree} · CPI {profile.education.cpi}
+          </p>
+
+          <ul class="space-y-2 text-xs text-bone-300 font-sans leading-relaxed">
+            <li class="flex items-start gap-2">
+              <span class="text-ember-400">›</span>
+              <span>{profile.education.role}</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-ember-400">›</span>
+              <span>{profile.education.nextStep}</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Verified Credentials Ledger -->
+        <article class="card card-glare p-6 sm:p-7" data-reveal id="credentials">
+          <p class="eyebrow mb-3"><span class="tick">LEDGER</span><span>Verified Credentials</span></p>
+          <div class="divide-y divide-bone-50/10">
+            {profile.credentials.map((c) => (
+              <div class="py-3.5 first:pt-0 last:pb-0">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="font-micro text-xs text-ember-400 font-semibold">{c.id}</span>
+                  <span class="chip chip-brass !text-[9px] !py-0.5 !px-2">{c.status}</span>
+                </div>
+                <h4 class="text-sm font-medium text-bone-50 mt-1">{c.title}</h4>
+                <p class="font-micro text-[10px] text-bone-500 uppercase tracking-wider mt-0.5">
+                  {c.issuer} · {c.date}
+                </p>
+                <p class="text-xs text-bone-400 mt-1.5 leading-relaxed">{c.detail}</p>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <!-- Competency Tags -->
+        <article class="card p-6" data-reveal>
+          <p class="eyebrow mb-3"><span class="tick">SKL</span><span>Technical Competencies</span></p>
+          <div class="space-y-4">
+            {profile.competencies.map((group) => (
+              <div>
+                <p class="font-micro text-[10px] uppercase tracking-wider text-bone-500 mb-2">{group.category}</p>
+                <div class="flex flex-wrap gap-1.5">
+                  {group.skills.map((s) => (
+                    <span class="chip !text-[10px] !py-0.5 !px-2">{s}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- Career Trajectory & Technical Progression -->
+  <ProgressionTimeline />
+</BaseLayout>

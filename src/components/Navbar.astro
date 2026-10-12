@@ -1,73 +1,187 @@
 ---
+/* Floating dock navigation — Awwwards-caliber pill geometry with responsive mobile drawer and live route indicators */
 const navItems = [
-  { label: '01 // DOSSIER', href: '/' },
-  { label: '02 // RESEARCH', href: '/research' },
-  { label: '03 // SYSTEMS', href: '/systems' },
-  { label: '04 // LEDGER', href: '/ledger' },
+  { label: 'DOSSIER', href: '/', num: '01' },
+  { label: 'SYSTEMS', href: '/systems', num: '02' },
+  { label: 'RESEARCH', href: '/research', num: '03' },
+  { label: 'ABOUT', href: '/about', num: '04' },
+  { label: 'CONTACT', href: '/contact', num: '05' },
 ];
 
-const currentPath = Astro.url.pathname;
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+function isRouteActive(href: string): boolean {
+  const cleanHref = href.replace(/\/$/, '') || '/';
+  if (cleanHref === '/') {
+    return currentPath === '/';
+  }
+  return currentPath.startsWith(cleanHref);
+}
+
+const activeItem = navItems.find((item) => isRouteActive(item.href)) || navItems[0];
 ---
 
-<header class="sticky top-0 z-50 backdrop-blur-md bg-[#020611]/85 border-b border-[#1e293b]">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-    <!-- Brand / Node Handle -->
-    <a href="/" class="flex items-center gap-2 group">
-      <span class="w-2.5 h-2.5 rounded-full bg-[#00e5ff] animate-pulse"></span>
-      <span class="font-bold text-sm tracking-widest text-[#f8fafc] group-hover:text-[#00e5ff] transition-colors">
-        AAYUSH<span class="text-[#38bdf8]">.BANKAR</span>
+<header class="sticky top-3 sm:top-5 z-50 w-full px-3 sm:px-6 pointer-events-none">
+  <div class="max-w-6xl mx-auto backdrop-blur-xl bg-ink-950/85 border border-bone-50/15 rounded-full px-3.5 sm:px-6 py-2 sm:py-2.5 shadow-[0_12px_40px_rgba(0,0,0,0.65)] flex items-center justify-between gap-2 sm:gap-6 pointer-events-auto transition-all">
+    <!-- Brand -->
+    <a href="/" class="flex items-center gap-2 group shrink-0" aria-label="Aayush Bankar Dossier Home">
+      <span class="w-2.5 h-2.5 rounded-full bg-ember-500 animate-pulse shadow-[0_0_10px_rgba(255,77,28,0.7)]"></span>
+      <span class="font-display font-semibold text-sm sm:text-base tracking-wide text-bone-50 group-hover:text-ember-400 transition-colors">
+        Aayush Bankar
       </span>
-      <span class="text-xs text-[#64748b] hidden sm:inline">[NODE: TTY0]</span>
+      <span class="hidden md:inline-flex chip !text-[9px] !py-0.5 !px-2 border-bone-50/10 text-bone-500">
+        SYS / SEC
+      </span>
     </a>
 
-    <!-- Navigation Menu -->
-    <nav class="hidden md:flex items-center gap-6">
-      {navItems.map((item) => {
-        const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
-        return (
-          <a
-            href={item.href}
-            class={`text-xs font-mono tracking-wider transition-colors py-1 ${
-              isActive
-                ? 'text-[#00e5ff] border-b-2 border-[#00e5ff]'
-                : 'text-[#94a3b8] hover:text-[#f8fafc]'
-            }`}
-          >
-            {item.label}
-          </a>
-        );
-      })}
+    <!-- Primary Nav (Desktop) -->
+    <nav class="hidden md:flex items-center gap-1 p-1 rounded-full bg-ink-900/60 border border-bone-50/5" aria-label="Main navigation">
+      {
+        navItems.map((item) => {
+          const active = isRouteActive(item.href);
+          return (
+            <a
+              href={item.href}
+              class:list={[
+                'nav-link font-micro text-[11px] tracking-[0.16em] px-3.5 py-1.5 rounded-full transition-all duration-200 relative',
+                active
+                  ? 'bg-bone-50/10 text-ember-400 font-semibold shadow-inner is-active'
+                  : 'text-bone-400 hover:text-bone-50 hover:bg-bone-50/5',
+              ]}
+              aria-current={active ? 'page' : undefined}
+            >
+              <span class="text-bone-600 mr-1 text-[10px]">{item.num}</span>
+              {item.label}
+            </a>
+          );
+        })
+      }
     </nav>
 
-    <!-- Right HUD status -->
-    <div class="flex items-center gap-3">
-      <div class="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded bg-[#040914] border border-[#1e293b] text-[11px] text-[#64748b]">
-        <span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>
-        <span>CYPHERMATRIX ANALYST</span>
+    <!-- Right Controls: Locator + GitHub + Mobile Menu Trigger -->
+    <div class="flex items-center gap-2 shrink-0">
+      <div class="hidden lg:flex items-center gap-2 font-micro text-[10px] tracking-[0.14em] text-bone-400 px-3 py-1.5 rounded-full bg-ink-900/60 border border-bone-50/5">
+        <span class="w-1.5 h-1.5 rounded-full bg-moss-500"></span>
+        <span>GANDHINAGAR</span>
+        <span class="text-bone-600">·</span>
+        <span data-ist-clock>--:-- IST</span>
       </div>
+
       <a
         href="https://github.com/Aayushbankar"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-xs px-3 py-1.5 rounded bg-[#07111e] border border-[#1e293b] text-[#38bdf8] hover:border-[#00e5ff] hover:text-[#00e5ff] transition-all"
+        class="btn btn-ghost !py-1 sm:!py-1.5 !px-2.5 sm:!px-3.5 !text-[10px] sm:!text-[11px] !rounded-full"
+        aria-label="GitHub Profile"
       >
-        GITHUB ↗
+        <span>GitHub</span>
+        <span class="text-ember-400">↗</span>
       </a>
+
+      <!-- Mobile Menu Toggle Button (Single Dock) -->
+      <button
+        type="button"
+        id="mobile-nav-toggle"
+        class="md:hidden flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-ink-900/80 border border-bone-50/15 text-bone-200 hover:text-ember-400 font-micro text-[10px] tracking-wider transition-colors"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+      >
+        <span class="text-ember-400 font-semibold">{activeItem.label}</span>
+        <svg class="w-3.5 h-3.5 transition-transform" id="nav-arrow-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+        </svg>
+      </button>
     </div>
   </div>
 
-  <!-- Mobile Navigation Bar -->
-  <div class="md:hidden flex items-center justify-around py-2 border-t border-[#1e293b]/50 bg-[#020611] text-[11px]">
-    {navItems.map((item) => {
-      const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
-      return (
-        <a
-          href={item.href}
-          class={`font-mono px-2 py-1 ${isActive ? 'text-[#00e5ff] font-bold' : 'text-[#94a3b8]'}`}
-        >
-          {item.label.split(' // ')[1]}
-        </a>
-      );
-    })}
+  <!-- Mobile Floating Drawer (Single-Dock Dropdown) -->
+  <div
+    id="mobile-nav-drawer"
+    class="hidden md:hidden mt-2 max-w-sm mx-auto backdrop-blur-2xl bg-ink-950/95 border border-bone-50/15 rounded-2xl p-3 shadow-2xl pointer-events-auto transition-all"
+  >
+    <div class="space-y-1">
+      {
+        navItems.map((item) => {
+          const active = isRouteActive(item.href);
+          return (
+            <a
+              href={item.href}
+              class:list={[
+                'flex items-center justify-between px-3 py-2 rounded-xl font-micro text-xs tracking-wider transition-colors',
+                active
+                  ? 'bg-bone-50/10 text-ember-400 font-semibold'
+                  : 'text-bone-300 hover:text-bone-50 hover:bg-bone-50/5',
+              ]}
+              aria-current={active ? 'page' : undefined}
+            >
+              <div class="flex items-center gap-2">
+                <span class="text-bone-600 text-[10px]">{item.num}</span>
+                <span>{item.label}</span>
+              </div>
+              {active && <span class="w-1.5 h-1.5 rounded-full bg-ember-500"></span>}
+            </a>
+          );
+        })
+      }
+    </div>
+
+    <!-- Mobile Drawer Footer Info -->
+    <div class="mt-3 pt-2.5 border-t border-bone-50/10 flex items-center justify-between text-[10px] font-micro text-bone-500 px-2">
+      <span class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-moss-500"></span>
+        <span data-ist-clock>--:-- IST</span>
+      </span>
+      <span>Gandhinagar, Gujarat</span>
+    </div>
   </div>
+
+  <!-- Interactive script for mobile drawer and route sync -->
+  <script is:inline>
+    (function () {
+      function setupNav() {
+        var toggle = document.getElementById('mobile-nav-toggle');
+        var drawer = document.getElementById('mobile-nav-drawer');
+        var icon = document.getElementById('nav-arrow-icon');
+        if (!toggle || !drawer) return;
+
+        function closeDrawer() {
+          drawer.classList.add('hidden');
+          toggle.setAttribute('aria-expanded', 'false');
+          if (icon) icon.classList.remove('rotate-180');
+        }
+
+        function openDrawer() {
+          drawer.classList.remove('hidden');
+          toggle.setAttribute('aria-expanded', 'true');
+          if (icon) icon.classList.add('rotate-180');
+        }
+
+        toggle.onclick = function (e) {
+          e.stopPropagation();
+          var isHidden = drawer.classList.contains('hidden');
+          if (isHidden) {
+            openDrawer();
+          } else {
+            closeDrawer();
+          }
+        };
+
+        drawer.querySelectorAll('a').forEach(function (a) {
+          a.onclick = function () {
+            closeDrawer();
+          };
+        });
+
+        document.addEventListener('click', function (e) {
+          if (!drawer.contains(e.target) && !toggle.contains(e.target)) {
+            closeDrawer();
+          }
+        });
+      }
+
+      setupNav();
+      document.addEventListener('astro:page-load', setupNav);
+      document.addEventListener('astro:after-swap', setupNav);
+    })();
+  </script>
 </header>

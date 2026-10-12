@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 250" width="580" height="250" role="img" aria-label="IT Department Official Portal">
+<title>IT Department Portal</title>
+<defs>
+  <linearGradient id="it-bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#0c0c0b"/><stop offset="1" stop-color="#141412"/>
+  </linearGradient>
+  <radialGradient id="it-glow" cx="80%" cy="52%" r="55%">
+    <stop offset="0%" stop-color="#9da65d" stop-opacity="0.16"/><stop offset="1" stop-color="#000" stop-opacity="0"/>
+  </radialGradient>
+  <pattern id="it-grid" width="26" height="26" patternUnits="userSpaceOnUse">
+    <path d="M26 0 V26 M0 26 H26" stroke="#1c1a14" stroke-width="1" fill="none"/>
+  </pattern>
+  <style>
+    .m { font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace; }
+    .d { font-size: 11px; fill: #a8a29a; }
+    .chip { font-size: 9px; letter-spacing: 1.1px; fill: #b8c773; }
+  </style>
+</defs>
+
+<rect x="1" y="1" width="578" height="248" rx="12" fill="url(#it-bg)" stroke="#2a2a26"/>
+<rect x="1" y="1" width="578" height="248" rx="12" fill="url(#it-grid)" opacity="0.55"/>
+<rect x="1" y="1" width="578" height="248" rx="12" fill="url(#it-glow)"/>
+<rect x="1" y="1" width="5" height="248" rx="2.5" fill="#9da65d" opacity="0.85"/>
+
+<g class="m">
+  <rect x="24" y="20" width="34" height="18" rx="4" fill="#1b2414" stroke="#485c25"/>
+  <text x="41" y="33" font-size="10" font-weight="700" fill="#9da65d" text-anchor="middle">07</text>
+  <circle cx="72" cy="29" r="3.5" fill="#9da65d">
+    <animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="84" y="33" font-size="9.5" letter-spacing="1.8" fill="#ede8dc">PRODUCTION PORTAL &#183; ZERO-COST CMS</text>
+
+  <text x="24" y="72" font-size="22" font-weight="800" letter-spacing="1.2" fill="#ede8dc">IT DEPARTMENT PORTAL</text>
+  <text x="24" y="93" font-size="10" letter-spacing="2" fill="#9da65d">GOVT. POLYTECHNIC GANDHINAGAR (500+ USERS)</text>
+  <path d="M24 104 H352" stroke="#2a2a26"/>
+
+  <text class="d" x="24" y="124">Production college departmental web presence.</text>
+  <text class="d" x="24" y="141">Google Drive headless CMS architecture with zero host cost.</text>
+  <text class="d" x="24" y="158">Serving 500+ daily active engineering students &amp; staff.</text>
+  <text class="d" x="24" y="175">Jekyll static pipeline deployed via automated GitHub Pages.</text>
+
+  <g>
+    <rect x="24" y="196" width="60" height="17" rx="3.5" fill="#1b2414" stroke="#485c25"/><text class="chip" x="54" y="208" text-anchor="middle">JEKYLL</text>
+    <rect x="90" y="196" width="84" height="17" rx="3.5" fill="#1b2414" stroke="#485c25"/><text class="chip" x="132" y="208" text-anchor="middle">DRIVE API</text>
+    <rect x="180" y="196" width="76" height="17" rx="3.5" fill="#1b2414" stroke="#485c25"/><text class="chip" x="218" y="208" text-anchor="middle">VANILLA JS</text>
+    <rect x="262" y="196" width="60" height="17" rx="3.5" fill="#1b2414" stroke="#485c25"/><text class="chip" x="292" y="208" text-anchor="middle">500+ DAU</text>
+  </g>
+
+  <text x="556" y="234" font-size="9.5" letter-spacing="1.6" fill="#6b675f" text-anchor="end">itgpg.github.io/it</text>
+</g>
+
+<!-- Headless CMS Flow Graphic -->
+<g transform="translate(466,126)" class="m">
+  <circle r="64" fill="#101010" stroke="#2a2a26"/>
+  <!-- Drive CMS -->
+  <rect x="-48" y="-46" width="96" height="16" rx="3" fill="#1b2414" stroke="#9da65d" stroke-width="1.2"/>
+  <text x="0" y="-34" font-size="7.5" fill="#9da65d" font-weight="700" text-anchor="middle">Drive Headless CMS</text>
+  <!-- Edge Cache -->
+  <rect x="-44" y="-12" width="88" height="22" rx="4" fill="#141812" stroke="#485c25" stroke-width="1.2"/>
+  <text x="0" y="2" font-size="8" fill="#ede8dc" font-weight="700" text-anchor="middle">GitHub Pages Edge</text>
+  <!-- Students -->
+  <rect x="-48" y="28" width="96" height="16" rx="3" fill="#101010" stroke="#9da65d" stroke-width="1.2"/>
+  <text x="0" y="39" font-size="7.5" fill="#ede8dc" font-weight="700" text-anchor="middle">500+ Daily Students</text>
+  <!-- Connectors -->
+  <line x1="0" y1="-30" x2="0" y2="-12" stroke="#9da65d" stroke-width="1.2"/>
+  <line x1="0" y1="10" x2="0" y2="28" stroke="#485c25" stroke-width="1.2"/>
+</g>
+</svg>

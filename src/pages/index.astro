@@ -1,243 +1,486 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import MonogramSeal from '../components/ui/MonogramSeal.astro';
 import { getCollection } from 'astro:content';
+
+import { profile } from '../data/profile';
+import { findings } from '../data/findings';
+import { allSystems } from '../data/systems';
+import { collab } from '../data/collab';
 
 const posts = await getCollection('research');
 const latestPosts = posts
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
   .slice(0, 3);
 
-const flagships = [
-  {
-    num: '01',
-    title: 'BAD EPOLL',
-    cve: 'CVE-2026-46242',
-    tag: 'KERNEL EXPLOIT POC',
-    desc: 'Linux kernel epoll subsystem race condition and use-after-free. Cross-cache slab reclamation via msg_msg into kmalloc-192, and two-stage ROP pivot under CONFIG_RETPOLINE.',
-    tech: ['C', 'Linux 6.12', 'SLUB', 'ROP', 'GDB/KASAN'],
-    repo: 'https://github.com/Aayushbankar/bad_epoll_ab_tier2',
-    accent: '#ef4444',
-  },
-  {
-    num: '02',
-    title: 'ANDROID SQLI',
-    cve: 'CVE-2026-28576',
-    tag: 'ANDROID FRAMEWORK AUDIT',
-    desc: 'Arbitrary projection injection across Android UID sandboxes in ContactsProvider. Validated across Android 11 through Android 15 DP with complete empirical ledger.',
-    tech: ['Java', 'Binder IPC', 'ContentProvider', 'SQLite', 'SELinux'],
-    repo: 'https://github.com/Aayushbankar/cve-2026-28576',
-    accent: '#f59e0b',
-  },
-  {
-    num: '03',
-    title: 'SPECTRE-PRISM',
-    cve: 'SIH 2026 SCREENING',
-    tag: 'SOVEREIGN ARCHITECTURE',
-    desc: '5-plane sovereign log processing and verification engine. Zero-copy SIMD ingestion sustained at 13K events/s/core with RFC 6962 BLAKE3 Merkle transparency proofs.',
-    tech: ['5-Plane Spec', 'SIMD', 'RFC 6962', 'BLAKE3', 'OCSF'],
-    repo: 'https://github.com/Aayushbankar/spectre-prism',
-    accent: '#00e5ff',
-  },
-  {
-    num: '04',
-    title: 'WOLVIE',
-    cve: 'REAL-TIME LOCAL AUDIO',
-    tag: 'APPLIED AI PIPELINE',
-    desc: 'End-to-end local voice companion pipeline with WebRTC streaming call UI. Silero VAD + faster-whisper + llama.cpp + Piper TTS on consumer edge hardware with zero cloud calls.',
-    tech: ['Python', 'WebRTC', 'Faster-Whisper', 'llama.cpp', 'Piper TTS'],
-    repo: 'https://github.com/Aayushbankar/wolvie',
-    accent: '#a855f7',
-  },
+const counts = [
+  { k: String(allSystems.length), v: 'Systems shipped', href: '/systems' },
+  { k: '02', v: 'Flagship CVE tracks', href: '#breakthroughs' },
+  { k: '04', v: 'Field notes with proof', href: '/research' },
+  { k: '100%', v: 'Locally reproducible', href: '/about' },
 ];
+
+const badEpoll = findings[0];
+const androidSqli = findings[1];
+const flagships = allSystems.slice(0, 3);
+const otherSystems = allSystems.slice(3);
+
+const rail = [
+  ['breakthroughs', '01', 'Bugs'],
+  ['systems', '02', 'Systems'],
+  ['notes', '03', 'Notes'],
+  ['connect', '04', 'Connect'],
+];
+
+const heroName = ['AAYUSH', 'BANKAR'];
 ---
 
-<BaseLayout>
-  <!-- Hero Terminal Section -->
-  <section class="border border-[#1e293b] rounded-lg bg-[#040914] overflow-hidden mb-12 shadow-2xl">
-    <!-- Window Bar -->
-    <div class="bg-[#07111e] px-4 py-3 border-b border-[#1e293b] flex items-center justify-between text-xs">
-      <div class="flex items-center gap-2">
-        <span class="w-3 h-3 rounded-full bg-[#ef4444] opacity-80 inline-block"></span>
-        <span class="w-3 h-3 rounded-full bg-[#f59e0b] opacity-80 inline-block"></span>
-        <span class="w-3 h-3 rounded-full bg-[#10b981] opacity-80 inline-block"></span>
-        <span class="text-[#64748b] ml-2 hidden sm:inline">aayush@research-node: ~/sec/operations</span>
-      </div>
-      <div class="text-[#38bdf8] text-[11px] font-bold">
-        STATUS: ACTIVE RESEARCH
-      </div>
-    </div>
+<BaseLayout
+  title="Aayush Bankar — Systems Security & Low-Level Engineering"
+  description="Ground-truth security research, Linux kernel & Android vulnerability notes, and high-performance verifiable architectures."
+>
+  <!-- Dossier left rail navigation (desktop only, hidden over hero) -->
+  <nav class="dossier-rail" aria-label="Dossier section navigation">
+    {rail.map((r) => (
+      <a href={`#${r[0]}`}><span class="dot"></span>{r[1]}</a>
+    ))}
+  </nav>
 
-    <!-- Terminal Inner Content -->
-    <div class="p-6 sm:p-8 space-y-6">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div class="text-[#38bdf8] text-xs font-bold tracking-widest mb-1">&gt; WHOAMI --SYSTEM-TARGET</div>
-          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#f8fafc]">
-            AAYUSH <span class="text-[#00e5ff]">BANKAR</span>
-          </h1>
-          <p class="text-sm sm:text-base text-[#94a3b8] mt-2 font-mono max-w-2xl leading-relaxed">
-            Systems Security Researcher &amp; AI-Augmented Engineer. Linux kernel &amp; Android vulnerability research, exploit primitive synthesis, and sovereign log architectures.
-          </p>
+  <!-- ═══════════════════════════════════════════════════════════════
+       HERO — Curated Editorial Dossier Visual Composition
+       ═══════════════════════════════════════════════════════════════ -->
+  <header class="w-full pt-6 sm:pt-10 pb-6" data-hero>
+    <div class="wrap-wide">
+      <!-- Status Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-6 rise">
+        <p class="eyebrow !mb-0 flex-1 min-w-56">
+          <span class="tick">DS–01</span>
+          <span>Curated Dossier · Gandhinagar, Gujarat · {profile.timezoneLabel}</span>
+        </p>
+        <div class="flex items-center gap-2">
+          <span class="chip chip-brass">
+            <span class="w-1.5 h-1.5 rounded-full bg-moss-500 animate-pulse"></span>
+            Open to Scoped Research
+          </span>
+        </div>
+      </div>
+
+      <!-- Split Hero Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <!-- Left: Handcrafted Monogram Seal Visual Anchor -->
+        <div class="lg:col-span-4 flex flex-col items-center justify-center text-center rise rise-1">
+          <MonogramSeal class="w-48 h-48 sm:w-60 sm:h-60 lg:w-68 lg:h-68" />
+          <div class="mt-4 space-y-1">
+            <p class="font-micro text-[11px] tracking-[0.16em] uppercase text-bone-300 font-semibold">
+              Systems Security &amp; Low-Level Engineering
+            </p>
+            <p class="font-micro text-[10px] tracking-[0.14em] uppercase text-bone-500">
+              Gandhinagar, Gujarat · 23.2156° N, 72.6369° E
+            </p>
+          </div>
         </div>
 
-        <div class="flex flex-col gap-2 p-3 rounded bg-[#020611] border border-[#1e293b] text-xs font-mono min-w-[200px]">
-          <div class="text-[#64748b] text-[10px] tracking-widest">AFFILIATION</div>
-          <div class="text-[#00e5ff] font-bold">Cybersecurity Analyst</div>
-          <div class="text-[#94a3b8]">@ CypherMatrix</div>
-          <div class="pt-2 border-t border-[#1e293b] text-[#10b981] text-[11px]">
-            &bull; SIH 2026 Screening Round
+        <!-- Right: Confident Editorial Typography with Kinetic Mask -->
+        <div class="lg:col-span-8 flex flex-col justify-center rise rise-2">
+          <h1 class="name-hero text-[clamp(2.3rem,6.5vw,7.2rem)] leading-[0.92]" aria-label="Aayush Bankar">
+            {heroName.map((word, wi) => (
+              <span class="line-mask block pb-0.5 sm:pb-1" aria-hidden="true">
+                {word.split('').map((ch) => (
+                  <span class={`hero-char ${wi === 1 ? 'text-stroke' : ''}`}>
+                    {ch}
+                  </span>
+                ))}
+              </span>
+            ))}
+          </h1>
+
+          <p class="font-display italic text-[clamp(1.3rem,2.4vw,1.9rem)] text-bone-50 mt-4 leading-tight hero-fade">
+            I break kernel race conditions, build fast systems, and <em class="text-ember-400">prove it with code.</em>
+          </p>
+
+          <p class="lede mt-3 !max-w-2xl text-[14px] sm:text-base hero-fade">
+            18-year-old systems security researcher at CypherMatrix. Dissecting Linux kernel &amp; Android
+            vulnerabilities, engineering high-throughput Rust/eBPF ingestion engines, and testing offline edge voice models.
+            Every claim backed by open code, GDB trace logs, and hardware benchmarks.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap items-center gap-3 mt-6 hero-fade">
+            <a href="/systems" class="btn btn-primary">Explore All {allSystems.length} Systems →</a>
+            <a href="/research" class="btn btn-ghost">Vulnerability Field Notes (4) →</a>
+            <a href="/about" class="btn btn-ghost">About &amp; Lab Rig ↗</a>
+          </div>
+
+          <!-- Credential Badges -->
+          <div class="flex flex-wrap gap-2 mt-5 hero-fade">
+            <span class="chip chip-brass">Systems &amp; Vulnerability Research</span>
+            <span class="chip">C · Rust · eBPF · Linux Kernel</span>
+            <span class="chip chip-ember">SIH 2026 · National Screening</span>
           </div>
         </div>
       </div>
 
-      <!-- Quick Ticker -->
-      <div class="p-3.5 rounded bg-[#07111e]/70 border border-[#1e293b] text-xs text-[#cbd5e1] flex items-center gap-3">
-        <span class="w-2 h-2 rounded-full bg-[#10b981] animate-ping"></span>
-        <span class="text-[#38bdf8] font-bold">CURRENT FOCUS:</span>
-        <span class="text-[#94a3b8] truncate">
-          CVE-2026-46242 Kernel Epoll UAF · CVE-2026-28576 Android SQLi · SPECTRE-PRISM 13K EPS Telemetry
-        </span>
+      <!-- 4-Box Proof Count Strip -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-px mt-8 rounded-2xl overflow-hidden border border-bone-50/10 bg-bone-50/10 rise rise-3">
+        {counts.map((c) => (
+          <a href={c.href} class="bg-ink-950 hover:bg-ink-800 transition-colors p-4 sm:p-6 group">
+            <p class="font-display italic text-3xl sm:text-4xl text-bone-50 group-hover:text-ember-400 transition-colors" data-count>{c.k}</p>
+            <p class="font-micro text-[10px] tracking-[0.18em] uppercase text-bone-500 mt-1.5">{c.v} ↗</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </header>
+
+  <!-- Focus Ticker -->
+  <div class="w-full card overflow-hidden py-3 my-2 border-x-0 rounded-none" aria-label="Current research focus" data-reveal>
+    <div class="ticker-track gap-10 font-micro text-[11px] tracking-[0.16em] uppercase text-bone-500">
+      <span class="flex gap-10 pr-10">
+        <span><span class="text-ember-400">●</span> CVE-2026-46242 · ARM64 GKI Verification (0/102k Hits)</span>
+        <span><span class="text-ember-400">●</span> SPECTRE-PRISM · SIH National Screening (13.2k EPS)</span>
+        <span><span class="text-brass-400">●</span> Wolvie · Sub-Second Offline Voice Pipeline (530ms)</span>
+        <span><span class="text-brass-400">●</span> QuantLab · Indian Market Friction Simulation</span>
+      </span>
+      <span class="flex gap-10 pr-10" aria-hidden="true">
+        <span><span class="text-ember-400">●</span> CVE-2026-46242 · ARM64 GKI Verification (0/102k Hits)</span>
+        <span><span class="text-ember-400">●</span> SPECTRE-PRISM · SIH National Screening (13.2k EPS)</span>
+        <span><span class="text-brass-400">●</span> Wolvie · Sub-Second Offline Voice Pipeline (530ms)</span>
+        <span><span class="text-brass-400">●</span> QuantLab · Indian Market Friction Simulation</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       01 NOTABLE BREAKTHROUGHS — Evidence-First Spotlight
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="breakthroughs" class="w-full mt-14 sm:mt-20">
+    <div class="wrap-wide">
+      <SectionHeading index="01" eyebrow="Vulnerability Research" title="Two bugs, <em>fully proven.</em>">
+        <p slot="lede" class="lede">
+          Curated empirical evidence tracks. Each finding features hardware test logs, mitigation bypass analysis, and open source reproduction harnesses.
+        </p>
+        <a slot="action" href="/research" class="link-sweep font-micro text-xs tracking-[0.16em] uppercase mt-4 inline-block">
+          All 4 Field Notes ↗
+        </a>
+      </SectionHeading>
+
+      <!-- 2-Column High-Impact Exhibition Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mt-8">
+        <!-- BAD EPOLL -->
+        <article class="card card-glare p-6 sm:p-7 flex flex-col justify-between" data-reveal>
+          <div>
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <span class="card-index text-2xl sm:text-3xl">{badEpoll.index}</span>
+              <div class="flex items-center gap-2">
+                <span class="stamp">{badEpoll.stamp}</span>
+                <span class="chip chip-brass hidden sm:inline-flex">Linux 6.12 &amp; Android GKI</span>
+              </div>
+            </div>
+
+            <!-- Visual Exhibition Plate -->
+            <div class="mb-4 rounded-xl overflow-hidden bg-ink-950 border border-bone-50/15 p-2 shadow-inner group">
+              <img
+                src="/figures/card-bad-epoll.svg"
+                alt="CVE-2026-46242 Bad Epoll Kernel Exploit Architecture"
+                class="w-full h-auto max-h-[170px] object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                loading="lazy"
+              />
+            </div>
+
+            <h3 class="display text-xl sm:text-2xl text-bone-50">{badEpoll.title}</h3>
+            <p class="font-display italic text-xs sm:text-sm text-bone-300 mt-1">{badEpoll.tagline}</p>
+            <p class="text-xs text-bone-400 leading-relaxed mt-2.5 line-clamp-3">{badEpoll.abstract}</p>
+
+            <!-- Key Findings Metric Strip -->
+            <div class="grid grid-cols-3 gap-2 mt-4 p-2.5 rounded-lg bg-ink-950 border border-bone-50/10 text-center">
+              <div>
+                <p class="font-display text-base sm:text-lg text-brass-400">Tier 1 Root</p>
+                <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">x86_64 Verified</p>
+              </div>
+              <div>
+                <p class="font-display text-base sm:text-lg text-ember-400">0 / 102k</p>
+                <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">ARM64 GKI Hits</p>
+              </div>
+              <div>
+                <p class="font-display text-base sm:text-lg text-bone-200">42 Claims</p>
+                <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">Audited Ledger</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-3.5 border-t border-bone-50/10 flex items-center justify-between font-micro text-xs">
+            <a href={badEpoll.repoUrl} target="_blank" rel="noopener noreferrer" class="text-bone-500 hover:text-ember-400 transition-colors">
+              GitHub Repo ↗
+            </a>
+            <a href={`/research/${badEpoll.articleSlug}`} class="btn btn-primary !py-1 !px-3 !text-[10px]">
+              Examine Exploit Note →
+            </a>
+          </div>
+        </article>
+
+        <!-- ANDROID SQLI -->
+        <article class="card card-glare p-6 sm:p-7 flex flex-col justify-between" data-reveal>
+          <div>
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <span class="card-index text-2xl sm:text-3xl">{androidSqli.index}</span>
+              <div class="flex items-center gap-2">
+                <span class="stamp">{androidSqli.stamp}</span>
+                <span class="chip chip-brass hidden sm:inline-flex">Android 11–15 DP</span>
+              </div>
+            </div>
+
+            <!-- Visual Exhibition Plate -->
+            <div class="mb-4 rounded-xl overflow-hidden bg-ink-950 border border-bone-50/15 p-2 shadow-inner group">
+              <img
+                src="/figures/card-android-sqli.svg"
+                alt="CVE-2026-28576 Android Contacts Injection Architecture"
+                class="w-full h-auto max-h-[170px] object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                loading="lazy"
+              />
+            </div>
+
+            <h3 class="display text-xl sm:text-2xl text-bone-50">{androidSqli.title}</h3>
+            <p class="font-display italic text-xs sm:text-sm text-bone-300 mt-1">{androidSqli.tagline}</p>
+            <p class="text-xs text-bone-400 leading-relaxed mt-2.5 line-clamp-3">{androidSqli.abstract}</p>
+
+            <!-- Key Findings Metric Strip -->
+            <div class="grid grid-cols-3 gap-2 mt-4 p-2.5 rounded-lg bg-ink-950 border border-bone-50/10 text-center">
+              <div>
+                <p class="font-display text-base sm:text-lg text-brass-400">Zero Perms</p>
+                <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">Binder IPC Oracle</p>
+              </div>
+              <div>
+                <p class="font-display text-base sm:text-lg text-ember-400">5 Versions</p>
+                <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">Android 11→15</p>
+              </div>
+              <div>
+                <p class="font-display text-base sm:text-lg text-bone-200">2 Defenses</p>
+                <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">YARA + Suricata</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-3.5 border-t border-bone-50/10 flex items-center justify-between font-micro text-xs">
+            <a href={androidSqli.repoUrl} target="_blank" rel="noopener noreferrer" class="text-bone-500 hover:text-ember-400 transition-colors">
+              GitHub Repo ↗
+            </a>
+            <a href={`/research/${androidSqli.articleSlug}`} class="btn btn-primary !py-1 !px-3 !text-[10px]">
+              Examine Injection Note →
+            </a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- Section: Flagship Research Systems -->
-  <section class="mb-14">
-    <div class="flex items-center justify-between mb-6 border-b border-[#1e293b] pb-3">
-      <div class="flex items-center gap-3">
-        <span class="text-[#00e5ff] font-bold text-lg">&#9608;&#9617;</span>
-        <h2 class="text-lg sm:text-xl font-bold tracking-wider text-[#f8fafc]">01 // FIELD RESEARCH &amp; FLAGSHIPS</h2>
+  <!-- ═══════════════════════════════════════════════════════════════
+       02 ENGINEERING SYSTEMS — Flagship Showcase & Spectrum Portal
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="systems" class="w-full mt-16 sm:mt-24">
+    <div class="wrap-wide">
+      <SectionHeading index="02" eyebrow="Engineering Systems" title="Architectures, <em>benchmarks, simulations.</em>">
+        <p slot="lede" class="lede">
+          High-throughput Rust/eBPF pipelines, sub-second local edge voice companions, and quantitative market models.
+        </p>
+        <a slot="action" href="/systems" class="link-sweep font-micro text-xs tracking-[0.16em] uppercase mt-4 inline-block">
+          All {allSystems.length} Systems Directory ↗
+        </a>
+      </SectionHeading>
+
+      <!-- 3 Flagships Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+        {flagships.map((sys) => (
+          <article class="card card-glare p-6 flex flex-col justify-between group" data-reveal>
+            <div>
+              <div class="flex items-start justify-between gap-2 mb-3">
+                <span class="card-index text-2xl sm:text-3xl">{sys.index}</span>
+                <span class={`stamp ${sys.badgeType === 'brass' ? 'stamp-brass' : ''}`}>{sys.status}</span>
+              </div>
+
+              <!-- Visual System Plate -->
+              <a href={`/systems/${sys.id}`} class="block my-2.5 rounded-xl overflow-hidden bg-ink-950 border border-bone-50/10 p-2 shadow-inner group-hover:border-bone-50/25 transition-colors">
+                <img
+                  src={sys.plateImage}
+                  alt={`${sys.name} System Diagram`}
+                  class="w-full h-32 sm:h-36 object-contain rounded transition-transform duration-500 group-hover:scale-[1.02]"
+                  loading="lazy"
+                />
+              </a>
+
+              <h3 class="display text-lg sm:text-xl text-bone-50 group-hover:text-ember-400 transition-colors leading-tight">
+                <a href={`/systems/${sys.id}`}>{sys.name}</a>
+              </h3>
+              <p class="font-micro text-[10px] tracking-wider uppercase text-ember-400 mt-1 font-semibold">{sys.category}</p>
+              <p class="text-xs text-bone-400 leading-relaxed mt-2 line-clamp-3">{sys.description}</p>
+
+              <!-- Benchmarks Strip -->
+              <div class="grid grid-cols-2 gap-2 mt-3.5 pt-3 border-t border-bone-50/10">
+                {sys.benchmarks.slice(0, 2).map((b) => (
+                  <div class="p-2 rounded bg-ink-950 border border-bone-50/10">
+                    <p class="font-display text-sm sm:text-base text-brass-400 font-semibold">{b.value}</p>
+                    <p class="font-micro text-[9px] tracking-wider uppercase text-bone-500 mt-0.5 truncate">{b.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div class="mt-5 pt-3.5 border-t border-bone-50/10 flex items-center justify-between font-micro text-xs">
+              <a href={sys.repoUrl} target="_blank" rel="noopener noreferrer" class="text-bone-500 hover:text-ember-400 transition-colors">
+                GitHub ↗
+              </a>
+              <a href={`/systems/${sys.id}`} class="btn btn-ghost !py-1 !px-3 !text-[10px]">
+                Spec Sheet →
+              </a>
+            </div>
+          </article>
+        ))}
       </div>
-      <a href="/systems" class="text-xs text-[#38bdf8] hover:text-[#00e5ff] transition-colors">
-        EXPLORE ALL SYSTEMS &rarr;
-      </a>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {flagships.map((f) => (
-        <div class="p-6 rounded-lg bg-[#040914] border border-[#1e293b] hover:border-[#38bdf8]/60 transition-all flex flex-col justify-between group">
+      <!-- Complete Spectrum Directory Gateway -->
+      <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-ink-900/60 border border-bone-50/10" data-reveal>
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-bone-50/10">
           <div>
-            <div class="flex items-center justify-between text-xs mb-3">
-              <span class="px-2 py-0.5 rounded font-bold" style={{ backgroundColor: `${f.accent}20`, color: f.accent }}>
-                {f.num}
-              </span>
-              <span class="text-[11px] text-[#64748b] tracking-wider">{f.tag}</span>
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="w-2 h-2 rounded-full bg-ember-500"></span>
+              <span class="font-micro text-xs text-ember-400 uppercase tracking-widest font-semibold">{allSystems.length} Documented Architectures Across the Spectrum</span>
             </div>
+            <h4 class="font-display text-lg sm:text-xl text-bone-50">Threat Harvesters, Offline RAG, 3D WebGL Labs, and Micro-Engines</h4>
+            <p class="text-xs sm:text-sm text-bone-400 mt-1 max-w-2xl">
+              Every system is documented with dedicated technical spec sheets, benchmark ledgers, and open repositories.
+            </p>
+          </div>
+          <a href="/systems" class="btn btn-primary shrink-0 text-center !text-xs sm:!text-sm">
+            Open Complete Systems Directory ({allSystems.length}) →
+          </a>
+        </div>
 
-            <h3 class="text-xl font-bold text-[#f8fafc] group-hover:text-[#00e5ff] transition-colors mb-1">
-              {f.title}
-            </h3>
-            <div class="text-xs font-mono font-bold mb-3" style={{ color: f.accent }}>
-              {f.cve}
+        <!-- Quick Matrix of Other Documented Systems -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 mt-5">
+          {otherSystems.slice(0, 6).map((s) => (
+            <a
+              href={`/systems/${s.id}`}
+              class="p-2.5 rounded-xl bg-ink-950/70 border border-bone-50/10 hover:border-ember-500/40 hover:bg-ink-850 transition-all group block"
+            >
+              <div class="flex items-center justify-between font-micro text-[9px] text-bone-500 mb-1">
+                <span>{s.index}</span>
+                <span class="text-ember-400 group-hover:translate-x-0.5 transition-transform">→</span>
+              </div>
+              <p class="font-display text-xs text-bone-200 group-hover:text-ember-400 font-medium truncate">{s.name}</p>
+              <p class="font-micro text-[8.5px] text-bone-500 uppercase tracking-wider truncate mt-0.5">{s.category}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       03 FIELD NOTES (WORKING NOTES WITH PROOF)
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="notes" class="w-full mt-16 sm:mt-24">
+    <div class="wrap-wide">
+      <SectionHeading index="03" eyebrow="Field notes" title="Notes with <em>proof.</em>">
+        <p slot="lede" class="lede">
+          Working technical breakdowns written as I verify — accompanied by reproducible artifacts, GDB scripts, and memory addresses.
+        </p>
+        <a slot="action" href="/research" class="link-sweep font-micro text-xs tracking-[0.16em] uppercase mt-4 inline-block">
+          All 4 Field Notes ↗
+        </a>
+      </SectionHeading>
+
+      <div class="card px-6 sm:px-8 py-2 mt-8" data-reveal>
+        {latestPosts.map((post, i) => (
+          <a href={`/research/${post.id}`} class="ledger-row group block">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+              <div class="flex items-baseline gap-4 min-w-0">
+                <span class="no">R–0{i + 1}</span>
+                <div>
+                  <p class="text-[15px] sm:text-[16px] text-bone-50 font-medium leading-snug group-hover:text-ember-400 transition-colors">
+                    {post.data.title}
+                  </p>
+                  <p class="text-xs text-bone-500 mt-1 line-clamp-1">{post.data.description}</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 shrink-0 ml-10 sm:ml-0">
+                {post.data.cveId && <span class="stamp !py-0.5 !px-2 !text-[9px]">{post.data.cveId}</span>}
+                <span class="chip text-[10px]">{post.data.category}</span>
+                <span class="font-micro text-[11px] tracking-[0.14em] text-bone-600 group-hover:text-ember-400 transition-colors shrink-0">
+                  READ →
+                </span>
+              </div>
             </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 
-            <p class="text-xs text-[#94a3b8] leading-relaxed mb-6">
-              {f.desc}
+  <!-- ═══════════════════════════════════════════════════════════════
+       04 DOSSIER CLOSING PORTAL & SCOPED ENGAGEMENTS
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="connect" class="w-full mt-16 sm:mt-24 mb-14">
+    <div class="wrap-wide">
+      <SectionHeading index="04" eyebrow="Engagements & Reality" title="Local test bench &amp; <em>scoped work.</em>">
+        <p slot="lede" class="lede">
+          Every exploit chain reproduced on local workstation hardware before publication. Open to discrete offensive audits and high-throughput systems research.
+        </p>
+      </SectionHeading>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+        <!-- Lab Bench Hardware Snapshot -->
+        <div class="card card-glare p-6 sm:p-7 flex flex-col justify-between" data-reveal>
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <p class="eyebrow mb-0"><span class="tick">RIG</span><span>Laboratory Test Bench</span></p>
+              <span class="chip chip-brass !text-[9px]">100% LOCALLY VERIFIED</span>
+            </div>
+            <p class="display text-xl text-bone-50">{profile.labRig.model}</p>
+            <p class="font-micro text-xs text-ember-400 uppercase tracking-wider mt-1 font-semibold">
+              {profile.labRig.cpu} · {profile.labRig.ram}
+            </p>
+            <p class="text-xs sm:text-sm text-bone-400 leading-relaxed mt-2.5">
+              {profile.labRig.os}. {profile.labRig.virtualization}. Every exploit chain, GDB memory trace, and SIMD ingestion benchmark was executed directly on this local hardware.
+            </p>
+            <div class="mt-4 pt-3.5 border-t border-bone-50/10 flex flex-wrap gap-2 text-xs font-micro text-bone-400">
+              <span class="chip">QEMU/KVM</span>
+              <span class="chip">GDB + Python API</span>
+              <span class="chip">KASAN</span>
+              <span class="chip">eBPF Telemetry</span>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-3.5 border-t border-bone-50/10 flex items-center justify-between font-micro text-xs">
+            <span class="text-bone-500">CPI {profile.education.cpi} · GPG IT</span>
+            <a href="/about" class="btn btn-ghost !py-1 !px-3 !text-[11px]">Full Bio &amp; Rig Details →</a>
+          </div>
+        </div>
+
+        <!-- Scoped Engagement Availability -->
+        <div class="card card-glare p-6 sm:p-7 border-l-4 border-brass-500 flex flex-col justify-between" data-reveal>
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-moss-500 animate-pulse"></span>
+                <span class="font-micro text-xs tracking-wider uppercase text-brass-400 font-semibold">{collab.availability.status}</span>
+              </div>
+              <span class="chip chip-ember !text-[9px]">SCOPED WORK</span>
+            </div>
+            <h3 class="display text-xl text-bone-50 mb-2">Discrete Audits &amp; High-Throughput Engines</h3>
+            <p class="text-xs sm:text-sm text-bone-300 leading-relaxed">
+              {collab.availability.note}
+            </p>
+            <p class="font-micro text-xs text-bone-500 uppercase tracking-wider mt-2.5">
+              Location: Gandhinagar, Gujarat (IST) · Remote Worldwide
             </p>
           </div>
 
-          <div>
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              {f.tech.map((t) => (
-                <span class="text-[10px] px-2 py-0.5 rounded bg-[#07111e] border border-[#1e293b] text-[#cbd5e1]">
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            <a
-              href={f.repo}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-xs text-[#38bdf8] hover:text-[#00e5ff] font-bold transition-colors"
-            >
-              INSPECT ARTIFACTS ↗
-            </a>
+          <div class="mt-5 pt-3.5 border-t border-bone-50/10 flex flex-wrap items-center justify-between gap-3">
+            <a href={`mailto:${profile.email}`} class="btn btn-primary !py-1.5 !px-3.5 !text-xs">{profile.email} ↗</a>
+            <a href="/contact" class="link-sweep font-micro text-xs text-ember-400 uppercase tracking-wider">Scope Deliverables →</a>
           </div>
         </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- Section: Latest Research Publications -->
-  <section class="mb-14">
-    <div class="flex items-center justify-between mb-6 border-b border-[#1e293b] pb-3">
-      <div class="flex items-center gap-3">
-        <span class="text-[#00e5ff] font-bold text-lg">&#9608;&#9617;</span>
-        <h2 class="text-lg sm:text-xl font-bold tracking-wider text-[#f8fafc]">02 // RECENT RESEARCH PAPERS</h2>
       </div>
-      <a href="/research" class="text-xs text-[#38bdf8] hover:text-[#00e5ff] transition-colors">
-        ALL PUBLICATIONS &rarr;
-      </a>
-    </div>
-
-    <div class="space-y-4">
-      {latestPosts.map((post) => (
-        <a
-          href={`/research/${post.id}`}
-          class="block p-5 rounded-lg bg-[#040914] border border-[#1e293b] hover:border-[#00e5ff]/60 hover:bg-[#07111e]/50 transition-all group"
-        >
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2 text-xs">
-            <span class="px-2 py-0.5 rounded bg-[#0284c7]/15 text-[#38bdf8] w-fit font-bold">
-              {post.data.category}
-            </span>
-            <time class="text-[#64748b]">
-              {post.data.publishDate.toISOString().split('T')[0]}
-            </time>
-          </div>
-
-          <h3 class="text-base sm:text-lg font-bold text-[#f8fafc] group-hover:text-[#00e5ff] transition-colors mb-2">
-            {post.data.title}
-          </h3>
-
-          <p class="text-xs text-[#94a3b8] leading-relaxed line-clamp-2">
-            {post.data.description}
-          </p>
-
-          <div class="flex flex-wrap gap-2 mt-4 text-[10px] text-[#64748b]">
-            {post.data.tags.map((tag) => (
-              <span>#{tag}</span>
-            ))}
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <!-- Section: Verified Telemetry & Credentials -->
-  <section class="p-6 rounded-lg bg-[#040914] border border-[#1e293b]">
-    <div class="flex items-center gap-3 mb-6 border-b border-[#1e293b] pb-3">
-      <span class="text-[#00e5ff] font-bold text-lg">&#9608;&#9617;</span>
-      <h2 class="text-lg font-bold tracking-wider text-[#f8fafc]">03 // VERIFIED CREDENTIALS &amp; TELEMETRY</h2>
-    </div>
-
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-      <div class="p-4 rounded bg-[#020611] border border-[#1e293b]">
-        <div class="text-[10px] text-[#64748b] tracking-widest">REPOSITORIES</div>
-        <div class="text-2xl font-bold text-[#f8fafc] mt-1">38</div>
-      </div>
-      <div class="p-4 rounded bg-[#020611] border border-[#1e293b]">
-        <div class="text-[10px] text-[#64748b] tracking-widest">CONTRIBUTIONS</div>
-        <div class="text-2xl font-bold text-[#38bdf8] mt-1">366+</div>
-      </div>
-      <div class="p-4 rounded bg-[#020611] border border-[#1e293b]">
-        <div class="text-[10px] text-[#64748b] tracking-widest">CVE TRACKS</div>
-        <div class="text-2xl font-bold text-[#ef4444] mt-1">2</div>
-      </div>
-      <div class="p-4 rounded bg-[#020611] border border-[#1e293b]">
-        <div class="text-[10px] text-[#64748b] tracking-widest">SIH STATUS</div>
-        <div class="text-base font-bold text-[#f59e0b] mt-1">SCREENING</div>
-      </div>
-    </div>
-
-    <div class="p-4 rounded bg-[#020611] border border-[#1e293b] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-      <div>
-        <span class="text-[#10b981] font-bold">VERIFIED CERTIFICATIONS:</span>
-        <span class="text-[#94a3b8] ml-2">Certified AppSec Practitioner v2 (CAP) &bull; Certified Network Security Practitioner (CNSP) &bull; IBM SkillsBuild (48/50)</span>
-      </div>
-      <a href="/ledger" class="px-3 py-1.5 rounded bg-[#07111e] border border-[#1e293b] text-[#00e5ff] hover:bg-[#00e5ff]/10 whitespace-nowrap">
-        VIEW FULL LEDGER &rarr;
-      </a>
     </div>
   </section>
 </BaseLayout>

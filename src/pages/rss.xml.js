@@ -4,8 +4,8 @@ import { getCollection } from 'astro:content';
 export async function GET(context) {
   const research = await getCollection('research');
   return rss({
-    title: 'Aayush Bankar — Systems Security Research & Sovereign Architectures',
-    description: 'Kernel vulnerability teardowns, Android framework exploits, and sovereign verifiable data engines.',
+    title: 'Aayush Bankar — Systems Security & Low-Level Engineering',
+    description: 'Kernel vulnerability teardowns, Android framework analysis, and verifiable high-throughput data engines.',
     site: context.site,
     items: research.map((post) => ({
       title: post.data.title,

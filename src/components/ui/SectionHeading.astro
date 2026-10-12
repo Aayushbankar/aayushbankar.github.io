@@ -1,0 +1,28 @@
+---
+/* SectionHeading — design-system primitive for the 5-page IA.
+   Usage:
+   <SectionHeading index="01" eyebrow="Field research" title="Work with <em>teeth</em>" />
+   <SectionHeading ...><p slot="lede">…</p><a slot="action" …>…</a></SectionHeading>
+*/
+interface Props {
+  index: string;
+  eyebrow: string;
+  title: string;
+  align?: 'left' | 'center';
+}
+
+const { index, eyebrow, title, align = 'left' } = Astro.props;
+const centered = align === 'center';
+---
+
+<div class:list={['mb-10 sm:mb-14', centered && 'text-center']}>
+  <p class:list={['eyebrow mb-5', centered && 'justify-center']}>
+    <span class="tick">{index}</span>
+    <span>{eyebrow}</span>
+  </p>
+  <h2 class="display display-md max-w-3xl text-balance" set:html={title} />
+  <div class:list={['mt-4', centered && 'flex justify-center']}>
+    <slot name="lede" />
+  </div>
+  <slot name="action" />
+</div>
