@@ -33,7 +33,7 @@ export interface SystemProject {
   index: string;
   name: string;
   category: string;
-  domain: 'Systems & Low-Level' | 'Edge AI & Pipelines' | 'Quantitative Finance' | 'Security Intelligence' | 'Production & Platforms' | 'Creative Tech & WebGL';
+  domain: 'Systems & Low-Level' | 'Edge AI & Pipelines' | 'Quantitative Finance' | 'Security Intelligence' | 'Production & Platforms';
   status: string;
   badgeType: 'brass' | 'ember' | 'moss' | 'default';
   tagline: string;
@@ -719,117 +719,8 @@ export const allSystems: SystemProject[] = [
     verification: 'Benchmarked across local lab subnets and verified against known test target services.',
   },
   {
-    id: 'pureedgesim',
-    index: 'S–10',
-    name: 'PureEdgeSim CLI Integration',
-    category: 'Edge Simulation Framework',
-    domain: 'Production & Platforms',
-    status: 'Contributed / Open Source',
-    badgeType: 'brass',
-    tagline: 'Interactive Console Execution Mode for Edge & Mist Simulations',
-    description:
-      'Open-source contribution to PureEdgeSim, a widely cited simulation framework for Cloud, Edge, and Mist computing environments. Developed a modular interactive CLI execution mode allowing researchers to launch complex simulation scenarios without graphical GUI overhead.',
-    overview:
-      'PureEdgeSim is a standard Java-based simulation engine built on top of CloudSim, widely used by academic researchers to simulate device mobility, task offloading, and network latency in Edge and Fog computing topologies. Standard upstream execution relied heavily on GUI menus, hindering deployment on remote Linux servers and headless compute clusters. Contributed an interactive menu-driven CLI runner that enables configuration loading, simulation scenario orchestration, and automated logging directly from the terminal.',
-    plateImage: '/figures/card-pureedgesim.svg',
-    benchmarks: [
-      {
-        label: 'Framework Base',
-        value: 'PureEdgeSim / CloudSim',
-        detail: 'Widely cited peer-reviewed Cloud/Edge/Mist simulation engine',
-      },
-      {
-        label: 'Execution Mode',
-        value: 'Headless CLI',
-        detail: 'Enables batch simulation runs on remote Linux compute servers',
-      },
-      {
-        label: 'Configuration Speed',
-        value: 'Interactive Menus',
-        detail: 'Rapid scenario loading without graphical desktop environment',
-      },
-    ],
-    specSheet: [
-      { key: 'Programming Language', value: 'Java 17, Apache Maven build system' },
-      { key: 'Upstream Project', value: 'PureEdgeSim open-source edge computing simulation ecosystem' },
-      { key: 'Contribution Scope', value: 'Interactive CLI controller module and scenario parameter launcher' },
-      { key: 'Use Case', value: 'Headless cluster evaluation of task offloading and edge resource allocation' },
-    ],
-    tech: ['Java', 'Maven', 'PureEdgeSim', 'Edge Computing', 'Mist Computing'],
-    repoUrl: 'https://github.com/Aayushbankar/PureEdgeSim',
-    highlights: [
-      'Direct contribution to a widely cited open-source Edge simulation platform.',
-      'Enables headless batch execution on remote HPC and Linux compute nodes.',
-      'Modular architecture decouples simulation logic from desktop GUI bindings.',
-    ],
-    verification: 'Merged into personal fork and tested with standard PureEdgeSim benchmark scenarios.',
-  },
-  {
-    id: 'polymathic-webgl',
-    index: 'S–11',
-    name: 'Polymathic 3D WebGL Ecosystem',
-    category: '3D Graphics & Shader Labs',
-    domain: 'Creative Tech & WebGL',
-    status: 'Active Lab',
-    badgeType: 'default',
-    tagline: 'Custom Bayer Shaders & 60 FPS GSAP Scroll Timelines',
-    description:
-      'A series of advanced web portfolios (portfolio_architect, portfolio_pro, portfolio_pro_3d, portfolio_pro_real) exploring WebGL rendering, custom ASCII and Bayer dither post-processing shaders, particle geometry, and 60fps GSAP ScrollTrigger timelines.',
-    overview:
-      'A technical exploration into real-time GPU rendering in the browser without compromising accessibility or layout stability. Features custom Three.js shader passes that implement 4x4 Bayer ordered dithering and luminance quantizing for a retro-cybernetic aesthetic. The animation layer connects GSAP ScrollTrigger to 3D camera matrices and quaternion interpolations, maintaining strict 60fps hardware acceleration while providing full graceful fallbacks for devices without WebGL support.',
-    plateImage: '/figures/card-polymathic.svg',
-    benchmarks: [
-      {
-        label: 'GPU Frame Rate',
-        value: '60 FPS Steady',
-        detail: 'Hardware accelerated WebGL pipeline without jank or dropped frames',
-      },
-      {
-        label: 'Shader Compilation',
-        value: '< 45 ms',
-        detail: 'Instantaneous GLSL fragment and vertex shader initialization',
-      },
-      {
-        label: 'Cumulative Layout Shift',
-        value: '0.00 CLS',
-        detail: 'Canvas wrapper strictly dimensioned to prevent viewport shifts',
-      },
-      {
-        label: 'Ecosystem Variants',
-        value: '4 Iterations',
-        detail: 'Demonstrates progression from static DOM to full WebGL space',
-      },
-      {
-        label: 'Scroll Synchronization',
-        value: '1:1 Scrub',
-        detail: 'GSAP ScrollTrigger scrub coupled to Three.js camera position',
-      },
-      {
-        label: 'Fallbacks',
-        value: '100% Accessible',
-        detail: 'CSS fallback layout loads seamlessly if WebGL is unavailable',
-      },
-    ],
-    specSheet: [
-      { key: 'Graphics Library', value: 'Three.js (r160+) / WebGL 2.0' },
-      { key: 'Post-Processing Shaders', value: 'Custom 4x4 Bayer Matrix Ordered Dithering + Luminance Quantizer' },
-      { key: 'Motion Orchestration', value: 'GSAP 3 (ScrollTrigger, TweenLite, TimelineMax)' },
-      { key: 'Frontend Stack', value: 'React 18, Vite, Tailwind CSS, PostCSS' },
-      { key: 'Asset Optimization', value: 'Low-poly GLTF/GLB models with DRACO compression' },
-      { key: 'Telemetry', value: 'stats.js live draw-call and polygon count monitors' },
-    ],
-    tech: ['Three.js', 'WebGL', 'GLSL Shaders', 'GSAP 3', 'React', 'Tailwind CSS'],
-    repoUrl: 'https://github.com/Aayushbankar',
-    highlights: [
-      'Interactive 3D geometry coupled to document scroll progress.',
-      'Custom fragment shaders applying ordered dithering and retro-CRT scanlines.',
-      'Progressive enhancement ensures no content is blocked without WebGL.',
-    ],
-    verification: 'Profiled via Chrome DevTools GPU profiler across 1080p and 4K displays.',
-  },
-  {
     id: 'kafka-story-generator',
-    index: 'S–12',
+    index: 'S–10',
     name: 'Kafka Story Generator',
     category: 'Fine-Tuned NLP Text Generation',
     domain: 'Edge AI & Pipelines',
@@ -893,7 +784,7 @@ export const allSystems: SystemProject[] = [
   },
   {
     id: 'yt-stlk',
-    index: 'S–13',
+    index: 'S–11',
     name: 'YT_STLK Activity Engine',
     category: 'Media Intelligence & Surveillance',
     domain: 'Production & Platforms',
@@ -954,69 +845,6 @@ export const allSystems: SystemProject[] = [
       'Engineered with aggressive caching to remain well inside free-tier API quotas.',
     ],
     verification: 'Monitors multiple real-world programming education channels with verified continuous uptime.',
-  },
-  {
-    id: 'itgrads-jobfeed',
-    index: 'S–14',
-    name: 'IT Grads Mobile Job Feed',
-    category: 'High-Performance Web App',
-    domain: 'Production & Platforms',
-    status: 'Production Hardened',
-    badgeType: 'moss',
-    tagline: 'Pure PHP 8.2 & MySQL Snap-Scroll Feed with O(1) Pagination',
-    description:
-      'An ultra-responsive vertical snap-scroll job feed built without heavy JavaScript frameworks using Pure PHP 8.2, MySQL PDO with O(1) B-tree pagination, automatic regex text parsing, GD image compression, and mobile 100dvh viewport fit.',
-    overview:
-      'Demonstrates extreme frontend efficiency and backend minimalism by eschewing bulky JavaScript SPA frameworks in favor of high-performance server-rendered PHP 8.2 and modern CSS scroll-snap. Includes an automated text-blob parser that tokenizes emails, phone numbers, and recruitment hashtags on submission, alongside PHP GD image resizing that strips EXIF data and compresses resumes. Database queries use deterministic keyset cursor pagination with O(1) lookups.',
-    plateImage: '/figures/card-itgrads.svg',
-    benchmarks: [
-      {
-        label: 'Server Response Time',
-        value: '< 15 ms TTFB',
-        detail: 'Pure PHP 8.2 execution without framework bootstrap overhead',
-      },
-      {
-        label: 'Pagination Complexity',
-        value: 'O(1) Constant',
-        detail: 'B-Tree indexed cursor pagination eliminating expensive OFFSET scans',
-      },
-      {
-        label: 'Viewport Behavior',
-        value: '100dvh Snap',
-        detail: 'CSS scroll-snap-type: y mandatory with dynamic mobile viewport fit',
-      },
-      {
-        label: 'Image Compression',
-        value: 'Up to 78% Saved',
-        detail: 'PHP GD auto-resizing, WebP conversion, and EXIF metadata stripping',
-      },
-      {
-        label: 'Security Posture',
-        value: 'CSRF & Sanitized',
-        detail: 'Session-bound tokens, HTML Purifier, and PDO parameterized SQL',
-      },
-      {
-        label: 'JS Dependency',
-        value: '0 KB Frameworks',
-        detail: 'Vanilla progressive enhancement with native browser behaviors',
-      },
-    ],
-    specSheet: [
-      { key: 'Server Environment', value: 'PHP 8.2 (OPcache enabled), Nginx' },
-      { key: 'Database Layer', value: 'MySQL 8.0, InnoDB with composite B-Tree indexes' },
-      { key: 'Authentication', value: 'Session-based Auth with Google OAuth 2.0 integration' },
-      { key: 'Image Processing', value: 'PHP GD library with automated WebP compression' },
-      { key: 'Styling Architecture', value: 'Modern CSS3 (scroll-snap, CSS variables, 100dvh)' },
-      { key: 'Text Analysis', value: 'RegEx-based multi-token extractor for contact coordinates' },
-    ],
-    tech: ['PHP 8.2', 'MySQL', 'Vanilla JS', 'CSS Scroll-Snap', 'OAuth 2.0', 'PHP-GD'],
-    repoUrl: 'https://github.com/Aayushbankar/itgrads_web',
-    highlights: [
-      'Sub-15ms server-side rendering without any frontend framework overhead.',
-      'Mobile-first TikTok-style vertical snap-scroll navigation for job listings.',
-      'Automated extraction of contact coordinates and candidate requirements from raw text.',
-    ],
-    verification: 'Stress-tested with Apache Bench (ab) achieving 2,400+ req/sec on local hardware.',
   },
 ];
 
