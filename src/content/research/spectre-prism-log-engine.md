@@ -68,7 +68,7 @@ uint32_t bitmask = _mm256_movemask_epi8(combined);
 // bitmask bits = delimiter positions
 ```
 
-**Benchmarks** (i5-8350U, 4C/8T, Fedora 40):
+**Benchmarks** (i5-8350U, 4C/8T, EndeavourOS / Linux 7.1):
 | Metric | Value |
 |--------|-------|
 | Sustained EPS/core | 13,247 |

@@ -6,50 +6,74 @@ export interface ScopedService {
   timeline: string;
 }
 
+export interface GroundTruthFAQ {
+  q: string;
+  a: string;
+}
+
 export const collab = {
-  headline: 'Scoped Engagements with Proof',
-  subheadline: 'Transparent technical scopes with concrete milestones, reproducible test harnesses, and verifiable deliverables.',
+  headline: 'Connect & Collaborate',
+  subheadline: 'Open for junior systems engineering roles, vulnerability research collaborations, and high-impact open-source systems.',
   availability: {
-    status: 'Available for Scoped Research',
-    note: 'Based in Gandhinagar, Gujarat (IST). Final-year Diploma IT student & systems security researcher. Open for scoped vulnerability audits, exploit reproduction, and verifiable systems engineering.',
+    status: 'Open to Roles & Research',
+    note: '18-year-old IT diploma student & systems security researcher based in Gandhinagar, Gujarat. Actively seeking junior systems/security roles, open CVE research collaborations, and high-velocity engineering projects.',
     location: 'Gandhinagar, Gujarat, India (IST / UTC+5:30)',
   },
   services: [
     {
       index: '01',
-      title: 'Scoped Vulnerability Research & Triage',
-      scope: 'Targeted kernel subsystem and Android framework audits, exploit primitive synthesis, and patch evaluation.',
+      title: 'Systems & Security Engineering Roles',
+      scope: 'Looking for full-time or internship opportunities in systems engineering, low-level tooling (C/Rust), or vulnerability research where I can contribute deep manual rigor and fast AI-assisted prototyping.',
       deliverables: [
-        'Hermetic QEMU/KVM reproduction harness with automated GDB Python telemetry',
-        'Empirical verification ledger detailing every tested claim, address, and gadget',
-        'Explicit dead-ends register documenting non-viable exploitation paths',
-        'Vendor remediation report and defensive YARA / Suricata detection rules',
+        'Low-level C and Rust systems engineering with clean POSIX/Linux APIs',
+        'Hermetic QEMU/KVM test harnesses and automated benchmark validation',
+        'Empirical verification documentation with zero marketing exaggerations',
+        'Direct, communicative collaboration across Git workflows and Linux environments',
       ],
-      timeline: '2–4 weeks per scoped target',
+      timeline: 'Immediate & Summer 2026',
     },
     {
       index: '02',
-      title: 'Verifiable Systems & Log Architecture',
-      scope: 'High-throughput ingestion engines, cryptographic transparency ledgers, and tamper-evident event streaming.',
+      title: 'Vulnerability Research & Bug Reproduction',
+      scope: 'Collaborating with security researchers, bug hunters, and academic labs to build hermetic QEMU harnesses, step through kernel/Android race conditions under GDB, and verify root causes.',
       deliverables: [
-        'Zero-copy SIMD ingestion pipelines in Rust and C with deterministic benchmarks',
-        'RFC 6962 BLAKE3 Merkle tree audit logging with inclusion proof verification',
-        'Multi-signature quorum attestations (Ed25519) and OCSF 1.2.0 schema normalization',
-        'Interactive operational terminal dashboards (Ratatui TUI) with low RSS footprint',
+        'Hermetic QEMU/KVM reproduction harness with automated GDB Python telemetry',
+        'Empirical verification ledger detailing every tested claim, address, and offset',
+        'Explicit dead-ends register documenting non-viable exploitation paths',
+        'Vendor remediation notes, reproduction artifacts, and defensive detection rules',
       ],
-      timeline: '3–6 weeks per system plane',
+      timeline: 'Open collaboration / Sprint',
     },
     {
       index: '03',
-      title: 'Edge AI & Local Offline Pipelines',
-      scope: 'Local-first voice and retrieval systems engineered for consumer edge hardware without cloud dependencies.',
+      title: 'Hackathons & Local-First Systems',
+      scope: 'Teaming up for national hackathons (like SIH), collegiate challenges, or building local-first open-source tools (offline voice stacks, SIMD log engines, ephemeral vaults) on modest hardware.',
       deliverables: [
-        'End-to-end chained voice pipeline (Silero VAD + faster-whisper + llama.cpp + Piper TTS)',
-        'Sub-second conversational turn latency optimization over WebRTC data channels',
-        'Local vector database ingestion (ChromaDB / Sentence Transformers) with zero data leakage',
-        'Complete hardware resource profiling on standard x86_64 laptops',
+        'High-velocity architecture and working MVP delivery under tight deadlines',
+        'Local-first edge AI pipelines optimized for standard x86_64 consumer laptops',
+        'Cryptographic verification proofs (BLAKE3 Merkle trees, Ed25519 signatures)',
+        'Technical presentation and transparent benchmark reproducibility artifacts',
       ],
-      timeline: '2–3 weeks per pipeline',
+      timeline: 'Hackathon & sprint cycles',
     },
   ] as ScopedService[],
+
+  faqs: [
+    {
+      q: 'What is your current academic status?',
+      a: 'I am 18 years old and in the final semester of my Information Technology Diploma at Government Polytechnic Gandhinagar, holding an academic CPI of 8.60/10.00. I am preparing for the DDCET examination for lateral entry into B.E. Computer Engineering.',
+    },
+    {
+      q: 'How do you balance AI assistance with manual engineering?',
+      a: 'I use frontier AI models aggressively as scaffolding catalysts—to draft initial test harnesses, parse specs, and explore CVE vectors quickly. But I never trust AI outputs on memory layout: I manually verify every struct offset, assembly instruction under GDB, and timing window in local QEMU micro-VMs before trusting it.',
+    },
+    {
+      q: 'What is your physical test bench setup?',
+      a: 'All my work is done on an HP EliteBook 840 G5 laptop running EndeavourOS (Arch Linux rolling) with an Intel Core i5-8350U CPU and 8 GB of RAM. Every project, from local quantized LLMs to kernel exploits, is designed to run deterministically on this machine without paid cloud GPU clusters.',
+    },
+    {
+      q: 'Are you open to remote or relocated positions?',
+      a: 'Yes. I am based in Gandhinagar, Gujarat (IST, UTC+5:30). I am fully set up for remote engineering worldwide, and open to relocation across major Indian tech hubs for the right engineering opportunity.',
+    },
+  ] as GroundTruthFAQ[],
 };

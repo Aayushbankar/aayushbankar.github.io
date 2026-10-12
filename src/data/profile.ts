@@ -25,9 +25,9 @@ export const profile = {
   github: 'https://github.com/Aayushbankar',
   linkedin: 'https://www.linkedin.com/in/aayushbankar/',
 
-  tagline: 'Systems security, low-level tooling, and verifiable code.',
+  tagline: '18-year-old systems security researcher & AI-augmented builder.',
   summary:
-    '18-year-old systems security researcher from Gandhinagar, Gujarat. Working across Linux kernel & Android vulnerability research, high-performance systems in C and Rust, and local offline AI pipelines — with every project backed by open code and reproduction steps.',
+    '18-year-old systems security researcher and IT diploma student from Gandhinagar, Gujarat. Working across Linux kernel & Android vulnerability research, high-performance C and Rust tools, and offline edge AI on an 8GB laptop — directing AI models to explore and scaffold, while verifying every memory layout and trace log in local QEMU harnesses.',
 
   domains: [
     {
@@ -71,12 +71,13 @@ export const profile = {
 
   labRig: {
     model: 'HP EliteBook 840 G5',
-    cpu: 'Intel Core i5-8350U (4 Cores / 8 Threads @ 3.6 GHz)',
-    ram: '16 GB DDR4-2400 MHz',
+    cpu: 'Intel Core i5-8350U (4 Cores / 8 Threads @ 1.70 GHz, Turbo to 3.6 GHz)',
+    ram: '8 GB DDR4 RAM',
     storage: '512 GB NVMe SSD',
-    os: 'Fedora Linux 41 & Arch Linux',
+    os: 'EndeavourOS (Arch Linux rolling, Linux 7.1 Kernel)',
+    gpu: 'Intel UHD Graphics 620 (Integrated)',
     virtualization: 'QEMU/KVM with GDB telemetry & KASAN/UBSAN harnesses',
-    edgeAi: 'llama.cpp GGUF CPU quantization & ONNX Runtime',
+    edgeAi: 'llama.cpp CPU quantization (Q4_K_M GGUF, 100% offline on 8GB)',
   },
 
   credentials: [
