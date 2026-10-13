@@ -13,6 +13,58 @@ import { profile } from '../data/profile';
 >
   <div class="wrap-wide py-10 sm:py-16">
     <!-- ═══════════════════════════════════════════════════════════════
+         MOBILE CYBERDECK DECK CONTROLLER (Tactile 4-Tab Switcher)
+         Philosophy · Methodology · Career Trajectory · Silicon Skills
+         ═══════════════════════════════════════════════════════════════ -->
+    <div class="md:hidden sticky top-14 z-30 mb-8 -mx-3 px-3 py-2.5 bg-ink-950/95 backdrop-blur-xl border-b border-bone-50/15 shadow-xl">
+      <div class="flex items-center justify-between gap-2 pb-1.5 mb-1.5 border-b border-bone-50/10 font-micro text-[10px]">
+        <div class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-ember-500 animate-pulse"></span>
+          <span class="text-ember-400 font-bold uppercase tracking-wider">Cyberdeck Deck</span>
+        </div>
+        <span class="text-bone-400 font-mono" id="m-about-active-tab-indicator">DECK 01 / 04 · PHILOSOPHY</span>
+      </div>
+      <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5" role="tablist" id="m-about-deck-tabs">
+        <button
+          type="button"
+          class="m-about-tab-btn active px-3 py-1.5 rounded-full font-micro text-[11px] font-semibold transition-all shrink-0 bg-bone-50/10 text-ember-400 border border-bone-50/20 shadow-inner cursor-pointer"
+          data-about-tab="philosophy"
+          role="tab"
+          aria-selected="true"
+        >
+          01 PHILOSOPHY
+        </button>
+        <button
+          type="button"
+          class="m-about-tab-btn px-3 py-1.5 rounded-full font-micro text-[11px] font-medium transition-all shrink-0 text-bone-400 hover:text-bone-50 bg-ink-900/60 border border-bone-50/10 cursor-pointer"
+          data-about-tab="methodology"
+          role="tab"
+          aria-selected="false"
+        >
+          02 METHODOLOGY
+        </button>
+        <button
+          type="button"
+          class="m-about-tab-btn px-3 py-1.5 rounded-full font-micro text-[11px] font-medium transition-all shrink-0 text-bone-400 hover:text-bone-50 bg-ink-900/60 border border-bone-50/10 cursor-pointer"
+          data-about-tab="trajectory"
+          role="tab"
+          aria-selected="false"
+        >
+          03 TRAJECTORY
+        </button>
+        <button
+          type="button"
+          class="m-about-tab-btn px-3 py-1.5 rounded-full font-micro text-[11px] font-medium transition-all shrink-0 text-bone-400 hover:text-bone-50 bg-ink-900/60 border border-bone-50/10 cursor-pointer"
+          data-about-tab="silicon"
+          role="tab"
+          aria-selected="false"
+        >
+          04 SILICON SKILLS
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
          01 PROFILE — Who I Am As a Person First
          ═══════════════════════════════════════════════════════════════ -->
     <section id="profile" class="scroll-mt-24 mb-14 sm:mb-20 rise">
@@ -184,7 +236,7 @@ import { profile } from '../data/profile';
             <p><span class="text-brass-400 font-semibold">Model name:</span> Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz (Boost: 3.60GHz)</p>
             <p><span class="text-brass-400 font-semibold">CPU(s):</span> 8 threads (4 cores, 2 threads/core, 1 socket)</p>
             <p><span class="text-brass-400 font-semibold">L1d cache:</span> 128 KiB | <span class="text-brass-400 font-semibold">L2 cache:</span> 1 MiB | <span class="text-brass-400 font-semibold">L3 cache:</span> 6 MiB</p>
-            <p><span class="text-brass-400 font-semibold">Flags:</span> fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities</p>
+            <p class="break-all"><span class="text-brass-400 font-semibold">Flags:</span> fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities</p>
           </div>
 
           <!-- Command 3: free -h Output -->
@@ -365,7 +417,7 @@ import { profile } from '../data/profile';
        ═══════════════════════════════════════════════════════════════ -->
   <ProgressionTimeline />
 
-  <!-- Interactive Rig Terminal Tabs Script -->
+  <!-- Interactive Rig Terminal Tabs & Mobile Cyberdeck Controller Script -->
   <script is:inline>
     function setupAboutRigTerminal() {
       const tabBtns = document.querySelectorAll('.term-tab-btn');
@@ -400,11 +452,142 @@ import { profile } from '../data/profile';
       });
     }
 
-    document.addEventListener('astro:page-load', setupAboutRigTerminal);
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', setupAboutRigTerminal);
-    } else {
+    function setupMobileAboutDeck() {
+      const tabs = document.querySelectorAll('.m-about-tab-btn');
+      const indicator = document.getElementById('m-about-active-tab-indicator');
+      if (!tabs.length) return;
+
+      const profileSec = document.getElementById('profile');
+      const hardwareSec = document.getElementById('hardware');
+      const credsSec = document.getElementById('creds');
+      const ethosSec = document.getElementById('ethos');
+      const trajSec = document.getElementById('trajectory');
+      const careerPanel = document.getElementById('panel-career');
+      const techPanel = document.getElementById('panel-tech');
+      const tabBtnCareer = document.getElementById('tab-btn-career');
+      const tabBtnTech = document.getElementById('tab-btn-tech');
+
+      function isMobile() {
+        return window.innerWidth < 768;
+      }
+
+      function applyDeckTab(tabId, shouldScroll) {
+        if (!isMobile()) {
+          [profileSec, hardwareSec, credsSec, ethosSec, trajSec].forEach((el) => {
+            if (el) el.style.display = '';
+          });
+          return;
+        }
+
+        tabs.forEach((t) => {
+          const match = t.getAttribute('data-about-tab') === tabId;
+          if (match) {
+            t.className = 'm-about-tab-btn active px-3 py-1.5 rounded-full font-micro text-[11px] font-semibold transition-all shrink-0 bg-bone-50/10 text-ember-400 border border-bone-50/20 shadow-inner cursor-pointer';
+            t.setAttribute('aria-selected', 'true');
+          } else {
+            t.className = 'm-about-tab-btn px-3 py-1.5 rounded-full font-micro text-[11px] font-medium transition-all shrink-0 text-bone-400 hover:text-bone-50 bg-ink-900/60 border border-bone-50/10 cursor-pointer';
+            t.setAttribute('aria-selected', 'false');
+          }
+        });
+
+        const tabLabels = {
+          philosophy: 'DECK 01 / 04 · PHILOSOPHY',
+          methodology: 'DECK 02 / 04 · METHODOLOGY',
+          trajectory: 'DECK 03 / 04 · TRAJECTORY',
+          silicon: 'DECK 04 / 04 · SILICON SKILLS',
+        };
+        if (indicator && tabLabels[tabId]) {
+          indicator.textContent = tabLabels[tabId];
+        }
+
+        if (tabId === 'philosophy') {
+          if (profileSec) profileSec.style.display = 'block';
+          if (hardwareSec) hardwareSec.style.display = 'block';
+          if (credsSec) credsSec.style.display = 'none';
+          if (ethosSec) ethosSec.style.display = 'none';
+          if (trajSec) trajSec.style.display = 'none';
+        } else if (tabId === 'methodology') {
+          if (profileSec) profileSec.style.display = 'none';
+          if (hardwareSec) hardwareSec.style.display = 'none';
+          if (credsSec) credsSec.style.display = 'none';
+          if (ethosSec) ethosSec.style.display = 'block';
+          if (trajSec) trajSec.style.display = 'none';
+        } else if (tabId === 'trajectory') {
+          if (profileSec) profileSec.style.display = 'none';
+          if (hardwareSec) hardwareSec.style.display = 'none';
+          if (credsSec) credsSec.style.display = 'block';
+          if (ethosSec) ethosSec.style.display = 'none';
+          if (trajSec) trajSec.style.display = 'block';
+          if (careerPanel) {
+            careerPanel.classList.remove('hidden');
+            careerPanel.style.opacity = '1';
+          }
+          if (techPanel) techPanel.classList.add('hidden');
+          if (tabBtnCareer) tabBtnCareer.setAttribute('aria-selected', 'true');
+          if (tabBtnTech) tabBtnTech.setAttribute('aria-selected', 'false');
+        } else if (tabId === 'silicon') {
+          if (profileSec) profileSec.style.display = 'none';
+          if (hardwareSec) hardwareSec.style.display = 'none';
+          if (credsSec) credsSec.style.display = 'none';
+          if (ethosSec) ethosSec.style.display = 'none';
+          if (trajSec) trajSec.style.display = 'block';
+          if (careerPanel) careerPanel.classList.add('hidden');
+          if (techPanel) {
+            techPanel.classList.remove('hidden');
+            techPanel.style.opacity = '1';
+            const mDeck = document.getElementById('mobile-silicon-deck');
+            if (mDeck) mDeck.classList.remove('hidden');
+          }
+          if (tabBtnCareer) tabBtnCareer.setAttribute('aria-selected', 'false');
+          if (tabBtnTech) tabBtnTech.setAttribute('aria-selected', 'true');
+        }
+
+        if (shouldScroll) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+
+      tabs.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const tabId = btn.getAttribute('data-about-tab');
+          if (tabId) applyDeckTab(tabId, true);
+        });
+      });
+
+      window.addEventListener('resize', () => {
+        if (!isMobile()) {
+          [profileSec, hardwareSec, credsSec, ethosSec, trajSec].forEach((el) => {
+            if (el) el.style.display = '';
+          });
+        }
+      });
+
+      // Handle initial load or anchor hash
+      const hash = window.location.hash.toLowerCase();
+      let initTab = 'philosophy';
+      if (hash.includes('ethos') || hash.includes('methodology')) {
+        initTab = 'methodology';
+      } else if (hash.includes('traj') || hash.includes('cred') || hash.includes('milestone')) {
+        initTab = 'trajectory';
+      } else if (hash.includes('silicon') || hash.includes('skill') || hash.includes('graph')) {
+        initTab = 'silicon';
+      }
+
+      if (isMobile()) {
+        applyDeckTab(initTab, false);
+      }
+    }
+
+    function initAboutPage() {
       setupAboutRigTerminal();
+      setupMobileAboutDeck();
+    }
+
+    document.addEventListener('astro:page-load', initAboutPage);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAboutPage);
+    } else {
+      initAboutPage();
     }
   </script>
 </BaseLayout>

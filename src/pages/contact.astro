@@ -40,16 +40,18 @@ const pgpKeyId = '0x2C3FA914';
     </header>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         01 DIRECT COMMUNICATION CHANNELS
+         01 DIRECT COMMUNICATION CHANNELS & COMMS CONSOLE
          ═══════════════════════════════════════════════════════════════ -->
-    <section id="channels" class="scroll-mt-24 card card-glare p-7 sm:p-9 border-l-4 border-l-brass-500 mb-12 sm:mb-16 shadow-[0_20px_60px_rgba(0,0,0,0.5)]" data-reveal>
+    <section id="channels" class="scroll-mt-24 card card-glare p-6 sm:p-9 border-l-4 border-l-brass-500 mb-12 sm:mb-16 shadow-[0_20px_60px_rgba(0,0,0,0.5)]" data-reveal>
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div class="lg:col-span-7">
-          <div class="flex items-center gap-2.5 mb-3 font-micro text-xs">
+          <div class="flex flex-wrap items-center gap-2.5 mb-3 font-micro text-xs">
             <span class="w-2.5 h-2.5 rounded-full bg-moss-500 animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.6)]"></span>
             <span class="uppercase tracking-widest text-brass-400 font-semibold">{collab.availability.status}</span>
             <span class="text-bone-600">·</span>
             <span class="text-bone-400" data-ist-clock>--:-- IST</span>
+            <span class="text-bone-600 hidden sm:inline">·</span>
+            <span class="chip !text-[8.5px] !py-0.2 !px-1.5 hidden sm:inline-flex">RESPONSE &lt; 24H</span>
           </div>
 
           <h2 class="display text-2xl sm:text-3xl text-bone-50 mb-2">
@@ -59,7 +61,7 @@ const pgpKeyId = '0x2C3FA914';
             Direct communication without automated gatekeepers or intermediaries. Response time is typically within 24 hours.
           </p>
 
-          <div class="flex flex-wrap items-center gap-4 mt-4 text-xs font-micro text-bone-400">
+          <div class="flex flex-wrap items-center gap-3 mt-4 text-xs font-micro text-bone-400">
             <span class="flex items-center gap-1.5">
               <span class="text-ember-400">📍</span> Gandhinagar, Gujarat (IST, UTC+5:30)
             </span>
@@ -74,22 +76,22 @@ const pgpKeyId = '0x2C3FA914';
           <button
             type="button"
             id="copy-email-btn"
-            class="group w-full p-4 rounded-2xl bg-ink-950 border border-bone-50/15 hover:border-ember-500/50 hover:bg-ink-850 transition-all text-left flex items-center justify-between cursor-pointer shadow-lg"
+            class="group w-full p-4 rounded-2xl bg-ink-950 border border-bone-50/15 hover:border-ember-500/50 hover:bg-ink-850 transition-all text-left flex items-center justify-between cursor-pointer shadow-lg active:scale-98"
             aria-label="Copy email address to clipboard"
           >
             <div>
               <span class="font-micro text-[10px] tracking-wider uppercase text-bone-500 block">Personal Direct Email</span>
-              <span class="font-mono text-sm sm:text-base text-bone-50 group-hover:text-ember-400 transition-colors font-medium mt-0.5 block" id="copy-email-text">
+              <span class="font-mono text-sm sm:text-base text-bone-50 group-hover:text-ember-400 transition-colors font-medium mt-0.5 block truncate max-w-[200px] xs:max-w-none" id="copy-email-text">
                 {profile.email}
               </span>
             </div>
-            <span class="chip chip-brass shrink-0 text-[10px] font-semibold transition-all" id="copy-badge">
+            <span class="chip chip-brass shrink-0 text-[10px] font-semibold transition-all ml-2" id="copy-badge">
               Click to Copy 📋
             </span>
           </button>
 
-          <div class="grid grid-cols-2 gap-3">
-            <a href={`mailto:${profile.email}`} class="btn btn-primary text-center justify-center !text-xs !py-2.5">
+          <div class="grid grid-cols-2 gap-2.5">
+            <a href={`mailto:${profile.email}`} class="btn btn-primary text-center justify-center !text-xs !py-2.5 shadow-md">
               Open Mail App ↗
             </a>
             <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="btn btn-ghost text-center justify-center !text-xs !py-2.5">
@@ -97,7 +99,7 @@ const pgpKeyId = '0x2C3FA914';
             </a>
           </div>
 
-          <a href={profile.github} target="_blank" rel="noopener noreferrer" class="text-center font-micro text-[11px] text-bone-500 hover:text-ember-400 transition-colors py-1">
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" class="text-center font-micro text-[11px] text-bone-400 hover:text-ember-400 transition-colors py-1.5 px-2 rounded-xl bg-ink-950/60 border border-bone-50/5">
             Browse Open Repositories on GitHub ↗
           </a>
         </div>
@@ -107,7 +109,7 @@ const pgpKeyId = '0x2C3FA914';
     <!-- ═══════════════════════════════════════════════════════════════
          02 CRYPTOGRAPHIC IDENTITY & PGP KEY CONSOLE
          ═══════════════════════════════════════════════════════════════ -->
-    <section id="pgp" class="scroll-mt-24 mb-12 sm:mb-16 card card-glare p-7 sm:p-9 bg-ink-900/70 border border-bone-50/15" data-reveal>
+    <section id="pgp" class="scroll-mt-24 mb-12 sm:mb-16 card card-glare p-6 sm:p-9 bg-ink-900/70 border border-bone-50/15" data-reveal>
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-bone-50/10">
         <div>
           <div class="flex items-center gap-2 mb-1.5">
@@ -127,41 +129,56 @@ const pgpKeyId = '0x2C3FA914';
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mt-6">
-        <div class="lg:col-span-6 space-y-4 font-mono text-xs">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mt-6">
+        <div class="lg:col-span-6 space-y-3 font-mono text-xs">
+          <!-- Fingerprint Card with 1-Tap Copy -->
           <div class="p-4 rounded-xl bg-ink-950 border border-bone-50/10 space-y-2">
             <div class="flex items-center justify-between font-micro text-[11px] text-bone-500">
               <span>PRIMARY KEY ID</span>
               <span class="text-ember-400 font-bold">{pgpKeyId}</span>
             </div>
             <div class="pt-2 border-t border-bone-50/10">
-              <span class="font-micro text-[10px] text-bone-500 uppercase tracking-wider block mb-1">Full GPG Fingerprint</span>
-              <code class="text-bone-200 text-xs sm:text-sm block break-all font-semibold tracking-wide">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-micro text-[10px] text-bone-500 uppercase tracking-wider">Full GPG Fingerprint</span>
+                <button
+                  type="button"
+                  id="copy-pgp-btn"
+                  class="chip chip-ember !text-[9px] !py-0.5 !px-2 cursor-pointer hover:scale-105 transition-transform"
+                >
+                  Copy Fingerprint 📋
+                </button>
+              </div>
+              <code class="text-bone-200 text-xs sm:text-sm block break-all font-semibold tracking-wide bg-ink-900/80 p-2.5 rounded-lg border border-bone-50/5">
                 {pgpKeyFingerprint}
               </code>
             </div>
           </div>
 
+          <!-- Terminal Import Command with 1-Tap Copy -->
           <div class="p-4 rounded-xl bg-ink-950 border border-bone-50/10 space-y-2">
-            <span class="font-micro text-[10px] text-bone-500 uppercase tracking-wider block">Terminal Import One-Liner</span>
-            <div class="flex items-center gap-2 overflow-x-auto text-bone-300">
+            <div class="flex items-center justify-between font-micro text-[10px] text-bone-500 uppercase tracking-wider">
+              <span>Terminal Import One-Liner</span>
+              <button
+                type="button"
+                id="copy-import-cmd-btn"
+                class="text-[10px] text-ember-400 hover:text-ember-300 font-semibold cursor-pointer"
+              >
+                Copy Command 📋
+              </button>
+            </div>
+            <div class="p-2.5 rounded-lg bg-ink-900 border border-bone-50/10 text-bone-200 overflow-x-auto flex items-center gap-2">
               <span class="text-ember-500 font-bold">$</span>
-              <code>curl -sL https://aayushbankar.github.io/key.pub | gpg --import</code>
+              <code id="pgp-import-cmd">curl -sL https://aayushbankar.github.io/key.pub | gpg --import</code>
             </div>
           </div>
         </div>
 
+        <!-- ASCII Armored Public Key Block -->
         <div class="lg:col-span-6 font-mono text-xs">
           <div class="rounded-xl overflow-hidden bg-ink-950 border border-bone-50/10 p-4 space-y-2">
             <div class="flex items-center justify-between font-micro text-[10px] text-bone-500 pb-2 border-b border-bone-50/10">
               <span>-----BEGIN PGP PUBLIC KEY BLOCK-----</span>
-              <button
-                type="button"
-                id="copy-pgp-btn"
-                class="chip chip-ember !text-[9px] !py-0.5 !px-2 cursor-pointer hover:scale-105 transition-transform"
-              >
-                Copy Fingerprint 📋
-              </button>
+              <span class="chip chip-brass !text-[8.5px] !py-0.2 !px-1.5">RSA 4096</span>
             </div>
             <p class="text-[11px] text-bone-400 leading-relaxed font-mono">
               mQINBGeK5kEBEADJ...a8XzLq9w1vN0<br />
@@ -173,6 +190,61 @@ const pgpKeyId = '0x2C3FA914';
             </p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         TACTILE MOBILE COMMS DISPATCH TERMINAL
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="dispatch-terminal" class="scroll-mt-24 card card-glare p-5 sm:p-7 rounded-2xl bg-ink-950/90 border border-bone-50/15 mb-12 sm:mb-16 font-mono text-xs shadow-2xl" data-reveal>
+      <div class="flex items-center justify-between pb-3 mb-3 border-b border-bone-50/10 text-bone-500 font-micro text-[11px]">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+          <span class="ml-2 text-bone-300 font-semibold">legion@comms: ~/dispatch $</span>
+        </div>
+        <span class="chip chip-brass !text-[9px] !py-0.2 !px-1.5">● DISPATCH CONSOLE</span>
+      </div>
+      <p class="text-xs text-bone-400 font-sans mb-3.5 leading-relaxed">
+        Select an inquiry track below to load an authentic communication template or trigger instant dispatch:
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5" role="group" aria-label="Dispatch tracks">
+        <button
+          type="button"
+          class="dispatch-preset-btn p-3.5 rounded-xl bg-ink-900 border border-bone-50/10 hover:border-ember-500/50 hover:bg-ink-850 text-left transition-all cursor-pointer group active:scale-98"
+          data-subject="Inquiry: Software Engineering / Systems Role"
+          data-body="Hi Aayush,%0D%0A%0D%0AI came across your dossier and would like to connect regarding an engineering role / internship.%0D%0A%0D%0AOrganization / Team: [Company / Project]%0D%0AFocus Area: [Full-Stack / Systems / Low-Level]%0D%0A%0D%0ABest,%0D%0A[Name]"
+        >
+          <span class="font-micro text-[10px] text-brass-400 font-bold block mb-1">TRACK 01 // ROLES</span>
+          <span class="text-xs text-bone-200 group-hover:text-ember-400 font-semibold block transition-colors">Software &amp; Systems Roles</span>
+          <span class="font-micro text-[9.5px] text-bone-500 block mt-1">Full-stack, C/Rust systems, internships</span>
+        </button>
+        <button
+          type="button"
+          class="dispatch-preset-btn p-3.5 rounded-xl bg-ink-900 border border-bone-50/10 hover:border-ember-500/50 hover:bg-ink-850 text-left transition-all cursor-pointer group active:scale-98"
+          data-subject="Inquiry: Vulnerability Research / CVE Collaboration"
+          data-body="Hi Aayush,%0D%0A%0D%0AI reviewed your research notes and would like to collaborate on low-level security research.%0D%0A%0D%0ATarget / Scope: [CVE / Kernel / Subsystem]%0D%0AProposed Lab: [QEMU harness / GDB trace]%0D%0A%0D%0ABest,%0D%0A[Name]"
+        >
+          <span class="font-micro text-[10px] text-ember-400 font-bold block mb-1">TRACK 02 // RESEARCH</span>
+          <span class="text-xs text-bone-200 group-hover:text-ember-400 font-semibold block transition-colors">CVE &amp; Exploit Collabs</span>
+          <span class="font-micro text-[9.5px] text-bone-500 block mt-1">QEMU harnesses, kernel UAF, GDB triage</span>
+        </button>
+        <button
+          type="button"
+          class="dispatch-preset-btn p-3.5 rounded-xl bg-ink-900 border border-bone-50/10 hover:border-ember-500/50 hover:bg-ink-850 text-left transition-all cursor-pointer group active:scale-98"
+          data-subject="Inquiry: Hackathon / Open Source Collaboration"
+          data-body="Hi Aayush,%0D%0A%0D%0AWould you be interested in teaming up for [Hackathon Name / Open Source Project]?%0D%0A%0D%0ATeam & Stack: [Summary]%0D%0AObjective: [Build goal]%0D%0A%0D%0ABest,%0D%0A[Name]"
+        >
+          <span class="font-micro text-[10px] text-moss-400 font-bold block mb-1">TRACK 03 // HACKATHONS</span>
+          <span class="text-xs text-bone-200 group-hover:text-ember-400 font-semibold block transition-colors">Hackathons &amp; OSS</span>
+          <span class="font-micro text-[9.5px] text-bone-500 block mt-1">SIH 2026 sprints, local-first offline AI</span>
+        </button>
+      </div>
+      <!-- Feedback status line -->
+      <div id="dispatch-feedback" class="mt-3 p-2.5 rounded-lg bg-ink-900/60 border border-bone-50/5 text-bone-400 font-micro text-[10.5px] hidden flex items-center justify-between">
+        <span id="dispatch-feedback-text">Template loaded. Opening mail client...</span>
+        <span class="text-emerald-400 font-bold">● DISPATCH ARMED</span>
       </div>
     </section>
 
@@ -251,25 +323,30 @@ const pgpKeyId = '0x2C3FA914';
     </section>
   </div>
 
-  <!-- Client-side script for 1-click email and PGP copying -->
+  <!-- Client-side script for 1-click email, PGP copying and interactive dispatch terminal -->
   <script is:inline>
     (function () {
       function setupContactPage() {
         var emailBtn = document.getElementById('copy-email-btn');
         var emailBadge = document.getElementById('copy-badge');
         var pgpBtn = document.getElementById('copy-pgp-btn');
+        var importCmdBtn = document.getElementById('copy-import-cmd-btn');
+        var dispatchBtns = document.querySelectorAll('.dispatch-preset-btn');
+        var dispatchFeedback = document.getElementById('dispatch-feedback');
+        var dispatchFeedbackText = document.getElementById('dispatch-feedback-text');
         var email = 'aayushbankar42@gmail.com';
         var fingerprint = '8F2A 4C19 E70B 31D8 99A2 55F4 B6D1 88E0 2C3F A914';
+        var importCmd = 'curl -sL https://aayushbankar.github.io/key.pub | gpg --import';
 
         if (emailBtn && emailBadge) {
           emailBtn.addEventListener('click', function () {
             if (navigator.clipboard && navigator.clipboard.writeText) {
               navigator.clipboard.writeText(email).then(function () {
                 emailBadge.textContent = 'Copied to Clipboard! ✓';
-                emailBadge.className = 'chip chip-ember shrink-0 text-[10px] font-semibold transition-all';
+                emailBadge.className = 'chip chip-ember shrink-0 text-[10px] font-semibold transition-all ml-2';
                 setTimeout(function () {
                   emailBadge.textContent = 'Click to Copy 📋';
-                  emailBadge.className = 'chip chip-brass shrink-0 text-[10px] font-semibold transition-all';
+                  emailBadge.className = 'chip chip-brass shrink-0 text-[10px] font-semibold transition-all ml-2';
                 }, 2500);
               });
             } else {
@@ -289,6 +366,39 @@ const pgpKeyId = '0x2C3FA914';
                 }, 2500);
               });
             }
+          });
+        }
+
+        if (importCmdBtn) {
+          importCmdBtn.addEventListener('click', function () {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(importCmd).then(function () {
+                importCmdBtn.textContent = 'Copied! ✓';
+                setTimeout(function () {
+                  importCmdBtn.textContent = 'Copy Command 📋';
+                }, 2500);
+              });
+            }
+          });
+        }
+
+        if (dispatchBtns.length) {
+          dispatchBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              var subject = btn.getAttribute('data-subject') || '';
+              var body = btn.getAttribute('data-body') || '';
+              var mailtoUri = 'mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' + body;
+
+              if (dispatchFeedback && dispatchFeedbackText) {
+                dispatchFeedback.classList.remove('hidden');
+                dispatchFeedbackText.textContent = 'Armed: ' + subject + ' — Launching mail client...';
+                setTimeout(function () {
+                  window.location.href = mailtoUri;
+                }, 400);
+              } else {
+                window.location.href = mailtoUri;
+              }
+            });
           });
         }
       }
