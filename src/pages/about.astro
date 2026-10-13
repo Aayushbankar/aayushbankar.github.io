@@ -5,39 +5,38 @@ import MonogramSeal from '../components/ui/MonogramSeal.astro';
 import ProgressionTimeline from '../components/ui/ProgressionTimeline.astro';
 
 import { profile } from '../data/profile';
-import { methodology } from '../data/methodology';
 ---
 
 <BaseLayout
   title="About & Reality — Aayush Bankar"
-  description="18-year-old systems security researcher & IT diploma student. AI-augmented exploration with manual GDB memory verification on an 8GB laptop."
+  description="18-year-old curious generalist builder exploring systems, web architecture, security, and offline AI. AI-augmented speed with manual ground-truth verification."
 >
   <div class="wrap-wide py-10 sm:py-16">
     <!-- ═══════════════════════════════════════════════════════════════
-         HERO — Grounded Editorial Profile
+         HERO — Who I Am As a Person First
          ═══════════════════════════════════════════════════════════════ -->
     <header class="mb-14 sm:mb-20 rise">
       <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
         <p class="eyebrow !mb-0">
           <span class="tick">AB–01</span>
-          <span>Ground-Truth Reality · Gandhinagar (IST)</span>
+          <span>Person &amp; Background · Gandhinagar (IST)</span>
         </p>
         <div class="flex items-center gap-2">
           <span class="chip chip-brass">
             <span class="w-1.5 h-1.5 rounded-full bg-moss-500 animate-pulse"></span>
-            Open to Roles &amp; Research
+            Open to Roles &amp; Projects
           </span>
         </div>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-        <!-- Visual Anchor: Monogram Seal with Orbit Accent -->
+        <!-- Visual Anchor: Monogram Seal with Identity Plate -->
         <div class="lg:col-span-4 flex flex-col items-center justify-center text-center p-6 sm:p-8 rounded-3xl bg-ink-900/60 border border-bone-50/10 shadow-[0_16px_50px_rgba(0,0,0,0.5)]">
           <MonogramSeal class="w-40 h-40 sm:w-48 sm:h-48" size={192} />
           <div class="mt-5 space-y-1">
             <h2 class="display text-xl text-bone-50">Aayush Bankar</h2>
             <p class="font-micro text-[11px] tracking-[0.16em] uppercase text-ember-400 font-semibold">
-              Student Researcher &amp; Systems Builder
+              Curious Generalist Builder &amp; Student
             </p>
             <p class="font-micro text-[10px] tracking-[0.14em] uppercase text-bone-500">
               Age 18 · Gandhinagar, Gujarat · 23.2156° N, 72.6369° E
@@ -45,18 +44,19 @@ import { methodology } from '../data/methodology';
           </div>
         </div>
 
-        <!-- Editorial Typography Column -->
+        <!-- Person-First Narrative Column -->
         <div class="lg:col-span-8 flex flex-col justify-center">
           <h1 class="display text-3xl sm:text-4xl lg:text-5xl text-bone-50 leading-[1.06]">
-            AI-augmented exploration, <em class="text-ember-400">manual memory verification.</em>
+            Curious generalist, <em class="text-ember-400">empirical builder.</em>
           </h1>
           <p class="font-display italic text-lg sm:text-xl text-bone-200 mt-3 leading-snug">
-            I don't pretend to be a corporate director. I'm an 18-year-old student who directs AI models to scaffold fast, then spends hours in GDB proving the assembly by hand.
+            I don't fit neatly into a single box, and I don't pretend to be a corporate director. I'm an 18-year-old student who directs AI models to scaffold fast, then spends hours verifying how things actually work under the hood.
           </p>
           <p class="lede mt-3.5 !max-w-2xl text-sm sm:text-base text-bone-400 leading-relaxed">
-            Final-year Information Technology Diploma student at <strong>Government Polytechnic Gandhinagar</strong> (CPI 8.60/10)
-            and ongoing research collaborator at <strong>CypherMatrix</strong>. I work on Linux kernel race condition triage,
-            reproducible CVE harnesses, and offline edge AI — completely executed on a modest 8GB laptop without paid cloud clusters.
+            Based in Gandhinagar, Gujarat. I get drawn to wherever interesting engineering problems live — whether that's
+            tracing Linux kernel memory under GDB, architecting campus web portals for <strong>500+ daily peers</strong>,
+            chaining local conversational speech models on an 8GB laptop, or simulating quantitative market friction.
+            Following an internship at <strong>CypherMatrix</strong>, I continue to collaborate with them on low-level systems and security research.
           </p>
 
           <!-- Verified Reality Metric Strip -->
@@ -66,16 +66,16 @@ import { methodology } from '../data/methodology';
               <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">Academic CPI (Final Yr)</p>
             </div>
             <div class="p-3.5 rounded-xl bg-ink-950/80 border border-bone-50/10">
-              <p class="font-display text-xl sm:text-2xl text-ember-400 font-semibold">8 GB RAM</p>
-              <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">Physical Test Bench</p>
-            </div>
-            <div class="p-3.5 rounded-xl bg-ink-950/80 border border-bone-50/10">
-              <p class="font-display text-xl sm:text-2xl text-moss-500 font-semibold">SIH 2026</p>
-              <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">National Screening</p>
-            </div>
-            <div class="p-3.5 rounded-xl bg-ink-950/80 border border-bone-50/10">
-              <p class="font-display text-xl sm:text-2xl text-bone-200 font-semibold">500+</p>
+              <p class="font-display text-xl sm:text-2xl text-ember-400 font-semibold">500+</p>
               <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">Daily Campus Users</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-ink-950/80 border border-bone-50/10">
+              <p class="font-display text-xl sm:text-2xl text-moss-500 font-semibold">8 GB RAM</p>
+              <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">Everyday Hardware Rig</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-ink-950/80 border border-bone-50/10">
+              <p class="font-display text-xl sm:text-2xl text-bone-200 font-semibold">SIH 2026</p>
+              <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">National Screening</p>
             </div>
           </div>
         </div>
@@ -83,12 +83,12 @@ import { methodology } from '../data/methodology';
     </header>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         01 HOW I ACTUALLY WORK: AI SCAFFOLDING VS MANUAL GROUND TRUTH
+         01 HOW I ACTUALLY WORK: AI SPEED + SILICON TRUTH + 3 RULES
          ═══════════════════════════════════════════════════════════════ -->
     <section class="mb-14 sm:mb-20" data-reveal>
       <SectionHeading index="01" eyebrow="Engineering Methodology" title="How I Work: <em>AI Speed + Silicon Truth.</em>">
         <p slot="lede" class="lede">
-          AI models are formidable brainstorming and boilerplate engines, but they hallucinate memory offsets and kernel race windows. Here is the exact methodology I use to bridge high-velocity AI exploration with undeniable manual verification.
+          AI models are formidable brainstorming and scaffolding engines, but they hallucinate memory layouts and concurrency windows. Here is the exact methodology I use to bridge high-velocity exploration with undeniable manual verification.
         </p>
       </SectionHeading>
 
@@ -98,25 +98,25 @@ import { methodology } from '../data/methodology';
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="font-micro text-xs text-ember-400 tracking-widest font-semibold uppercase">01 / High-Velocity Scaffolding</span>
-              <span class="chip chip-ember !text-[9px]">EXPLORATION PHASE</span>
+              <span class="chip chip-ember !text-[9px]">EXPLORATION CATALYST</span>
             </div>
             <h3 class="display text-xl sm:text-2xl text-bone-50 mb-3">AI As a Force Multiplier</h3>
             <p class="text-xs sm:text-sm text-bone-300 leading-relaxed">
-              I direct frontier LLMs to analyze vulnerability disclosures, draft initial C test skeletons, parse complex RFC schemas, and generate test matrix combinations. This compresses days of mechanical scaffolding into minutes of focused exploration.
+              I direct frontier LLMs to analyze vulnerability disclosures, draft initial test harnesses, parse RFC specifications, and generate frontend layout scaffolds. This compresses days of mechanical syntax generation into minutes of focused exploration across the spectrum.
             </p>
 
             <div class="mt-5 p-4 rounded-xl bg-ink-950 border border-bone-50/10 space-y-2">
-              <p class="font-micro text-[10px] text-ember-400 font-semibold uppercase tracking-wider">What AI Does Well:</p>
+              <p class="font-micro text-[10px] text-ember-400 font-semibold uppercase tracking-wider">Where AI Accelerates Me:</p>
               <ul class="text-xs text-bone-400 space-y-1.5 list-disc list-inside">
-                <li>Drafting initial QEMU launch scripts and test runners</li>
-                <li>Generating syntactically correct boilerplate for Linux ioctl &amp; socket harnesses</li>
-                <li>Rapidly exploring alternative hypothesis trees across RFC specifications</li>
+                <li>Drafting initial test runner scripts and command matrices</li>
+                <li>Generating boilerplate for Linux ioctl, socket, and web harness code</li>
+                <li>Rapidly exploring alternative architectural ideas across unfamiliar libraries</li>
               </ul>
             </div>
           </div>
 
           <div class="mt-6 pt-4 border-t border-bone-50/10 flex items-center justify-between font-micro text-xs text-bone-500">
-            <span>Speed: 10x Prototyping</span>
+            <span>Velocity: 10x Breadth</span>
             <span class="text-ember-400">Never trusted blindly</span>
           </div>
         </article>
@@ -128,9 +128,9 @@ import { methodology } from '../data/methodology';
               <span class="font-micro text-xs text-moss-400 tracking-widest font-semibold uppercase">02 / Silicon Ground Truth</span>
               <span class="chip chip-brass !text-[9px]">VERIFICATION PHASE</span>
             </div>
-            <h3 class="display text-xl sm:text-2xl text-bone-50 mb-3">Manual GDB &amp; Memory Telemetry</h3>
+            <h3 class="display text-xl sm:text-2xl text-bone-50 mb-3">Manual GDB &amp; Memory Depth</h3>
             <p class="text-xs sm:text-sm text-bone-300 leading-relaxed">
-              Every struct alignment, SLUB cache allocation, and assembly instruction is verified by hand. When an AI model hallucinates a struct member displacement (e.g. 8 bytes off under GCC), I catch it with GDB breakpoint traces and kernel memory inspection.
+              Every struct alignment, SLUB cache allocation, and assembly instruction is verified by hand. When an AI model hallucinates a struct member displacement (e.g. 8 bytes off under GCC), I catch it with GDB breakpoint traces, memory inspection, and local micro-VM runs.
             </p>
 
             <div class="mt-5 p-4 rounded-xl bg-ink-950 border border-bone-50/10 space-y-2">
@@ -138,37 +138,38 @@ import { methodology } from '../data/methodology';
               <ul class="text-xs text-bone-400 space-y-1.5 list-disc list-inside">
                 <li>Exact memory offsets in SLUB (<code class="text-moss-300">kmalloc-192</code>) under KASAN</li>
                 <li>ROP gadget viability and stack pivot alignment under RETPOLINE</li>
-                <li>Deterministic clock cycles and zero-copy ring buffer behavior</li>
+                <li>Real-world latency, cache footprint, and zero-copy data integrity</li>
               </ul>
             </div>
           </div>
 
           <div class="mt-6 pt-4 border-t border-bone-50/10 flex items-center justify-between font-micro text-xs text-bone-500">
-            <span>Proof: Empirical GDB Logs</span>
+            <span>Proof: Empirical Logs</span>
             <span class="text-moss-400">100% Deterministic</span>
           </div>
         </article>
       </div>
 
-      <!-- Ground Truth Operating Principles Banner -->
-      <div class="card p-6 sm:p-7 mt-6 bg-ink-900/40 border border-bone-50/10">
+      <!-- Ground Truth Operating Manifesto (The 3 Rules) -->
+      <div class="card p-7 sm:p-8 mt-6 bg-ink-900/60 border border-bone-50/15">
+        <p class="eyebrow mb-4"><span class="tick">RUL</span><span>Non-Negotiable Operating Rules</span></p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div>
-            <span class="font-micro text-xs text-brass-400 font-bold block mb-1">RULE 01 // EVIDENCE FIRST</span>
-            <p class="text-xs text-bone-300 leading-relaxed">
+          <div class="p-4 rounded-xl bg-ink-950/80 border border-bone-50/10">
+            <span class="font-micro text-xs text-brass-400 font-bold block mb-2 tracking-wider">RULE 01 // EVIDENCE FIRST</span>
+            <p class="text-xs sm:text-sm text-bone-300 leading-relaxed">
               No claim is published without a hermetic reproduction command, compile flags, and exact kernel commit hash.
             </p>
           </div>
-          <div>
-            <span class="font-micro text-xs text-ember-400 font-bold block mb-1">RULE 02 // OPEN DEAD ENDS</span>
-            <p class="text-xs text-bone-300 leading-relaxed">
-              When an exploitation branch fails due to compiler alignments or kernel security mitigations, it is documented openly.
+          <div class="p-4 rounded-xl bg-ink-950/80 border border-bone-50/10">
+            <span class="font-micro text-xs text-ember-400 font-bold block mb-2 tracking-wider">RULE 02 // OPEN DEAD ENDS</span>
+            <p class="text-xs sm:text-sm text-bone-300 leading-relaxed">
+              When an exploitation branch or architecture fails due to compiler alignments or system mitigations, it is documented openly.
             </p>
           </div>
-          <div>
-            <span class="font-micro text-xs text-moss-400 font-bold block mb-1">RULE 03 // ZERO HYPE</span>
-            <p class="text-xs text-bone-300 leading-relaxed">
-              I speak as an 18-year-old student passionate about low-level systems, not an exaggerated corporate figurehead.
+          <div class="p-4 rounded-xl bg-ink-950/80 border border-bone-50/10">
+            <span class="font-micro text-xs text-moss-400 font-bold block mb-2 tracking-wider">RULE 03 // ZERO HYPE</span>
+            <p class="text-xs sm:text-sm text-bone-300 leading-relaxed">
+              I speak as an 18-year-old student passionate about building real systems, not an exaggerated corporate figurehead.
             </p>
           </div>
         </div>
@@ -176,127 +177,154 @@ import { methodology } from '../data/methodology';
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         02 THE 8GB HARDWARE RIG (Awwwards-Grade Blueprint Plate)
+         02 BUILDING ACROSS THE SPECTRUM (GENERALIST BREADTH)
          ═══════════════════════════════════════════════════════════════ -->
     <section class="mb-14 sm:mb-20" data-reveal>
-      <SectionHeading index="02" eyebrow="Physical Test Bench" title="The 8GB Rig: <em>Constraints Breed Discipline.</em>">
+      <SectionHeading index="02" eyebrow="Breadth & Interests" title="No Silos. <em>From Web to Silicon.</em>">
         <p slot="lede" class="lede">
-          Every exploit chain, quantized LLM inference loop, and SIMD ingestion benchmark was built and tested directly on this physical workstation — an HP EliteBook 840 G5 with 8 GB of RAM running EndeavourOS.
+          I don't believe in boxing yourself into one niche. The best engineering happens when you understand the whole picture — from pixels and network protocols to memory allocators and neural models.
         </p>
       </SectionHeading>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8">
-        <!-- Rig Blueprint Specimen Card -->
-        <div class="lg:col-span-7 card card-glare p-7 sm:p-9 flex flex-col justify-between border-l-4 border-l-ember-500">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+        <!-- Spectrum 1: Web Architecture -->
+        <div class="card card-glare p-6 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-ember-500 animate-pulse"></span>
-                <span class="font-micro text-xs text-bone-400 uppercase tracking-widest font-semibold">Active Workstation Rig</span>
-              </div>
-              <span class="chip chip-brass !text-[9px]">100% LOCAL SILICON</span>
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-micro text-xs text-brass-400 font-bold uppercase tracking-wider">[01 / WEB]</span>
+              <span class="chip chip-brass !text-[9px]">CAMPUS SCALE</span>
             </div>
-
-            <h3 class="display text-2xl sm:text-3xl text-bone-50 mb-1">{profile.labRig.model}</h3>
-            <p class="font-micro text-xs text-ember-400 uppercase tracking-wider mb-6">Physical Ground-Truth Telemetry</p>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 font-micro text-xs">
-              <div class="p-3.5 rounded-xl bg-ink-950 border border-bone-50/10">
-                <span class="text-bone-500 uppercase tracking-wider text-[10px] block mb-1">Processor</span>
-                <span class="text-bone-100 font-semibold block">{profile.labRig.cpu}</span>
-                <span class="text-bone-500 text-[10px] mt-0.5 block">4 Cores / 8 Threads · 15W TDP</span>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-ink-950 border border-bone-50/10">
-                <span class="text-bone-500 uppercase tracking-wider text-[10px] block mb-1">Memory &amp; Storage</span>
-                <span class="text-bone-100 font-semibold block">{profile.labRig.ram}</span>
-                <span class="text-bone-500 text-[10px] mt-0.5 block">512 GB NVMe SSD · 7.6 GiB Usable</span>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-ink-950 border border-bone-50/10">
-                <span class="text-bone-500 uppercase tracking-wider text-[10px] block mb-1">Operating System</span>
-                <span class="text-bone-100 font-semibold block">{profile.labRig.os}</span>
-                <span class="text-bone-500 text-[10px] mt-0.5 block">Arch Linux Rolling · Linux 7.1</span>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-ink-950 border border-bone-50/10">
-                <span class="text-bone-500 uppercase tracking-wider text-[10px] block mb-1">Graphics &amp; Display</span>
-                <span class="text-bone-100 font-semibold block">{profile.labRig.gpu}</span>
-                <span class="text-bone-500 text-[10px] mt-0.5 block">Integrated Intel GPU · Zero dGPU</span>
-              </div>
-            </div>
-
-            <!-- Memory Telemetry Visual Bar -->
-            <div class="mt-6 p-4 rounded-xl bg-ink-950/80 border border-bone-50/10">
-              <div class="flex items-center justify-between text-xs font-micro mb-2">
-                <span class="text-bone-400">RAM Budget Allocation (8.0 GB Physical)</span>
-                <span class="text-ember-400 font-semibold">Strict 7.6 GiB Boundary</span>
-              </div>
-              <div class="w-full h-3 rounded-full bg-ink-900 overflow-hidden flex">
-                <div class="h-full bg-ember-500" style="width: 55%;" title="Offline llama.cpp Q4_K_M GGUF (4.2 GiB)"></div>
-                <div class="h-full bg-brass-500" style="width: 25%;" title="EndeavourOS Desktop & Tools (1.9 GiB)"></div>
-                <div class="h-full bg-moss-500" style="width: 20%;" title="QEMU Micro-VM Kernel Harness (1.5 GiB)"></div>
-              </div>
-              <div class="flex flex-wrap items-center justify-between gap-2 mt-2 font-micro text-[10px] text-bone-500">
-                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-ember-500"></span> llama.cpp (4.2 GB)</span>
-                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-brass-500"></span> Arch Desktop (1.9 GB)</span>
-                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-moss-500"></span> QEMU VM (1.5 GB)</span>
-              </div>
-            </div>
+            <h4 class="display text-lg text-bone-50 mb-2">Production Web Architecture</h4>
+            <p class="text-xs text-bone-400 leading-relaxed">
+              Architected and maintain the official IT Department Web Portal for Government Polytechnic Gandhinagar. Self-hosted, sub-second loads, serving 500+ daily active students and faculty with zero infrastructure budget.
+            </p>
           </div>
-
-          <div class="mt-6 pt-4 border-t border-bone-50/10 flex items-center justify-between font-micro text-xs text-bone-400">
-            <span>Kernel Debug: QEMU + GDB</span>
-            <span class="text-moss-400 font-semibold">✓ 100% Zero Cloud Dependency</span>
+          <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
+            Astro · Modern JS · Accessible UI
           </div>
         </div>
 
-        <!-- Why 8GB Rig Matters Narrative Column -->
-        <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
-          <article class="card card-glare p-7 sm:p-8 flex-1">
-            <p class="eyebrow mb-2"><span class="tick">ETH</span><span>Philosophy of Constraints</span></p>
-            <h4 class="display text-xl text-bone-50 mb-3">Why 8GB Makes a Better Engineer</h4>
-            <p class="text-xs sm:text-sm text-bone-300 leading-relaxed mb-4">
-              When you don't have access to 80GB cloud GPUs or 64-core enterprise servers, you cannot afford wasteful abstractions. You are forced to understand how every single byte is allocated.
-            </p>
-            <ul class="text-xs text-bone-400 space-y-2.5">
-              <li class="flex items-start gap-2">
-                <span class="text-ember-400 font-bold shrink-0">›</span>
-                <span><strong>Zero-Copy C &amp; Rust:</strong> Eliminating extraneous heap allocations because memory is genuinely scarce.</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-ember-400 font-bold shrink-0">›</span>
-                <span><strong>Q4_K_M Quantization:</strong> Tuning llama.cpp to run offline edge speech pipelines entirely in CPU RAM.</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-ember-400 font-bold shrink-0">›</span>
-                <span><strong>Hermetic Micro-VMs:</strong> Crafting minimal Linux kernel configs that boot under QEMU in under 400 milliseconds.</span>
-              </li>
-            </ul>
-          </article>
-
-          <!-- Current Student Status Card -->
-          <article class="card p-6 bg-ink-900/50 border border-bone-50/10">
-            <div class="flex items-center justify-between mb-2">
-              <span class="font-micro text-[11px] text-brass-400 uppercase tracking-wider font-semibold">Academic Trajectory</span>
-              <span class="chip chip-brass !text-[9px]">ACTIVE</span>
+        <!-- Spectrum 2: Low-Level Systems & Security -->
+        <div class="card card-glare p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-micro text-xs text-ember-400 font-bold uppercase tracking-wider">[02 / SYSTEMS]</span>
+              <span class="chip chip-ember !text-[9px]">KERNEL DEPTH</span>
             </div>
-            <p class="display text-lg text-bone-50">Govt. Polytechnic Gandhinagar</p>
-            <p class="text-xs text-bone-400 mt-1">
-              Final-year IT Diploma (CPI <strong>8.60 / 10.00</strong>). Preparing for DDCET entrance examination for lateral entry into B.E. Computer Engineering.
+            <h4 class="display text-lg text-bone-50 mb-2">Low-Level Systems &amp; Security</h4>
+            <p class="text-xs text-bone-400 leading-relaxed">
+              Linux kernel race condition triage (CVE-2026-46242), Android Binder IPC projection audits (CVE-2026-28576), eBPF tracepoints, and hermetic QEMU test harnesses with automated GDB Python telemetry.
             </p>
-          </article>
+          </div>
+          <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
+            C · Rust · Assembly · Linux 6.12
+          </div>
+        </div>
+
+        <!-- Spectrum 3: Offline Edge AI & Audio -->
+        <div class="card card-glare p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-micro text-xs text-moss-400 font-bold uppercase tracking-wider">[03 / EDGE AI]</span>
+              <span class="chip !text-[9px]">OFFLINE FIRST</span>
+            </div>
+            <h4 class="display text-lg text-bone-50 mb-2">Offline Edge AI &amp; Audio</h4>
+            <p class="text-xs text-bone-400 leading-relaxed">
+              Engineered Wolvie: a chained local speech assistant (Silero VAD + faster-whisper + llama.cpp + Piper TTS) achieving ~530ms round-trip latency over WebRTC data channels on standard CPU hardware with zero cloud dependencies.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
+            llama.cpp GGUF · WebRTC · Python
+          </div>
+        </div>
+
+        <!-- Spectrum 4: Quant Modeling -->
+        <div class="card card-glare p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-micro text-xs text-bone-300 font-bold uppercase tracking-wider">[04 / SIM]</span>
+              <span class="chip !text-[9px]">EMPIRICAL</span>
+            </div>
+            <h4 class="display text-lg text-bone-50 mb-2">Quantitative Simulation</h4>
+            <p class="text-xs text-bone-400 leading-relaxed">
+              Built QuantLab: an event-driven backtesting engine modeling market impact (Almgren-Chriss), order execution friction, and statutory Indian market taxes (STT/GST) under combinatorial cross-validation.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
+            Python · Event Loops · NumPy
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         03 VERIFIED ACADEMIC & INDUSTRY CREDENTIALS
+         03 THE 8GB HARDWARE RIG (COMPACT & GROUNDED SPECIMEN)
          ═══════════════════════════════════════════════════════════════ -->
     <section class="mb-14 sm:mb-20" data-reveal>
-      <SectionHeading index="03" eyebrow="Verified Credentials" title="Academic Standing &amp; <em>Certifications.</em>">
+      <SectionHeading index="03" eyebrow="Hardware Reality" title="The 8GB Rig: <em>Constraints Breed Discipline.</em>">
         <p slot="lede" class="lede">
-          Verified academic performance and industry certifications. Backed by institutional records and transparent credentials.
+          All my code, from local quantized LLMs to kernel exploit harnesses, is built and tested directly on an everyday HP EliteBook with 8 GB of RAM running EndeavourOS.
+        </p>
+      </SectionHeading>
+
+      <div class="card card-glare p-7 sm:p-9 mt-8 border-l-4 border-l-ember-500">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7">
+            <div class="flex items-center gap-2 mb-2 font-micro text-xs">
+              <span class="w-2 h-2 rounded-full bg-moss-500"></span>
+              <span class="text-bone-400 uppercase tracking-wider">Physical Daily Workstation</span>
+            </div>
+            <h3 class="display text-2xl sm:text-3xl text-bone-50">{profile.labRig.model}</h3>
+            <p class="text-xs sm:text-sm text-bone-300 leading-relaxed mt-2 max-w-xl">
+              When you don't have access to 80GB cloud GPUs or 64-core enterprise servers, you cannot afford wasteful abstractions. You are forced to understand how every single byte is allocated — writing zero-copy C, tuning quantization, and minimizing cache misses.
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-5 font-micro text-xs">
+              <div class="p-2.5 rounded-lg bg-ink-950 border border-bone-50/10">
+                <span class="text-bone-500 text-[10px] block uppercase">CPU</span>
+                <span class="text-bone-100 font-semibold block mt-0.5 truncate">i5-8350U (4C/8T)</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-ink-950 border border-bone-50/10">
+                <span class="text-bone-500 text-[10px] block uppercase">RAM</span>
+                <span class="text-bone-100 font-semibold block mt-0.5">8 GB DDR4</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-ink-950 border border-bone-50/10">
+                <span class="text-bone-500 text-[10px] block uppercase">OS</span>
+                <span class="text-bone-100 font-semibold block mt-0.5 truncate">EndeavourOS (Arch)</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-ink-950 border border-bone-50/10">
+                <span class="text-bone-500 text-[10px] block uppercase">GPU</span>
+                <span class="text-bone-100 font-semibold block mt-0.5 truncate">Intel UHD 620</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 p-5 rounded-2xl bg-ink-950/80 border border-bone-50/10 space-y-3 font-micro text-xs">
+            <span class="text-ember-400 uppercase tracking-widest font-semibold block text-[11px]">Strict Execution Baseline</span>
+            <div class="flex items-center justify-between text-bone-300">
+              <span>llama.cpp Q4_K_M GGUF</span>
+              <span class="text-bone-500">Runs locally in ~4.2 GB RSS</span>
+            </div>
+            <div class="flex items-center justify-between text-bone-300">
+              <span>QEMU Micro-VM Kernel Lab</span>
+              <span class="text-bone-500">Boots in &lt;400ms with KASAN</span>
+            </div>
+            <div class="flex items-center justify-between text-bone-300">
+              <span>Cloud Infrastructure Cost</span>
+              <span class="text-moss-400 font-semibold">₹0 / month (100% Offline)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         04 ACADEMIC TRAJECTORY & VERIFIED CREDENTIALS
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="mb-14 sm:mb-20" data-reveal>
+      <SectionHeading index="04" eyebrow="Education & Credentials" title="Academic Standing &amp; <em>Verified Records.</em>">
+        <p slot="lede" class="lede">
+          Grounded institutional performance and verified industry certifications.
         </p>
       </SectionHeading>
 
@@ -319,27 +347,6 @@ import { methodology } from '../data/methodology';
             </div>
           </div>
         ))}
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         04 TECHNICAL COMPETENCIES (HONEST SPECTRUM)
-         ═══════════════════════════════════════════════════════════════ -->
-    <section class="mb-14 sm:mb-20" data-reveal>
-      <div class="card p-7 sm:p-9">
-        <p class="eyebrow mb-4"><span class="tick">SKL</span><span>Technical Spectrum &amp; Everyday Tools</span></p>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {profile.competencies.map((group) => (
-            <div>
-              <p class="font-micro text-xs uppercase tracking-wider text-ember-400 font-semibold mb-3">{group.category}</p>
-              <div class="flex flex-wrap gap-1.5">
-                {group.skills.map((s) => (
-                  <span class="chip !text-[10px] !py-0.5 !px-2">{s}</span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   </div>

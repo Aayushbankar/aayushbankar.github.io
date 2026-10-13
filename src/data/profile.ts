@@ -15,9 +15,9 @@ export interface CompetencyGroup {
 export const profile = {
   name: 'Aayush Bankar',
   age: 18,
-  title: 'Systems Security & Low-Level Engineering',
-  role: 'Systems Security Researcher',
-  company: 'CypherMatrix',
+  title: 'Generalist Builder, Systems & Security Researcher',
+  role: 'Student & Generalist Builder',
+  company: 'CypherMatrix (Research Collaborator)',
   location: 'Gandhinagar, Gujarat, India',
   timezone: 'Asia/Kolkata',
   timezoneLabel: 'IST (UTC+5:30)',
@@ -25,9 +25,9 @@ export const profile = {
   github: 'https://github.com/Aayushbankar',
   linkedin: 'https://www.linkedin.com/in/aayushbankar/',
 
-  tagline: '18-year-old systems security researcher & AI-augmented builder.',
+  tagline: '18-year-old curious generalist builder exploring systems, security, and offline AI.',
   summary:
-    '18-year-old systems security researcher and IT diploma student from Gandhinagar, Gujarat. Working across Linux kernel & Android vulnerability research, high-performance C and Rust tools, and offline edge AI on an 8GB laptop — directing AI models to explore and scaffold, while verifying every memory layout and trace log in local QEMU harnesses.',
+    '18-year-old student and builder from Gandhinagar, Gujarat. Moving across low-level systems, web engineering, edge AI audio, quant modeling, and vulnerability research — directing AI models to scaffold and explore fast, while personally diving deep to verify how things actually work under the hood.',
 
   domains: [
     {

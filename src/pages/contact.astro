@@ -6,18 +6,18 @@ import { collab } from '../data/collab';
 ---
 
 <BaseLayout
-  title="Contact & Collaboration — Aayush Bankar"
-  description="Connect directly with Aayush Bankar: systems engineering roles, vulnerability research collaborations, and open-source projects."
+  title="Contact & Connect — Aayush Bankar"
+  description="Connect with Aayush Bankar: open for software engineering internships, junior systems roles, vulnerability research collaborations, and hackathons."
 >
   <div class="wrap-wide py-10 sm:py-16">
     <!-- ═══════════════════════════════════════════════════════════════
          HEADER — Direct, Open, & Grounded
          ═══════════════════════════════════════════════════════════════ -->
-    <header class="mb-14 sm:mb-20 rise">
+    <header class="mb-10 sm:mb-14 rise">
       <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
         <p class="eyebrow !mb-0">
           <span class="tick">CNT–01</span>
-          <span>Open Channels · Direct Communication</span>
+          <span>Open Channels · Gandhinagar (IST)</span>
         </p>
         <div class="flex items-center gap-2">
           <span class="chip chip-brass">
@@ -28,20 +28,20 @@ import { collab } from '../data/collab';
       </div>
 
       <h1 class="display text-3xl sm:text-5xl lg:text-6xl text-bone-50 leading-[1.04]">
-        Let's build, research, or <em class="text-ember-400">solve hard problems.</em>
+        Let's build, connect, or <em class="text-ember-400">solve hard problems.</em>
       </h1>
       <p class="font-display italic text-lg sm:text-xl text-bone-200 mt-3 leading-snug">
-        Open for engineering roles, vulnerability research collaborations, and high-impact open-source systems.
+        Open for engineering internships, junior systems roles, research collaborations, and hackathons.
       </p>
       <p class="lede mt-3.5 max-w-2xl text-sm sm:text-base text-bone-400 leading-relaxed">
-        {collab.subheadline} Based in Gandhinagar, Gujarat (IST). Whether you are a recruiter evaluating low-level systems depth or a researcher wanting to collaborate on QEMU reproduction harnesses, reach out directly.
+        18-year-old student and generalist builder based in Gandhinagar, Gujarat. Whether you're a team looking for a sharp builder across web and systems, or an independent researcher wanting to collaborate, reach out directly.
       </p>
     </header>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         INTERACTIVE AVAILABILITY & 1-CLICK COPY STATION (Framer-Style)
+         INTERACTIVE 1-CLICK ACTION STATION (Framer-Style)
          ═══════════════════════════════════════════════════════════════ -->
-    <section class="card card-glare p-8 sm:p-10 border-l-4 border-l-brass-500 mb-14 sm:mb-20 shadow-[0_20px_60px_rgba(0,0,0,0.5)]" data-reveal>
+    <section class="card card-glare p-7 sm:p-9 border-l-4 border-l-brass-500 mb-12 sm:mb-16 shadow-[0_20px_60px_rgba(0,0,0,0.5)]" data-reveal>
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div class="lg:col-span-7">
           <div class="flex items-center gap-2.5 mb-3 font-micro text-xs">
@@ -51,33 +51,29 @@ import { collab } from '../data/collab';
             <span class="text-bone-400" data-ist-clock>--:-- IST</span>
           </div>
 
-          <h2 class="display text-2xl sm:text-3xl text-bone-50 mb-3">
-            Direct Line: Roles, Research &amp; Projects
+          <h2 class="display text-2xl sm:text-3xl text-bone-50 mb-2">
+            Direct Line: Personal Inbox
           </h2>
-          <p class="text-sm sm:text-base text-bone-300 leading-relaxed max-w-2xl">
-            {collab.availability.note}
+          <p class="text-xs sm:text-sm text-bone-300 leading-relaxed max-w-xl">
+            Direct communication without automated gatekeepers or intermediaries. Response time is typically within 24 hours.
           </p>
 
-          <div class="flex flex-wrap items-center gap-4 mt-5 text-xs font-micro text-bone-400">
+          <div class="flex flex-wrap items-center gap-4 mt-4 text-xs font-micro text-bone-400">
             <span class="flex items-center gap-1.5">
               <span class="text-ember-400">📍</span> Gandhinagar, Gujarat (IST, UTC+5:30)
             </span>
             <span class="flex items-center gap-1.5">
-              <span class="text-brass-400">⚡</span> Response time: within 24 hours
-            </span>
-            <span class="flex items-center gap-1.5">
-              <span class="text-moss-400">✓</span> No recruiters or PR middle-layers
+              <span class="text-moss-400">✓</span> Open to Remote Worldwide &amp; Relocation
             </span>
           </div>
         </div>
 
         <!-- 1-Click Interactive Email Copy & Actions -->
         <div class="lg:col-span-5 flex flex-col gap-3">
-          <!-- Copy to Clipboard Button -->
           <button
             type="button"
             id="copy-email-btn"
-            class="group w-full p-4.5 rounded-2xl bg-ink-950 border border-bone-50/15 hover:border-ember-500/50 hover:bg-ink-850 transition-all text-left flex items-center justify-between cursor-pointer shadow-lg"
+            class="group w-full p-4 rounded-2xl bg-ink-950 border border-bone-50/15 hover:border-ember-500/50 hover:bg-ink-850 transition-all text-left flex items-center justify-between cursor-pointer shadow-lg"
             aria-label="Copy email address to clipboard"
           >
             <div>
@@ -91,137 +87,98 @@ import { collab } from '../data/collab';
             </span>
           </button>
 
-          <!-- Alternative Direct Actions -->
           <div class="grid grid-cols-2 gap-3">
             <a href={`mailto:${profile.email}`} class="btn btn-primary text-center justify-center !text-xs !py-2.5">
               Open Mail App ↗
             </a>
             <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="btn btn-ghost text-center justify-center !text-xs !py-2.5">
-              LinkedIn Message ↗
+              LinkedIn Profile ↗
             </a>
+          </div>
+
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" class="text-center font-micro text-[11px] text-bone-500 hover:text-ember-400 transition-colors py-1">
+            Browse Open Repositories on GitHub ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         WHAT I'M OPEN FOR (SHORT & PUNCHY)
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="mb-12 sm:mb-16" data-reveal>
+      <SectionHeading index="01" eyebrow="Open Channels" title="What I'm Looking <em>To Do.</em>">
+        <p slot="lede" class="lede">
+          A few concrete ways we can collaborate or work together.
+        </p>
+      </SectionHeading>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-6">
+        <div class="card card-glare p-6 flex flex-col justify-between">
+          <div>
+            <span class="font-micro text-xs text-brass-400 font-bold uppercase tracking-wider block mb-2">[01 / ROLES]</span>
+            <h3 class="display text-lg text-bone-50 mb-2">Software &amp; Systems Roles</h3>
+            <p class="text-xs text-bone-400 leading-relaxed">
+              Seeking full-time or internship roles across full-stack web engineering, systems tooling (C/Rust), or vulnerability research. Fast AI-augmented exploration combined with disciplined manual verification.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
+            Immediate &amp; Summer 2026
+          </div>
+        </div>
+
+        <div class="card card-glare p-6 flex flex-col justify-between">
+          <div>
+            <span class="font-micro text-xs text-ember-400 font-bold uppercase tracking-wider block mb-2">[02 / RESEARCH]</span>
+            <h3 class="display text-lg text-bone-50 mb-2">Vulnerability Research Collabs</h3>
+            <p class="text-xs text-bone-400 leading-relaxed">
+              Partnering with independent security researchers and teams to build hermetic QEMU harnesses, trace Linux/Android race conditions under GDB, and verify root causes with deterministic test artifacts.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
+            Open CVE Research &amp; Tooling
+          </div>
+        </div>
+
+        <div class="card card-glare p-6 flex flex-col justify-between">
+          <div>
+            <span class="font-micro text-xs text-moss-400 font-bold uppercase tracking-wider block mb-2">[03 / HACKATHONS]</span>
+            <h3 class="display text-lg text-bone-50 mb-2">Hackathons &amp; Open Source</h3>
+            <p class="text-xs text-bone-400 leading-relaxed">
+              Teaming up for national hackathons (like SIH) or building local-first open-source tools (offline speech pipelines, campus web tools, SIMD log preprocessors) on modest hardware.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
+            Sprint &amp; Hackathon Cycles
           </div>
         </div>
       </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         01 COLLABORATION AVENUES (NOT CORPORATE RETAINERS)
+         GROUND TRUTH FAQ (COMPACT BENTO GRID)
          ═══════════════════════════════════════════════════════════════ -->
-    <section class="mb-14 sm:mb-20" data-reveal>
-      <SectionHeading index="01" eyebrow="Collaboration Avenues" title="Three Primary <em>Focus Areas.</em>">
+    <section class="mb-10 sm:mb-14" data-reveal>
+      <SectionHeading index="02" eyebrow="Transparent Q&amp;A" title="Frequently Answered <em>Questions.</em>">
         <p slot="lede" class="lede">
-          Here is how I collaborate with engineering teams, independent security researchers, and hackathon partners.
+          Direct, honest answers about my academic status, workflow balance, hardware setup, and availability.
         </p>
       </SectionHeading>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-        {collab.services.map((service) => (
-          <article class="card card-glare p-7 sm:p-8 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between gap-3 mb-4">
-                <span class="font-micro text-xs text-ember-400 tracking-widest font-semibold">[{service.index}]</span>
-                <span class="chip font-micro text-[10px]">{service.timeline}</span>
-              </div>
-
-              <h3 class="display text-xl text-bone-50 mb-3">{service.title}</h3>
-              <p class="text-xs sm:text-sm text-bone-400 leading-relaxed mb-6">
-                {service.scope}
-              </p>
-
-              <div class="pt-4 border-t border-bone-50/10">
-                <p class="font-micro text-[10px] tracking-wider uppercase text-bone-500 mb-2.5">What I Bring / Deliver:</p>
-                <ul class="space-y-2 text-xs text-bone-300 font-sans">
-                  {service.deliverables.map((d) => (
-                    <li class="flex items-start gap-2">
-                      <span class="text-ember-400 font-bold shrink-0">›</span>
-                      <span class="leading-relaxed">{d}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-bone-50/10 flex items-center justify-between font-micro text-xs">
-              <span class="text-bone-500">Direct Discussion</span>
-              <a href={`mailto:${profile.email}?subject=Collaboration:%20${encodeURIComponent(service.title)}`} class="link-sweep text-ember-400 uppercase tracking-wider font-semibold">
-                Start Conversation →
-              </a>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         02 GROUND TRUTH FAQ (Framer-Style Bento Grid)
-         ═══════════════════════════════════════════════════════════════ -->
-    <section class="mb-14 sm:mb-20" data-reveal>
-      <SectionHeading index="02" eyebrow="Transparent Ground Truth" title="Frequently Answered <em>Questions.</em>">
-        <p slot="lede" class="lede">
-          Honest answers about my academic status, workflow balance, hardware setup, and availability.
-        </p>
-      </SectionHeading>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
         {collab.faqs.map((faq, i) => (
-          <div class="p-6 sm:p-7 rounded-2xl bg-ink-900/60 border border-bone-50/10 flex flex-col justify-between">
+          <div class="p-6 rounded-2xl bg-ink-900/60 border border-bone-50/10 flex flex-col justify-between">
             <div>
               <div class="flex items-center gap-2 mb-2 font-micro text-xs text-brass-400 font-semibold">
                 <span>0{i + 1}</span>
                 <span class="text-bone-600">/</span>
                 <span>FAQ</span>
               </div>
-              <h4 class="display text-base sm:text-lg text-bone-50 mb-2.5">{faq.q}</h4>
-              <p class="text-xs sm:text-sm text-bone-400 leading-relaxed">{faq.a}</p>
+              <h4 class="display text-base text-bone-50 mb-2">{faq.q}</h4>
+              <p class="text-xs text-bone-400 leading-relaxed">{faq.a}</p>
             </div>
           </div>
         ))}
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         03 DIRECT CHANNELS & VERIFIED COORDINATES
-         ═══════════════════════════════════════════════════════════════ -->
-    <section class="card p-8 sm:p-10" data-reveal>
-      <SectionHeading index="03" eyebrow="Direct Channels" title="Connect <em>Directly.</em>" />
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 font-micro text-xs">
-        <a
-          href={`mailto:${profile.email}`}
-          class="p-5 rounded-xl bg-ink-950 border border-bone-50/10 hover:border-ember-500 transition-colors group block"
-        >
-          <span class="text-bone-500 block uppercase tracking-wider text-[10px]">Primary Direct Inbox</span>
-          <span class="text-bone-100 font-semibold text-sm group-hover:text-ember-400 transition-colors mt-1 block truncate">
-            {profile.email}
-          </span>
-          <span class="text-bone-500 mt-2 block text-[11px]">Direct communication · PGP on request</span>
-        </a>
-
-        <a
-          href={profile.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="p-5 rounded-xl bg-ink-950 border border-bone-50/10 hover:border-ember-500 transition-colors group block"
-        >
-          <span class="text-bone-500 block uppercase tracking-wider text-[10px]">Professional Network</span>
-          <span class="text-bone-100 font-semibold text-sm group-hover:text-ember-400 transition-colors mt-1 block">
-            LinkedIn Profile ↗
-          </span>
-          <span class="text-bone-500 mt-2 block text-[11px]">in/aayushbankar · Direct messages open</span>
-        </a>
-
-        <a
-          href={profile.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="p-5 rounded-xl bg-ink-950 border border-bone-50/10 hover:border-ember-500 transition-colors group block"
-        >
-          <span class="text-bone-500 block uppercase tracking-wider text-[10px]">Open Repositories</span>
-          <span class="text-bone-100 font-semibold text-sm group-hover:text-ember-400 transition-colors mt-1 block">
-            GitHub Telemetry ↗
-          </span>
-          <span class="text-bone-500 mt-2 block text-[11px]">github.com/Aayushbankar · Source code &amp; logs</span>
-        </a>
       </div>
     </section>
   </div>

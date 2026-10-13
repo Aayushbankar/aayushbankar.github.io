@@ -13,21 +13,21 @@ export interface GroundTruthFAQ {
 
 export const collab = {
   headline: 'Connect & Collaborate',
-  subheadline: 'Open for junior systems engineering roles, vulnerability research collaborations, and high-impact open-source systems.',
+  subheadline: 'Open for software engineering internships, junior systems roles, open research collaborations, and hackathons.',
   availability: {
-    status: 'Open to Roles & Research',
-    note: '18-year-old IT diploma student & systems security researcher based in Gandhinagar, Gujarat. Actively seeking junior systems/security roles, open CVE research collaborations, and high-velocity engineering projects.',
+    status: 'Open to Roles & Projects',
+    note: '18-year-old student and generalist builder based in Gandhinagar, Gujarat. Open for software engineering internships, junior systems/web roles, open research collaborations, and hackathon teams.',
     location: 'Gandhinagar, Gujarat, India (IST / UTC+5:30)',
   },
   services: [
     {
       index: '01',
-      title: 'Systems & Security Engineering Roles',
-      scope: 'Looking for full-time or internship opportunities in systems engineering, low-level tooling (C/Rust), or vulnerability research where I can contribute deep manual rigor and fast AI-assisted prototyping.',
+      title: 'Software & Systems Engineering Roles',
+      scope: 'Open for internships or junior engineering roles across full-stack web engineering, low-level systems (C/Rust), or security analysis where I can contribute fast prototyping and rigorous verification.',
       deliverables: [
+        'Full-stack web engineering with modern frameworks and robust backend services',
         'Low-level C and Rust systems engineering with clean POSIX/Linux APIs',
         'Hermetic QEMU/KVM test harnesses and automated benchmark validation',
-        'Empirical verification documentation with zero marketing exaggerations',
         'Direct, communicative collaboration across Git workflows and Linux environments',
       ],
       timeline: 'Immediate & Summer 2026',
