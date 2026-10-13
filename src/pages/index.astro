@@ -40,17 +40,21 @@ const heroName = ['AAYUSH', 'BANKAR'];
   title="Aayush Bankar — Systems Security & Low-Level Engineering"
   description="Ground-truth security research, Linux kernel & Android vulnerability notes, and high-performance verifiable architectures."
 >
-  <!-- Dossier left rail navigation (desktop only, hidden over hero) -->
+  <!-- Dossier left rail navigation (desktop sticky floating capsule dock) -->
   <nav class="dossier-rail" aria-label="Dossier section navigation">
     {rail.map((r) => (
-      <a href={`#${r[0]}`}><span class="dot"></span>{r[1]}</a>
+      <a href={`#${r[0]}`} aria-label={`Jump to section ${r[1]} ${r[2]}`}>
+        <span class="dot"></span>
+        <span>{r[1]}</span>
+        <span class="rail-label">{r[2]}</span>
+      </a>
     ))}
   </nav>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       HERO — Curated Editorial Dossier Visual Composition
+       HERO — Curated Editorial Dossier Visual Composition (Slide 00)
        ═══════════════════════════════════════════════════════════════ -->
-  <header class="w-full pt-6 sm:pt-10 pb-6" data-hero>
+  <header class="w-full min-h-[92vh] lg:min-h-screen flex flex-col justify-center pt-8 pb-12 relative border-b border-bone-50/5" data-hero>
     <div class="wrap-wide">
       <!-- Status Bar -->
       <div class="flex flex-wrap items-center justify-between gap-3 mb-6 rise">
@@ -156,9 +160,9 @@ const heroName = ['AAYUSH', 'BANKAR'];
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       01 NOTABLE BREAKTHROUGHS — Evidence-First Spotlight
+       01 NOTABLE BREAKTHROUGHS — Evidence-First Spotlight (Slide 01)
        ═══════════════════════════════════════════════════════════════ -->
-  <section id="breakthroughs" class="w-full mt-14 sm:mt-20">
+  <section id="breakthroughs" class="w-full min-h-screen flex flex-col justify-center py-16 sm:py-24 relative border-b border-bone-50/5 scroll-mt-6">
     <div class="wrap-wide">
       <SectionHeading index="01" eyebrow="Vulnerability Research" title="Two bugs, <em>fully proven.</em>">
         <p slot="lede" class="lede">
@@ -279,9 +283,9 @@ const heroName = ['AAYUSH', 'BANKAR'];
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       02 ENGINEERING SYSTEMS — Flagship Showcase & Spectrum Portal
+       02 ENGINEERING SYSTEMS — Flagship Showcase & Spectrum Portal (Slide 02)
        ═══════════════════════════════════════════════════════════════ -->
-  <section id="systems" class="w-full mt-16 sm:mt-24">
+  <section id="systems" class="w-full min-h-screen flex flex-col justify-center py-16 sm:py-24 relative border-b border-bone-50/5 scroll-mt-6">
     <div class="wrap-wide">
       <SectionHeading index="02" eyebrow="Engineering Systems" title="Architectures, <em>benchmarks, simulations.</em>">
         <p slot="lede" class="lede">
@@ -380,9 +384,9 @@ const heroName = ['AAYUSH', 'BANKAR'];
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       03 FIELD NOTES (WORKING NOTES WITH PROOF)
+       03 FIELD NOTES (WORKING NOTES WITH PROOF) (Slide 03)
        ═══════════════════════════════════════════════════════════════ -->
-  <section id="notes" class="w-full mt-16 sm:mt-24">
+  <section id="notes" class="w-full min-h-screen flex flex-col justify-center py-16 sm:py-24 relative border-b border-bone-50/5 scroll-mt-6">
     <div class="wrap-wide">
       <SectionHeading index="03" eyebrow="Field notes" title="Notes with <em>proof.</em>">
         <p slot="lede" class="lede">
@@ -421,9 +425,9 @@ const heroName = ['AAYUSH', 'BANKAR'];
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       04 DOSSIER CLOSING PORTAL & SCOPED ENGAGEMENTS
+       04 DOSSIER CLOSING PORTAL & SCOPED ENGAGEMENTS (Slide 04)
        ═══════════════════════════════════════════════════════════════ -->
-  <section id="connect" class="w-full mt-16 sm:mt-24 mb-14">
+  <section id="connect" class="w-full min-h-screen flex flex-col justify-center py-16 sm:py-24 relative scroll-mt-6">
     <div class="wrap-wide">
       <SectionHeading index="04" eyebrow="Test Bench & Channels" title="Physical 8GB rig &amp; <em>collaboration.</em>">
         <p slot="lede" class="lede">

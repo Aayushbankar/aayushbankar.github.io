@@ -127,43 +127,87 @@ function scrollFX() {
 function railSpy() {
   const rail = document.querySelector('.dossier-rail');
   const links = document.querySelectorAll('.dossier-rail a');
-  if (!rail || !links.length || !('IntersectionObserver' in window)) return;
+  if (!rail || !links.length) return;
 
-  const map = new Map();
+  const sectionLinks = [];
   links.forEach((a) => {
-    const id = a.getAttribute('href')?.slice(1);
-    const sec = id && document.getElementById(id);
-    if (sec) map.set(sec, a);
+    const href = a.getAttribute('href');
+    if (!href || !href.startsWith('#')) return;
+    const id = href.slice(1);
+    const sec = document.getElementById(id);
+    if (sec) {
+      sectionLinks.push({ id, sec, link: a });
+    }
   });
 
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          links.forEach((a) => a.classList.remove('active'));
-          map.get(e.target)?.classList.add('active');
+  if (!sectionLinks.length) return;
+
+  let ticking = false;
+
+  function updateActive() {
+    ticking = false;
+    const scrollY = window.scrollY || window.pageYOffset;
+    const vh = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+
+    // If near bottom of page, activate the last section
+    if (scrollY + vh >= docHeight - 140) {
+      sectionLinks.forEach(({ link }, idx) => {
+        if (idx === sectionLinks.length - 1) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
         }
       });
-    },
-    { rootMargin: '-35% 0px -55% 0px' }
-  );
-  map.forEach((_, sec) => io.observe(sec));
+      return;
+    }
 
-  const hero = document.querySelector('[data-hero]');
-  if (hero) {
-    const updateRail = () => {
-      const heroRect = hero.getBoundingClientRect();
-      if (heroRect.bottom > 140) {
-        rail.classList.add('rail-hidden');
-        rail.classList.remove('rail-on');
-      } else {
-        rail.classList.remove('rail-hidden');
-        rail.classList.add('rail-on');
+    // Focal point is 42% from top of viewport
+    const focusY = vh * 0.42;
+    let current = sectionLinks[0];
+
+    for (const item of sectionLinks) {
+      const rect = item.sec.getBoundingClientRect();
+      if (rect.top <= focusY) {
+        current = item;
       }
-    };
-    window.addEventListener('scroll', updateRail, { passive: true });
-    updateRail();
+    }
+
+    sectionLinks.forEach(({ link }) => {
+      if (link === current.link) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
   }
+
+  function onScroll() {
+    if (!ticking) {
+      window.requestAnimationFrame(updateActive);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  updateActive();
+
+  // Smooth scroll on click
+  links.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        const target = document.getElementById(href.slice(1));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', href);
+          updateActive();
+        }
+      }
+    });
+  });
 }
 
 function pointers() {

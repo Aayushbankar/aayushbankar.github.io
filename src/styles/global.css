@@ -273,56 +273,97 @@
   /* Fixed section rail (desktop dossier navigation) */
   .dossier-rail {
     position: fixed;
-    left: max(1rem, calc((100vw - 88rem) / 2 - 3.5rem));
+    left: 1.25rem;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 40;
+    z-index: 50;
     display: none;
     flex-direction: column;
-    gap: 1.1rem;
-    transition: opacity 0.35s ease;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0.45rem;
+    border-radius: 9999px;
+    background: rgba(18, 16, 15, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(237, 232, 220, 0.14);
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(237, 232, 220, 0.08);
+    transition: opacity 0.35s ease, transform 0.35s ease;
   }
-  .dossier-rail {
-    opacity: 0;
-    pointer-events: none;
-  }
-  .dossier-rail.rail-on {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .dossier-rail.rail-hidden {
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-  @media (min-width: 1400px) {
+  @media (min-width: 1024px) {
     .dossier-rail {
       display: flex;
     }
   }
+  @media (min-width: 1536px) {
+    .dossier-rail {
+      left: max(1.5rem, calc((100vw - 88rem) / 2 - 4.5rem));
+    }
+  }
   .dossier-rail a {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.45rem;
+    border-radius: 9999px;
     font-family: var(--font-micro);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--color-bone-600);
-    transition: color 0.25s ease;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--color-bone-500);
+    text-decoration: none;
+    transition: color 0.25s ease, background-color 0.25s ease, transform 0.2s ease;
+  }
+  .dossier-rail a:hover {
+    color: var(--color-bone-50);
   }
   .dossier-rail a .dot {
     width: 6px;
     height: 6px;
     border-radius: 999px;
-    border: 1px solid var(--color-bone-600);
+    border: 1.5px solid var(--color-bone-600);
+    background: transparent;
     transition: all 0.25s ease;
+    flex-shrink: 0;
   }
   .dossier-rail a.active {
     color: var(--color-bone-50);
+    background: rgba(255, 77, 28, 0.15);
   }
   .dossier-rail a.active .dot {
     background: var(--color-ember-500);
     border-color: var(--color-ember-500);
-    box-shadow: 0 0 12px rgba(255, 77, 28, 0.8);
+    box-shadow: 0 0 12px rgba(255, 77, 28, 0.9);
+    transform: scale(1.25);
+  }
+  /* Floating tooltip label on hover */
+  .dossier-rail a .rail-label {
+    position: absolute;
+    left: calc(100% + 0.65rem);
+    top: 50%;
+    transform: translateY(-50%) translateX(-4px);
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    background: var(--color-ink-900);
+    border: 1px solid rgba(237, 232, 220, 0.16);
+    font-family: var(--font-micro);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-bone-100);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 60;
+  }
+  .dossier-rail a:hover .rail-label {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
   }
   /* Micro eyebrow: numbered section label, mono, tracked */
   .eyebrow {

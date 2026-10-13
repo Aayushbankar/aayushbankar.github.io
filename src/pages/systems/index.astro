@@ -3,7 +3,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionHeading from '../../components/ui/SectionHeading.astro';
 import { allSystems } from '../../data/systems';
 
-const flagships = allSystems.slice(0, 3);
+const inspectorSystems = [
+  allSystems.find((s) => s.id === 'spectre-prism')!,
+  allSystems.find((s) => s.id === 'wolvie')!,
+  allSystems.find((s) => s.id === 'quantlab')!,
+  allSystems.find((s) => s.id === 'privata')!,
+  allSystems.find((s) => s.id === 'cve-aggregator')!,
+].filter(Boolean);
+
 const domains = [
   'All',
   'Systems & Low-Level',
@@ -20,7 +27,7 @@ const domains = [
 >
   <div class="wrap-wide py-10 sm:py-16">
     <!-- Header -->
-    <header class="mb-14 rise">
+    <header class="mb-12 rise">
       <p class="eyebrow mb-3">
         <span class="tick">SYS–00</span>
         <span>Systems Architecture &amp; Empirical Telemetry</span>
@@ -50,6 +57,170 @@ const domains = [
         </div>
       </div>
     </header>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         INTERACTIVE ARCHITECTURAL TELEMETRY INSPECTOR
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="mb-16 card card-glare p-6 sm:p-8 bg-ink-900/80 border border-bone-50/15" data-reveal>
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-bone-50/10">
+        <div>
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="w-2 h-2 rounded-full bg-ember-500 animate-pulse"></span>
+            <span class="font-micro text-xs text-ember-400 uppercase tracking-widest font-semibold">Live Telemetry Inspector</span>
+          </div>
+          <h2 class="font-display text-2xl sm:text-3xl text-bone-50">
+            Interactive Architecture &amp; <em class="text-ember-400">Benchmark Console</em>
+          </h2>
+          <p class="text-xs sm:text-sm text-bone-400 mt-1 max-w-2xl">
+            Select an architecture to inspect its pipeline stages, local hardware benchmarks, and verification commands.
+          </p>
+        </div>
+
+        <!-- System Selection Switcher Pills -->
+        <div class="flex flex-wrap gap-1.5 p-1 rounded-2xl bg-ink-950 border border-bone-50/10 font-micro text-xs shrink-0" role="tablist">
+          {inspectorSystems.map((sys, idx) => (
+            <button
+              type="button"
+              class={`inspector-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${idx === 0 ? 'bg-bone-50/10 text-ember-400 shadow-inner' : 'text-bone-400 hover:text-bone-100'}`}
+              data-target={`inspector-panel-${sys.id}`}
+              role="tab"
+              aria-selected={idx === 0 ? 'true' : 'false'}
+            >
+              <span class="text-bone-500 mr-1">{sys.index}</span> {sys.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Inspector Panels -->
+      <div class="mt-6">
+        {inspectorSystems.map((sys, idx) => (
+          <div
+            id={`inspector-panel-${sys.id}`}
+            class={`inspector-panel ${idx === 0 ? '' : 'hidden'} transition-opacity duration-300`}
+            role="tabpanel"
+          >
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              <!-- Left: Visual Plate & Specs -->
+              <div class="lg:col-span-5 flex flex-col justify-between h-full space-y-4">
+                <div class="rounded-2xl overflow-hidden bg-ink-950 border border-bone-50/15 p-3 shadow-inner">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="font-micro text-xs text-ember-400 font-bold">{sys.index} · {sys.category}</span>
+                    <span class="stamp !text-[9px] !py-0.5 !px-2">{sys.status}</span>
+                  </div>
+                  <img
+                    src={sys.plateImage}
+                    alt={`${sys.name} Blueprint`}
+                    class="w-full h-44 sm:h-52 object-contain rounded transition-transform duration-500 hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+                </div>
+
+                <div>
+                  <h3 class="display text-2xl text-bone-50">{sys.name}</h3>
+                  <p class="font-display italic text-sm text-bone-300 mt-0.5">{sys.tagline}</p>
+                  <p class="text-xs text-bone-400 leading-relaxed mt-2.5">{sys.description}</p>
+                </div>
+
+                <div class="pt-3 border-t border-bone-50/10 flex items-center justify-between font-micro text-xs">
+                  <a href={sys.repoUrl} target="_blank" rel="noopener noreferrer" class="text-bone-400 hover:text-ember-400 transition-colors">
+                    GitHub Repo ↗
+                  </a>
+                  <a href={`/systems/${sys.id}`} class="btn btn-primary !py-1.5 !px-3.5 !text-xs">
+                    Examine Full Spec Sheet →
+                  </a>
+                </div>
+              </div>
+
+              <!-- Right: Benchmarks & Execution Pipeline -->
+              <div class="lg:col-span-7 space-y-5">
+                <!-- Benchmarks Matrix -->
+                <div class="p-4 rounded-2xl bg-ink-950 border border-bone-50/10">
+                  <p class="font-micro text-xs text-brass-400 uppercase tracking-wider font-semibold mb-3">
+                    Empirical Benchmarks (8GB HP EliteBook Test Rig)
+                  </p>
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {sys.benchmarks.map((b) => (
+                      <div class="p-3 rounded-xl bg-ink-900 border border-bone-50/10">
+                        <p class="font-display text-lg sm:text-xl text-ember-400 font-semibold">{b.value}</p>
+                        <p class="font-micro text-[10px] text-bone-300 font-semibold uppercase tracking-wider mt-0.5">{b.label}</p>
+                        <p class="text-[11px] text-bone-500 mt-1 leading-snug">{b.detail}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <!-- Pipeline Stages or Architectural Planes -->
+                {sys.pipeline && sys.pipeline.length > 0 ? (
+                  <div class="p-4 rounded-2xl bg-ink-950 border border-bone-50/10">
+                    <p class="font-micro text-xs text-bone-300 uppercase tracking-wider font-semibold mb-3">
+                      End-to-End Pipeline Latency Trace
+                    </p>
+                    <div class="space-y-2">
+                      {sys.pipeline.map((p, pIdx) => (
+                        <div class="flex items-center justify-between p-2.5 rounded-lg bg-ink-900/60 border border-bone-50/5 text-xs">
+                          <div class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-bone-50/10 flex items-center justify-center font-micro text-[10px] text-bone-300">{pIdx + 1}</span>
+                            <span class="font-micro text-bone-200 font-semibold">{p.stage}</span>
+                            <span class="text-bone-500 text-[11px]">({p.component})</span>
+                          </div>
+                          <span class="font-mono text-moss-400 font-semibold">{p.latency}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : sys.planes && sys.planes.length > 0 ? (
+                  <div class="p-4 rounded-2xl bg-ink-950 border border-bone-50/10">
+                    <p class="font-micro text-xs text-bone-300 uppercase tracking-wider font-semibold mb-3">
+                      5-Plane Subsystem Architecture
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {sys.planes.map((plane) => (
+                        <div class="p-2.5 rounded-lg bg-ink-900/60 border border-bone-50/5 text-xs">
+                          <span class="font-micro text-ember-400 font-bold block">{plane.id} // {plane.name}</span>
+                          <span class="text-bone-400 text-[11px] mt-0.5 block">{plane.detail}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+
+                <!-- Terminal Verification Command Box -->
+                <div class="p-4 rounded-2xl bg-ink-950 border border-bone-50/10 font-mono text-xs">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="font-micro text-[11px] text-bone-500 uppercase tracking-wider">Hermetic Reproduction Command</span>
+                    <button
+                      type="button"
+                      class="copy-cmd-btn text-[11px] text-ember-400 hover:text-ember-300 flex items-center gap-1 cursor-pointer"
+                      data-cmd={sys.verification}
+                    >
+                      <span class="copy-text">Copy Command</span>
+                    </button>
+                  </div>
+                  <div class="p-2.5 rounded-lg bg-ink-900 border border-bone-50/10 text-bone-200 overflow-x-auto flex items-center gap-2">
+                    <span class="text-ember-500 font-bold">$</span>
+                    <code>{sys.verification}</code>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Complete Systems Catalog Header & Filter -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+      <div>
+        <p class="eyebrow mb-1">
+          <span class="tick">CAT–01</span>
+          <span>Catalog &amp; Spec Sheets</span>
+        </p>
+        <h3 class="font-display text-2xl sm:text-3xl text-bone-50">
+          All {allSystems.length} Documented Architectures
+        </h3>
+      </div>
+    </div>
 
     <!-- Domain Filter Navigation (Progressive Enhancement) -->
     <nav class="flex flex-wrap gap-2 mb-10 pb-4 border-b border-bone-50/10" aria-label="Filter systems by domain" id="domain-filter">
@@ -168,15 +339,65 @@ const domains = [
     </div>
   </div>
 
-  <!-- Domain Filtering Script (Progressive Enhancement) -->
+  <!-- Interactive Telemetry Console & Domain Filtering Script -->
   <script is:inline>
-    (function () {
-      function initDomainFilter() {
-        const filterBtns = document.querySelectorAll('[data-filter-btn]');
-        const systemCards = document.querySelectorAll('.system-card');
+    function setupSystemsPage() {
+      // 1. Inspector Tabs
+      const tabBtns = document.querySelectorAll('.inspector-tab-btn');
+      const panels = document.querySelectorAll('.inspector-panel');
 
-        if (!filterBtns.length || !systemCards.length) return;
+      tabBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-target');
+          if (!targetId) return;
 
+          tabBtns.forEach((b) => {
+            b.classList.remove('bg-bone-50/10', 'text-ember-400', 'shadow-inner');
+            b.classList.add('text-bone-400');
+            b.setAttribute('aria-selected', 'false');
+          });
+
+          btn.classList.add('bg-bone-50/10', 'text-ember-400', 'shadow-inner');
+          btn.classList.remove('text-bone-400');
+          btn.setAttribute('aria-selected', 'true');
+
+          panels.forEach((p) => {
+            if (p.id === targetId) {
+              p.classList.remove('hidden');
+              p.style.opacity = '1';
+            } else {
+              p.classList.add('hidden');
+            }
+          });
+        });
+      });
+
+      // 2. Copy Command Buttons
+      document.querySelectorAll('.copy-cmd-btn').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const cmd = btn.getAttribute('data-cmd');
+          if (!cmd) return;
+          try {
+            await navigator.clipboard.writeText(cmd);
+            const label = btn.querySelector('.copy-text');
+            if (label) {
+              const original = label.textContent;
+              label.textContent = 'Copied!';
+              setTimeout(() => {
+                label.textContent = original;
+              }, 2000);
+            }
+          } catch (e) {
+            console.error('Failed to copy', e);
+          }
+        });
+      });
+
+      // 3. Domain Filtering
+      const filterBtns = document.querySelectorAll('[data-filter-btn]');
+      const systemCards = document.querySelectorAll('.system-card');
+
+      if (filterBtns.length && systemCards.length) {
         filterBtns.forEach((btn) => {
           btn.addEventListener('click', function () {
             const selected = this.getAttribute('data-filter-btn');
@@ -199,9 +420,13 @@ const domains = [
           });
         });
       }
+    }
 
-      initDomainFilter();
-      document.addEventListener('astro:after-swap', initDomainFilter);
-    })();
+    document.addEventListener('astro:page-load', setupSystemsPage);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupSystemsPage);
+    } else {
+      setupSystemsPage();
+    }
   </script>
 </BaseLayout>
