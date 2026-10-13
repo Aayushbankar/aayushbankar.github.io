@@ -8,6 +8,7 @@ interface Props {
 const { initialView = 'graph' } = Astro.props;
 
 const clusterList = Object.values(graphClusters);
+const isGraphInitial = initialView === 'graph';
 ---
 
 <div class="w-full obsidian-graph-root" id="obsidian-graph-component">
@@ -34,9 +35,9 @@ const clusterList = Object.values(graphClusters);
         <button
           type="button"
           id="btn-view-graph"
-          class="px-3.5 py-1.5 rounded-full font-semibold transition-all bg-bone-50/10 text-ember-400 cursor-pointer flex items-center gap-1.5"
+          class={`px-3.5 py-1.5 rounded-full font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${isGraphInitial ? 'bg-bone-50/10 text-ember-400' : 'text-bone-400 hover:text-bone-50'}`}
           role="tab"
-          aria-selected="true"
+          aria-selected={isGraphInitial ? 'true' : 'false'}
         >
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="6" cy="6" r="3" />
@@ -50,9 +51,9 @@ const clusterList = Object.values(graphClusters);
         <button
           type="button"
           id="btn-view-grid"
-          class="px-3.5 py-1.5 rounded-full font-semibold transition-all text-bone-400 hover:text-bone-50 cursor-pointer flex items-center gap-1.5"
+          class={`px-3.5 py-1.5 rounded-full font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${!isGraphInitial ? 'bg-bone-50/10 text-ember-400' : 'text-bone-400 hover:text-bone-50'}`}
           role="tab"
-          aria-selected="false"
+          aria-selected={!isGraphInitial ? 'true' : 'false'}
         >
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="3" width="7" height="7" rx="1" />
@@ -103,7 +104,7 @@ const clusterList = Object.values(graphClusters);
   </div>
 
   <!-- VIEW 1: Interactive Obsidian Canvas -->
-  <div id="obsidian-graph-view" class="relative w-full rounded-2xl bg-ink-950 border border-bone-50/15 overflow-hidden shadow-2xl">
+  <div id="obsidian-graph-view" class={`relative w-full rounded-2xl bg-ink-950 border border-bone-50/15 overflow-hidden shadow-2xl ${isGraphInitial ? '' : 'hidden'}`}>
     <div class="relative w-full h-[520px] sm:h-[620px] lg:h-[680px]">
       <canvas
         id="obsidian-canvas"
@@ -171,7 +172,7 @@ const clusterList = Object.values(graphClusters);
   </div>
 
   <!-- VIEW 2: Small Cards Matrix (Accessible Categorized Grid) -->
-  <div id="obsidian-grid-view" class="hidden space-y-8">
+  <div id="obsidian-grid-view" class={`space-y-8 ${isGraphInitial ? 'hidden' : ''}`}>
     {clusterList.map((cluster) => {
       const clusterNodes = techNodes.filter((n) => n.cluster === cluster.id);
       return (
@@ -246,14 +247,17 @@ const clusterList = Object.values(graphClusters);
   </div>
 </div>
 
-<script is:inline define:vars={{ techNodesData: techNodes, techEdgesData: techEdges, clustersData: graphClusters }}>
+<script is:inline define:vars={{ techNodesData: techNodes, techEdgesData: techEdges, clustersData: graphClusters, defaultView: initialView }}>
   (function () {
     let animId = null;
-    let isRunning = true;
+    let isRunning = false;
+    let isPhysicsPaused = false;
     let resizeObserver = null;
     let abortController = null;
+    let hasInitializedSize = false;
 
     function cleanup() {
+      isRunning = false;
       if (animId) {
         cancelAnimationFrame(animId);
         animId = null;
@@ -266,11 +270,14 @@ const clusterList = Object.values(graphClusters);
         abortController.abort();
         abortController = null;
       }
-      isRunning = false;
+      window.__activeObsidianCleanup = null;
     }
 
     function initObsidianGraph() {
-      cleanup();
+      if (typeof window.__activeObsidianCleanup === 'function') {
+        window.__activeObsidianCleanup();
+      }
+      window.__activeObsidianCleanup = cleanup;
 
       const canvas = document.getElementById('obsidian-canvas');
       if (!canvas) return;
@@ -279,6 +286,8 @@ const clusterList = Object.values(graphClusters);
       if (!ctx) return;
 
       isRunning = true;
+      isPhysicsPaused = false;
+      hasInitializedSize = false;
       abortController = new AbortController();
       const signal = abortController.signal;
 
@@ -288,8 +297,8 @@ const clusterList = Object.values(graphClusters);
       const graphView = document.getElementById('obsidian-graph-view');
       const gridView = document.getElementById('obsidian-grid-view');
 
-      if (btnGraph && btnGrid && graphView && gridView) {
-        btnGraph.onclick = () => {
+      function showGraphView() {
+        if (btnGraph && btnGrid && graphView && gridView) {
           btnGraph.classList.add('bg-bone-50/10', 'text-ember-400');
           btnGraph.classList.remove('text-bone-400');
           btnGraph.setAttribute('aria-selected', 'true');
@@ -301,9 +310,11 @@ const clusterList = Object.values(graphClusters);
           graphView.classList.remove('hidden');
           gridView.classList.add('hidden');
           resize();
-        };
+        }
+      }
 
-        btnGrid.onclick = () => {
+      function showGridView() {
+        if (btnGraph && btnGrid && graphView && gridView) {
           btnGrid.classList.add('bg-bone-50/10', 'text-ember-400');
           btnGrid.classList.remove('text-bone-400');
           btnGrid.setAttribute('aria-selected', 'true');
@@ -315,20 +326,28 @@ const clusterList = Object.values(graphClusters);
           gridView.classList.remove('hidden');
           graphView.classList.add('hidden');
           applyGridFilter();
-        };
+        }
+      }
+
+      if (btnGraph) btnGraph.onclick = showGraphView;
+      if (btnGrid) btnGrid.onclick = showGridView;
+
+      if (defaultView === 'grid') {
+        showGridView();
       }
 
       // Graph data clone
       const nodes = techNodesData.map((n, i) => {
         const angle = (i / techNodesData.length) * Math.PI * 2;
-        const radius = 175 + (i % 4) * 45;
+        const radius = 210 + (i % 4) * 45;
+        const incidentEdgesCount = techEdgesData.filter(e => e.source === n.id || e.target === n.id).length;
         return {
           ...n,
           x: Math.cos(angle) * radius,
           y: Math.sin(angle) * radius,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
-          radius: 12 + ((techEdgesData.filter(e => e.source === n.id || e.target === n.id).length) * 1.5),
+          vx: 0,
+          vy: 0,
+          radius: 12 + (incidentEdgesCount * 1.5),
           color: (clustersData[n.cluster] && clustersData[n.cluster].color) || '#ff7a45',
         };
       });
@@ -339,20 +358,22 @@ const clusterList = Object.values(graphClusters);
         targetNode: nodes.find(n => n.id === e.target),
       })).filter(e => e.sourceNode && e.targetNode);
 
-      let width = 800;
-      let height = 600;
+      let width = 0;
+      let height = 0;
       let dpr = window.devicePixelRatio || 1;
 
       // Transform state (Pan & Zoom)
       let transform = {
-        x: width / 2,
-        y: height / 2,
+        x: 0,
+        y: 0,
         scale: 1,
       };
 
       function resize() {
         const rect = canvas.getBoundingClientRect();
         if (rect.width === 0 || rect.height === 0) return;
+
+        const firstInit = !hasInitializedSize || width === 0 || height === 0;
         width = rect.width;
         height = rect.height;
         dpr = window.devicePixelRatio || 1;
@@ -360,17 +381,18 @@ const clusterList = Object.values(graphClusters);
         canvas.height = Math.round(height * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        if (transform.x === 0 || Math.abs(transform.x - width / 2) > width) {
+        if (firstInit || transform.x === 0) {
           transform.x = width / 2;
           transform.y = height / 2;
+          transform.scale = 1;
+          hasInitializedSize = true;
         }
       }
 
       resize();
 
-      // Observe container size changes (fixes hidden tab initialization)
-      const graphContainer = document.getElementById('obsidian-graph-component');
-      if (window.ResizeObserver && graphContainer) {
+      // Observe container size changes (fixes hidden tab initialization and responsive resizes)
+      if (window.ResizeObserver) {
         resizeObserver = new ResizeObserver((entries) => {
           for (let entry of entries) {
             if (entry.contentRect.width > 0 && entry.contentRect.height > 0) {
@@ -378,13 +400,19 @@ const clusterList = Object.values(graphClusters);
             }
           }
         });
-        resizeObserver.observe(graphContainer);
+        if (canvas.parentElement) {
+          resizeObserver.observe(canvas.parentElement);
+        }
+        const graphContainer = document.getElementById('obsidian-graph-component');
+        if (graphContainer) {
+          resizeObserver.observe(graphContainer);
+        }
       }
 
       window.addEventListener('resize', resize, { signal });
 
       let hoveredNode = null;
-      let selectedNode = nodes[0];
+      let selectedNode = nodes[0] || null;
       let draggedNode = null;
       let isPanning = false;
       let panStart = { x: 0, y: 0 };
@@ -477,7 +505,9 @@ const clusterList = Object.values(graphClusters);
         }
       }
 
-      updateInspector(selectedNode);
+      if (selectedNode) {
+        updateInspector(selectedNode);
+      }
 
       // Grid view dynamic filtering
       function applyGridFilter() {
@@ -501,12 +531,9 @@ const clusterList = Object.values(graphClusters);
 
         groups.forEach(group => {
           const groupCluster = group.getAttribute('data-group-cluster');
-          const visibleCards = group.querySelectorAll('.obsidian-small-card[style*="display: flex"]');
-          if ((activeCluster === 'all' || groupCluster === activeCluster) && visibleCards.length > 0) {
-            group.style.display = 'block';
-          } else {
-            group.style.display = 'none';
-          }
+          const clusterMatches = activeCluster === 'all' || groupCluster === activeCluster;
+          const hasVisibleCards = Array.from(group.querySelectorAll('.obsidian-small-card')).some(c => c.style.display !== 'none');
+          group.style.display = (clusterMatches && hasVisibleCards) ? 'block' : 'none';
         });
       }
 
@@ -549,14 +576,21 @@ const clusterList = Object.values(graphClusters);
         }, { signal });
       });
 
-      // HUD zoom & controls
+      // HUD zoom & controls (centered on canvas center)
+      function zoomAround(pivotX, pivotY, factor) {
+        const newScale = Math.min(2.5, Math.max(0.4, transform.scale * factor));
+        transform.x = pivotX - (pivotX - transform.x) * (newScale / transform.scale);
+        transform.y = pivotY - (pivotY - transform.y) * (newScale / transform.scale);
+        transform.scale = newScale;
+      }
+
       const btnZoomIn = document.getElementById('graph-zoom-in');
       const btnZoomOut = document.getElementById('graph-zoom-out');
       const btnReset = document.getElementById('graph-reset');
       const btnPause = document.getElementById('graph-pause');
 
-      if (btnZoomIn) btnZoomIn.onclick = () => { transform.scale = Math.min(2.5, transform.scale * 1.25); };
-      if (btnZoomOut) btnZoomOut.onclick = () => { transform.scale = Math.max(0.4, transform.scale / 1.25); };
+      if (btnZoomIn) btnZoomIn.onclick = () => zoomAround(width / 2, height / 2, 1.25);
+      if (btnZoomOut) btnZoomOut.onclick = () => zoomAround(width / 2, height / 2, 0.8);
       if (btnReset) btnReset.onclick = () => {
         transform.scale = 1;
         transform.x = width / 2;
@@ -564,9 +598,8 @@ const clusterList = Object.values(graphClusters);
       };
       if (btnPause) {
         btnPause.onclick = () => {
-          isRunning = !isRunning;
-          btnPause.textContent = isRunning ? 'Pause' : 'Play';
-          if (isRunning) requestAnimationFrame(loop);
+          isPhysicsPaused = !isPhysicsPaused;
+          btnPause.textContent = isPhysicsPaused ? 'Play' : 'Pause';
         };
       }
 
@@ -581,10 +614,22 @@ const clusterList = Object.values(graphClusters);
       }
 
       function findNodeAt(gX, gY) {
+        // Prioritize non-dimmed nodes
+        for (let i = nodes.length - 1; i >= 0; i--) {
+          const n = nodes[i];
+          const matchesCluster = activeCluster === 'all' || n.cluster === activeCluster;
+          const matchesSearch = !searchQuery || n.label.toLowerCase().includes(searchQuery) || n.summary.toLowerCase().includes(searchQuery);
+          if (matchesCluster && matchesSearch) {
+            const distSq = (n.x - gX) * (n.x - gX) + (n.y - gY) * (n.y - gY);
+            if (distSq <= (n.radius + 10) * (n.radius + 10)) {
+              return n;
+            }
+          }
+        }
         for (let i = nodes.length - 1; i >= 0; i--) {
           const n = nodes[i];
           const distSq = (n.x - gX) * (n.x - gX) + (n.y - gY) * (n.y - gY);
-          if (distSq <= (n.radius + 8) * (n.radius + 8)) {
+          if (distSq <= (n.radius + 10) * (n.radius + 10)) {
             return n;
           }
         }
@@ -593,15 +638,18 @@ const clusterList = Object.values(graphClusters);
 
       // Mouse Listeners
       canvas.addEventListener('mousedown', (e) => {
+        if (e.button !== 0) return;
         const pos = toGraphCoords(e.clientX, e.clientY);
         const hit = findNodeAt(pos.x, pos.y);
         if (hit) {
           draggedNode = hit;
           selectedNode = hit;
           updateInspector(hit);
+          canvas.style.cursor = 'grabbing';
         } else {
           isPanning = true;
           panStart = { x: e.clientX - transform.x, y: e.clientY - transform.y };
+          canvas.style.cursor = 'grabbing';
         }
       }, { signal });
 
@@ -629,6 +677,7 @@ const clusterList = Object.values(graphClusters);
       window.addEventListener('mouseup', () => {
         draggedNode = null;
         isPanning = false;
+        canvas.style.cursor = hoveredNode ? 'pointer' : 'grab';
       }, { signal });
 
       canvas.addEventListener('wheel', (e) => {
@@ -637,11 +686,7 @@ const clusterList = Object.values(graphClusters);
         const rect = canvas.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
-
-        const newScale = Math.min(2.5, Math.max(0.4, transform.scale * zoomFactor));
-        transform.x = mouseX - (mouseX - transform.x) * (newScale / transform.scale);
-        transform.y = mouseY - (mouseY - transform.y) * (newScale / transform.scale);
-        transform.scale = newScale;
+        zoomAround(mouseX, mouseY, zoomFactor);
       }, { passive: false, signal });
 
       // Touch & Pinch-to-zoom handlers
@@ -681,6 +726,7 @@ const clusterList = Object.values(graphClusters);
             draggedNode.vx = 0;
             draggedNode.vy = 0;
           } else if (isPanning) {
+            e.preventDefault();
             transform.x = t.clientX - panStart.x;
             transform.y = t.clientY - panStart.y;
           }
@@ -690,7 +736,10 @@ const clusterList = Object.values(graphClusters);
           const dy = e.touches[0].clientY - e.touches[1].clientY;
           const currentDist = Math.hypot(dx, dy);
           const factor = currentDist / initialPinchDist;
-          transform.scale = Math.min(2.5, Math.max(0.4, initialScale * factor));
+          const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+          const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+          const rect = canvas.getBoundingClientRect();
+          zoomAround(midX - rect.left, midY - rect.top, (factor * initialScale) / transform.scale);
         }
       }, { passive: false, signal });
 
@@ -700,9 +749,10 @@ const clusterList = Object.values(graphClusters);
         initialPinchDist = null;
       }, { signal });
 
-      // Physics update
+      // Physics update: force-directed layout with Newton third law conservation
       function updatePhysics() {
-        if (!isRunning) return;
+        if (!isRunning || isPhysicsPaused) return;
+        if (width === 0 || height === 0) return;
 
         // Anti-collision repulsion
         for (let i = 0; i < nodes.length; i++) {
@@ -711,20 +761,20 @@ const clusterList = Object.values(graphClusters);
             const n2 = nodes[j];
             let dx = n2.x - n1.x;
             let dy = n2.y - n1.y;
-            let distSq = dx * dx + dy * dy + 0.01;
-            let dist = Math.sqrt(distSq);
+            let dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+            const minDist = n1.radius + n2.radius + 85;
 
-            if (dist < 260) {
-              let force = (260 - dist) / 260;
-              let fx = (dx / dist) * force * 1.8;
-              let fy = (dy / dist) * force * 1.8;
+            if (dist < minDist) {
+              let force = (minDist - dist) / minDist;
+              let fx = (dx / dist) * force * 1.6;
+              let fy = (dy / dist) * force * 1.6;
               if (n1 !== draggedNode) { n1.vx -= fx; n1.vy -= fy; }
               if (n2 !== draggedNode) { n2.vx += fx; n2.vy += fy; }
             }
           }
         }
 
-        // Spring attraction
+        // Spring attraction (Equal and opposite reaction!)
         for (let i = 0; i < edges.length; i++) {
           const e = edges[i];
           const n1 = e.sourceNode;
@@ -732,14 +782,15 @@ const clusterList = Object.values(graphClusters);
           let dx = n2.x - n1.x;
           let dy = n2.y - n1.y;
           let dist = Math.sqrt(dx * dx + dy * dy) || 1;
-          let ideal = 110;
-          let force = (dist - ideal) * 0.022;
+          let ideal = 135;
+          let force = (dist - ideal) * 0.025;
+          force = Math.max(-4, Math.min(4, force));
 
           let fx = (dx / dist) * force;
           let fy = (dy / dist) * force;
 
           if (n1 !== draggedNode) { n1.vx += fx; n1.vy += fy; }
-          if (n2 !== draggedNode) { n2.vx += fx; n2.vy += fy; }
+          if (n2 !== draggedNode) { n2.vx -= fx; n2.vy -= fy; }
         }
 
         // Center gravity & dampening
@@ -750,8 +801,11 @@ const clusterList = Object.values(graphClusters);
           n.vx -= n.x * 0.0025;
           n.vy -= n.y * 0.0025;
 
-          n.vx *= 0.86;
-          n.vy *= 0.86;
+          n.vx *= 0.85;
+          n.vy *= 0.85;
+
+          n.vx = Math.max(-6, Math.min(6, n.vx));
+          n.vy = Math.max(-6, Math.min(6, n.vy));
 
           n.x += n.vx;
           n.y += n.vy;
@@ -764,104 +818,116 @@ const clusterList = Object.values(graphClusters);
 
         updatePhysics();
 
-        ctx.clearRect(0, 0, width, height);
-
-        ctx.save();
-        ctx.translate(transform.x, transform.y);
-        ctx.scale(transform.scale, transform.scale);
-
-        // Background subtle grid stars
-        ctx.fillStyle = 'rgba(237, 232, 220, 0.04)';
-        for (let gx = -600; gx <= 600; gx += 60) {
-          for (let gy = -600; gy <= 600; gy += 60) {
-            ctx.beginPath();
-            ctx.arc(gx, gy, 1, 0, Math.PI * 2);
-            ctx.fill();
-          }
-        }
-
-        const activeNode = hoveredNode || selectedNode;
-
-        // Draw Edges
-        for (let i = 0; i < edges.length; i++) {
-          const e = edges[i];
-          const n1 = e.sourceNode;
-          const n2 = e.targetNode;
-
-          const isConnectedToActive = activeNode && (e.source === activeNode.id || e.target === activeNode.id);
-
-          ctx.beginPath();
-          ctx.moveTo(n1.x, n1.y);
-          ctx.lineTo(n2.x, n2.y);
-
-          if (isConnectedToActive) {
-            ctx.strokeStyle = 'rgba(255, 122, 69, 0.75)';
-            ctx.lineWidth = 2.2 / transform.scale;
-            ctx.shadowColor = '#ff4d1c';
-            ctx.shadowBlur = 8;
-          } else {
-            ctx.strokeStyle = 'rgba(237, 232, 220, 0.12)';
-            ctx.lineWidth = 1 / transform.scale;
-            ctx.shadowBlur = 0;
-          }
-          ctx.stroke();
-          ctx.shadowBlur = 0;
-        }
-
-        // Draw Nodes
-        for (let i = 0; i < nodes.length; i++) {
-          const n = nodes[i];
-
-          const matchesCluster = activeCluster === 'all' || n.cluster === activeCluster;
-          const matchesSearch = !searchQuery || n.label.toLowerCase().includes(searchQuery) || n.summary.toLowerCase().includes(searchQuery);
-          const isDimmed = !matchesCluster || !matchesSearch;
-
-          const isHovered = n === hoveredNode;
-          const isSelected = n === selectedNode;
-          const isConnected = activeNode && edges.some(e =>
-            (e.source === activeNode.id && e.target === n.id) ||
-            (e.target === activeNode.id && e.source === n.id)
-          );
+        if (width > 0 && height > 0) {
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          ctx.clearRect(0, 0, width, height);
 
           ctx.save();
-          if (isDimmed) {
-            ctx.globalAlpha = 0.18;
+          ctx.translate(transform.x, transform.y);
+          ctx.scale(transform.scale, transform.scale);
+
+          // Background subtle grid stars
+          ctx.fillStyle = 'rgba(237, 232, 220, 0.04)';
+          for (let gx = -600; gx <= 600; gx += 60) {
+            for (let gy = -600; gy <= 600; gy += 60) {
+              ctx.beginPath();
+              ctx.arc(gx, gy, 1, 0, Math.PI * 2);
+              ctx.fill();
+            }
           }
 
-          if (isHovered || isSelected || isConnected) {
+          const activeNode = hoveredNode || selectedNode;
+
+          // Draw Edges
+          for (let i = 0; i < edges.length; i++) {
+            const e = edges[i];
+            const n1 = e.sourceNode;
+            const n2 = e.targetNode;
+
+            const isConnectedToActive = activeNode && (e.source === activeNode.id || e.target === activeNode.id);
+            const n1Matches = activeCluster === 'all' || n1.cluster === activeCluster;
+            const n2Matches = activeCluster === 'all' || n2.cluster === activeCluster;
+            const isDimmed = !n1Matches && !n2Matches;
+
             ctx.beginPath();
-            ctx.arc(n.x, n.y, n.radius + 6, 0, Math.PI * 2);
-            ctx.fillStyle = isSelected ? 'rgba(255, 77, 28, 0.25)' : 'rgba(237, 232, 220, 0.15)';
+            ctx.moveTo(n1.x, n1.y);
+            ctx.lineTo(n2.x, n2.y);
+
+            if (isConnectedToActive) {
+              ctx.strokeStyle = 'rgba(255, 122, 69, 0.85)';
+              ctx.lineWidth = 2.4 / transform.scale;
+              ctx.shadowColor = '#ff4d1c';
+              ctx.shadowBlur = 10;
+            } else if (isDimmed) {
+              ctx.strokeStyle = 'rgba(237, 232, 220, 0.04)';
+              ctx.lineWidth = 0.8 / transform.scale;
+              ctx.shadowBlur = 0;
+            } else {
+              ctx.strokeStyle = 'rgba(237, 232, 220, 0.15)';
+              ctx.lineWidth = 1.2 / transform.scale;
+              ctx.shadowBlur = 0;
+            }
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+          }
+
+          // Draw Nodes
+          for (let i = 0; i < nodes.length; i++) {
+            const n = nodes[i];
+
+            const matchesCluster = activeCluster === 'all' || n.cluster === activeCluster;
+            const matchesSearch = !searchQuery || n.label.toLowerCase().includes(searchQuery) || n.summary.toLowerCase().includes(searchQuery);
+            const isDimmed = !matchesCluster || !matchesSearch;
+
+            const isHovered = n === hoveredNode;
+            const isSelected = n === selectedNode;
+            const isConnected = activeNode && edges.some(e =>
+              (e.source === activeNode.id && e.target === n.id) ||
+              (e.target === activeNode.id && e.source === n.id)
+            );
+
+            ctx.save();
+            if (isDimmed) {
+              ctx.globalAlpha = 0.18;
+            }
+
+            // Halo glow for hovered/selected/connected
+            if (isHovered || isSelected || isConnected) {
+              ctx.beginPath();
+              ctx.arc(n.x, n.y, n.radius + 6, 0, Math.PI * 2);
+              ctx.fillStyle = isSelected ? 'rgba(255, 77, 28, 0.3)' : 'rgba(237, 232, 220, 0.15)';
+              ctx.fill();
+            }
+
+            // Main node circle
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+            ctx.fillStyle = n.color;
+            if (isSelected || isHovered) {
+              ctx.shadowColor = n.color;
+              ctx.shadowBlur = 14;
+            }
             ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // Inner pin dot
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, 3, 0, Math.PI * 2);
+            ctx.fillStyle = '#0c0c0b';
+            ctx.fill();
+
+            // Label text
+            ctx.font = `${isHovered || isSelected ? 'bold 11px' : '10px'} "JetBrains Mono", monospace`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            ctx.fillStyle = isSelected ? '#ff7a45' : isHovered ? '#ede8dc' : 'rgba(237, 232, 220, 0.85)';
+            ctx.fillText(n.label, n.x, n.y + n.radius + 5);
+
+            ctx.restore();
           }
-
-          ctx.beginPath();
-          ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-          ctx.fillStyle = n.color;
-          if (isSelected || isHovered) {
-            ctx.shadowColor = n.color;
-            ctx.shadowBlur = 14;
-          }
-          ctx.fill();
-          ctx.shadowBlur = 0;
-
-          // Inner pin dot
-          ctx.beginPath();
-          ctx.arc(n.x, n.y, 3, 0, Math.PI * 2);
-          ctx.fillStyle = '#0c0c0b';
-          ctx.fill();
-
-          // Label text
-          ctx.font = `${isHovered || isSelected ? 'bold 11px' : '10px'} "JetBrains Mono", monospace`;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'top';
-          ctx.fillStyle = isSelected ? '#ff7a45' : isHovered ? '#ede8dc' : 'rgba(237, 232, 220, 0.8)';
-          ctx.fillText(n.label, n.x, n.y + n.radius + 4);
 
           ctx.restore();
         }
-
-        ctx.restore();
 
         if (isRunning) {
           animId = requestAnimationFrame(loop);
@@ -871,12 +937,24 @@ const clusterList = Object.values(graphClusters);
       animId = requestAnimationFrame(loop);
     }
 
+    if (!window.__obsidianGraphLifecycleRegistered) {
+      window.__obsidianGraphLifecycleRegistered = true;
+      document.addEventListener('astro:page-load', () => {
+        if (document.getElementById('obsidian-canvas')) {
+          initObsidianGraph();
+        }
+      });
+      document.addEventListener('astro:before-swap', () => {
+        if (typeof window.__activeObsidianCleanup === 'function') {
+          window.__activeObsidianCleanup();
+        }
+      });
+    }
+
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initObsidianGraph);
+      document.addEventListener('DOMContentLoaded', initObsidianGraph, { once: true });
     } else {
       initObsidianGraph();
     }
-    document.addEventListener('astro:page-load', initObsidianGraph);
-    document.addEventListener('astro:before-swap', cleanup);
   })();
 </script>
