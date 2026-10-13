@@ -4,6 +4,7 @@ import SectionHeading from '../components/ui/SectionHeading.astro';
 import ObsidianTechGraph from '../components/ObsidianTechGraph.astro';
 import { careerTimeline } from '../data/timeline';
 import { profile } from '../data/profile';
+import { techNodes } from '../data/techGraph';
 
 const architecturalDecisions = [
   {
@@ -81,7 +82,7 @@ const eras = [
 
 <BaseLayout
   title="Engineering Trajectory & Decisions — Aayush Bankar"
-  description="Multi-track engineering trajectory, production deployments, research collaborations at CypherMatrix, interactive Obsidian tech graph, and architectural decision records."
+  description="Multi-track engineering trajectory, production deployments, research collaborations at CypherMatrix, interactive Connected Skills & Silicon Tooling Graph, and architectural decision records."
 >
   <div class="wrap-wide py-10 sm:py-16">
     <!-- Header -->
@@ -124,8 +125,8 @@ const eras = [
           <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">Daily Campus Users</p>
         </div>
         <div class="p-3.5 rounded-xl bg-ink-950/80 border border-bone-50/10">
-          <p class="font-display text-xl sm:text-2xl text-moss-500 font-semibold">24 Nodes</p>
-          <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">Obsidian Graph Depth</p>
+          <p class="font-display text-xl sm:text-2xl text-moss-500 font-semibold">{techNodes.length} Nodes</p>
+          <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">Silicon Graph Depth</p>
         </div>
         <div class="p-3.5 rounded-xl bg-ink-950/80 border border-bone-50/10">
           <p class="font-display text-xl sm:text-2xl text-bone-200 font-semibold">{architecturalDecisions.length} Decisions</p>
@@ -315,14 +316,14 @@ const eras = [
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         02 OBSIDIAN TECHNICAL DEPENDENCY GRAPH
+         02 CONNECTED SKILLS & SILICON TOOLING GRAPH
          ═══════════════════════════════════════════════════════════════ -->
     <section id="tech-evolution" class="scroll-mt-24 mb-16 sm:mb-20">
       <div class="mb-10 pb-4 border-b border-bone-50/10 flex items-center justify-between" data-reveal>
         <div>
           <p class="eyebrow mb-1"><span class="tick">02</span><span>Interactive Architecture</span></p>
           <h2 class="font-display text-2xl sm:text-3xl text-bone-50">
-            Obsidian Technical Dependency Graph
+            Connected Skills &amp; Silicon Tooling Graph
           </h2>
         </div>
         <span class="font-micro text-[11px] text-bone-500 hidden sm:inline">
