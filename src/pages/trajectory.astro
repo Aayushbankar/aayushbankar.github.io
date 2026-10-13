@@ -1,0 +1,209 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import { careerTimeline, technicalProgression } from '../data/timeline';
+import { profile } from '../data/profile';
+---
+
+<BaseLayout
+  title="Engineering Trajectory & Roadmap — Aayush Bankar"
+  description="Chronological engineering trajectory, production deployments, research collaborations at CypherMatrix, and SIH 2026 milestones."
+>
+  <div class="wrap-wide py-10 sm:py-16">
+    <!-- Header -->
+    <header class="mb-12 sm:mb-16 rise">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <div class="flex items-center gap-2">
+          <a href="/about" class="font-micro text-xs text-bone-500 hover:text-ember-400 transition-colors flex items-center gap-1.5">
+            <span>←</span> Back to About
+          </a>
+          <span class="text-bone-700">/</span>
+          <p class="eyebrow !mb-0">
+            <span class="tick">TRJ–01</span>
+            <span>Complete Engineering Roadmap</span>
+          </p>
+        </div>
+        <span class="chip chip-brass">
+          <span class="w-1.5 h-1.5 rounded-full bg-moss-500 animate-pulse"></span>
+          Active Track · 2024—2026+
+        </span>
+      </div>
+
+      <h1 class="display text-3xl sm:text-5xl lg:text-6xl text-bone-50 leading-[1.04]">
+        The Engineering <em class="text-ember-400">Trajectory.</em>
+      </h1>
+      <p class="font-display italic text-lg sm:text-xl text-bone-200 mt-3 leading-snug">
+        From first-principles web fundamentals to production campus infrastructure, kernel race conditions, and SIH 2026.
+      </p>
+      <p class="lede mt-3.5 max-w-2xl text-sm sm:text-base text-bone-400 leading-relaxed">
+        A chronological record of milestones, research roles, and technical growth. Every milestone is tied to verifiable code, public repositories, or deployed production systems.
+      </p>
+
+      <!-- Quick Metrics Strip -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-bone-50/10">
+        <div class="p-3.5 rounded-xl bg-ink-950/80 border border-bone-50/10">
+          <p class="font-display text-xl sm:text-2xl text-brass-400 font-semibold">{careerTimeline.length}</p>
+          <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">Chronological Milestones</p>
+        </div>
+        <div class="p-3.5 rounded-xl bg-ink-950/80 border border-bone-50/10">
+          <p class="font-display text-xl sm:text-2xl text-ember-400 font-semibold">500+</p>
+          <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">Daily Campus Users</p>
+        </div>
+        <div class="p-3.5 rounded-xl bg-ink-950/80 border border-bone-50/10">
+          <p class="font-display text-xl sm:text-2xl text-moss-500 font-semibold">4 Phases</p>
+          <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">Technical Stack Depth</p>
+        </div>
+        <div class="p-3.5 rounded-xl bg-ink-950/80 border border-bone-50/10">
+          <p class="font-display text-xl sm:text-2xl text-bone-200 font-semibold">SIH 2026</p>
+          <p class="font-micro text-[9px] uppercase tracking-wider text-bone-500 mt-0.5">National Screening</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- View Mode Switch -->
+    <div class="flex items-center justify-between flex-wrap gap-4 mb-10 pb-4 border-b border-bone-50/10">
+      <div class="flex items-center gap-2 p-1 rounded-full bg-ink-950 border border-bone-50/10 font-micro text-xs">
+        <button
+          type="button"
+          id="traj-tab-career"
+          class="px-4 py-2 rounded-full font-semibold transition-all bg-bone-50/10 text-ember-400 cursor-pointer"
+        >
+          01 / Career &amp; Experience Timeline ({careerTimeline.length})
+        </button>
+        <button
+          type="button"
+          id="traj-tab-tech"
+          class="px-4 py-2 rounded-full font-semibold transition-all text-bone-400 hover:text-bone-50 cursor-pointer"
+        >
+          02 / Technical Evolution Stack (4 Phases)
+        </button>
+      </div>
+
+      <span class="font-micro text-[11px] text-bone-500">
+        Empirical timeline · Gandhinagar (IST)
+      </span>
+    </div>
+
+    <!-- Panel 1: Complete Career Timeline -->
+    <div id="traj-panel-career" class="space-y-8">
+      <div class="relative pl-6 sm:pl-10 before:absolute before:inset-0 before:left-3 sm:before:left-4 before:w-px before:bg-gradient-to-b before:from-ember-500 before:via-brass-500/50 before:to-bone-50/10 space-y-10">
+        {careerTimeline.map((item, idx) => (
+          <div class="relative group">
+            <!-- Timeline Pin -->
+            <span class="absolute -left-6 sm:-left-10 top-2 w-7 h-7 rounded-full bg-ink-950 border-2 border-ember-500/80 group-hover:border-ember-400 group-hover:scale-110 transition-all flex items-center justify-center font-micro text-[10px] text-ember-400 font-bold z-10 shadow-[0_0_12px_rgba(255,77,28,0.4)]">
+              0{idx + 1}
+            </span>
+
+            <article class="card card-glare p-7 sm:p-9 hover:border-bone-50/20 transition-all">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                <div class="flex flex-wrap items-center gap-2.5">
+                  <span class="chip chip-ember !text-[10px] !py-0.5 !px-2.5">{item.year}</span>
+                  <span class="font-micro text-xs text-bone-400">{item.period}</span>
+                  <span class="text-bone-600">·</span>
+                  <span class="font-micro text-xs font-semibold text-brass-400">{item.organization}</span>
+                </div>
+                <span class="chip !text-[10px] !py-0.5 !px-2 text-bone-300 font-medium">{item.role}</span>
+              </div>
+
+              <h2 class="display text-2xl text-bone-50 group-hover:text-ember-300 transition-colors">
+                {item.title}
+              </h2>
+
+              <p class="text-sm sm:text-base text-bone-300 leading-relaxed mt-3 max-w-3xl">
+                {item.summary}
+              </p>
+
+              <!-- Highlights Strip -->
+              <div class="mt-5 pt-4 border-t border-bone-50/10 grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs text-bone-400 font-sans">
+                {item.highlights.map((h) => (
+                  <div class="flex items-start gap-2">
+                    <span class="text-ember-400 font-bold shrink-0">›</span>
+                    <span class="leading-relaxed">{h}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div class="flex flex-wrap gap-1.5 mt-5">
+                {item.tags.map((t) => (
+                  <span class="chip !text-[9px] !py-0.5 !px-2 bg-ink-950/80 border-bone-50/10 text-bone-400">{t}</span>
+                ))}
+              </div>
+            </article>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Panel 2: Technical Evolution Stack (4 Phases) -->
+    <div id="traj-panel-tech" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+      {technicalProgression.map((item) => (
+        <article class="card card-glare p-7 sm:p-8 flex flex-col justify-between border-t-2 border-t-brass-500">
+          <div>
+            <div class="flex items-center justify-between gap-3 mb-4">
+              <span class="font-micro text-xs font-bold text-ember-400 tracking-widest">PHASE {item.level}</span>
+              <span class="chip chip-brass !text-[9px] !py-0.5 !px-2">VERIFIED MASTERY</span>
+            </div>
+            <h2 class="display text-xl sm:text-2xl text-bone-50 mb-2">{item.phase}</h2>
+            <div class="p-3 rounded-xl bg-ink-950 border border-bone-50/10 mb-4">
+              <p class="font-micro text-xs text-brass-400 leading-relaxed">{item.skills}</p>
+            </div>
+            <p class="text-xs sm:text-sm text-bone-300 leading-relaxed">{item.detail}</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-bone-50/10 font-micro text-[10px] text-bone-500 uppercase tracking-wider flex items-center justify-between">
+            <span>Deterministic Reproduction</span>
+            <span class="text-moss-400 font-semibold">✓ 100% Proven</span>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Closing Callout -->
+    <div class="mt-16 p-8 rounded-2xl bg-ink-900/60 border border-bone-50/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div>
+        <h3 class="display text-xl text-bone-50">Want to explore the source code behind these milestones?</h3>
+        <p class="text-xs sm:text-sm text-bone-400 mt-1">
+          Every system and research breakdown is documented with open repositories and reproduction harnesses.
+        </p>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <a href="/systems" class="btn btn-primary !text-xs">Browse Systems →</a>
+        <a href="/about" class="btn btn-ghost !text-xs">About Me ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Toggle Script -->
+  <script is:inline>
+    (function () {
+      function setupTrajTabs() {
+        const btnCareer = document.getElementById('traj-tab-career');
+        const btnTech = document.getElementById('traj-tab-tech');
+        const panelCareer = document.getElementById('traj-panel-career');
+        const panelTech = document.getElementById('traj-panel-tech');
+
+        if (!btnCareer || !btnTech || !panelCareer || !panelTech) return;
+
+        btnCareer.addEventListener('click', () => {
+          btnCareer.className = 'px-4 py-2 rounded-full font-semibold transition-all bg-bone-50/10 text-ember-400 cursor-pointer';
+          btnTech.className = 'px-4 py-2 rounded-full font-semibold transition-all text-bone-400 hover:text-bone-50 cursor-pointer';
+          panelCareer.classList.remove('hidden');
+          panelTech.classList.add('hidden');
+        });
+
+        btnTech.addEventListener('click', () => {
+          btnTech.className = 'px-4 py-2 rounded-full font-semibold transition-all bg-bone-50/10 text-ember-400 cursor-pointer';
+          btnCareer.className = 'px-4 py-2 rounded-full font-semibold transition-all text-bone-400 hover:text-bone-50 cursor-pointer';
+          panelTech.classList.remove('hidden');
+          panelCareer.classList.add('hidden');
+        });
+      }
+
+      document.addEventListener('astro:page-load', setupTrajTabs);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupTrajTabs);
+      } else {
+        setupTrajTabs();
+      }
+    })();
+  </script>
+</BaseLayout>

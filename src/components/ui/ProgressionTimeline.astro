@@ -18,31 +18,37 @@ import { careerTimeline, technicalProgression } from '../../data/timeline';
         </p>
       </div>
 
-      <!-- Mode switch tabs -->
-      <div class="flex items-center gap-1.5 p-1 rounded-full bg-ink-950 border border-bone-50/10 font-micro text-[11px] shrink-0" role="tablist">
-        <button
-          type="button"
-          class="px-4 py-2 rounded-full font-semibold transition-all bg-bone-50/10 text-ember-400"
-          id="tab-btn-career"
-          role="tab"
-          aria-selected="true"
-        >
-          01 / Career Trajectory
-        </button>
-        <button
-          type="button"
-          class="px-4 py-2 rounded-full font-semibold transition-all text-bone-400 hover:text-bone-50"
-          id="tab-btn-tech"
-          role="tab"
-          aria-selected="false"
-        >
-          02 / Technical Stack
-        </button>
+      <!-- Mode switch tabs + Subpage link -->
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="flex items-center gap-1.5 p-1 rounded-full bg-ink-950 border border-bone-50/10 font-micro text-[11px] shrink-0" role="tablist">
+          <button
+            type="button"
+            class="px-4 py-2 rounded-full font-semibold transition-all bg-bone-50/10 text-ember-400 cursor-pointer"
+            id="tab-btn-career"
+            role="tab"
+            aria-selected="true"
+          >
+            01 / Career Trajectory
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 rounded-full font-semibold transition-all text-bone-400 hover:text-bone-50 cursor-pointer"
+            id="tab-btn-tech"
+            role="tab"
+            aria-selected="false"
+          >
+            02 / Technical Stack (4 Phases)
+          </button>
+        </div>
+
+        <a href="/trajectory" class="chip chip-brass !text-[11px] !py-1.5 !px-3 font-semibold hover:border-ember-400 transition-colors">
+          Full Roadmap Page ↗
+        </a>
       </div>
     </div>
 
     <!-- Panel 1: Career Timeline -->
-    <div id="panel-career" class="space-y-6" data-reveal>
+    <div id="panel-career" class="space-y-6 transition-opacity duration-300">
       <div class="relative pl-6 sm:pl-8 before:absolute before:inset-0 before:left-3 before:w-px before:bg-gradient-to-b before:from-ember-500 before:via-brass-500/50 before:to-bone-50/10 space-y-8">
         {careerTimeline.map((item, idx) => (
           <div class="relative group">
@@ -90,21 +96,38 @@ import { careerTimeline, technicalProgression } from '../../data/timeline';
       </div>
     </div>
 
-    <!-- Panel 2: Technical Evolution (Hidden by default, toggled via JS) -->
-    <div id="panel-tech" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4" data-reveal>
+    <!-- Panel 2: Technical Evolution Stack (No data-reveal conflict) -->
+    <div id="panel-tech" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4 transition-opacity duration-300">
       {technicalProgression.map((item) => (
-        <div class="card card-glare p-6 sm:p-7 flex flex-col justify-between">
+        <div class="card card-glare p-6 sm:p-7 flex flex-col justify-between border-t-2 border-t-brass-500">
           <div>
             <div class="flex items-center justify-between gap-3 mb-3">
               <span class="font-micro text-xs font-bold text-ember-400 tracking-widest">PHASE {item.level}</span>
               <span class="chip chip-brass !text-[9px] !py-0.5 !px-2">PROVEN DEPTH</span>
             </div>
             <h3 class="display text-xl text-bone-50 mb-2">{item.phase}</h3>
-            <p class="font-micro text-xs text-brass-400 leading-relaxed mb-4">{item.skills}</p>
+            <div class="p-2.5 rounded-lg bg-ink-950 border border-bone-50/10 mb-3">
+              <p class="font-micro text-xs text-brass-400 leading-relaxed">{item.skills}</p>
+            </div>
             <p class="text-xs sm:text-sm text-bone-300 leading-relaxed">{item.detail}</p>
+          </div>
+          <div class="mt-5 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500 uppercase tracking-wider flex items-center justify-between">
+            <span>Deterministic Reproduction</span>
+            <span class="text-moss-400 font-semibold">✓ 100% Proven</span>
           </div>
         </div>
       ))}
+    </div>
+
+    <!-- Gateway to dedicated /trajectory page -->
+    <div class="mt-12 p-6 sm:p-8 rounded-2xl bg-ink-900/60 border border-bone-50/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <p class="font-display text-lg text-bone-50">Detailed Milestone &amp; Timeline Documentation</p>
+        <p class="text-xs text-bone-400 mt-1">Want to review each milestone with full repository links, architecture specs, and academic history?</p>
+      </div>
+      <a href="/trajectory" class="btn btn-primary shrink-0 !text-xs !py-2.5">
+        Open Dedicated Roadmap Page →
+      </a>
     </div>
   </div>
 </section>
@@ -128,6 +151,7 @@ import { careerTimeline, technicalProgression } from '../../data/timeline';
       btnTech.setAttribute('aria-selected', 'false');
 
       panelCareer.classList.remove('hidden');
+      panelCareer.style.opacity = '1';
       panelTech.classList.add('hidden');
     });
 
@@ -141,6 +165,7 @@ import { careerTimeline, technicalProgression } from '../../data/timeline';
       btnCareer.setAttribute('aria-selected', 'false');
 
       panelTech.classList.remove('hidden');
+      panelTech.style.opacity = '1';
       panelCareer.classList.add('hidden');
     });
   }
