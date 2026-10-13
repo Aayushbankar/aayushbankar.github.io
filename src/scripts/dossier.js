@@ -88,16 +88,21 @@ function scrollFX() {
 
   // Single element reveals
   document.querySelectorAll('[data-reveal]').forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.95 && rect.bottom > 0) {
+      gsap.to(el, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: 'power2.out' });
+      return;
+    }
     gsap.fromTo(
       el,
-      { y: 32, opacity: 0, scale: 0.985 },
+      { y: 24, opacity: 0, scale: 0.99 },
       {
         y: 0,
         opacity: 1,
         scale: 1,
-        duration: 0.85,
+        duration: 0.7,
         ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+        scrollTrigger: { trigger: el, start: 'top 96%', once: true },
       }
     );
   });
