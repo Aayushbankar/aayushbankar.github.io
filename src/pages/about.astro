@@ -141,20 +141,29 @@ import { profile } from '../data/profile';
           </div>
         </div>
 
-        <!-- Authentic EndeavourOS Rig Terminal Console -->
+        <!-- Authentic EndeavourOS Rig Terminal Console with Interactive Tabs -->
         <div class="mt-8 pt-6 border-t border-bone-50/10 rounded-xl overflow-hidden bg-ink-950 border border-bone-50/15 p-4 sm:p-5 font-mono text-xs">
-          <div class="flex items-center justify-between mb-3 pb-2 border-b border-bone-50/10 text-bone-500 font-micro text-[11px]">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-bone-50/10 text-bone-500 font-micro text-[11px]">
             <div class="flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
               <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
               <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
-              <span class="ml-2 text-bone-400">legion@elitebook-g5: ~ (neofetch)</span>
+              <span class="ml-2 text-bone-300 font-semibold" id="terminal-prompt-user">legion@elitebook-g5: ~ $</span>
             </div>
-            <span class="text-moss-400">● VERIFIED RIG</span>
+            <!-- Interactive Command Tabs -->
+            <div class="flex flex-wrap gap-1 p-0.5 rounded-lg bg-ink-900 border border-bone-50/10" role="tablist">
+              <button type="button" class="term-tab-btn active px-2.5 py-1 rounded font-semibold text-ember-400 bg-bone-50/10 cursor-pointer" data-cmd="neofetch">neofetch</button>
+              <button type="button" class="term-tab-btn px-2.5 py-1 rounded text-bone-400 hover:text-bone-100 cursor-pointer" data-cmd="lscpu">lscpu</button>
+              <button type="button" class="term-tab-btn px-2.5 py-1 rounded text-bone-400 hover:text-bone-100 cursor-pointer" data-cmd="free">free -h</button>
+              <button type="button" class="term-tab-btn px-2.5 py-1 rounded text-bone-400 hover:text-bone-100 cursor-pointer" data-cmd="uname">uname -a</button>
+            </div>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-[11.5px] leading-relaxed">
+
+          <!-- Command 1: Neofetch Output -->
+          <div id="term-panel-neofetch" class="term-panel grid grid-cols-1 md:grid-cols-2 gap-4 text-[11.5px] leading-relaxed">
             <div class="space-y-1 text-bone-300">
               <p><span class="text-ember-400 font-semibold">OS:</span> EndeavourOS Linux x86_64</p>
+              <p><span class="text-ember-400 font-semibold">Host:</span> HP EliteBook 840 G5 (Serial: 5CG8...)</p>
               <p><span class="text-ember-400 font-semibold">Kernel:</span> 6.12.67-arch1-1 (SMP PREEMPT_DYNAMIC)</p>
               <p><span class="text-ember-400 font-semibold">Uptime:</span> 14 days, 6 hours</p>
               <p><span class="text-ember-400 font-semibold">Packages:</span> 984 (pacman)</p>
@@ -167,6 +176,29 @@ import { profile } from '../data/profile';
               <p><span class="text-brass-400 font-semibold">Storage:</span> 256 GB NVMe SSD (ext4)</p>
               <p><span class="text-moss-400 font-semibold">Security Mitigations:</span> RETPOLINE=y, KASAN=y, Freelist Hardening</p>
             </div>
+          </div>
+
+          <!-- Command 2: lscpu Output -->
+          <div id="term-panel-lscpu" class="term-panel hidden space-y-1 text-[11.5px] leading-relaxed text-bone-300">
+            <p><span class="text-brass-400 font-semibold">Architecture:</span> x86_64 (CPU op-mode(s): 32-bit, 64-bit)</p>
+            <p><span class="text-brass-400 font-semibold">Model name:</span> Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz (Boost: 3.60GHz)</p>
+            <p><span class="text-brass-400 font-semibold">CPU(s):</span> 8 threads (4 cores, 2 threads/core, 1 socket)</p>
+            <p><span class="text-brass-400 font-semibold">L1d cache:</span> 128 KiB | <span class="text-brass-400 font-semibold">L2 cache:</span> 1 MiB | <span class="text-brass-400 font-semibold">L3 cache:</span> 6 MiB</p>
+            <p><span class="text-brass-400 font-semibold">Flags:</span> fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities</p>
+          </div>
+
+          <!-- Command 3: free -h Output -->
+          <div id="term-panel-free" class="term-panel hidden space-y-1 text-[11.5px] leading-relaxed text-bone-300">
+            <p class="text-bone-500 font-semibold">               total        used        free      shared  buff/cache   available</p>
+            <p>Mem:           <span class="text-ember-400">7.6Gi</span>       3.0Gi       2.8Gi       142Mi       1.8Gi       <span class="text-moss-400">4.3Gi</span></p>
+            <p>Swap:          8.0Gi          0B       8.0Gi</p>
+            <p class="text-[10px] text-bone-500 mt-2">Zero swap thrash observed during local llama.cpp Q4_K_M 3B inference tests.</p>
+          </div>
+
+          <!-- Command 4: uname -a Output -->
+          <div id="term-panel-uname" class="term-panel hidden space-y-1 text-[11.5px] leading-relaxed text-bone-300">
+            <p class="text-bone-100">Linux arch-elitebook-840g5 6.12.67-arch1-1 #1 SMP PREEMPT_DYNAMIC Sun Jan 18 14:22:10 UTC 2026 x86_64 GNU/Linux</p>
+            <p class="text-[10px] text-bone-500 mt-2">CONFIG_PREEMPT_DYNAMIC=y enabled for deterministic low-latency eBPF ringbuf tracepoint processing.</p>
           </div>
         </div>
       </div>
@@ -331,4 +363,48 @@ import { profile } from '../data/profile';
        INTERACTIVE CAREER TRAJECTORY & TECHNICAL PROGRESSION
        ═══════════════════════════════════════════════════════════════ -->
   <ProgressionTimeline />
+
+  <!-- Interactive Rig Terminal Tabs Script -->
+  <script is:inline>
+    function setupAboutRigTerminal() {
+      const tabBtns = document.querySelectorAll('.term-tab-btn');
+      const panels = document.querySelectorAll('.term-panel');
+      const promptUser = document.getElementById('terminal-prompt-user');
+
+      tabBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const cmd = btn.getAttribute('data-cmd');
+          if (!cmd) return;
+
+          tabBtns.forEach((b) => {
+            b.classList.remove('active', 'text-ember-400', 'bg-bone-50/10', 'shadow-inner');
+            b.classList.add('text-bone-400');
+          });
+
+          btn.classList.add('active', 'text-ember-400', 'bg-bone-50/10', 'shadow-inner');
+          btn.classList.remove('text-bone-400');
+
+          if (promptUser) {
+            promptUser.textContent = `legion@elitebook-g5: ~ $ ${cmd === 'free' ? 'free -h' : cmd === 'uname' ? 'uname -a' : cmd}`;
+          }
+
+          panels.forEach((p) => {
+            if (p.id === `term-panel-${cmd}`) {
+              p.classList.remove('hidden');
+            } else {
+              p.classList.add('hidden');
+            }
+          });
+        });
+      });
+    }
+
+    document.addEventListener('astro:page-load', setupAboutRigTerminal);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupAboutRigTerminal);
+    } else {
+      setupAboutRigTerminal();
+    }
+  </script>
 </BaseLayout>
+

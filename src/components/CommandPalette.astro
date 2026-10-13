@@ -1,0 +1,185 @@
+---
+/* Awwwards-caliber Command Palette (Cmd+K / Ctrl+K)
+   Instant keyboard search across all dossier documents, systems, research CVEs, and quick actions.
+   Progressive enhancement: 100% accessible with focus trap and ARIA combobox pattern. */
+---
+
+<div
+  id="cmdk-backdrop"
+  class="cmdk-backdrop hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Dossier Command Palette"
+>
+  <div class="cmdk-modal" id="cmdk-container">
+    <!-- Search Input Header -->
+    <div class="cmdk-header">
+      <span class="cmdk-prompt-symbol">&gt;</span>
+      <input
+        type="text"
+        id="cmdk-input"
+        class="cmdk-input"
+        placeholder="Type a command or search dossier, systems, CVEs..."
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <kbd class="cmdk-esc-badge" id="cmdk-close-btn" title="Press Esc to close">ESC</kbd>
+    </div>
+
+    <!-- Live Filterable Results List -->
+    <div class="cmdk-list" id="cmdk-results" role="listbox">
+      <!-- Section: Dossier Documents -->
+      <div class="cmdk-group-title">Dossier Documents</div>
+      <a href="/" class="cmdk-item" role="option" data-keywords="home index ds01 bugs systems notes connect">
+        <span class="cmdk-item-badge">DS:01</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">Curated Dossier Home</span>
+          <span class="cmdk-item-desc">Breakthrough bugs, systems carousel, field notes</span>
+        </div>
+        <span class="cmdk-item-action">Jump ↵</span>
+      </a>
+
+      <a href="/systems" class="cmdk-item" role="option" data-keywords="systems spec sheets ds02 architectures telemetry benchmarks">
+        <span class="cmdk-item-badge">DS:02</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">Systems &amp; Spec Sheets</span>
+          <span class="cmdk-item-desc">Hardware telemetry, 5-plane log engine, edge voice</span>
+        </div>
+        <span class="cmdk-item-action">Jump ↵</span>
+      </a>
+
+      <a href="/research" class="cmdk-item" role="option" data-keywords="research field notes ds03 vulnerabilities cve kernel exploits">
+        <span class="cmdk-item-badge">DS:03</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">Vulnerability Field Notes</span>
+          <span class="cmdk-item-desc">Hermetic repro terminal, kernel UAF, Android SQLi</span>
+        </div>
+        <span class="cmdk-item-action">Jump ↵</span>
+      </a>
+
+      <a href="/about" class="cmdk-item" role="option" data-keywords="about reality ds04 bio hardware 8gb elitebook gandhinagar student">
+        <span class="cmdk-item-badge">DS:04</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">About &amp; Hardware Reality</span>
+          <span class="cmdk-item-desc">18yo generalist builder, 8GB EndeavourOS rig, CPI 8.6</span>
+        </div>
+        <span class="cmdk-item-action">Jump ↵</span>
+      </a>
+
+      <a href="/trajectory" class="cmdk-item" role="option" data-keywords="trajectory timeline ds05 career milestones adr architectural decisions">
+        <span class="cmdk-item-badge">DS:05</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">Engineering Trajectory &amp; ADRs</span>
+          <span class="cmdk-item-desc">Technical progression timeline, ADR-01 through ADR-04</span>
+        </div>
+        <span class="cmdk-item-action">Jump ↵</span>
+      </a>
+
+      <a href="/contact" class="cmdk-item" role="option" data-keywords="contact channels ds06 pgp email collaboration gandhinagar">
+        <span class="cmdk-item-badge">DS:06</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">Contact &amp; Encrypted Channels</span>
+          <span class="cmdk-item-desc">Direct inbox, PGP cryptographic identity, scope</span>
+        </div>
+        <span class="cmdk-item-action">Jump ↵</span>
+      </a>
+
+      <!-- Section: Flagship Systems -->
+      <div class="cmdk-group-title">Flagship Architectures</div>
+      <a href="/systems/spectre-prism" class="cmdk-item" role="option" data-keywords="spectre prism rust ebpf 13247 eps siem log engine sih">
+        <span class="cmdk-item-badge badge-ember">SYS:01</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">SPECTRE-PRISM</span>
+          <span class="cmdk-item-desc">13,247 EPS/core 5-plane log engine (Rust / eBPF / AVX2)</span>
+        </div>
+        <span class="cmdk-item-action">Spec ↵</span>
+      </a>
+
+      <a href="/systems/wolvie" class="cmdk-item" role="option" data-keywords="wolvie offline voice 530ms whisper llama piper edge ai">
+        <span class="cmdk-item-badge badge-ember">SYS:02</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">Wolvie Sub-Second Voice</span>
+          <span class="cmdk-item-desc">530ms round-trip offline speech assistant on 8GB laptop</span>
+        </div>
+        <span class="cmdk-item-action">Spec ↵</span>
+      </a>
+
+      <a href="/systems/quantlab" class="cmdk-item" role="option" data-keywords="quantlab sebi market friction backtester python rust">
+        <span class="cmdk-item-badge badge-ember">SYS:03</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">QuantLab Backtester</span>
+          <span class="cmdk-item-desc">High-fidelity Indian market friction &amp; liquidity backtester</span>
+        </div>
+        <span class="cmdk-item-action">Spec ↵</span>
+      </a>
+
+      <!-- Section: Research & Exploits -->
+      <div class="cmdk-group-title">Verified Research &amp; CVEs</div>
+      <a href="/research/cve-2026-46242-bad-epoll" class="cmdk-item" role="option" data-keywords="bad epoll cve-2026-46242 linux kernel uaf android gki 6.12">
+        <span class="cmdk-item-badge badge-brass">CVE</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">Bad Epoll (CVE-2026-46242)</span>
+          <span class="cmdk-item-desc">Linux Kernel epoll_ctl socket UAF &amp; ARM64 GKI branch audit</span>
+        </div>
+        <span class="cmdk-item-action">Field Note ↵</span>
+      </a>
+
+      <a href="/research/cve-2026-28576-android-contacts-sqli" class="cmdk-item" role="option" data-keywords="android sqli cve-2026-28576 contacts provider injection zero-perm">
+        <span class="cmdk-item-badge badge-brass">CVE</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">Android Contacts SQLi (CVE-2026-28576)</span>
+          <span class="cmdk-item-desc">Zero-permission Binder IPC leak across Android 11→15</span>
+        </div>
+        <span class="cmdk-item-action">Field Note ↵</span>
+      </a>
+
+      <!-- Section: Quick Actions -->
+      <div class="cmdk-group-title">Quick Actions</div>
+      <button type="button" class="cmdk-item cmdk-btn" role="option" data-action="copy-email" data-keywords="copy email aayushbankar42 gmail contact inbox">
+        <span class="cmdk-item-badge badge-moss">ACT</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">Copy Email Address</span>
+          <span class="cmdk-item-desc">aayushbankar42@gmail.com</span>
+        </div>
+        <span class="cmdk-item-action" id="cmdk-email-status">Copy ↵</span>
+      </button>
+
+      <button type="button" class="cmdk-item cmdk-btn" role="option" data-action="copy-pgp" data-keywords="copy pgp key fingerprint encryption identity">
+        <span class="cmdk-item-badge badge-moss">ACT</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">Copy PGP Key Fingerprint</span>
+          <span class="cmdk-item-desc">7F2B A189 4C3E 90D2 B581 ...</span>
+        </div>
+        <span class="cmdk-item-action" id="cmdk-pgp-status">Copy ↵</span>
+      </button>
+
+      <button type="button" class="cmdk-item cmdk-btn" role="option" data-action="toggle-audio" data-keywords="toggle sound sfx audio haptics bleep click">
+        <span class="cmdk-item-badge badge-moss">ACT</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">Toggle Cybernetic Audio SFX</span>
+          <span class="cmdk-item-desc">Enable/mute procedural Web Audio API haptics</span>
+        </div>
+        <span class="cmdk-item-action">Toggle ↵</span>
+      </button>
+
+      <button type="button" class="cmdk-item cmdk-btn" role="option" data-action="scroll-top" data-keywords="top scroll jump to top document">
+        <span class="cmdk-item-badge badge-moss">ACT</span>
+        <div class="cmdk-item-content">
+          <span class="cmdk-item-title">Scroll Back to Top</span>
+          <span class="cmdk-item-desc">Smooth return to the top of the current document</span>
+        </div>
+        <span class="cmdk-item-action">Top ↵</span>
+      </button>
+    </div>
+
+    <!-- Footer Controls -->
+    <div class="cmdk-footer">
+      <div class="cmdk-keys">
+        <span><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
+        <span><kbd>↵</kbd> Select</span>
+        <span><kbd>ESC</kbd> Close</span>
+      </div>
+      <span class="cmdk-footer-brand">Aayush Bankar Dossier Console</span>
+    </div>
+  </div>
+</div>

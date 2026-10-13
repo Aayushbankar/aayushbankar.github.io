@@ -276,23 +276,24 @@
      ═══════════════════════════════════════════════════════════════ */
   .dossier-rail-dock {
     position: fixed;
-    left: 1.25rem;
+    left: 1rem;
     top: 50%;
     transform: translateY(-50%);
     z-index: 60;
     display: none;
     flex-direction: column;
     align-items: center;
-    gap: 0.65rem;
-    padding: 0.75rem 0.5rem;
-    border-radius: 9999px;
-    background: rgba(18, 16, 15, 0.88);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    gap: 0.55rem;
+    padding: 0.65rem 0.5rem;
+    border-radius: 20px;
+    background: rgba(14, 12, 11, 0.94);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border: 1px solid rgba(237, 232, 220, 0.16);
-    box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(237, 232, 220, 0.1);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 77, 28, 0.08), inset 0 1px 0 rgba(237, 232, 220, 0.1);
+    transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.25s ease;
     user-select: none;
+    width: 122px;
   }
   @media (min-width: 1024px) {
     .dossier-rail-dock {
@@ -301,34 +302,45 @@
   }
   @media (min-width: 1536px) {
     .dossier-rail-dock {
-      left: max(1.5rem, calc((100vw - 88rem) / 2 - 4.75rem));
+      left: max(1.5rem, calc((100vw - 92rem) / 2 - 5.5rem));
+    }
+  }
+  @media (max-height: 620px) and (min-width: 1024px) {
+    .dossier-rail-dock {
+      gap: 0.35rem;
+      padding: 0.45rem 0.35rem;
+      transform: translateY(-50%) scale(0.9);
     }
   }
 
   /* Active page indicator pill & switcher */
   .dossier-page-pill {
     position: relative;
+    width: 100%;
     display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.32rem 0.55rem;
-    border-radius: 9999px;
-    background: rgba(255, 77, 28, 0.12);
-    border: 1px solid rgba(255, 77, 28, 0.35);
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.4rem 0.5rem;
+    border-radius: 12px;
+    background: rgba(255, 77, 28, 0.1);
+    border: 1px solid rgba(255, 77, 28, 0.3);
     color: var(--color-ember-400);
     font-family: var(--font-micro);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
     cursor: pointer;
     transition: all 0.25s ease;
   }
   .dossier-page-pill:hover,
   .dossier-page-pill:focus-visible {
-    background: rgba(255, 77, 28, 0.22);
+    background: rgba(255, 77, 28, 0.18);
     border-color: rgba(255, 77, 28, 0.55);
     color: var(--color-bone-50);
+  }
+  .dossier-pill-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.3rem;
   }
   .dossier-led {
     width: 6px;
@@ -342,16 +354,28 @@
   .dossier-page-code {
     color: var(--color-ember-400);
     font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.08em;
   }
   .dossier-page-title {
-    display: none;
-    color: var(--color-bone-100);
+    display: inline-block;
+    color: var(--color-bone-50);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 52px;
   }
   .dossier-page-chevron {
-    width: 11px;
-    height: 11px;
+    width: 10px;
+    height: 10px;
     color: var(--color-bone-400);
     transition: transform 0.2s ease;
+    flex-shrink: 0;
   }
   .dossier-page-pill:hover .dossier-page-chevron,
   .dossier-page-pill.open .dossier-page-chevron {
@@ -359,15 +383,44 @@
     color: var(--color-ember-400);
   }
 
+  /* Live dynamic section readout: shows current section as visitor scrolls */
+  .dossier-pill-sub {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding-top: 0.2rem;
+    border-top: 1px solid rgba(237, 232, 220, 0.1);
+    font-family: var(--font-micro);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-bone-400);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .dossier-sub-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--color-brass-400);
+    flex-shrink: 0;
+  }
+  #dossier-active-sec-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   /* Flyout directory menu */
   .dossier-page-flyout {
     position: absolute;
     left: calc(100% + 0.75rem);
     top: 0;
-    min-width: 13.5rem;
+    min-width: 14rem;
     padding: 0.5rem;
     border-radius: 14px;
-    background: rgba(18, 16, 15, 0.96);
+    background: rgba(14, 12, 11, 0.96);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border: 1px solid rgba(237, 232, 220, 0.18);
@@ -438,7 +491,7 @@
   }
 
   .dossier-rail-divider {
-    width: 1.25rem;
+    width: 80%;
     height: 1px;
     background: rgba(237, 232, 220, 0.12);
   }
@@ -446,20 +499,20 @@
   /* Section rail spine & anchor links */
   .dossier-rail {
     position: relative;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.65rem;
-    padding: 0.25rem 0;
+    align-items: stretch;
+    gap: 0.45rem;
+    padding: 0.2rem 0;
   }
   .dossier-rail-spine {
     position: absolute;
-    left: 50%;
+    left: 14px;
     top: 8px;
     bottom: 8px;
     width: 1px;
-    background: rgba(237, 232, 220, 0.12);
-    transform: translateX(-50%);
+    background: rgba(237, 232, 220, 0.14);
     z-index: 1;
   }
   .dossier-rail-progress {
@@ -469,7 +522,7 @@
     width: 100%;
     height: 0%;
     background: var(--color-ember-500);
-    box-shadow: 0 0 6px rgba(255, 77, 28, 0.85);
+    box-shadow: 0 0 6px rgba(255, 77, 28, 0.9);
     transition: height 0.1s ease-out;
   }
   .dossier-rail a {
@@ -477,64 +530,64 @@
     z-index: 2;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.35rem;
-    padding: 0.35rem 0.5rem;
-    border-radius: 9999px;
+    gap: 0.4rem;
+    padding: 0.32rem 0.45rem;
+    border-radius: 8px;
     font-family: var(--font-micro);
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     color: var(--color-bone-500);
     text-decoration: none;
-    background: rgba(18, 16, 15, 0.85);
+    background: transparent;
     border: 1px solid transparent;
-    transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
   }
   .dossier-rail a:hover {
     color: var(--color-bone-50);
-    border-color: rgba(237, 232, 220, 0.2);
-    transform: scale(1.05);
+    background: rgba(237, 232, 220, 0.06);
+    border-color: rgba(237, 232, 220, 0.16);
+    transform: translateX(2px);
   }
   .dossier-rail a .dot {
     width: 6px;
     height: 6px;
     border-radius: 999px;
     border: 1.5px solid var(--color-bone-600);
-    background: transparent;
+    background: var(--color-ink-950);
     transition: all 0.25s ease;
     flex-shrink: 0;
   }
   .dossier-rail a.active {
     color: var(--color-bone-50);
-    background: rgba(255, 77, 28, 0.18);
-    border-color: rgba(255, 77, 28, 0.4);
+    background: rgba(255, 77, 28, 0.16);
+    border-color: rgba(255, 77, 28, 0.35);
   }
   .dossier-rail a.active .dot {
     background: var(--color-ember-500);
     border-color: var(--color-ember-500);
-    box-shadow: 0 0 12px rgba(255, 77, 28, 0.95);
-    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(255, 77, 28, 0.95);
+    transform: scale(1.35);
   }
   .dossier-rail a .rail-label {
     position: absolute;
-    left: calc(100% + 0.75rem);
+    left: calc(100% + 0.65rem);
     top: 50%;
     transform: translateY(-50%) translateX(-4px);
     opacity: 0;
     pointer-events: none;
     white-space: nowrap;
-    padding: 0.25rem 0.65rem;
+    padding: 0.22rem 0.55rem;
     border-radius: 6px;
-    background: var(--color-ink-900);
+    background: rgba(18, 16, 15, 0.96);
     border: 1px solid rgba(237, 232, 220, 0.18);
     font-family: var(--font-micro);
     font-size: 10px;
     font-weight: 600;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--color-bone-100);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.75);
     transition: opacity 0.2s ease, transform 0.2s ease;
     z-index: 60;
   }
@@ -543,14 +596,45 @@
     transform: translateY(-50%) translateX(0);
   }
 
+  /* Utility actions dock: Cmd+K, SFX, Top */
+  .dossier-rail-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 0.15rem;
+    gap: 0.25rem;
+  }
+  .dossier-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.35rem;
+    border-radius: 6px;
+    background: rgba(237, 232, 220, 0.05);
+    border: 1px solid rgba(237, 232, 220, 0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .dossier-action-btn:hover {
+    background: rgba(237, 232, 220, 0.12);
+    border-color: rgba(237, 232, 220, 0.25);
+  }
+  .dossier-action-btn.sfx-active {
+    background: rgba(157, 166, 93, 0.18);
+    border-color: rgba(157, 166, 93, 0.4);
+  }
+  .dossier-action-btn.sfx-active #sound-label {
+    color: var(--color-moss-500);
+  }
+
   /* Scroll depth gauge & jump to top */
   .dossier-top-btn {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.15rem;
-    padding: 0.35rem 0.45rem;
-    border-radius: 9999px;
+    gap: 0.2rem;
+    padding: 0.25rem 0.35rem;
+    border-radius: 6px;
     background: transparent;
     border: 1px solid transparent;
     cursor: pointer;
@@ -561,13 +645,13 @@
     border-color: rgba(237, 232, 220, 0.15);
   }
   .dossier-top-icon {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     color: var(--color-bone-400);
     transition: transform 0.2s ease, color 0.2s ease;
   }
   .dossier-top-btn:hover .dossier-top-icon {
-    transform: translateY(-2px);
+    transform: translateY(-1.5px);
     color: var(--color-ember-400);
   }
   .dossier-depth-readout {
@@ -575,7 +659,6 @@
     font-size: 9px;
     color: var(--color-bone-500);
     font-weight: 600;
-    letter-spacing: 0.05em;
   }
 
   /* Mobile bottom floating HUD pill */
@@ -590,7 +673,7 @@
     gap: 0.6rem;
     padding: 0.4rem 0.85rem;
     border-radius: 9999px;
-    background: rgba(18, 16, 15, 0.94);
+    background: rgba(14, 12, 11, 0.94);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(237, 232, 220, 0.18);
@@ -647,6 +730,212 @@
     border-radius: 999px;
     border: 1px solid var(--color-bone-600);
     background: transparent;
+  }
+  .dossier-mobile-link.active {
+    color: var(--color-bone-50);
+    background: rgba(255, 77, 28, 0.18);
+  }
+  .dossier-mobile-link.active .dot {
+    background: var(--color-ember-500);
+    border-color: var(--color-ember-500);
+    box-shadow: 0 0 8px rgba(255, 77, 28, 0.9);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     COMMAND PALETTE (⌘K / Ctrl+K) MODAL STYLING
+     ═══════════════════════════════════════════════════════════════ */
+  .cmdk-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(8, 7, 6, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 12vh 1rem 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cmdk-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .cmdk-backdrop.hidden {
+    display: none;
+  }
+  .cmdk-modal {
+    width: 100%;
+    max-width: 38rem;
+    border-radius: 18px;
+    background: rgba(14, 12, 11, 0.96);
+    border: 1px solid rgba(237, 232, 220, 0.18);
+    box-shadow: 0 24px 64px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 77, 28, 0.12), inset 0 1px 0 rgba(237, 232, 220, 0.15);
+    overflow: hidden;
+    transform: scale(0.97) translateY(-8px);
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cmdk-backdrop.open .cmdk-modal {
+    transform: scale(1) translateY(0);
+  }
+  .cmdk-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1.25rem;
+    border-bottom: 1px solid rgba(237, 232, 220, 0.12);
+  }
+  .cmdk-prompt-symbol {
+    font-family: var(--font-micro);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-ember-400);
+  }
+  .cmdk-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--color-bone-50);
+  }
+  .cmdk-input::placeholder {
+    color: var(--color-bone-500);
+  }
+  .cmdk-esc-badge {
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    background: rgba(237, 232, 220, 0.08);
+    border: 1px solid rgba(237, 232, 220, 0.15);
+    font-family: var(--font-micro);
+    font-size: 10px;
+    color: var(--color-bone-400);
+    cursor: pointer;
+  }
+  .cmdk-list {
+    max-height: 22rem;
+    overflow-y: auto;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .cmdk-group-title {
+    padding: 0.5rem 0.75rem 0.25rem;
+    font-family: var(--font-micro);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-bone-500);
+  }
+  .cmdk-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 10px;
+    color: var(--color-bone-200);
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+  }
+  .cmdk-item:hover,
+  .cmdk-item.selected {
+    background: rgba(255, 77, 28, 0.14);
+    border-color: rgba(255, 77, 28, 0.35);
+    color: var(--color-bone-50);
+  }
+  .cmdk-item-badge {
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    background: rgba(237, 232, 220, 0.08);
+    border: 1px solid rgba(237, 232, 220, 0.14);
+    font-family: var(--font-micro);
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--color-ember-400);
+    flex-shrink: 0;
+  }
+  .badge-ember {
+    background: rgba(255, 77, 28, 0.15);
+    border-color: rgba(255, 77, 28, 0.3);
+    color: var(--color-ember-400);
+  }
+  .badge-brass {
+    background: rgba(200, 162, 75, 0.15);
+    border-color: rgba(200, 162, 75, 0.3);
+    color: var(--color-brass-400);
+  }
+  .badge-moss {
+    background: rgba(157, 166, 93, 0.15);
+    border-color: rgba(157, 166, 93, 0.3);
+    color: var(--color-moss-500);
+  }
+  .cmdk-item-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .cmdk-item-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-bone-100);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cmdk-item-desc {
+    font-size: 11px;
+    color: var(--color-bone-500);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cmdk-item-action {
+    font-family: var(--font-micro);
+    font-size: 10px;
+    color: var(--color-bone-500);
+    flex-shrink: 0;
+  }
+  .cmdk-item:hover .cmdk-item-action,
+  .cmdk-item.selected .cmdk-item-action {
+    color: var(--color-ember-400);
+  }
+  .cmdk-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55rem 1rem;
+    border-top: 1px solid rgba(237, 232, 220, 0.1);
+    background: rgba(10, 9, 8, 0.6);
+    font-family: var(--font-micro);
+    font-size: 10px;
+    color: var(--color-bone-500);
+  }
+  .cmdk-keys {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .cmdk-keys kbd {
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    background: rgba(237, 232, 220, 0.08);
+    border: 1px solid rgba(237, 232, 220, 0.15);
+    margin-right: 0.2rem;
+  }
+  .cmdk-footer-brand {
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
   .dossier-mobile-link.active {
     color: var(--color-bone-50);

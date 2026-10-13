@@ -342,6 +342,79 @@ const domains = [
         </p>
       </div>
 
+      <!-- SPECTRE-PRISM 5-Plane Live Pipeline Simulator -->
+      <div class="card card-glare p-5 sm:p-7 bg-ink-950/80 border border-bone-50/15 mb-8" data-reveal>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-bone-50/10">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="w-2 h-2 rounded-full bg-ember-500 animate-pulse"></span>
+              <span class="font-micro text-xs text-ember-400 uppercase tracking-widest font-semibold">Interactive Architecture Simulator</span>
+            </div>
+            <h4 class="font-display text-lg sm:text-xl text-bone-100">SPECTRE-PRISM: 5-Plane Pipeline &amp; Core Saturation Rig</h4>
+          </div>
+          <button
+            type="button"
+            id="sim-spike-btn"
+            class="btn btn-ghost !py-1 !px-3 !text-xs !border-ember-500/40 text-ember-400 cursor-pointer self-start sm:self-auto"
+          >
+            Simulate 1M Event Spike ⚡
+          </button>
+        </div>
+
+        <!-- 5 Planes Toggles -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 my-5">
+          <button type="button" class="sim-plane-btn active p-2.5 rounded-xl bg-ink-900 border border-ember-500/40 text-left transition-all cursor-pointer" data-plane="0" data-cost="22">
+            <span class="font-micro text-[10px] text-ember-400 font-bold block">P0: INGEST</span>
+            <span class="text-xs text-bone-200 font-semibold block mt-0.5">eBPF XDP Ringbuf</span>
+            <span class="font-micro text-[9px] text-bone-500 block mt-1">Zero-copy kernel poll</span>
+          </button>
+          <button type="button" class="sim-plane-btn active p-2.5 rounded-xl bg-ink-900 border border-ember-500/40 text-left transition-all cursor-pointer" data-plane="1" data-cost="18">
+            <span class="font-micro text-[10px] text-ember-400 font-bold block">P1: PARSE</span>
+            <span class="text-xs text-bone-200 font-semibold block mt-0.5">SIMD AVX2 Parser</span>
+            <span class="font-micro text-[9px] text-bone-500 block mt-1">Vectorized byte lexing</span>
+          </button>
+          <button type="button" class="sim-plane-btn active p-2.5 rounded-xl bg-ink-900 border border-ember-500/40 text-left transition-all cursor-pointer" data-plane="2" data-cost="14">
+            <span class="font-micro text-[10px] text-ember-400 font-bold block">P2: FILTER</span>
+            <span class="text-xs text-bone-200 font-semibold block mt-0.5">Bloom &amp; Bitset</span>
+            <span class="font-micro text-[9px] text-bone-500 block mt-1">Sigma rule pre-match</span>
+          </button>
+          <button type="button" class="sim-plane-btn active p-2.5 rounded-xl bg-ink-900 border border-ember-500/40 text-left transition-all cursor-pointer" data-plane="3" data-cost="12">
+            <span class="font-micro text-[10px] text-ember-400 font-bold block">P3: ROUTE</span>
+            <span class="text-xs text-bone-200 font-semibold block mt-0.5">Lock-Free Channel</span>
+            <span class="font-micro text-[9px] text-bone-500 block mt-1">Crossbeam mpsc pipe</span>
+          </button>
+          <button type="button" class="sim-plane-btn active p-2.5 rounded-xl bg-ink-900 border border-ember-500/40 text-left transition-all cursor-pointer" data-plane="4" data-cost="8">
+            <span class="font-micro text-[10px] text-ember-400 font-bold block">P4: COMMIT</span>
+            <span class="text-xs text-bone-200 font-semibold block mt-0.5">Sequential WAL</span>
+            <span class="font-micro text-[9px] text-bone-500 block mt-1">Zero fsync stall queue</span>
+          </button>
+        </div>
+
+        <!-- Live Reactive Metric Readouts -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-bone-50/10">
+          <div class="p-3 rounded-lg bg-ink-900 border border-bone-50/10">
+            <span class="font-micro text-[10px] uppercase text-bone-500 block">Throughput</span>
+            <span class="font-display text-xl sm:text-2xl text-ember-400 font-bold block mt-0.5" id="sim-throughput">13,247 EPS</span>
+            <span class="font-micro text-[9px] text-bone-500 block mt-0.5">Per CPU Core</span>
+          </div>
+          <div class="p-3 rounded-lg bg-ink-900 border border-bone-50/10">
+            <span class="font-micro text-[10px] uppercase text-bone-500 block">End-to-End Latency</span>
+            <span class="font-display text-xl sm:text-2xl text-brass-400 font-bold block mt-0.5" id="sim-latency">74.2 µs</span>
+            <span class="font-micro text-[9px] text-bone-500 block mt-0.5">Mean per event</span>
+          </div>
+          <div class="p-3 rounded-lg bg-ink-900 border border-bone-50/10">
+            <span class="font-micro text-[10px] uppercase text-bone-500 block">RAM Utilization</span>
+            <span class="font-display text-xl sm:text-2xl text-bone-100 font-bold block mt-0.5" id="sim-ram">142 MB</span>
+            <span class="font-micro text-[9px] text-bone-500 block mt-0.5">HP EliteBook 8GB rig</span>
+          </div>
+          <div class="p-3 rounded-lg bg-ink-900 border border-bone-50/10">
+            <span class="font-micro text-[10px] uppercase text-bone-500 block">Core 0 Saturation</span>
+            <span class="font-display text-xl sm:text-2xl text-moss-500 font-bold block mt-0.5" id="sim-cpu">28% CPU</span>
+            <span class="font-micro text-[9px] text-bone-500 block mt-0.5">72% idle headroom</span>
+          </div>
+        </div>
+      </div>
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div class="card card-glare p-5 bg-ink-950/80 border border-bone-50/10">
           <div class="flex items-center justify-between mb-2">
@@ -486,6 +559,62 @@ const domains = [
               }
             });
           });
+        });
+      }
+
+      // 4. 5-Plane Live Architecture Simulator
+      const planeBtns = document.querySelectorAll('.sim-plane-btn');
+      const tpEl = document.getElementById('sim-throughput');
+      const latEl = document.getElementById('sim-latency');
+      const ramEl = document.getElementById('sim-ram');
+      const cpuEl = document.getElementById('sim-cpu');
+      const spikeBtn = document.getElementById('sim-spike-btn');
+
+      function updateSimulation() {
+        const activeCount = Array.from(planeBtns).filter((b) => b.classList.contains('active')).length;
+        if (activeCount === 0) {
+          if (tpEl) tpEl.textContent = '0 EPS';
+          if (latEl) latEl.textContent = '0.0 µs';
+          if (ramEl) ramEl.textContent = '12 MB';
+          if (cpuEl) cpuEl.textContent = '1% CPU';
+          return;
+        }
+        const eps = Math.round(activeCount * 2649.4);
+        const lat = (activeCount * 14.84).toFixed(1);
+        const ram = 28 + activeCount * 22.8;
+        const cpu = Math.round(activeCount * 5.6);
+
+        if (tpEl) tpEl.textContent = `${eps.toLocaleString()} EPS`;
+        if (latEl) latEl.textContent = `${lat} µs`;
+        if (ramEl) ramEl.textContent = `${Math.round(ram)} MB`;
+        if (cpuEl) cpuEl.textContent = `${cpu}% CPU`;
+      }
+
+      planeBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          btn.classList.toggle('active');
+          if (btn.classList.contains('active')) {
+            btn.classList.add('border-ember-500/40');
+            btn.classList.remove('opacity-40', 'border-bone-50/10');
+          } else {
+            btn.classList.remove('border-ember-500/40');
+            btn.classList.add('opacity-40', 'border-bone-50/10');
+          }
+          updateSimulation();
+        });
+      });
+
+      if (spikeBtn) {
+        spikeBtn.addEventListener('click', () => {
+          planeBtns.forEach((b) => {
+            b.classList.add('active', 'border-ember-500/40');
+            b.classList.remove('opacity-40', 'border-bone-50/10');
+          });
+          if (tpEl) tpEl.textContent = '24,180 EPS ⚡';
+          if (latEl) latEl.textContent = '91.4 µs';
+          if (ramEl) ramEl.textContent = '184 MB';
+          if (cpuEl) cpuEl.textContent = '76% CPU';
+          setTimeout(updateSimulation, 2200);
         });
       }
     }

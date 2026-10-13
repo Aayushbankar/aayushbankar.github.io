@@ -269,6 +269,112 @@ const heroName = ['AAYUSH', 'BANKAR'];
           </div>
         </article>
       </div>
+
+      <!-- Interactive Kernel Exploit & Syscall Telemetry Console -->
+      <div class="mt-8 card card-glare p-5 sm:p-7 bg-ink-950/80 border border-bone-50/15" data-reveal>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-bone-50/10">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-ember-500 animate-pulse"></span>
+            <span class="font-micro text-xs text-ember-400 uppercase tracking-widest font-semibold">Live Vulnerability Telemetry Console</span>
+          </div>
+          <div class="flex flex-wrap gap-1 p-1 rounded-xl bg-ink-900 border border-bone-50/10 font-micro text-xs" role="tablist">
+            <button type="button" class="exploit-tab-btn active px-3 py-1.5 rounded-lg font-semibold cursor-pointer text-ember-400 bg-bone-50/10 shadow-inner" data-target="exploit-panel-badepoll">CVE-2026-46242 Hex Dump</button>
+            <button type="button" class="exploit-tab-btn px-3 py-1.5 rounded-lg font-semibold cursor-pointer text-bone-400 hover:text-bone-100" data-target="exploit-panel-android">CVE-2026-28576 Binder Trace</button>
+            <button type="button" class="exploit-tab-btn px-3 py-1.5 rounded-lg font-semibold cursor-pointer text-bone-400 hover:text-bone-100" data-target="exploit-panel-gki">ARM64 GKI Branch Audit</button>
+          </div>
+        </div>
+
+        <!-- Panel 1: CVE-2026-46242 Hex Dump & Memory State -->
+        <div id="exploit-panel-badepoll" class="exploit-panel mt-5">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div class="lg:col-span-7 bg-ink-900/90 rounded-xl p-4 border border-bone-50/10 font-micro text-xs overflow-x-auto">
+              <div class="flex items-center justify-between mb-3 pb-2 border-b border-bone-50/10 text-bone-500">
+                <span>VIRT_ADDR: 0xffff8881023a4000 (SLUB: kmalloc-512)</span>
+                <span class="text-ember-400">STATE: UAF_DIRTY</span>
+              </div>
+              <div class="space-y-1 leading-relaxed text-bone-300">
+                <div class="flex gap-3 hover:bg-bone-50/5 p-1 rounded cursor-pointer hex-line" data-offset="0x0000" data-field="struct epitem -> rcu_head" data-desc="Freed struct epitem RCU list pointers awaiting reclaim cycle.">
+                  <span class="text-bone-600 select-none">0x0000:</span>
+                  <span class="text-ember-400">41 41 41 41 41 41 41 41</span>
+                  <span>00 00 00 00 00 00 00 00</span>
+                  <span class="text-bone-600 select-none">|AAAAAAAA........|</span>
+                </div>
+                <div class="flex gap-3 hover:bg-bone-50/5 p-1 rounded cursor-pointer hex-line bg-ember-500/10" data-offset="0x0010" data-field="sock -> sk_data_ready callback" data-desc="CORRUPT POINTER: Dereferenced upon incoming packet epoll wake, yielding control flow hijacking.">
+                  <span class="text-bone-600 select-none">0x0010:</span>
+                  <span class="text-ember-300 font-bold">ef be ad de 00 80 ff ff</span>
+                  <span>01 00 00 00 00 00 00 00</span>
+                  <span class="text-bone-600 select-none">|................|</span>
+                </div>
+                <div class="flex gap-3 hover:bg-bone-50/5 p-1 rounded cursor-pointer hex-line" data-offset="0x0020" data-field="epitem -> ffd.file descriptor" data-desc="Dangling struct file pointer pointing to closed socket handle.">
+                  <span class="text-bone-600 select-none">0x0020:</span>
+                  <span>20 40 3a 02 81 88 ff ff</span>
+                  <span>03 00 00 00 00 00 00 00</span>
+                  <span class="text-bone-600 select-none">| @:.............|</span>
+                </div>
+                <div class="flex gap-3 hover:bg-bone-50/5 p-1 rounded cursor-pointer hex-line" data-offset="0x0030" data-field="struct wait_queue_entry -> flags" data-desc="Custom WQ_FLAG_EXCLUSIVE bitmask triggering concurrent wake race.">
+                  <span class="text-bone-600 select-none">0x0030:</span>
+                  <span>08 00 00 00 00 00 00 00</span>
+                  <span>70 41 3a 02 81 88 ff ff</span>
+                  <span class="text-bone-600 select-none">|........pA:.....|</span>
+                </div>
+              </div>
+            </div>
+            <div class="lg:col-span-5 flex flex-col justify-between p-4 rounded-xl bg-ink-900 border border-bone-50/10">
+              <div>
+                <p class="font-micro text-[11px] uppercase tracking-wider text-bone-500 font-semibold mb-1">Interactive SLUB Inspector</p>
+                <p class="font-display text-base text-bone-100" id="hex-inspect-field">sock -> sk_data_ready callback</p>
+                <p class="text-xs text-bone-400 mt-2 leading-relaxed" id="hex-inspect-desc">
+                  CORRUPT POINTER: Dereferenced upon incoming packet epoll wake, yielding control flow hijacking. Verified on x86_64 Linux 6.12.9 kernel test rig.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-bone-50/10 flex items-center justify-between font-micro text-[11px]">
+                <span class="text-brass-400">Click lines to inspect offsets</span>
+                <a href={`/research/${badEpoll.articleSlug}`} class="text-ember-400 hover:underline">Full Exploit Note →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 2: CVE-2026-28576 Binder Trace -->
+        <div id="exploit-panel-android" class="exploit-panel hidden mt-5">
+          <div class="p-4 rounded-xl bg-ink-900 border border-bone-50/10 font-micro text-xs space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-bone-50/10 text-bone-400">
+              <span>BINDER IPC ORACLE (content://com.android.contacts/data)</span>
+              <span class="text-moss-500">ZERO PERMISSIONS REQUIRED</span>
+            </div>
+            <div class="space-y-2 text-bone-300">
+              <p><span class="text-ember-400">[STEP 01]</span> Unprivileged app sends Cursor query to ContactsProvider with projection parameter: <code class="text-bone-100">['(SELECT password FROM users WHERE uid=1000)']</code></p>
+              <p><span class="text-ember-400">[STEP 02]</span> SQLiteQueryBuilder in Android 11 through 15 fails to sanitize subquery projection clause.</p>
+              <p><span class="text-ember-400">[STEP 03]</span> Blind boolean side-channel leaks sensitive hashes without declaring <code class="text-brass-400">READ_CONTACTS</code> manifest permission.</p>
+            </div>
+            <div class="pt-3 border-t border-bone-50/10 flex justify-between items-center text-[11px]">
+              <span class="text-bone-500">Defenses: Strict projection whitelist + YARA/Suricata rules provided.</span>
+              <a href={`/research/${androidSqli.articleSlug}`} class="text-ember-400 hover:underline">Full Disclosure Paper →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: ARM64 GKI Audit -->
+        <div id="exploit-panel-gki" class="exploit-panel hidden mt-5">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-micro text-xs">
+            <div class="p-3.5 rounded-xl bg-ink-900 border border-bone-50/10">
+              <p class="text-ember-400 font-display text-2xl font-bold">0 / 102,400</p>
+              <p class="text-bone-400 uppercase tracking-wider mt-1 font-semibold">ARM64 GKI Hits</p>
+              <p class="text-bone-500 mt-1 text-[11px]">Across 102k synthetic tracepoint fuzz passes, Android GKI mitigation prevented UAF exploitation.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-ink-900 border border-bone-50/10">
+              <p class="text-brass-400 font-display text-2xl font-bold">x86_64 Root</p>
+              <p class="text-bone-400 uppercase tracking-wider mt-1 font-semibold">Tier 1 Verification</p>
+              <p class="text-bone-500 mt-1 text-[11px]">Reproduced hermetically under QEMU 6.12.9 with deterministic SLUB heap spray payload.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-ink-900 border border-bone-50/10">
+              <p class="text-moss-500 font-display text-2xl font-bold">100% Repro</p>
+              <p class="text-bone-400 uppercase tracking-wider mt-1 font-semibold">Open Source Harness</p>
+              <p class="text-bone-500 mt-1 text-[11px]">Dockerized container test harness with exact kernel seed and GDB trace script in repo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -481,4 +587,59 @@ const heroName = ['AAYUSH', 'BANKAR'];
       </div>
     </div>
   </section>
+
+  <!-- Interactive Telemetry Console Script -->
+  <script is:inline>
+    function setupHomeConsole() {
+      // 1. Exploit Tabs
+      const tabs = document.querySelectorAll('.exploit-tab-btn');
+      const panels = document.querySelectorAll('.exploit-panel');
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const target = tab.getAttribute('data-target');
+          if (!target) return;
+
+          tabs.forEach((t) => {
+            t.classList.remove('active', 'text-ember-400', 'bg-bone-50/10', 'shadow-inner');
+            t.classList.add('text-bone-400');
+          });
+
+          tab.classList.add('active', 'text-ember-400', 'bg-bone-50/10', 'shadow-inner');
+          tab.classList.remove('text-bone-400');
+
+          panels.forEach((p) => {
+            if (p.id === target) {
+              p.classList.remove('hidden');
+            } else {
+              p.classList.add('hidden');
+            }
+          });
+        });
+      });
+
+      // 2. Interactive Hex Lines
+      const hexLines = document.querySelectorAll('.hex-line');
+      const fieldEl = document.getElementById('hex-inspect-field');
+      const descEl = document.getElementById('hex-inspect-desc');
+
+      hexLines.forEach((line) => {
+        line.addEventListener('click', () => {
+          hexLines.forEach((l) => l.classList.remove('bg-ember-500/10'));
+          line.classList.add('bg-ember-500/10');
+          const field = line.getAttribute('data-field');
+          const desc = line.getAttribute('data-desc');
+          if (fieldEl && field) fieldEl.textContent = field;
+          if (descEl && desc) descEl.textContent = desc;
+        });
+      });
+    }
+
+    document.addEventListener('astro:page-load', setupHomeConsole);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupHomeConsole);
+    } else {
+      setupHomeConsole();
+    }
+  </script>
 </BaseLayout>

@@ -65,6 +65,19 @@ const activeItem = navItems.find((item) => isRouteActive(item.href)) || navItems
         <span data-ist-clock>--:-- IST</span>
       </div>
 
+      <button
+        type="button"
+        id="navbar-cmdk-btn"
+        class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-ink-900/60 border border-bone-50/10 text-bone-400 hover:text-bone-50 hover:border-bone-50/20 font-micro text-[10px] tracking-wider transition-all cursor-pointer"
+        aria-label="Open Command Palette (Cmd+K)"
+        title="Search dossier (⌘K)"
+      >
+        <svg class="w-3 h-3 text-bone-400" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+        </svg>
+        <span class="text-bone-300 font-semibold">⌘K</span>
+      </button>
+
       <a
         href="https://github.com/Aayushbankar"
         target="_blank"

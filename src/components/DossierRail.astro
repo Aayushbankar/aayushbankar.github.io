@@ -133,7 +133,7 @@ if (pathname === '/') {
 
 <!-- Desktop Sticky Dossier Rail Dock (Fixed Left Bar) -->
 <aside class="dossier-rail-dock" aria-label="Dossier Document and Section Navigation">
-  <!-- Active Page Pill & Switcher -->
+  <!-- Active Page Pill & Switcher: Always shows current page + dynamic active section -->
   <div
     class="dossier-page-pill"
     id="dossier-page-trigger"
@@ -143,14 +143,22 @@ if (pathname === '/') {
     aria-expanded="false"
     aria-label={`Current document: ${currentPage.pageName}. Click to open document index.`}
   >
-    <span class="dossier-led"></span>
-    <span class="dossier-page-code">{currentPage.code}</span>
-    <span class="dossier-page-title">{currentPage.pageName}</span>
-    <svg class="dossier-page-chevron" viewBox="0 0 20 20" fill="currentColor">
-      <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-    </svg>
+    <div class="dossier-pill-header">
+      <span class="dossier-led"></span>
+      <span class="dossier-page-code">{currentPage.code}</span>
+      <span class="dossier-page-title">{currentPage.pageName}</span>
+      <svg class="dossier-page-chevron" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+      </svg>
+    </div>
 
-    <!-- Page Switcher Flyout Menu -->
+    <!-- Dynamic Section Readout: updates as visitor scrolls through different sections -->
+    <div class="dossier-pill-sub" id="dossier-active-sec-readout">
+      <span class="dossier-sub-dot"></span>
+      <span id="dossier-active-sec-name">{currentPage.sections[0].num} {currentPage.sections[0].label}</span>
+    </div>
+
+    <!-- Page Switcher Flyout Directory -->
     <div class="dossier-page-flyout" id="dossier-page-menu" role="menu">
       <div class="dossier-flyout-header">
         <span>Dossier Directory ({allPages.length} Documents)</span>
@@ -185,6 +193,7 @@ if (pathname === '/') {
         aria-label={`Jump to section ${sec.num} ${sec.label}`}
         class={idx === 0 ? 'active' : ''}
         data-section-id={sec.id}
+        data-section-label={`${sec.num} ${sec.label}`}
       >
         <span class="dot"></span>
         <span>{sec.num}</span>
@@ -195,19 +204,42 @@ if (pathname === '/') {
 
   <div class="dossier-rail-divider"></div>
 
-  <!-- Scroll Depth Gauge & Jump to Top -->
-  <button
-    type="button"
-    class="dossier-top-btn"
-    id="dossier-scroll-top"
-    aria-label="Scroll back to top of document"
-    title="Back to top"
-  >
-    <svg class="dossier-top-icon" viewBox="0 0 20 20" fill="currentColor">
-      <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd" />
-    </svg>
-    <span class="dossier-depth-readout" id="dossier-depth-val">0%</span>
-  </button>
+  <!-- Utility Controls: Command Palette (⌘K) + Audio SFX Toggle + Back to Top -->
+  <div class="dossier-rail-actions">
+    <button
+      type="button"
+      class="dossier-action-btn"
+      id="dossier-cmdk-trigger"
+      aria-label="Open Command Palette (Cmd+K)"
+      title="Search dossier (⌘K)"
+    >
+      <span class="font-micro text-[10px] font-bold text-bone-300">⌘K</span>
+    </button>
+
+    <button
+      type="button"
+      class="dossier-action-btn"
+      id="dossier-sound-toggle"
+      aria-label="Toggle Cybernetic Audio Synthesizer"
+      title="Audio FX: Off"
+      aria-pressed="false"
+    >
+      <span class="font-micro text-[9px] font-bold text-bone-400" id="sound-label">SFX</span>
+    </button>
+
+    <button
+      type="button"
+      class="dossier-top-btn"
+      id="dossier-scroll-top"
+      aria-label="Scroll back to top of document"
+      title="Back to top"
+    >
+      <svg class="dossier-top-icon" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd" />
+      </svg>
+      <span class="dossier-depth-readout" id="dossier-depth-val">0%</span>
+    </button>
+  </div>
 </aside>
 
 <!-- Mobile Docked Dossier HUD Pill (Responsive Bottom Dock) -->
@@ -224,6 +256,7 @@ if (pathname === '/') {
         aria-label={`Jump to section ${sec.num} ${sec.label}`}
         class={`dossier-mobile-link ${idx === 0 ? 'active' : ''}`}
         data-section-id={sec.id}
+        data-section-label={`${sec.num} ${sec.label}`}
       >
         <span class="dot"></span>
         <span>{sec.num}</span>
