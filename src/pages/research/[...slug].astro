@@ -33,7 +33,7 @@ const { Content } = await render(post);
       </a>
 
       <!-- Article Header -->
-      <header class="mb-10 rise">
+      <header id="overview" class="scroll-mt-24 mb-10 rise">
         <div class="flex flex-wrap items-center gap-2.5 mb-4">
           <span class="chip chip-brass text-[10px]">
             {post.data.category}
@@ -80,14 +80,14 @@ const { Content } = await render(post);
       </header>
 
       <!-- Paper Content (Rendered Markdown) -->
-      <article class="paper-body border-t border-bone-50/10 pt-10">
+      <article id="analysis" class="scroll-mt-24 paper-body border-t border-bone-50/10 pt-10">
         <Content />
       </article>
 
       <!-- Post Footer -->
-      <footer class="mt-16 pt-8 border-t border-bone-50/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-micro text-bone-500">
+      <footer id="defense" class="scroll-mt-24 mt-16 pt-8 border-t border-bone-50/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-micro text-bone-500">
         <div>
-          AUTHOR: <span class="text-bone-50 font-semibold">{post.data.author}</span> · Cybersecurity Analyst @ CypherMatrix
+          AUTHOR: <span class="text-bone-50 font-semibold">{post.data.author}</span> · Student Builder &amp; Research Collaborator @ CypherMatrix
         </div>
         <div class="flex items-center gap-4">
           <a href="/research" class="text-ember-400 hover:text-bone-50 transition-colors">

@@ -1,0 +1,233 @@
+---
+interface RailSection {
+  id: string;
+  num: string;
+  label: string;
+}
+
+interface PageConfig {
+  code: string;
+  pageNum: string;
+  pageName: string;
+  href: string;
+  sections: RailSection[];
+}
+
+const allPages: PageConfig[] = [
+  {
+    code: 'DS:01',
+    pageNum: '01',
+    pageName: 'Home',
+    href: '/',
+    sections: [
+      { id: 'breakthroughs', num: '01', label: 'Bugs' },
+      { id: 'systems', num: '02', label: 'Systems' },
+      { id: 'notes', num: '03', label: 'Notes' },
+      { id: 'connect', num: '04', label: 'Connect' },
+    ],
+  },
+  {
+    code: 'DS:02',
+    pageNum: '02',
+    pageName: 'Systems',
+    href: '/systems',
+    sections: [
+      { id: 'telemetry', num: '01', label: 'Console' },
+      { id: 'domains', num: '02', label: 'Domains' },
+      { id: 'catalog', num: '03', label: 'Catalog' },
+      { id: 'benchmarks', num: '04', label: 'Metrics' },
+    ],
+  },
+  {
+    code: 'DS:03',
+    pageNum: '03',
+    pageName: 'Research',
+    href: '/research',
+    sections: [
+      { id: 'testbench', num: '01', label: 'Harness' },
+      { id: 'disclosures', num: '02', label: 'CVEs' },
+      { id: 'engine', num: '03', label: 'Engine' },
+      { id: 'methodology', num: '04', label: 'Methods' },
+    ],
+  },
+  {
+    code: 'DS:04',
+    pageNum: '04',
+    pageName: 'About',
+    href: '/about',
+    sections: [
+      { id: 'profile', num: '01', label: 'Profile' },
+      { id: 'hardware', num: '02', label: 'Hardware' },
+      { id: 'creds', num: '03', label: 'Creds' },
+      { id: 'ethos', num: '04', label: 'Ethos' },
+    ],
+  },
+  {
+    code: 'DS:05',
+    pageNum: '05',
+    pageName: 'Trajectory',
+    href: '/trajectory',
+    sections: [
+      { id: 'milestones', num: '01', label: 'Timeline' },
+      { id: 'tech-evolution', num: '02', label: 'Stack' },
+      { id: 'decisions', num: '03', label: 'Decisions' },
+    ],
+  },
+  {
+    code: 'DS:06',
+    pageNum: '06',
+    pageName: 'Contact',
+    href: '/contact',
+    sections: [
+      { id: 'channels', num: '01', label: 'Channels' },
+      { id: 'pgp', num: '02', label: 'PGP Key' },
+      { id: 'scope', num: '03', label: 'Scope' },
+    ],
+  },
+];
+
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+let currentPage: PageConfig;
+
+if (pathname === '/') {
+  currentPage = allPages[0];
+} else if (pathname === '/systems') {
+  currentPage = allPages[1];
+} else if (pathname.startsWith('/systems/')) {
+  currentPage = {
+    code: 'DS:SYS',
+    pageNum: '02',
+    pageName: 'Spec',
+    href: pathname,
+    sections: [
+      { id: 'specs', num: '01', label: 'Specs' },
+      { id: 'architecture', num: '02', label: 'Arch' },
+      { id: 'benchmarks', num: '03', label: 'Verify' },
+    ],
+  };
+} else if (pathname === '/research') {
+  currentPage = allPages[2];
+} else if (pathname.startsWith('/research/')) {
+  currentPage = {
+    code: 'DS:RES',
+    pageNum: '03',
+    pageName: 'Paper',
+    href: pathname,
+    sections: [
+      { id: 'overview', num: '01', label: 'Overview' },
+      { id: 'analysis', num: '02', label: 'Analysis' },
+      { id: 'defense', num: '03', label: 'Defense' },
+    ],
+  };
+} else if (pathname === '/about') {
+  currentPage = allPages[3];
+} else if (pathname === '/trajectory') {
+  currentPage = allPages[4];
+} else if (pathname === '/contact') {
+  currentPage = allPages[5];
+} else {
+  currentPage = allPages[0];
+}
+---
+
+<!-- Desktop Sticky Dossier Rail Dock (Fixed Left Bar) -->
+<aside class="dossier-rail-dock" aria-label="Dossier Document and Section Navigation">
+  <!-- Active Page Pill & Switcher -->
+  <div
+    class="dossier-page-pill"
+    id="dossier-page-trigger"
+    tabindex="0"
+    role="button"
+    aria-haspopup="true"
+    aria-expanded="false"
+    aria-label={`Current document: ${currentPage.pageName}. Click to open document index.`}
+  >
+    <span class="dossier-led"></span>
+    <span class="dossier-page-code">{currentPage.code}</span>
+    <span class="dossier-page-title">{currentPage.pageName}</span>
+    <svg class="dossier-page-chevron" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+    </svg>
+
+    <!-- Page Switcher Flyout Menu -->
+    <div class="dossier-page-flyout" id="dossier-page-menu" role="menu">
+      <div class="dossier-flyout-header">
+        <span>Dossier Directory ({allPages.length} Documents)</span>
+      </div>
+      {allPages.map((p) => {
+        const isCurrent = p.code === currentPage.code;
+        return (
+          <a
+            href={p.href}
+            class={`dossier-flyout-item ${isCurrent ? 'active' : ''}`}
+            role="menuitem"
+          >
+            <span class="flyout-num">{p.pageNum}</span>
+            <span class="flyout-name">{p.pageName}</span>
+            {isCurrent && <span class="flyout-curr-dot"></span>}
+          </a>
+        );
+      })}
+    </div>
+  </div>
+
+  <div class="dossier-rail-divider"></div>
+
+  <!-- Pinned Section Anchors Navigation Rail -->
+  <nav class="dossier-rail" aria-label="Dossier section navigation">
+    <div class="dossier-rail-spine" aria-hidden="true">
+      <div class="dossier-rail-progress" id="dossier-progress-line"></div>
+    </div>
+    {currentPage.sections.map((sec, idx) => (
+      <a
+        href={`#${sec.id}`}
+        aria-label={`Jump to section ${sec.num} ${sec.label}`}
+        class={idx === 0 ? 'active' : ''}
+        data-section-id={sec.id}
+      >
+        <span class="dot"></span>
+        <span>{sec.num}</span>
+        <span class="rail-label">{sec.label}</span>
+      </a>
+    ))}
+  </nav>
+
+  <div class="dossier-rail-divider"></div>
+
+  <!-- Scroll Depth Gauge & Jump to Top -->
+  <button
+    type="button"
+    class="dossier-top-btn"
+    id="dossier-scroll-top"
+    aria-label="Scroll back to top of document"
+    title="Back to top"
+  >
+    <svg class="dossier-top-icon" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd" />
+    </svg>
+    <span class="dossier-depth-readout" id="dossier-depth-val">0%</span>
+  </button>
+</aside>
+
+<!-- Mobile Docked Dossier HUD Pill (Responsive Bottom Dock) -->
+<nav class="dossier-rail-mobile" aria-label="Mobile dossier section navigation">
+  <a href={currentPage.href} class="dossier-mobile-page" title="Current dossier document">
+    <span class="dossier-mobile-led"></span>
+    <span>{currentPage.code}</span>
+  </a>
+  <span class="dossier-mobile-sep">|</span>
+  <div class="dossier-mobile-sections">
+    {currentPage.sections.map((sec, idx) => (
+      <a
+        href={`#${sec.id}`}
+        aria-label={`Jump to section ${sec.num} ${sec.label}`}
+        class={`dossier-mobile-link ${idx === 0 ? 'active' : ''}`}
+        data-section-id={sec.id}
+      >
+        <span class="dot"></span>
+        <span>{sec.num}</span>
+      </a>
+    ))}
+  </div>
+</nav>

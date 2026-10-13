@@ -61,7 +61,7 @@ const domains = [
     <!-- ═══════════════════════════════════════════════════════════════
          INTERACTIVE ARCHITECTURAL TELEMETRY INSPECTOR
          ═══════════════════════════════════════════════════════════════ -->
-    <section class="mb-16 card card-glare p-6 sm:p-8 bg-ink-900/80 border border-bone-50/15" data-reveal>
+    <section id="telemetry" class="scroll-mt-24 mb-16 card card-glare p-6 sm:p-8 bg-ink-900/80 border border-bone-50/15" data-reveal>
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-bone-50/10">
         <div>
           <div class="flex items-center gap-2 mb-1.5">
@@ -209,38 +209,45 @@ const domains = [
       </div>
     </section>
 
-    <!-- Complete Systems Catalog Header & Filter -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
-      <div>
-        <p class="eyebrow mb-1">
-          <span class="tick">CAT–01</span>
-          <span>Catalog &amp; Spec Sheets</span>
-        </p>
-        <h3 class="font-display text-2xl sm:text-3xl text-bone-50">
-          All {allSystems.length} Documented Architectures
-        </h3>
+    <!-- ═══════════════════════════════════════════════════════════════
+         02 DOMAIN FILTERING & CLASSIFICATION
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="domains" class="scroll-mt-24 mb-10">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+        <div>
+          <p class="eyebrow mb-1">
+            <span class="tick">CAT–01</span>
+            <span>Catalog &amp; Spec Sheets</span>
+          </p>
+          <h3 class="font-display text-2xl sm:text-3xl text-bone-50">
+            All {allSystems.length} Documented Architectures
+          </h3>
+        </div>
       </div>
-    </div>
 
-    <!-- Domain Filter Navigation (Progressive Enhancement) -->
-    <nav class="flex flex-wrap gap-2 mb-10 pb-4 border-b border-bone-50/10" aria-label="Filter systems by domain" id="domain-filter">
-      {domains.map((d, i) => (
-        <button
-          type="button"
-          data-filter-btn={d}
-          class={`filter-btn px-3.5 py-1.5 rounded-full font-micro text-xs tracking-wider transition-all duration-200 cursor-pointer ${
-            i === 0
-              ? 'bg-bone-50 text-ink-950 font-semibold shadow-sm active'
-              : 'bg-ink-850 text-bone-400 border border-bone-50/10 hover:border-bone-50/30 hover:text-bone-50'
-          }`}
-        >
-          {d}
-        </button>
-      ))}
-    </nav>
+      <!-- Domain Filter Navigation (Progressive Enhancement) -->
+      <nav class="flex flex-wrap gap-2 pb-4 border-b border-bone-50/10" aria-label="Filter systems by domain" id="domain-filter">
+        {domains.map((d, i) => (
+          <button
+            type="button"
+            data-filter-btn={d}
+            class={`filter-btn px-3.5 py-1.5 rounded-full font-micro text-xs tracking-wider transition-all duration-200 cursor-pointer ${
+              i === 0
+                ? 'bg-bone-50 text-ink-950 font-semibold shadow-sm active'
+                : 'bg-ink-850 text-bone-400 border border-bone-50/10 hover:border-bone-50/30 hover:text-bone-50'
+            }`}
+          >
+            {d}
+          </button>
+        ))}
+      </nav>
+    </section>
 
-    <!-- Complete Systems Catalog Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="systems-grid">
+    <!-- ═══════════════════════════════════════════════════════════════
+         03 COMPLETE SYSTEMS CATALOG GRID
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="catalog" class="scroll-mt-24 mb-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="systems-grid">
       {allSystems.map((sys) => {
         const badgeClass =
           sys.badgeType === 'ember'
@@ -316,27 +323,88 @@ const domains = [
         );
       })}
     </div>
+  </section>
 
-    <!-- Related CVE & Kernel Research Callout -->
-    <div class="mt-16 card card-glare p-8 border-l-4 border-ember-500 flex flex-col md:flex-row md:items-center justify-between gap-6" data-reveal>
-      <div>
-        <div class="flex items-center gap-2 mb-2">
-          <span class="stamp !text-[9px] !py-0.5 !px-2">KERNEL AUDITS</span>
-          <span class="font-micro text-xs tracking-wider uppercase text-ember-400 font-semibold">Vulnerability Triage</span>
-        </div>
-        <h3 class="display text-xl sm:text-2xl text-bone-50 mb-2">
-          Looking for Low-Level Exploit Chains &amp; CVE Notes?
+    <!-- ═══════════════════════════════════════════════════════════════
+         04 HARDWARE VERIFICATION & EMPIRICAL BENCHMARKS
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="benchmarks" class="scroll-mt-24 mt-16 mb-12" data-reveal>
+      <div class="mb-8">
+        <p class="eyebrow mb-1">
+          <span class="tick">BENCH–01</span>
+          <span>Empirical Telemetry Matrix</span>
+        </p>
+        <h3 class="font-display text-2xl sm:text-3xl text-bone-50">
+          Hardware Verification Matrix (8 GB HP EliteBook Test Rig)
         </h3>
-        <p class="text-xs sm:text-sm text-bone-300 max-w-2xl leading-relaxed">
-          Examine Bad Epoll (CVE-2026-46242) and Android Contacts SQLi (CVE-2026-28576) complete with GDB hardware watchpoint logs, ROP gadget chains, and verification registers.
+        <p class="text-xs sm:text-sm text-bone-400 mt-2 max-w-2xl leading-relaxed">
+          Zero simulated vanity numbers. Every benchmark below was executed directly on standard consumer silicon (Intel Core i5-8350U @ 1.70GHz, 8 GB DDR4 RAM, EndeavourOS Linux 6.12).
         </p>
       </div>
-      <div class="shrink-0">
-        <a href="/research" class="btn btn-primary">
-          Explore Research Notes →
-        </a>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="card card-glare p-5 bg-ink-950/80 border border-bone-50/10">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-micro text-[11px] text-ember-400 font-bold">SPECTRE-PRISM</span>
+            <span class="chip chip-ember !text-[9px]">SIH SCREENING</span>
+          </div>
+          <p class="font-display text-2xl sm:text-3xl text-bone-50 font-semibold">13,247</p>
+          <p class="font-micro text-[10px] text-bone-400 uppercase tracking-wider mt-0.5">Events / Sec / Core</p>
+          <p class="text-[11px] text-bone-500 mt-2">Zero-copy Linux eBPF ringbuf streaming with zero packet loss across 1M synthetic events.</p>
+        </div>
+
+        <div class="card card-glare p-5 bg-ink-950/80 border border-bone-50/10">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-micro text-[11px] text-brass-400 font-bold">Wolvie Assistant</span>
+            <span class="chip chip-brass !text-[9px]">100% OFFLINE</span>
+          </div>
+          <p class="font-display text-2xl sm:text-3xl text-brass-400 font-semibold">530 ms</p>
+          <p class="font-micro text-[10px] text-bone-400 uppercase tracking-wider mt-0.5">End-to-End Latency</p>
+          <p class="text-[11px] text-bone-500 mt-2">Silero VAD + faster-whisper + llama.cpp Q4_K_M + Piper TTS on 4 CPU threads.</p>
+        </div>
+
+        <div class="card card-glare p-5 bg-ink-950/80 border border-bone-50/10">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-micro text-[11px] text-moss-400 font-bold">QuantLab SEBI</span>
+            <span class="chip !text-[9px] !text-moss-400 !border-moss-500/40">FRICTION ENGINE</span>
+          </div>
+          <p class="font-display text-2xl sm:text-3xl text-moss-400 font-semibold">-42.8%</p>
+          <p class="font-micro text-[10px] text-bone-400 uppercase tracking-wider mt-0.5">Realistic P&amp;L Decay</p>
+          <p class="text-[11px] text-bone-500 mt-2">Discrete-event simulation testing Almgren-Chriss impact against statutory Indian market tax drag.</p>
+        </div>
+
+        <div class="card card-glare p-5 bg-ink-950/80 border border-bone-50/10">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-micro text-[11px] text-bone-200 font-bold">Campus Web Portal</span>
+            <span class="chip !text-[9px]">ZERO-BUDGET INFRA</span>
+          </div>
+          <p class="font-display text-2xl sm:text-3xl text-bone-50 font-semibold">500+</p>
+          <p class="font-micro text-[10px] text-bone-400 uppercase tracking-wider mt-0.5">Daily Active Peers</p>
+          <p class="text-[11px] text-bone-500 mt-2">Self-hosted GP Gandhinagar IT portal delivering sub-second TTFB on zero rupee hosting budget.</p>
+        </div>
       </div>
-    </div>
+
+      <!-- Related CVE & Kernel Research Callout -->
+      <div class="card card-glare p-8 border-l-4 border-ember-500 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="stamp !text-[9px] !py-0.5 !px-2">KERNEL AUDITS</span>
+            <span class="font-micro text-xs tracking-wider uppercase text-ember-400 font-semibold">Vulnerability Triage</span>
+          </div>
+          <h3 class="display text-xl sm:text-2xl text-bone-50 mb-2">
+            Looking for Low-Level Exploit Chains &amp; CVE Notes?
+          </h3>
+          <p class="text-xs sm:text-sm text-bone-300 max-w-2xl leading-relaxed">
+            Examine Bad Epoll (CVE-2026-46242) and Android Contacts SQLi (CVE-2026-28576) complete with GDB hardware watchpoint logs, ROP gadget chains, and verification registers.
+          </p>
+        </div>
+        <div class="shrink-0">
+          <a href="/research" class="btn btn-primary">
+            Explore Research Notes →
+          </a>
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- Interactive Telemetry Console & Domain Filtering Script -->

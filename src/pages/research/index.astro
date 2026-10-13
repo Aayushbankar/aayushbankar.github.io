@@ -174,7 +174,7 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
     <!-- ═══════════════════════════════════════════════════════════════
          INTERACTIVE EXPLOIT REPRODUCTION & VERIFICATION TERMINAL
          ═══════════════════════════════════════════════════════════════ -->
-    <section class="mb-16 card card-glare p-6 sm:p-8 bg-ink-900/80 border border-bone-50/15" data-reveal>
+    <section id="testbench" class="scroll-mt-24 mb-16 card card-glare p-6 sm:p-8 bg-ink-900/80 border border-bone-50/15" data-reveal>
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-bone-50/10">
         <div>
           <div class="flex items-center gap-2 mb-1.5">
@@ -302,18 +302,21 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
       </div>
     </section>
 
-    <!-- Field Notes Catalog Header & Category Filter -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
-      <div>
-        <p class="eyebrow mb-1">
-          <span class="tick">CAT–01</span>
-          <span>Field Notes &amp; Ledger Index</span>
-        </p>
-        <h3 class="font-display text-2xl sm:text-3xl text-bone-50">
-          All {sortedPosts.length} Documented Field Notes
-        </h3>
+    <!-- ═══════════════════════════════════════════════════════════════
+         02 VULNERABILITY DISCLOSURES & FIELD NOTES INDEX
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="disclosures" class="scroll-mt-24 mb-16">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+        <div>
+          <p class="eyebrow mb-1">
+            <span class="tick">CAT–01</span>
+            <span>Field Notes &amp; Ledger Index</span>
+          </p>
+          <h3 class="font-display text-2xl sm:text-3xl text-bone-50">
+            All {sortedPosts.length} Documented Field Notes
+          </h3>
+        </div>
       </div>
-    </div>
 
     <!-- Interactive Category Filter (Works with and without JS) -->
     <nav class="flex flex-wrap gap-2 mb-10 pb-4 border-b border-bone-50/10" aria-label="Filter field notes by category" id="category-filter">
@@ -414,6 +417,143 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
         </section>
       ))}
     </div>
+  </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         03 SPECTRE-PRISM 5-PLANE LOG ENGINE ARCHITECTURE
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="engine" class="scroll-mt-24 mb-16" data-reveal>
+      <div class="mb-8">
+        <p class="eyebrow mb-1">
+          <span class="tick">ENG–01</span>
+          <span>5-Plane High-Throughput Log Architecture</span>
+        </p>
+        <h3 class="font-display text-2xl sm:text-3xl text-bone-50">
+          SPECTRE-PRISM: <em class="text-ember-400">SIH 2026 Detection Engine.</em>
+        </h3>
+        <p class="text-xs sm:text-sm text-bone-400 mt-2 max-w-2xl leading-relaxed">
+          Designed for the Smart India Hackathon (SIH 2026) national screening. Ingests Linux kernel syscall tracepoints via zero-copy ring buffers, parses multi-line events with a custom Pratt parser, and maintains an RFC 6962 BLAKE3 Merkle tree audit trail.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3.5 mb-8">
+        <div class="card card-glare p-5 bg-ink-950/80 border border-bone-50/10 flex flex-col justify-between">
+          <div>
+            <span class="font-micro text-[10px] text-ember-400 font-bold uppercase tracking-wider block mb-1">Plane 01</span>
+            <h4 class="font-display text-base text-bone-50 mb-1.5">Kernel Ingestion</h4>
+            <p class="text-[11px] text-bone-400 leading-snug">eBPF <code class="text-ember-300">BPF_MAP_TYPE_RINGBUF</code> zero-copy tracepoint polling for <code class="text-bone-200">sys_enter_execve</code>.</p>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-bone-50/10 font-mono text-[10px] text-emerald-400 font-semibold">
+            13,247 EPS / core
+          </div>
+        </div>
+
+        <div class="card card-glare p-5 bg-ink-950/80 border border-bone-50/10 flex flex-col justify-between">
+          <div>
+            <span class="font-micro text-[10px] text-brass-400 font-bold uppercase tracking-wider block mb-1">Plane 02</span>
+            <h4 class="font-display text-base text-bone-50 mb-1.5">SIMD Tokenizer</h4>
+            <p class="text-[11px] text-bone-400 leading-snug">Zero-allocation byte-slice lexer with vectorized ASCII whitespace and quote delimiter skipping.</p>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-bone-50/10 font-mono text-[10px] text-brass-400 font-semibold">
+            0 Heap Allocations
+          </div>
+        </div>
+
+        <div class="card card-glare p-5 bg-ink-950/80 border border-bone-50/10 flex flex-col justify-between">
+          <div>
+            <span class="font-micro text-[10px] text-ember-400 font-bold uppercase tracking-wider block mb-1">Plane 03</span>
+            <h4 class="font-display text-base text-bone-50 mb-1.5">Pratt Parser</h4>
+            <p class="text-[11px] text-bone-400 leading-snug">Top-Down Operator Precedence AST evaluator matching 84 Sigma rule conditions concurrently.</p>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-bone-50/10 font-mono text-[10px] text-emerald-400 font-semibold">
+            14.2 µs Mean Eval
+          </div>
+        </div>
+
+        <div class="card card-glare p-5 bg-ink-950/80 border border-bone-50/10 flex flex-col justify-between">
+          <div>
+            <span class="font-micro text-[10px] text-moss-400 font-bold uppercase tracking-wider block mb-1">Plane 04</span>
+            <h4 class="font-display text-base text-bone-50 mb-1.5">Merkle Audit</h4>
+            <p class="text-[11px] text-bone-400 leading-snug">RFC 6962 BLAKE3 leaf node aggregation into tamper-evident log chunks signed via Ed25519.</p>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-bone-50/10 font-mono text-[10px] text-moss-400 font-semibold">
+            Cryptographic Proof
+          </div>
+        </div>
+
+        <div class="card card-glare p-5 bg-ink-950/80 border border-bone-50/10 flex flex-col justify-between">
+          <div>
+            <span class="font-micro text-[10px] text-bone-300 font-bold uppercase tracking-wider block mb-1">Plane 05</span>
+            <h4 class="font-display text-base text-bone-50 mb-1.5">Egress Sinks</h4>
+            <p class="text-[11px] text-bone-400 leading-snug">mmap memory-backed ring buffers flushing to hermetic disk journals and SIEM pipelines.</p>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-bone-50/10 font-mono text-[10px] text-bone-300 font-semibold">
+            0 Packet Drops
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-ink-950 border border-bone-50/10 font-mono text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-2 overflow-x-auto">
+          <span class="text-ember-500 font-bold">$</span>
+          <span class="text-bone-200">cargo bench --bench simd_ingest -- --verbose</span>
+        </div>
+        <span class="chip chip-ember !text-[10px] shrink-0">13,247 EPS on HP EliteBook 840 G5</span>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         04 THREAT MODELING & HERMETIC LAB METHODOLOGY
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="methodology" class="scroll-mt-24 mb-12" data-reveal>
+      <div class="mb-8">
+        <p class="eyebrow mb-1">
+          <span class="tick">MET–01</span>
+          <span>Threat Modeling &amp; Verification Rig</span>
+        </p>
+        <h3 class="font-display text-2xl sm:text-3xl text-bone-50">
+          Hermetic Verification: <em class="text-ember-400">From Silicon to Signed Proof.</em>
+        </h3>
+        <p class="text-xs sm:text-sm text-bone-400 mt-2 max-w-2xl leading-relaxed">
+          Every exploit chain, race condition window, and system benchmark is tested under strictly isolated, reproducible conditions.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="card card-glare p-6 bg-ink-900/60 border border-bone-50/10">
+          <span class="font-micro text-xs text-brass-400 font-bold block mb-2">[01 / QEMU HARNESS]</span>
+          <h4 class="display text-lg text-bone-50 mb-2">Isolated Micro-VMs</h4>
+          <p class="text-xs text-bone-400 leading-relaxed">
+            Exploits run inside hermetic QEMU micro-VMs booting stripped Arch kernels (<code class="text-brass-300">CONFIG_SLAB_FREELIST_HARDENED=y</code>, <code class="text-brass-300">RETPOLINE=y</code>) in under 400ms without contaminating host memory.
+          </p>
+          <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
+            Reproducible kernel root in 84ms
+          </div>
+        </div>
+
+        <div class="card card-glare p-6 bg-ink-900/60 border border-bone-50/10">
+          <span class="font-micro text-xs text-ember-400 font-bold block mb-2">[02 / GDB AUTOMATION]</span>
+          <h4 class="display text-lg text-bone-50 mb-2">GDB Python Watchpoints</h4>
+          <p class="text-xs text-bone-400 leading-relaxed">
+            Hardware watchpoints scripted in Python track SLUB freelist allocations in <code class="text-ember-300">kmalloc-192</code>, catching race collisions between <code class="text-bone-200">epoll_ctl()</code> and <code class="text-bone-200">close()</code> deterministically.
+          </p>
+          <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
+            KASLR leak verified via /proc/self/fdinfo
+          </div>
+        </div>
+
+        <div class="card card-glare p-6 bg-ink-900/60 border border-bone-50/10">
+          <span class="font-micro text-xs text-moss-400 font-bold block mb-2">[03 / IPC TIMING ORACLE]</span>
+          <h4 class="display text-lg text-bone-50 mb-2">Binder Timing Analysis</h4>
+          <p class="text-xs text-bone-400 leading-relaxed">
+            Android projection injection verified across 5 OS releases using high-resolution transaction timing differentials (142ms vs 12ms) over unprivileged Binder boundaries with 0 permissions.
+          </p>
+          <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
+            Published YARA and Suricata signatures
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- Interactive Terminal Simulator & Category Filter Script -->

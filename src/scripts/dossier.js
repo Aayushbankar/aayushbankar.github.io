@@ -125,9 +125,8 @@ function scrollFX() {
 }
 
 function railSpy() {
-  const rail = document.querySelector('.dossier-rail');
-  const links = document.querySelectorAll('.dossier-rail a');
-  if (!rail || !links.length) return;
+  const links = document.querySelectorAll('.dossier-rail a, .dossier-rail-mobile a');
+  if (!links.length) return;
 
   const sectionLinks = [];
   links.forEach((a) => {
@@ -140,6 +139,31 @@ function railSpy() {
     }
   });
 
+  const progressLine = document.getElementById('dossier-progress-line');
+  const depthVal = document.getElementById('dossier-depth-val');
+  const topBtn = document.getElementById('dossier-scroll-top');
+  const pageTrigger = document.getElementById('dossier-page-trigger');
+
+  if (topBtn) {
+    topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  if (pageTrigger) {
+    pageTrigger.onclick = (e) => {
+      if (!e.target.closest('a')) {
+        pageTrigger.classList.toggle('open');
+        const expanded = pageTrigger.classList.contains('open');
+        pageTrigger.setAttribute('aria-expanded', String(expanded));
+      }
+    };
+    document.addEventListener('click', (e) => {
+      if (!pageTrigger.contains(e.target)) {
+        pageTrigger.classList.remove('open');
+        pageTrigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   if (!sectionLinks.length) return;
 
   let ticking = false;
@@ -150,35 +174,38 @@ function railSpy() {
     const vh = window.innerHeight;
     const docHeight = document.documentElement.scrollHeight;
 
+    // Scroll depth readout & progress line
+    const maxScroll = Math.max(1, docHeight - vh);
+    const pct = Math.min(100, Math.max(0, Math.round((scrollY / maxScroll) * 100)));
+    if (depthVal) depthVal.textContent = `${pct}%`;
+    if (progressLine) progressLine.style.height = `${pct}%`;
+
     // If near bottom of page, activate the last section
     if (scrollY + vh >= docHeight - 140) {
-      sectionLinks.forEach(({ link }, idx) => {
-        if (idx === sectionLinks.length - 1) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
+      const lastId = sectionLinks[sectionLinks.length - 1].id;
+      sectionLinks.forEach(({ id, link }) => {
+        const isActive = id === lastId;
+        link.classList.toggle('active', isActive);
+        link.setAttribute('aria-current', isActive ? 'true' : 'false');
       });
       return;
     }
 
     // Focal point is 42% from top of viewport
     const focusY = vh * 0.42;
-    let current = sectionLinks[0];
+    let currentId = sectionLinks[0].id;
 
     for (const item of sectionLinks) {
       const rect = item.sec.getBoundingClientRect();
       if (rect.top <= focusY) {
-        current = item;
+        currentId = item.id;
       }
     }
 
-    sectionLinks.forEach(({ link }) => {
-      if (link === current.link) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
-      }
+    sectionLinks.forEach(({ id, link }) => {
+      const isActive = id === currentId;
+      link.classList.toggle('active', isActive);
+      link.setAttribute('aria-current', isActive ? 'true' : 'false');
     });
   }
 
@@ -193,7 +220,7 @@ function railSpy() {
   window.addEventListener('resize', onScroll, { passive: true });
   updateActive();
 
-  // Smooth scroll on click
+  // Smooth scroll on click with header clearance
   links.forEach((link) => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
@@ -241,13 +268,13 @@ function pointers() {
     });
   });
 
-  // Magnetic button physics
-  document.querySelectorAll('.btn').forEach((btn) => {
+  // Magnetic button & dossier rail physics
+  document.querySelectorAll('.btn, .dossier-rail a, .chip-brass, .chip-ember').forEach((btn) => {
     btn.addEventListener('mousemove', (e) => {
       const r = btn.getBoundingClientRect();
       const x = (e.clientX - r.left - r.width / 2) / (r.width / 2);
       const y = (e.clientY - r.top - r.height / 2) / (r.height / 2);
-      gsap.to(btn, { x: x * 5, y: y * 4, duration: 0.25, ease: 'power2.out' });
+      gsap.to(btn, { x: x * 4, y: y * 3, duration: 0.25, ease: 'power2.out' });
     });
     btn.addEventListener('mouseleave', () =>
       gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1.1, 0.4)' })

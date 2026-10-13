@@ -1,6 +1,7 @@
 ---
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import DossierRail from '../components/DossierRail.astro';
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
@@ -69,6 +70,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </div>
 
     <Navbar />
+
+    <DossierRail />
 
     <main class="flex-1 w-full">
       <slot />

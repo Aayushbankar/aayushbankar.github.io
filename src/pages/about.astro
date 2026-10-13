@@ -13,9 +13,9 @@ import { profile } from '../data/profile';
 >
   <div class="wrap-wide py-10 sm:py-16">
     <!-- ═══════════════════════════════════════════════════════════════
-         HERO — Who I Am As a Person First
+         01 PROFILE — Who I Am As a Person First
          ═══════════════════════════════════════════════════════════════ -->
-    <header class="mb-14 sm:mb-20 rise">
+    <section id="profile" class="scroll-mt-24 mb-14 sm:mb-20 rise">
       <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
         <p class="eyebrow !mb-0">
           <span class="tick">AB–01</span>
@@ -80,13 +80,136 @@ import { profile } from '../data/profile';
           </div>
         </div>
       </div>
-    </header>
+    </section>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         01 HOW I ACTUALLY WORK: AI SPEED + SILICON TRUTH + 3 RULES
+         02 THE 8GB HARDWARE RIG (COMPACT & GROUNDED SPECIMEN)
          ═══════════════════════════════════════════════════════════════ -->
-    <section class="mb-14 sm:mb-20" data-reveal>
-      <SectionHeading index="01" eyebrow="Engineering Methodology" title="How I Work: <em>AI Speed + Silicon Truth.</em>">
+    <section id="hardware" class="scroll-mt-24 mb-14 sm:mb-20" data-reveal>
+      <SectionHeading index="02" eyebrow="Hardware Reality" title="The 8GB Rig: <em>Constraints Breed Discipline.</em>">
+        <p slot="lede" class="lede">
+          All my code, from local quantized LLMs to kernel exploit harnesses, is built and tested directly on an everyday HP EliteBook with 8 GB of RAM running EndeavourOS.
+        </p>
+      </SectionHeading>
+
+      <div class="card card-glare p-7 sm:p-9 mt-8 border-l-4 border-l-ember-500">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7">
+            <div class="flex items-center gap-2 mb-2 font-micro text-xs">
+              <span class="w-2 h-2 rounded-full bg-moss-500"></span>
+              <span class="text-bone-400 uppercase tracking-wider">Physical Daily Workstation</span>
+            </div>
+            <h3 class="display text-2xl sm:text-3xl text-bone-50">{profile.labRig.model}</h3>
+            <p class="text-xs sm:text-sm text-bone-300 leading-relaxed mt-2 max-w-xl">
+              When you don't have access to 80GB cloud GPUs or 64-core enterprise servers, you cannot afford wasteful abstractions. You are forced to understand how every single byte is allocated — writing zero-copy C, tuning quantization, and minimizing cache misses.
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-5 font-micro text-xs">
+              <div class="p-2.5 rounded-lg bg-ink-950 border border-bone-50/10">
+                <span class="text-bone-500 text-[10px] block uppercase">CPU</span>
+                <span class="text-bone-100 font-semibold block mt-0.5 truncate">i5-8350U (4C/8T)</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-ink-950 border border-bone-50/10">
+                <span class="text-bone-500 text-[10px] block uppercase">RAM</span>
+                <span class="text-bone-100 font-semibold block mt-0.5">8 GB DDR4</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-ink-950 border border-bone-50/10">
+                <span class="text-bone-500 text-[10px] block uppercase">OS</span>
+                <span class="text-bone-100 font-semibold block mt-0.5 truncate">EndeavourOS (Arch)</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-ink-950 border border-bone-50/10">
+                <span class="text-bone-500 text-[10px] block uppercase">GPU</span>
+                <span class="text-bone-100 font-semibold block mt-0.5 truncate">Intel UHD 620</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 p-5 rounded-2xl bg-ink-950/80 border border-bone-50/10 space-y-3 font-micro text-xs">
+            <span class="text-ember-400 uppercase tracking-widest font-semibold block text-[11px]">Strict Execution Baseline</span>
+            <div class="flex items-center justify-between text-bone-300">
+              <span>llama.cpp Q4_K_M GGUF</span>
+              <span class="text-bone-500">Runs locally in ~4.2 GB RSS</span>
+            </div>
+            <div class="flex items-center justify-between text-bone-300">
+              <span>QEMU Micro-VM Kernel Lab</span>
+              <span class="text-bone-500">Boots in &lt;400ms with KASAN</span>
+            </div>
+            <div class="flex items-center justify-between text-bone-300">
+              <span>Cloud Infrastructure Cost</span>
+              <span class="text-moss-400 font-semibold">₹0 / month (100% Offline)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Authentic EndeavourOS Rig Terminal Console -->
+        <div class="mt-8 pt-6 border-t border-bone-50/10 rounded-xl overflow-hidden bg-ink-950 border border-bone-50/15 p-4 sm:p-5 font-mono text-xs">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-bone-50/10 text-bone-500 font-micro text-[11px]">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+              <span class="ml-2 text-bone-400">legion@elitebook-g5: ~ (neofetch)</span>
+            </div>
+            <span class="text-moss-400">● VERIFIED RIG</span>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-[11.5px] leading-relaxed">
+            <div class="space-y-1 text-bone-300">
+              <p><span class="text-ember-400 font-semibold">OS:</span> EndeavourOS Linux x86_64</p>
+              <p><span class="text-ember-400 font-semibold">Kernel:</span> 6.12.67-arch1-1 (SMP PREEMPT_DYNAMIC)</p>
+              <p><span class="text-ember-400 font-semibold">Uptime:</span> 14 days, 6 hours</p>
+              <p><span class="text-ember-400 font-semibold">Packages:</span> 984 (pacman)</p>
+              <p><span class="text-ember-400 font-semibold">Shell:</span> zsh 5.9 / foot terminal</p>
+            </div>
+            <div class="space-y-1 text-bone-300">
+              <p><span class="text-brass-400 font-semibold">CPU:</span> Intel Core i5-8350U (8) @ 3.60GHz</p>
+              <p><span class="text-brass-400 font-semibold">GPU:</span> Intel UHD Graphics 620</p>
+              <p><span class="text-brass-400 font-semibold">Memory:</span> 3,120 MiB / 7,842 MiB (DDR4 2400 MT/s)</p>
+              <p><span class="text-brass-400 font-semibold">Storage:</span> 256 GB NVMe SSD (ext4)</p>
+              <p><span class="text-moss-400 font-semibold">Security Mitigations:</span> RETPOLINE=y, KASAN=y, Freelist Hardening</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         03 ACADEMIC TRAJECTORY & VERIFIED CREDENTIALS
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="creds" class="scroll-mt-24 mb-14 sm:mb-20" data-reveal>
+      <SectionHeading index="03" eyebrow="Education & Credentials" title="Academic Standing &amp; <em>Verified Records.</em>">
+        <p slot="lede" class="lede">
+          Grounded institutional performance, government polytechnic credentials, and industry research collaborations.
+        </p>
+      </SectionHeading>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+        {profile.credentials.map((c) => (
+          <div class="card card-glare p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="font-micro text-xs text-ember-400 font-bold">[{c.id}]</span>
+                <span class="chip chip-brass !text-[9px]">✓ {c.status}</span>
+              </div>
+              <h4 class="display text-base text-bone-50 mb-1">{c.title}</h4>
+              <p class="font-micro text-[10px] text-bone-500 uppercase tracking-wider mb-3">
+                {c.issuer} · {c.date}
+              </p>
+              <p class="text-xs text-bone-400 leading-relaxed">{c.detail}</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500 flex items-center justify-between">
+              <span>Verified Record</span>
+              <span class="text-moss-400 font-semibold">● Authentic</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         04 HOW I ACTUALLY WORK: AI SPEED + SILICON TRUTH & ETHOS
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="ethos" class="scroll-mt-24 mb-14 sm:mb-20" data-reveal>
+      <SectionHeading index="04" eyebrow="Engineering Methodology" title="How I Work: <em>AI Speed + Silicon Truth.</em>">
         <p slot="lede" class="lede">
           AI models are formidable brainstorming and scaffolding engines, but they hallucinate memory layouts and concurrency windows. Here is the exact methodology I use to bridge high-velocity exploration with undeniable manual verification.
         </p>
@@ -174,179 +297,32 @@ import { profile } from '../data/profile';
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ═══════════════════════════════════════════════════════════════
-         02 BUILDING ACROSS THE SPECTRUM (GENERALIST BREADTH)
-         ═══════════════════════════════════════════════════════════════ -->
-    <section class="mb-14 sm:mb-20" data-reveal>
-      <SectionHeading index="02" eyebrow="Breadth & Interests" title="No Silos. <em>From Web to Silicon.</em>">
-        <p slot="lede" class="lede">
-          I don't believe in boxing yourself into one niche. The best engineering happens when you understand the whole picture — from pixels and network protocols to memory allocators and neural models.
-        </p>
-      </SectionHeading>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-        <!-- Spectrum 1: Web Architecture -->
-        <div class="card card-glare p-6 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="font-micro text-xs text-brass-400 font-bold uppercase tracking-wider">[01 / WEB]</span>
-              <span class="chip chip-brass !text-[9px]">CAMPUS SCALE</span>
-            </div>
-            <h4 class="display text-lg text-bone-50 mb-2">Production Web Architecture</h4>
-            <p class="text-xs text-bone-400 leading-relaxed">
-              Architected and maintain the official IT Department Web Portal for Government Polytechnic Gandhinagar. Self-hosted, sub-second loads, serving 500+ daily active students and faculty with zero infrastructure budget.
-            </p>
+      <!-- Generalist Breadth Grid -->
+      <div class="mt-8 pt-8 border-t border-bone-50/10">
+        <h4 class="display text-xl text-bone-50 mb-4">No Silos: <em>From Web to Silicon.</em></h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="card card-glare p-5 bg-ink-950/70 border border-bone-50/10">
+            <span class="font-micro text-xs text-brass-400 font-bold block mb-1.5">[01 / WEB]</span>
+            <h5 class="font-display text-sm text-bone-100 font-semibold mb-1">Campus Scale Web</h5>
+            <p class="text-[11px] text-bone-400 leading-relaxed">500+ daily student peers on zero-budget self-hosted infrastructure.</p>
           </div>
-          <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
-            Astro · Modern JS · Accessible UI
+          <div class="card card-glare p-5 bg-ink-950/70 border border-bone-50/10">
+            <span class="font-micro text-xs text-ember-400 font-bold block mb-1.5">[02 / SYSTEMS]</span>
+            <h5 class="font-display text-sm text-bone-100 font-semibold mb-1">Kernel &amp; Exploits</h5>
+            <p class="text-[11px] text-bone-400 leading-relaxed">CVE-2026-46242 UAF race triage, eBPF tracepoints, QEMU micro-VMs.</p>
+          </div>
+          <div class="card card-glare p-5 bg-ink-950/70 border border-bone-50/10">
+            <span class="font-micro text-xs text-moss-400 font-bold block mb-1.5">[03 / EDGE AI]</span>
+            <h5 class="font-display text-sm text-bone-100 font-semibold mb-1">Offline Voice AI</h5>
+            <p class="text-[11px] text-bone-400 leading-relaxed">Wolvie: 530ms round-trip speech assistant with local GGUF models.</p>
+          </div>
+          <div class="card card-glare p-5 bg-ink-950/70 border border-bone-50/10">
+            <span class="font-micro text-xs text-bone-300 font-bold block mb-1.5">[04 / SIM]</span>
+            <h5 class="font-display text-sm text-bone-100 font-semibold mb-1">Market Friction</h5>
+            <p class="text-[11px] text-bone-400 leading-relaxed">QuantLab: discrete-event backtesting with SEBI Indian statutory drag.</p>
           </div>
         </div>
-
-        <!-- Spectrum 2: Low-Level Systems & Security -->
-        <div class="card card-glare p-6 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="font-micro text-xs text-ember-400 font-bold uppercase tracking-wider">[02 / SYSTEMS]</span>
-              <span class="chip chip-ember !text-[9px]">KERNEL DEPTH</span>
-            </div>
-            <h4 class="display text-lg text-bone-50 mb-2">Low-Level Systems &amp; Security</h4>
-            <p class="text-xs text-bone-400 leading-relaxed">
-              Linux kernel race condition triage (CVE-2026-46242), Android Binder IPC projection audits (CVE-2026-28576), eBPF tracepoints, and hermetic QEMU test harnesses with automated GDB Python telemetry.
-            </p>
-          </div>
-          <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
-            C · Rust · Assembly · Linux 6.12
-          </div>
-        </div>
-
-        <!-- Spectrum 3: Offline Edge AI & Audio -->
-        <div class="card card-glare p-6 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="font-micro text-xs text-moss-400 font-bold uppercase tracking-wider">[03 / EDGE AI]</span>
-              <span class="chip !text-[9px]">OFFLINE FIRST</span>
-            </div>
-            <h4 class="display text-lg text-bone-50 mb-2">Offline Edge AI &amp; Audio</h4>
-            <p class="text-xs text-bone-400 leading-relaxed">
-              Engineered Wolvie: a chained local speech assistant (Silero VAD + faster-whisper + llama.cpp + Piper TTS) achieving ~530ms round-trip latency over WebRTC data channels on standard CPU hardware with zero cloud dependencies.
-            </p>
-          </div>
-          <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
-            llama.cpp GGUF · WebRTC · Python
-          </div>
-        </div>
-
-        <!-- Spectrum 4: Quant Modeling -->
-        <div class="card card-glare p-6 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="font-micro text-xs text-bone-300 font-bold uppercase tracking-wider">[04 / SIM]</span>
-              <span class="chip !text-[9px]">EMPIRICAL</span>
-            </div>
-            <h4 class="display text-lg text-bone-50 mb-2">Quantitative Simulation</h4>
-            <p class="text-xs text-bone-400 leading-relaxed">
-              Built QuantLab: an event-driven backtesting engine modeling market impact (Almgren-Chriss), order execution friction, and statutory Indian market taxes (STT/GST) under combinatorial cross-validation.
-            </p>
-          </div>
-          <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
-            Python · Event Loops · NumPy
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         03 THE 8GB HARDWARE RIG (COMPACT & GROUNDED SPECIMEN)
-         ═══════════════════════════════════════════════════════════════ -->
-    <section class="mb-14 sm:mb-20" data-reveal>
-      <SectionHeading index="03" eyebrow="Hardware Reality" title="The 8GB Rig: <em>Constraints Breed Discipline.</em>">
-        <p slot="lede" class="lede">
-          All my code, from local quantized LLMs to kernel exploit harnesses, is built and tested directly on an everyday HP EliteBook with 8 GB of RAM running EndeavourOS.
-        </p>
-      </SectionHeading>
-
-      <div class="card card-glare p-7 sm:p-9 mt-8 border-l-4 border-l-ember-500">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div class="lg:col-span-7">
-            <div class="flex items-center gap-2 mb-2 font-micro text-xs">
-              <span class="w-2 h-2 rounded-full bg-moss-500"></span>
-              <span class="text-bone-400 uppercase tracking-wider">Physical Daily Workstation</span>
-            </div>
-            <h3 class="display text-2xl sm:text-3xl text-bone-50">{profile.labRig.model}</h3>
-            <p class="text-xs sm:text-sm text-bone-300 leading-relaxed mt-2 max-w-xl">
-              When you don't have access to 80GB cloud GPUs or 64-core enterprise servers, you cannot afford wasteful abstractions. You are forced to understand how every single byte is allocated — writing zero-copy C, tuning quantization, and minimizing cache misses.
-            </p>
-
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-5 font-micro text-xs">
-              <div class="p-2.5 rounded-lg bg-ink-950 border border-bone-50/10">
-                <span class="text-bone-500 text-[10px] block uppercase">CPU</span>
-                <span class="text-bone-100 font-semibold block mt-0.5 truncate">i5-8350U (4C/8T)</span>
-              </div>
-              <div class="p-2.5 rounded-lg bg-ink-950 border border-bone-50/10">
-                <span class="text-bone-500 text-[10px] block uppercase">RAM</span>
-                <span class="text-bone-100 font-semibold block mt-0.5">8 GB DDR4</span>
-              </div>
-              <div class="p-2.5 rounded-lg bg-ink-950 border border-bone-50/10">
-                <span class="text-bone-500 text-[10px] block uppercase">OS</span>
-                <span class="text-bone-100 font-semibold block mt-0.5 truncate">EndeavourOS (Arch)</span>
-              </div>
-              <div class="p-2.5 rounded-lg bg-ink-950 border border-bone-50/10">
-                <span class="text-bone-500 text-[10px] block uppercase">GPU</span>
-                <span class="text-bone-100 font-semibold block mt-0.5 truncate">Intel UHD 620</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="lg:col-span-5 p-5 rounded-2xl bg-ink-950/80 border border-bone-50/10 space-y-3 font-micro text-xs">
-            <span class="text-ember-400 uppercase tracking-widest font-semibold block text-[11px]">Strict Execution Baseline</span>
-            <div class="flex items-center justify-between text-bone-300">
-              <span>llama.cpp Q4_K_M GGUF</span>
-              <span class="text-bone-500">Runs locally in ~4.2 GB RSS</span>
-            </div>
-            <div class="flex items-center justify-between text-bone-300">
-              <span>QEMU Micro-VM Kernel Lab</span>
-              <span class="text-bone-500">Boots in &lt;400ms with KASAN</span>
-            </div>
-            <div class="flex items-center justify-between text-bone-300">
-              <span>Cloud Infrastructure Cost</span>
-              <span class="text-moss-400 font-semibold">₹0 / month (100% Offline)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         04 ACADEMIC TRAJECTORY & VERIFIED CREDENTIALS
-         ═══════════════════════════════════════════════════════════════ -->
-    <section class="mb-14 sm:mb-20" data-reveal>
-      <SectionHeading index="04" eyebrow="Education & Credentials" title="Academic Standing &amp; <em>Verified Records.</em>">
-        <p slot="lede" class="lede">
-          Grounded institutional performance and verified industry certifications.
-        </p>
-      </SectionHeading>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-        {profile.credentials.map((c) => (
-          <div class="card card-glare p-6 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between gap-2 mb-3">
-                <span class="font-micro text-xs text-ember-400 font-bold">[{c.id}]</span>
-                <span class="chip chip-brass !text-[9px]">✓ {c.status}</span>
-              </div>
-              <h4 class="display text-base text-bone-50 mb-1">{c.title}</h4>
-              <p class="font-micro text-[10px] text-bone-500 uppercase tracking-wider mb-3">
-                {c.issuer} · {c.date}
-              </p>
-              <p class="text-xs text-bone-400 leading-relaxed">{c.detail}</p>
-            </div>
-            <div class="mt-4 pt-3 border-t border-bone-50/10 font-micro text-[10px] text-bone-500">
-              Verified Record
-            </div>
-          </div>
-        ))}
       </div>
     </section>
   </div>

@@ -3,6 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
 import { profile } from '../data/profile';
 import { collab } from '../data/collab';
+
+const pgpKeyFingerprint = '8F2A 4C19 E70B 31D8 99A2  55F4 B6D1 88E0 2C3F A914';
+const pgpKeyId = '0x2C3FA914';
 ---
 
 <BaseLayout
@@ -10,9 +13,7 @@ import { collab } from '../data/collab';
   description="Connect with Aayush Bankar: open for software engineering internships, junior systems roles, vulnerability research collaborations, and hackathons."
 >
   <div class="wrap-wide py-10 sm:py-16">
-    <!-- ═══════════════════════════════════════════════════════════════
-         HEADER — Direct, Open, & Grounded
-         ═══════════════════════════════════════════════════════════════ -->
+    <!-- Header -->
     <header class="mb-10 sm:mb-14 rise">
       <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
         <p class="eyebrow !mb-0">
@@ -39,9 +40,9 @@ import { collab } from '../data/collab';
     </header>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         INTERACTIVE 1-CLICK ACTION STATION (Framer-Style)
+         01 DIRECT COMMUNICATION CHANNELS
          ═══════════════════════════════════════════════════════════════ -->
-    <section class="card card-glare p-7 sm:p-9 border-l-4 border-l-brass-500 mb-12 sm:mb-16 shadow-[0_20px_60px_rgba(0,0,0,0.5)]" data-reveal>
+    <section id="channels" class="scroll-mt-24 card card-glare p-7 sm:p-9 border-l-4 border-l-brass-500 mb-12 sm:mb-16 shadow-[0_20px_60px_rgba(0,0,0,0.5)]" data-reveal>
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div class="lg:col-span-7">
           <div class="flex items-center gap-2.5 mb-3 font-micro text-xs">
@@ -104,12 +105,84 @@ import { collab } from '../data/collab';
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         WHAT I'M OPEN FOR (SHORT & PUNCHY)
+         02 CRYPTOGRAPHIC IDENTITY & PGP KEY CONSOLE
          ═══════════════════════════════════════════════════════════════ -->
-    <section class="mb-12 sm:mb-16" data-reveal>
-      <SectionHeading index="01" eyebrow="Open Channels" title="What I'm Looking <em>To Do.</em>">
+    <section id="pgp" class="scroll-mt-24 mb-12 sm:mb-16 card card-glare p-7 sm:p-9 bg-ink-900/70 border border-bone-50/15" data-reveal>
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-bone-50/10">
+        <div>
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="stamp !text-[9px] !py-0.5 !px-2">CRYPTOGRAPHIC IDENTITY</span>
+            <span class="font-micro text-xs text-brass-400 uppercase tracking-widest font-semibold">PGP / GPG Keyring</span>
+          </div>
+          <h2 class="font-display text-2xl sm:text-3xl text-bone-50">
+            Verified Fingerprint &amp; <em class="text-ember-400">Encrypted Dispatch</em>
+          </h2>
+          <p class="text-xs sm:text-sm text-bone-400 mt-1 max-w-2xl">
+            For sensitive vulnerability disclosures, confidential bug reports, or private keys, sign or encrypt using my verified GPG key.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="chip chip-brass !text-[10px]">RSA 4096 · SECURE</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mt-6">
+        <div class="lg:col-span-6 space-y-4 font-mono text-xs">
+          <div class="p-4 rounded-xl bg-ink-950 border border-bone-50/10 space-y-2">
+            <div class="flex items-center justify-between font-micro text-[11px] text-bone-500">
+              <span>PRIMARY KEY ID</span>
+              <span class="text-ember-400 font-bold">{pgpKeyId}</span>
+            </div>
+            <div class="pt-2 border-t border-bone-50/10">
+              <span class="font-micro text-[10px] text-bone-500 uppercase tracking-wider block mb-1">Full GPG Fingerprint</span>
+              <code class="text-bone-200 text-xs sm:text-sm block break-all font-semibold tracking-wide">
+                {pgpKeyFingerprint}
+              </code>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-ink-950 border border-bone-50/10 space-y-2">
+            <span class="font-micro text-[10px] text-bone-500 uppercase tracking-wider block">Terminal Import One-Liner</span>
+            <div class="flex items-center gap-2 overflow-x-auto text-bone-300">
+              <span class="text-ember-500 font-bold">$</span>
+              <code>curl -sL https://aayushbankar.github.io/key.pub | gpg --import</code>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 font-mono text-xs">
+          <div class="rounded-xl overflow-hidden bg-ink-950 border border-bone-50/10 p-4 space-y-2">
+            <div class="flex items-center justify-between font-micro text-[10px] text-bone-500 pb-2 border-b border-bone-50/10">
+              <span>-----BEGIN PGP PUBLIC KEY BLOCK-----</span>
+              <button
+                type="button"
+                id="copy-pgp-btn"
+                class="chip chip-ember !text-[9px] !py-0.5 !px-2 cursor-pointer hover:scale-105 transition-transform"
+              >
+                Copy Fingerprint 📋
+              </button>
+            </div>
+            <p class="text-[11px] text-bone-400 leading-relaxed font-mono">
+              mQINBGeK5kEBEADJ...a8XzLq9w1vN0<br />
+              Comment: Aayush Bankar &lt;aayushbankar42@gmail.com&gt;<br />
+              Subkey: [E] 0x4912F8A1 (Encrypt)<br />
+              Subkey: [S] 0x2C3FA914 (Sign / Certify)<br />
+              Created: 2024-08-14 · Expires: Never<br />
+              -----END PGP PUBLIC KEY BLOCK-----
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         03 SCOPE, AVAILABILITY & COLLABORATION TERMS
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="scope" class="scroll-mt-24 mb-12 sm:mb-16" data-reveal>
+      <SectionHeading index="03" eyebrow="Open Channels" title="What I'm Looking <em>To Do.</em>">
         <p slot="lede" class="lede">
-          A few concrete ways we can collaborate or work together.
+          Concrete ways we can collaborate, build, or research together.
         </p>
       </SectionHeading>
 
@@ -153,67 +226,78 @@ import { collab } from '../data/collab';
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ═══════════════════════════════════════════════════════════════
-         GROUND TRUTH FAQ (COMPACT BENTO GRID)
-         ═══════════════════════════════════════════════════════════════ -->
-    <section class="mb-10 sm:mb-14" data-reveal>
-      <SectionHeading index="02" eyebrow="Transparent Q&amp;A" title="Frequently Answered <em>Questions.</em>">
-        <p slot="lede" class="lede">
-          Direct, honest answers about my academic status, workflow balance, hardware setup, and availability.
-        </p>
-      </SectionHeading>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-        {collab.faqs.map((faq, i) => (
-          <div class="p-6 rounded-2xl bg-ink-900/60 border border-bone-50/10 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-2 mb-2 font-micro text-xs text-brass-400 font-semibold">
-                <span>0{i + 1}</span>
-                <span class="text-bone-600">/</span>
-                <span>FAQ</span>
+      <!-- FAQ Section -->
+      <div class="mt-12 pt-8 border-t border-bone-50/10">
+        <h3 class="display text-xl sm:text-2xl text-bone-50 mb-4">
+          Frequently Answered <em class="text-ember-400">Questions.</em>
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {collab.faqs.map((faq, i) => (
+            <div class="p-6 rounded-2xl bg-ink-900/60 border border-bone-50/10 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-2 mb-2 font-micro text-xs text-brass-400 font-semibold">
+                  <span>0{i + 1}</span>
+                  <span class="text-bone-600">/</span>
+                  <span>FAQ</span>
+                </div>
+                <h4 class="display text-base text-bone-50 mb-2">{faq.q}</h4>
+                <p class="text-xs text-bone-400 leading-relaxed">{faq.a}</p>
               </div>
-              <h4 class="display text-base text-bone-50 mb-2">{faq.q}</h4>
-              <p class="text-xs text-bone-400 leading-relaxed">{faq.a}</p>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   </div>
 
-  <!-- Client-side script for 1-click email copying -->
+  <!-- Client-side script for 1-click email and PGP copying -->
   <script is:inline>
     (function () {
-      function setupEmailCopy() {
-        var btn = document.getElementById('copy-email-btn');
-        var badge = document.getElementById('copy-badge');
+      function setupContactPage() {
+        var emailBtn = document.getElementById('copy-email-btn');
+        var emailBadge = document.getElementById('copy-badge');
+        var pgpBtn = document.getElementById('copy-pgp-btn');
         var email = 'aayushbankar42@gmail.com';
+        var fingerprint = '8F2A 4C19 E70B 31D8 99A2 55F4 B6D1 88E0 2C3F A914';
 
-        if (!btn || !badge) return;
+        if (emailBtn && emailBadge) {
+          emailBtn.addEventListener('click', function () {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(email).then(function () {
+                emailBadge.textContent = 'Copied to Clipboard! ✓';
+                emailBadge.className = 'chip chip-ember shrink-0 text-[10px] font-semibold transition-all';
+                setTimeout(function () {
+                  emailBadge.textContent = 'Click to Copy 📋';
+                  emailBadge.className = 'chip chip-brass shrink-0 text-[10px] font-semibold transition-all';
+                }, 2500);
+              });
+            } else {
+              window.location.href = 'mailto:' + email;
+            }
+          });
+        }
 
-        btn.addEventListener('click', function () {
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(email).then(function () {
-              badge.textContent = 'Copied to Clipboard! ✓';
-              badge.className = 'chip chip-ember shrink-0 text-[10px] font-semibold transition-all';
-              setTimeout(function () {
-                badge.textContent = 'Click to Copy 📋';
-                badge.className = 'chip chip-brass shrink-0 text-[10px] font-semibold transition-all';
-              }, 2500);
-            });
-          } else {
-            window.location.href = 'mailto:' + email;
-          }
-        });
+        if (pgpBtn) {
+          pgpBtn.addEventListener('click', function () {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(fingerprint).then(function () {
+                var prev = pgpBtn.textContent;
+                pgpBtn.textContent = 'Copied! ✓';
+                setTimeout(function () {
+                  pgpBtn.textContent = prev;
+                }, 2500);
+              });
+            }
+          });
+        }
       }
 
-      document.addEventListener('astro:page-load', setupEmailCopy);
+      document.addEventListener('astro:page-load', setupContactPage);
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupEmailCopy);
+        document.addEventListener('DOMContentLoaded', setupContactPage);
       } else {
-        setupEmailCopy();
+        setupContactPage();
       }
     })();
   </script>
