@@ -103,8 +103,141 @@ const isGraphInitial = initialView === 'graph';
     </div>
   </div>
 
-  <!-- VIEW 1: Interactive Force Canvas -->
-  <div id="obsidian-graph-view" class={`relative w-full rounded-2xl bg-ink-950 border border-bone-50/15 overflow-hidden shadow-2xl ${isGraphInitial ? '' : 'hidden'}`}>
+  <!-- VIEW 3: Bespoke Mobile Silicon Deck (Default on touch screens < 768px) -->
+  <div id="mobile-silicon-deck" class={`md:hidden ${isGraphInitial ? 'block' : 'hidden'} space-y-3.5`}>
+    <!-- Mobile Cluster Horizontal Filter Ribbon -->
+    <div class="flex items-center gap-1.5 overflow-x-auto pb-1.5 no-scrollbar -mx-1 px-1" id="m-cluster-ribbon">
+      <button
+        type="button"
+        class="m-cluster-pill active px-3 py-1 rounded-full font-micro text-[10px] font-semibold transition-all bg-bone-50/10 text-bone-50 border border-bone-50/20 shrink-0 cursor-pointer"
+        data-m-cluster="all"
+      >
+        All ({techNodes.length})
+      </button>
+      {clusterList.map((c) => (
+        <button
+          type="button"
+          class="m-cluster-pill px-2.5 py-1 rounded-full font-micro text-[10px] font-medium transition-all text-bone-400 hover:text-bone-50 bg-ink-950/80 border border-bone-50/10 shrink-0 cursor-pointer flex items-center gap-1.5"
+          data-m-cluster={c.id}
+        >
+          <span class="w-2 h-2 rounded-full shrink-0" style={`background-color: ${c.color};`}></span>
+          <span>{c.name.split(' ')[0]}</span>
+        </button>
+      ))}
+    </div>
+
+    <!-- Active Tactile Node Card with Touch Swipe Gestures -->
+    <div
+      id="m-node-card"
+      class="card card-glare p-4 sm:p-5 rounded-2xl border-t-2 bg-ink-950/95 border-bone-50/15 shadow-2xl relative transition-all duration-300 select-none touch-pan-y"
+      style="border-top-color: #ff7a45;"
+    >
+      <!-- Card Header: Cluster & Level -->
+      <div class="flex items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-bone-50/10">
+        <div class="flex items-center gap-1.5 min-w-0">
+          <span class="w-2.5 h-2.5 rounded-full shrink-0" id="m-cluster-dot" style="background-color: #ff7a45;"></span>
+          <span class="font-micro text-[10px] font-bold uppercase tracking-wider text-ember-400 truncate" id="m-cluster-name">Silicon &amp; Hardware Tooling</span>
+        </div>
+        <span class="chip chip-brass !text-[8.5px] !py-0.2 !px-2 shrink-0 font-semibold" id="m-node-level">Daily Exploit Tooling</span>
+      </div>
+
+      <!-- Node Title -->
+      <h4 class="display text-lg sm:text-xl text-bone-50 font-bold mb-1.5 leading-snug" id="m-node-title">
+        {techNodes[0].label}
+      </h4>
+
+      <!-- Node Summary -->
+      <p class="text-xs text-bone-300 leading-relaxed mb-3" id="m-node-summary">
+        {techNodes[0].summary}
+      </p>
+
+      <!-- Ground Truth Evidence Box -->
+      <div class="p-2.5 rounded-xl bg-ink-900/90 border border-bone-50/10 mb-3">
+        <div class="flex items-center gap-1 text-moss-400 font-micro text-[9px] uppercase tracking-wider font-semibold mb-0.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-moss-400 animate-pulse"></span>
+          <span>Verified Rig Proof:</span>
+        </div>
+        <p class="text-[11px] text-bone-400 leading-relaxed" id="m-node-evidence">
+          {techNodes[0].evidence}
+        </p>
+      </div>
+
+      <!-- Connected Silicon Dependencies -->
+      <div class="mb-3">
+        <span class="font-micro text-[9px] uppercase tracking-wider text-bone-500 block mb-1.5 font-semibold">
+          Connected Silicon Primitives:
+        </span>
+        <div class="flex flex-wrap gap-1" id="m-node-links">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Artifact Action Link -->
+      <div id="m-node-action-wrap">
+        <a
+          href="#"
+          id="m-node-artifact-btn"
+          class="btn btn-primary w-full !text-xs !py-2 justify-center flex items-center gap-1.5 hidden shadow-lg"
+        >
+          <span>Open Research / System Spec</span>
+          <span>↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile Deck Navigation Controls (Thumbs Accessible) -->
+    <div class="flex items-center justify-between gap-2">
+      <button
+        type="button"
+        id="m-btn-prev"
+        class="flex-1 py-2.5 px-3 rounded-xl bg-ink-900/90 border border-bone-50/10 text-bone-200 hover:text-ember-400 font-micro text-[11px] font-semibold flex items-center justify-center gap-1.5 active:scale-95 transition-all cursor-pointer"
+        aria-label="Previous Silicon Node"
+      >
+        <span>◀</span>
+        <span>PREV</span>
+      </button>
+
+      <div class="px-3 py-2 rounded-xl bg-ink-950 border border-bone-50/10 font-micro text-xs text-bone-300 shrink-0 font-mono">
+        <span id="m-node-index">01</span>
+        <span class="text-bone-600">/</span>
+        <span id="m-node-total">{techNodes.length}</span>
+      </div>
+
+      <button
+        type="button"
+        id="m-btn-next"
+        class="flex-1 py-2.5 px-3 rounded-xl bg-ink-900/90 border border-bone-50/10 text-bone-200 hover:text-ember-400 font-micro text-[11px] font-semibold flex items-center justify-center gap-1.5 active:scale-95 transition-all cursor-pointer"
+        aria-label="Next Silicon Node"
+      >
+        <span>NEXT</span>
+        <span>▶</span>
+      </button>
+    </div>
+
+    <!-- Mobile View Mode Toggle (Tactile Deck vs 2D Canvas) -->
+    <div class="p-2.5 rounded-xl bg-ink-900/60 border border-bone-50/10 flex items-center justify-between gap-2 font-micro text-[10px]">
+      <span class="text-bone-400">Mobile Mode:</span>
+      <div class="flex items-center gap-1">
+        <button
+          type="button"
+          id="m-toggle-deck-btn"
+          class="px-2.5 py-1 rounded-full bg-bone-50/10 text-ember-400 font-semibold cursor-pointer transition-colors"
+        >
+          Tactile Deck
+        </button>
+        <button
+          type="button"
+          id="m-toggle-canvas-btn"
+          class="px-2.5 py-1 rounded-full text-bone-400 hover:text-bone-100 cursor-pointer transition-colors"
+        >
+          2D Physics Canvas
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW 1: Interactive Force Canvas (Desktop default / Mobile optional) -->
+  <div id="obsidian-graph-view" class={`relative w-full rounded-2xl bg-ink-950 border border-bone-50/15 overflow-hidden shadow-2xl ${isGraphInitial ? 'hidden md:block' : 'hidden'}`}>
     <div class="relative w-full h-[520px] sm:h-[620px] lg:h-[680px]">
       <canvas
         id="obsidian-canvas"
@@ -307,9 +440,19 @@ const isGraphInitial = initialView === 'graph';
           btnGrid.classList.add('text-bone-400');
           btnGrid.setAttribute('aria-selected', 'false');
 
-          graphView.classList.remove('hidden');
           gridView.classList.add('hidden');
-          resize();
+          if (mDeckView) mDeckView.classList.remove('hidden');
+          if (window.innerWidth >= 768) {
+            graphView.classList.remove('hidden');
+            resize();
+          } else {
+            if (mToggleCanvasBtn && mToggleCanvasBtn.classList.contains('text-ember-400')) {
+              graphView.classList.remove('hidden');
+              resize();
+            } else {
+              graphView.classList.add('hidden');
+            }
+          }
         }
       }
 
@@ -325,12 +468,189 @@ const isGraphInitial = initialView === 'graph';
 
           gridView.classList.remove('hidden');
           graphView.classList.add('hidden');
+          if (mDeckView) mDeckView.classList.add('hidden');
           applyGridFilter();
         }
       }
 
       if (btnGraph) btnGraph.onclick = showGraphView;
       if (btnGrid) btnGrid.onclick = showGridView;
+
+      // Mobile Silicon Deck Controller
+      let mobileCurrentIndex = 0;
+      let mobileFilteredNodes = [...techNodesData];
+
+      const mDeckView = document.getElementById('mobile-silicon-deck');
+      const mCard = document.getElementById('m-node-card');
+      const mClusterDot = document.getElementById('m-cluster-dot');
+      const mClusterName = document.getElementById('m-cluster-name');
+      const mNodeIndex = document.getElementById('m-node-index');
+      const mNodeTotal = document.getElementById('m-node-total');
+      const mNodeLevel = document.getElementById('m-node-level');
+      const mNodeTitle = document.getElementById('m-node-title');
+      const mNodeSummary = document.getElementById('m-node-summary');
+      const mNodeEvidence = document.getElementById('m-node-evidence');
+      const mNodeLinks = document.getElementById('m-node-links');
+      const mArtifactBtn = document.getElementById('m-node-artifact-btn');
+      const mBtnPrev = document.getElementById('m-btn-prev');
+      const mBtnNext = document.getElementById('m-btn-next');
+      const mToggleDeckBtn = document.getElementById('m-toggle-deck-btn');
+      const mToggleCanvasBtn = document.getElementById('m-toggle-canvas-btn');
+
+      function updateMobileCard(index) {
+        if (!mobileFilteredNodes.length) return;
+        if (index < 0) index = mobileFilteredNodes.length - 1;
+        if (index >= mobileFilteredNodes.length) index = 0;
+        mobileCurrentIndex = index;
+
+        const node = mobileFilteredNodes[index];
+        const cluster = clustersData[node.cluster] || { name: node.cluster, color: '#ff7a45' };
+
+        if (mClusterDot) mClusterDot.style.backgroundColor = cluster.color;
+        if (mClusterName) mClusterName.textContent = cluster.name;
+        if (mCard) mCard.style.borderTopColor = cluster.color;
+        if (mNodeIndex) mNodeIndex.textContent = String(index + 1).padStart(2, '0');
+        if (mNodeTotal) mNodeTotal.textContent = String(mobileFilteredNodes.length).padStart(2, '0');
+        if (mNodeLevel) mNodeLevel.textContent = node.level;
+        if (mNodeTitle) mNodeTitle.textContent = node.label;
+        if (mNodeSummary) mNodeSummary.textContent = node.summary;
+        if (mNodeEvidence) mNodeEvidence.textContent = node.evidence;
+
+        if (mNodeLinks) {
+          mNodeLinks.innerHTML = '';
+          const connected = techEdgesData.filter(e => e.source === node.id || e.target === node.id);
+          if (connected.length === 0) {
+            const span = document.createElement('span');
+            span.className = 'text-[10px] text-bone-500 font-micro';
+            span.textContent = 'None directly connected';
+            mNodeLinks.appendChild(span);
+          } else {
+            connected.forEach(e => {
+              const targetId = e.source === node.id ? e.target : e.source;
+              const targetNode = techNodesData.find(n => n.id === targetId);
+              if (targetNode) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'chip !text-[8.5px] !py-0.2 !px-1.5 bg-ink-900 border-bone-50/10 text-bone-300 hover:text-ember-300 hover:border-ember-400/40 cursor-pointer transition-colors';
+                btn.textContent = `↔ ${targetNode.label}`;
+                btn.onclick = (ev) => {
+                  ev.preventDefault();
+                  jumpToMobileNode(targetId);
+                };
+                mNodeLinks.appendChild(btn);
+              }
+            });
+          }
+        }
+
+        if (mArtifactBtn) {
+          if (node.artifactUrl) {
+            mArtifactBtn.href = node.artifactUrl;
+            mArtifactBtn.classList.remove('hidden');
+          } else {
+            mArtifactBtn.classList.add('hidden');
+          }
+        }
+      }
+
+      function jumpToMobileNode(nodeId) {
+        let idx = mobileFilteredNodes.findIndex(n => n.id === nodeId);
+        if (idx === -1) {
+          mobileFilteredNodes = [...techNodesData];
+          document.querySelectorAll('.m-cluster-pill').forEach(p => {
+            const isAll = p.getAttribute('data-m-cluster') === 'all';
+            p.classList.toggle('active', isAll);
+            p.classList.toggle('bg-bone-50/10', isAll);
+            p.classList.toggle('text-bone-50', isAll);
+            p.classList.toggle('text-bone-400', !isAll);
+          });
+          idx = mobileFilteredNodes.findIndex(n => n.id === nodeId);
+        }
+        if (idx !== -1) {
+          if (mCard) {
+            mCard.style.opacity = '0.5';
+            setTimeout(() => {
+              updateMobileCard(idx);
+              mCard.style.opacity = '1';
+            }, 100);
+          } else {
+            updateMobileCard(idx);
+          }
+        }
+      }
+
+      if (mBtnPrev) {
+        mBtnPrev.onclick = () => updateMobileCard(mobileCurrentIndex - 1);
+      }
+      if (mBtnNext) {
+        mBtnNext.onclick = () => updateMobileCard(mobileCurrentIndex + 1);
+      }
+
+      if (mCard) {
+        let touchStartX = 0;
+        mCard.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true, signal });
+
+        mCard.addEventListener('touchend', (e) => {
+          const touchEndX = e.changedTouches[0].screenX;
+          const diff = touchStartX - touchEndX;
+          if (diff > 45) {
+            updateMobileCard(mobileCurrentIndex + 1);
+          } else if (diff < -45) {
+            updateMobileCard(mobileCurrentIndex - 1);
+          }
+        }, { passive: true, signal });
+      }
+
+      document.querySelectorAll('.m-cluster-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          document.querySelectorAll('.m-cluster-pill').forEach(p => {
+            p.classList.remove('active', 'bg-bone-50/10', 'text-bone-50');
+            p.classList.add('text-bone-400');
+          });
+          pill.classList.add('active', 'bg-bone-50/10', 'text-bone-50');
+          pill.classList.remove('text-bone-400');
+
+          const cl = pill.getAttribute('data-m-cluster');
+          if (cl === 'all') {
+            mobileFilteredNodes = [...techNodesData];
+          } else {
+            mobileFilteredNodes = techNodesData.filter(n => n.cluster === cl);
+          }
+          updateMobileCard(0);
+        }, { signal });
+      });
+
+      if (mToggleDeckBtn && mToggleCanvasBtn) {
+        mToggleDeckBtn.onclick = () => {
+          mToggleDeckBtn.classList.add('bg-bone-50/10', 'text-ember-400');
+          mToggleDeckBtn.classList.remove('text-bone-400');
+          mToggleCanvasBtn.classList.remove('bg-bone-50/10', 'text-ember-400');
+          mToggleCanvasBtn.classList.add('text-bone-400');
+
+          if (mDeckView) mDeckView.classList.remove('hidden');
+          if (graphView) {
+            graphView.classList.add('hidden');
+            graphView.classList.add('md:block');
+          }
+        };
+
+        mToggleCanvasBtn.onclick = () => {
+          mToggleCanvasBtn.classList.add('bg-bone-50/10', 'text-ember-400');
+          mToggleCanvasBtn.classList.remove('text-bone-400');
+          mToggleDeckBtn.classList.remove('bg-bone-50/10', 'text-ember-400');
+          mToggleDeckBtn.classList.add('text-bone-400');
+
+          if (mDeckView) mDeckView.classList.add('hidden');
+          if (graphView) {
+            graphView.classList.remove('hidden', 'md:block');
+            resize();
+          }
+        };
+      }
+
+      updateMobileCard(0);
 
       if (defaultView === 'grid') {
         showGridView();

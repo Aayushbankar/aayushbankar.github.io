@@ -257,42 +257,83 @@ if (pathname === '/') {
   </div>
 </aside>
 
-<!-- Mobile Docked Dossier HUD Pill (Responsive Bottom Dock) -->
-<nav class="dossier-rail-mobile" aria-label="Mobile dossier section navigation">
+<!-- Mobile Docked Cyber-Deck Command Bar (Responsive Ergonomic Bottom Dock) -->
+<nav class="dossier-rail-mobile" aria-label="Mobile dossier navigation command deck">
+  <!-- Document Drawer Trigger -->
   <button
     type="button"
     id="dossier-mobile-page-trigger"
-    class="dossier-mobile-page cursor-pointer bg-transparent border-0 p-0 text-left"
+    class="dossier-mobile-page cursor-pointer bg-transparent border-0 p-0 text-left flex items-center gap-1.5 shrink-0"
     title="Tap to open full document index"
     aria-label={`Current document: ${currentPage.pageName}. Tap to open document index.`}
   >
     <span class="dossier-mobile-led"></span>
-    <span>{currentPage.code}</span>
+    <span class="font-bold">{currentPage.code}</span>
+    <span class="hidden xs:inline text-[9px] text-bone-400 uppercase tracking-wider">{currentPage.pageName}</span>
   </button>
+
   <span class="dossier-mobile-sep">|</span>
-  <div class="dossier-mobile-sections">
-    {currentPage.sections.map((sec, idx) => (
-      <a
-        href={`#${sec.id}`}
-        aria-label={`Jump to section ${sec.num} ${sec.label}`}
-        class={`dossier-mobile-link ${idx === 0 ? 'active' : ''}`}
-        data-section-id={sec.id}
-        data-section-label={`${sec.num} ${sec.label}`}
-      >
-        <span class="dot"></span>
-        <span>{sec.num}</span>
-      </a>
-    ))}
+
+  <!-- Dynamic Section Scrubber with ◀ and ▶ Thumb Buttons -->
+  <div class="dossier-mobile-sections flex items-center gap-1 overflow-hidden">
+    <button
+      type="button"
+      id="dossier-mobile-prev-sec"
+      class="dossier-mobile-nav-arrow p-1 text-bone-400 hover:text-ember-400 font-bold cursor-pointer bg-transparent border-0 font-micro text-[11px]"
+      title="Previous section"
+      aria-label="Previous section"
+    >
+      ◀
+    </button>
+    
+    <div class="dossier-mobile-sec-badge px-2 py-0.5 rounded-full bg-bone-50/10 border border-bone-50/15 text-[10px] text-bone-200 font-micro font-semibold whitespace-nowrap truncate max-w-[120px] sm:max-w-none">
+      <span id="dossier-mobile-active-sec-text">{currentPage.sections[0].num} {currentPage.sections[0].label}</span>
+    </div>
+
+    <button
+      type="button"
+      id="dossier-mobile-next-sec"
+      class="dossier-mobile-nav-arrow p-1 text-bone-400 hover:text-ember-400 font-bold cursor-pointer bg-transparent border-0 font-micro text-[11px]"
+      title="Next section"
+      aria-label="Next section"
+    >
+      ▶
+    </button>
   </div>
+
   <span class="dossier-mobile-sep">|</span>
+
+  <!-- Quick Command Palette ⌘K -->
+  <button
+    type="button"
+    id="dossier-mobile-cmdk-btn"
+    class="dossier-mobile-link !px-1.5 text-bone-300 hover:text-ember-400 font-bold cursor-pointer bg-transparent border-0 font-micro text-[10px]"
+    title="Search dossier (⌘K)"
+    aria-label="Search dossier"
+  >
+    ⌘K
+  </button>
+
+  <!-- Navigation Guide (?) -->
   <button
     type="button"
     id="dossier-mobile-guide-btn"
-    class="dossier-mobile-link !px-2 text-brass-400 font-bold cursor-pointer bg-transparent border-0"
+    class="dossier-mobile-link !px-1.5 text-brass-400 font-bold cursor-pointer bg-transparent border-0 font-micro text-xs"
     title="Navigation Guide"
     aria-label="Open Navigation Guide"
   >
     ?
+  </button>
+
+  <!-- Back to Top (↑) -->
+  <button
+    type="button"
+    id="dossier-mobile-top-btn"
+    class="dossier-mobile-link !px-1.5 text-bone-400 hover:text-bone-100 font-bold cursor-pointer bg-transparent border-0 font-micro text-xs"
+    title="Back to Top"
+    aria-label="Scroll to top"
+  >
+    ↑
   </button>
 </nav>
 

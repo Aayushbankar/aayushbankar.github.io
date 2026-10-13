@@ -261,6 +261,10 @@ function railSpy(signal) {
     if (activeSecName && activeSecName.textContent !== currentItem.label) {
       activeSecName.textContent = currentItem.label;
     }
+    const mobileSecText = document.getElementById('dossier-mobile-active-sec-text');
+    if (mobileSecText && mobileSecText.textContent !== currentItem.label) {
+      mobileSecText.textContent = currentItem.label;
+    }
 
     sectionLinks.forEach(({ id, link }) => {
       const isActive = id === currentItem.id;
@@ -300,6 +304,61 @@ function railSpy(signal) {
       { signal }
     );
   });
+
+  // Mobile Cyber-Deck Controls
+  const prevSecBtn = document.getElementById('dossier-mobile-prev-sec');
+  const nextSecBtn = document.getElementById('dossier-mobile-next-sec');
+  const mobileCmdkBtn = document.getElementById('dossier-mobile-cmdk-btn');
+  const mobileTopBtn = document.getElementById('dossier-mobile-top-btn');
+
+  if (prevSecBtn && nextSecBtn) {
+    prevSecBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const currentIdx = sectionLinks.findIndex(item => item.id === currentItem.id);
+      if (currentIdx > 0) {
+        const prevTarget = sectionLinks[currentIdx - 1].sec;
+        playSelect();
+        prevTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, { signal });
+
+    nextSecBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const currentIdx = sectionLinks.findIndex(item => item.id === currentItem.id);
+      if (currentIdx < sectionLinks.length - 1) {
+        const nextTarget = sectionLinks[currentIdx + 1].sec;
+        playSelect();
+        nextTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, { signal });
+  }
+
+  if (mobileCmdkBtn) {
+    mobileCmdkBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const backdrop = document.getElementById('cmdk-backdrop');
+      const input = document.getElementById('cmdk-input');
+      if (backdrop) {
+        backdrop.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          backdrop.classList.add('open');
+          if (input) {
+            input.value = '';
+            input.focus();
+          }
+        });
+        playOpen();
+      }
+    }, { signal });
+  }
+
+  if (mobileTopBtn) {
+    mobileTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      playSelect();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, { signal });
+  }
 }
 
 function setupCommandPalette(signal) {
