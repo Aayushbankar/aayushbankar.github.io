@@ -8,6 +8,10 @@ export interface TimelineMilestone {
   highlights: string[];
   tags: string[];
   type: 'professional' | 'technical';
+  track: 'production' | 'security' | 'systems';
+  trackLabel: string;
+  metric: { value: string; label: string };
+  retrospective: string;
 }
 
 export const careerTimeline: TimelineMilestone[] = [
@@ -25,6 +29,11 @@ export const careerTimeline: TimelineMilestone[] = [
     ],
     tags: ['Web Protocols', 'Frontend Systems', 'JavaScript'],
     type: 'professional',
+    track: 'production',
+    trackLabel: 'Campus & Production Track',
+    metric: { value: '100%', label: 'Hands-on Browser Groundwork' },
+    retrospective:
+      'Taught me that abstractions leak quickly across browsers; mastering DOM lifecycles and HTTP requests directly without bloated frameworks was foundational.',
   },
   {
     year: '2025',
@@ -41,6 +50,11 @@ export const careerTimeline: TimelineMilestone[] = [
     ],
     tags: ['500+ Active Users', 'Production Web', 'Architecture'],
     type: 'professional',
+    track: 'production',
+    trackLabel: 'Campus & Production Track',
+    metric: { value: '500+', label: 'Daily Active Campus Peers' },
+    retrospective:
+      'When you are solely accountable to 500+ peers and professors, you cannot blame hosting providers. Designing for zero-budget self-hosted Linux taught me real operational discipline.',
   },
   {
     year: '2025',
@@ -57,6 +71,11 @@ export const careerTimeline: TimelineMilestone[] = [
     ],
     tags: ['eBPF Probes', 'Host Telemetry', 'IBM Certified'],
     type: 'professional',
+    track: 'security',
+    trackLabel: 'Security Research Track',
+    metric: { value: '48 / 50', label: 'Enterprise Security Modules' },
+    retrospective:
+      'First deep dive into kernel telemetry. Revealed that naive user-space log monitoring misses malicious kernel transitions; you must observe events at the syscall boundary.',
   },
   {
     year: '2026',
@@ -73,6 +92,11 @@ export const careerTimeline: TimelineMilestone[] = [
     ],
     tags: ['Linux Kernel 6.12', 'Root Exploit', 'CVE-2026-46242', 'QEMU/GDB'],
     type: 'professional',
+    track: 'security',
+    trackLabel: 'Security Research Track',
+    metric: { value: '26 Pgs', label: 'Technical Whitepaper & PoC' },
+    retrospective:
+      'Proved that AI models hallucinate struct offsets under specific compiler flags. Every instruction and ROP gadget must be manually confirmed under GDB breakpoints on physical silicon.',
   },
   {
     year: '2026',
@@ -89,6 +113,11 @@ export const careerTimeline: TimelineMilestone[] = [
     ],
     tags: ['Android GKI', 'Mali/Adreno GPUs', 'Systems Security', 'Research'],
     type: 'professional',
+    track: 'security',
+    trackLabel: 'Security Research Track',
+    metric: { value: '102.7k', label: 'ARM64 Test Iterations' },
+    retrospective:
+      'Moving from standard x86_64 to ARM64 Android GKI proved that memory models, PAC, and SELinux policies fundamentally alter exploit viability. Methodical iteration beats guesswork.',
   },
   {
     year: '2026+',
@@ -105,6 +134,11 @@ export const careerTimeline: TimelineMilestone[] = [
     ],
     tags: ['SIH 2026 Screening', 'Rust Systems', 'DDCET → B.E.'],
     type: 'professional',
+    track: 'systems',
+    trackLabel: 'High-Throughput Systems Track',
+    metric: { value: '13,247', label: 'EPS/core Sustained Ingestion' },
+    retrospective:
+      'Translating research insights into high-throughput production Rust. Balancing SIH national competition, 8.60 academic CPI, and upcoming B.E. entrance exam.',
   },
 ];
 

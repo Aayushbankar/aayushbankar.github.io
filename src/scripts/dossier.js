@@ -535,9 +535,11 @@ function pageEntrance() {
 function syncNavActive() {
   if (typeof window === 'undefined') return;
   const path = window.location.pathname.replace(/\/$/, '') || '/';
+  
+  // Desktop navigation links
   document.querySelectorAll('header nav a, header .nav-link').forEach((link) => {
     const href = link.getAttribute('href')?.replace(/\/$/, '') || '/';
-    const isActive = href === '/' ? path === '/' : path.startsWith(href);
+    const isActive = href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
     if (isActive) {
       link.setAttribute('aria-current', 'page');
       link.classList.add('is-active', 'bg-bone-50/10', 'text-ember-400', 'font-semibold', 'shadow-inner');
@@ -548,6 +550,41 @@ function syncNavActive() {
       link.classList.add('text-bone-400');
     }
   });
+
+  // Mobile drawer links & toggle label sync
+  let activeMobileLabel = 'DOSSIER';
+  document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+    const href = link.getAttribute('data-nav-href')?.replace(/\/$/, '') || link.getAttribute('href')?.replace(/\/$/, '') || '/';
+    const isActive = href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+    const label = link.getAttribute('data-nav-label');
+    
+    if (isActive) {
+      if (label) activeMobileLabel = label;
+      link.setAttribute('aria-current', 'page');
+      link.classList.add('bg-bone-50/10', 'border-bone-50/20', 'text-bone-50', 'font-semibold', 'shadow-inner', 'is-active');
+      link.classList.remove('bg-ink-900/50', 'border-bone-50/5', 'text-bone-300');
+      if (!link.querySelector('.mobile-curr-pill')) {
+        const titleContainer = link.querySelector('.font-display');
+        if (titleContainer) {
+          const pill = document.createElement('span');
+          pill.className = 'chip !text-[8px] !py-0.2 !px-1.5 bg-ember-500/20 text-ember-400 border-ember-500/30 mobile-curr-pill ml-2';
+          pill.textContent = 'CURRENT';
+          titleContainer.parentNode.appendChild(pill);
+        }
+      }
+    } else {
+      link.removeAttribute('aria-current');
+      link.classList.remove('bg-bone-50/10', 'border-bone-50/20', 'text-bone-50', 'font-semibold', 'shadow-inner', 'is-active');
+      link.classList.add('bg-ink-900/50', 'border-bone-50/5', 'text-bone-300');
+      const pill = link.querySelector('.mobile-curr-pill');
+      if (pill) pill.remove();
+    }
+  });
+
+  const toggleLabel = document.getElementById('mobile-nav-toggle-label');
+  if (toggleLabel && activeMobileLabel) {
+    toggleLabel.textContent = activeMobileLabel;
+  }
 }
 
 function init() {

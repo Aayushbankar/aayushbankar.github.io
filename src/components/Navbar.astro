@@ -1,11 +1,13 @@
 ---
-/* Floating dock navigation — Awwwards-caliber pill geometry with responsive mobile drawer and live route indicators */
+/* Floating dock navigation — Awwwards-caliber pill geometry with persistent viewport pinning,
+   responsive mobile drawer with complete 6-route navigation, and live route telemetry. */
 const navItems = [
-  { label: 'DOSSIER', href: '/', num: '01' },
-  { label: 'SYSTEMS', href: '/systems', num: '02' },
-  { label: 'RESEARCH', href: '/research', num: '03' },
-  { label: 'ABOUT', href: '/about', num: '04' },
-  { label: 'CONTACT', href: '/contact', num: '05' },
+  { label: 'DOSSIER', href: '/', num: '01', desc: 'Primary Dossier & Verification Highlights' },
+  { label: 'SYSTEMS', href: '/systems', num: '02', desc: '11 Flagship Specs, 13k EPS Engine & Voice' },
+  { label: 'RESEARCH', href: '/research', num: '03', desc: 'Kernel CVEs, Android SQLi & Lab Notes' },
+  { label: 'ABOUT', href: '/about', num: '04', desc: '18yo Builder, 8GB Rig, Credentials & Ethos' },
+  { label: 'TRAJECTORY', href: '/trajectory', num: '05', desc: 'Multi-Track Milestone Matrix & Tech Stack' },
+  { label: 'CONTACT', href: '/contact', num: '06', desc: 'Encrypted Comms, PGP Key & Research Scope' },
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
@@ -15,27 +17,27 @@ function isRouteActive(href: string): boolean {
   if (cleanHref === '/') {
     return currentPath === '/';
   }
-  return currentPath.startsWith(cleanHref);
+  return currentPath === cleanHref || currentPath.startsWith(cleanHref + '/');
 }
 
 const activeItem = navItems.find((item) => isRouteActive(item.href)) || navItems[0];
 ---
 
-<header class="sticky top-3 sm:top-5 z-50 w-full px-3 sm:px-6 pointer-events-none">
-  <div class="max-w-7xl mx-auto backdrop-blur-xl bg-ink-950/90 border border-bone-50/15 rounded-full px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 shadow-[0_12px_40px_rgba(0,0,0,0.65)] flex items-center justify-between gap-3 sm:gap-6 pointer-events-auto transition-all">
+<header class="fixed top-0 left-0 right-0 z-50 pt-2.5 sm:pt-4 px-3 sm:px-6 pointer-events-none transition-transform duration-200">
+  <div class="max-w-7xl mx-auto backdrop-blur-2xl bg-ink-950/92 border border-bone-50/15 rounded-full px-3.5 sm:px-6 lg:px-8 py-2 sm:py-2.5 shadow-[0_12px_40px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,77,28,0.06)] flex items-center justify-between gap-2.5 sm:gap-6 pointer-events-auto transition-all">
     <!-- Brand -->
-    <a href="/" class="flex items-center gap-2.5 group shrink-0" aria-label="Aayush Bankar Dossier Home">
+    <a href="/" class="flex items-center gap-2 sm:gap-2.5 group shrink-0" aria-label="Aayush Bankar Dossier Home">
       <span class="w-2.5 h-2.5 rounded-full bg-ember-500 animate-pulse shadow-[0_0_10px_rgba(255,77,28,0.7)] shrink-0"></span>
-      <span class="font-display font-semibold text-sm sm:text-base tracking-wide text-bone-50 group-hover:text-ember-400 transition-colors whitespace-nowrap">
+      <span class="font-display font-semibold text-xs sm:text-base tracking-wide text-bone-50 group-hover:text-ember-400 transition-colors whitespace-nowrap">
         Aayush Bankar
       </span>
-      <span class="hidden 2xl:inline-flex chip !text-[9px] !py-0.5 !px-2 border-bone-50/10 text-bone-500 shrink-0">
+      <span class="hidden xl:inline-flex chip !text-[9px] !py-0.5 !px-2 border-bone-50/10 text-bone-500 shrink-0">
         SYS / SEC
       </span>
     </a>
 
-    <!-- Primary Nav (Desktop) -->
-    <nav class="hidden md:flex items-center gap-0.5 lg:gap-1 p-1 rounded-full bg-ink-900/60 border border-bone-50/5 shrink-0" aria-label="Main navigation">
+    <!-- Primary Nav (Desktop: All 6 Core Routes) -->
+    <nav class="hidden lg:flex items-center gap-0.5 p-1 rounded-full bg-ink-900/70 border border-bone-50/5 shrink-0" aria-label="Main navigation">
       {
         navItems.map((item) => {
           const active = isRouteActive(item.href);
@@ -43,14 +45,14 @@ const activeItem = navItems.find((item) => isRouteActive(item.href)) || navItems
             <a
               href={item.href}
               class:list={[
-                'nav-link font-micro text-[10px] lg:text-[11px] tracking-[0.12em] px-2.5 lg:px-3.5 py-1.5 rounded-full transition-all duration-200 whitespace-nowrap',
+                'nav-link font-micro text-[10px] xl:text-[11px] tracking-[0.12em] px-2.5 xl:px-3 py-1.5 rounded-full transition-all duration-200 whitespace-nowrap',
                 active
                   ? 'bg-bone-50/10 text-ember-400 font-semibold shadow-inner is-active'
                   : 'text-bone-400 hover:text-bone-50 hover:bg-bone-50/5',
               ]}
               aria-current={active ? 'page' : undefined}
             >
-              <span class="text-bone-600 mr-1 text-[9px] lg:text-[10px]">{item.num}</span>
+              <span class="text-bone-600 mr-1 text-[9px] xl:text-[10px]">{item.num}</span>
               {item.label}
             </a>
           );
@@ -58,9 +60,9 @@ const activeItem = navItems.find((item) => isRouteActive(item.href)) || navItems
       }
     </nav>
 
-    <!-- Right Controls: Locator + GitHub + Mobile Menu Trigger -->
-    <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-      <div class="hidden xl:flex items-center gap-2 font-micro text-[10px] tracking-[0.14em] text-bone-400 px-3 py-1.5 rounded-full bg-ink-900/60 border border-bone-50/5 whitespace-nowrap" title="Gandhinagar, Gujarat (IST)">
+    <!-- Right Controls: Locator + ⌘K + GitHub + Mobile Menu Trigger -->
+    <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+      <div class="hidden 2xl:flex items-center gap-2 font-micro text-[10px] tracking-[0.14em] text-bone-400 px-3 py-1.5 rounded-full bg-ink-900/60 border border-bone-50/5 whitespace-nowrap" title="Gandhinagar, Gujarat (IST)">
         <span class="w-1.5 h-1.5 rounded-full bg-moss-500"></span>
         <span data-ist-clock>--:-- IST</span>
       </div>
@@ -68,21 +70,21 @@ const activeItem = navItems.find((item) => isRouteActive(item.href)) || navItems
       <button
         type="button"
         id="navbar-cmdk-btn"
-        class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-ink-900/60 border border-bone-50/10 text-bone-400 hover:text-bone-50 hover:border-bone-50/20 font-micro text-[10px] tracking-wider transition-all cursor-pointer"
+        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-ink-900/70 border border-bone-50/10 text-bone-300 hover:text-bone-50 hover:border-bone-50/20 font-micro text-[10px] tracking-wider transition-all cursor-pointer"
         aria-label="Open Command Palette (Cmd+K)"
         title="Search dossier (⌘K)"
       >
         <svg class="w-3 h-3 text-bone-400" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
         </svg>
-        <span class="text-bone-300 font-semibold">⌘K</span>
+        <span class="text-bone-200 font-semibold">⌘K</span>
       </button>
 
       <a
         href="https://github.com/Aayushbankar"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-1.5 btn btn-ghost !py-1 sm:!py-1.5 !px-3 !text-[10px] sm:!text-[11px] !rounded-full shrink-0 whitespace-nowrap"
+        class="hidden sm:inline-flex items-center gap-1.5 btn btn-ghost !py-1 sm:!py-1.5 !px-3 !text-[10px] sm:!text-[11px] !rounded-full shrink-0 whitespace-nowrap"
         aria-label="GitHub Profile"
       >
         <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
@@ -92,15 +94,18 @@ const activeItem = navItems.find((item) => isRouteActive(item.href)) || navItems
         <span class="text-ember-400">↗</span>
       </a>
 
-      <!-- Mobile Menu Toggle Button (Single Dock) -->
+      <!-- Mobile & Tablet Menu Toggle Button (Prominent & High-Usability) -->
       <button
         type="button"
         id="mobile-nav-toggle"
-        class="md:hidden flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-ink-900/80 border border-bone-50/15 text-bone-200 hover:text-ember-400 font-micro text-[10px] tracking-wider transition-colors shrink-0 whitespace-nowrap"
-        aria-label="Toggle navigation menu"
+        class="lg:hidden flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-ink-900/90 border border-bone-50/20 text-bone-100 hover:text-ember-400 font-micro text-[10px] sm:text-[11px] tracking-wider transition-all cursor-pointer shadow-md shrink-0 whitespace-nowrap"
+        aria-label="Open Navigation Menu"
         aria-expanded="false"
+        aria-controls="mobile-nav-drawer"
       >
-        <span class="text-ember-400 font-semibold">{activeItem.label}</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-ember-500 animate-pulse"></span>
+        <span class="text-ember-400 font-semibold" id="mobile-nav-toggle-label">{activeItem.label}</span>
+        <span class="text-bone-400 font-bold ml-0.5">MENU</span>
         <svg class="w-3.5 h-3.5 transition-transform shrink-0" id="nav-arrow-icon" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
         </svg>
@@ -108,89 +113,223 @@ const activeItem = navItems.find((item) => isRouteActive(item.href)) || navItems
     </div>
   </div>
 
-  <!-- Mobile Floating Drawer (Single-Dock Dropdown) -->
+  <!-- Mobile Full-Drawer Dialog with Guidance & All 6 Routes -->
   <div
+    id="mobile-nav-backdrop"
+    class="fixed inset-0 z-50 bg-ink-950/80 backdrop-blur-md hidden transition-opacity pointer-events-auto"
+    aria-hidden="true"
+  ></div>
+
+  <aside
     id="mobile-nav-drawer"
-    class="hidden md:hidden mt-2 max-w-sm mx-auto backdrop-blur-2xl bg-ink-950/95 border border-bone-50/15 rounded-2xl p-3 shadow-2xl pointer-events-auto transition-all"
+    class="fixed top-0 right-0 bottom-0 w-full max-w-sm sm:max-w-md bg-ink-950 border-l border-bone-50/15 p-5 sm:p-6 shadow-[0_0_60px_rgba(0,0,0,0.9)] z-50 flex flex-col justify-between overflow-y-auto pointer-events-auto transition-transform duration-300 translate-x-full"
+    aria-label="Mobile Navigation Menu"
+    role="dialog"
+    aria-modal="true"
   >
-    <div class="space-y-1">
-      {
-        navItems.map((item) => {
-          const active = isRouteActive(item.href);
-          return (
-            <a
-              href={item.href}
-              class:list={[
-                'flex items-center justify-between px-3 py-2 rounded-xl font-micro text-xs tracking-wider transition-colors',
-                active
-                  ? 'bg-bone-50/10 text-ember-400 font-semibold'
-                  : 'text-bone-300 hover:text-bone-50 hover:bg-bone-50/5',
-              ]}
-              aria-current={active ? 'page' : undefined}
-            >
-              <div class="flex items-center gap-2">
-                <span class="text-bone-600 text-[10px]">{item.num}</span>
-                <span>{item.label}</span>
-              </div>
-              {active && <span class="w-1.5 h-1.5 rounded-full bg-ember-500"></span>}
-            </a>
-          );
-        })
-      }
-      <a
-        href="https://github.com/Aayushbankar"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center justify-between px-3 py-2 rounded-xl font-micro text-xs text-bone-300 hover:text-bone-50 hover:bg-bone-50/5 transition-colors border-t border-bone-50/10 mt-1"
-      >
+    <div>
+      <!-- Drawer Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-bone-50/10 mb-5">
         <div class="flex items-center gap-2">
-          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-          <span>GitHub Profile</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-ember-500 shadow-[0_0_8px_rgba(255,77,28,0.8)]"></span>
+          <div>
+            <h3 class="font-display font-semibold text-base text-bone-50">Dossier Index</h3>
+            <p class="font-micro text-[10px] tracking-widest text-bone-500 uppercase">Aayush Bankar · Research Site</p>
+          </div>
         </div>
-        <span class="text-ember-400">↗</span>
-      </a>
+
+        <button
+          type="button"
+          id="mobile-drawer-close"
+          class="p-2 rounded-full bg-ink-900 border border-bone-50/10 text-bone-400 hover:text-bone-50 cursor-pointer transition-colors"
+          aria-label="Close navigation menu"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Cross-Page Navigation Items (All 6 Pages) -->
+      <div class="space-y-1.5" role="navigation" aria-label="Mobile primary navigation">
+        <p class="font-micro text-[10px] uppercase tracking-widest text-bone-500 mb-2 px-1 font-semibold">
+          Primary Dossier Documents (01—06)
+        </p>
+        {
+          navItems.map((item) => {
+            const active = isRouteActive(item.href);
+            return (
+              <a
+                href={item.href}
+                class:list={[
+                  'mobile-nav-link flex items-center justify-between p-3 rounded-xl transition-all group',
+                  active
+                    ? 'bg-bone-50/10 border border-bone-50/20 text-bone-50 font-semibold shadow-inner is-active'
+                    : 'bg-ink-900/50 border border-bone-50/5 text-bone-300 hover:text-bone-50 hover:bg-bone-50/5 hover:border-bone-50/15',
+                ]}
+                aria-current={active ? 'page' : undefined}
+                data-nav-href={item.href}
+                data-nav-label={item.label}
+              >
+                <div class="space-y-0.5">
+                  <div class="flex items-center gap-2">
+                    <span class:list={['font-micro text-xs font-bold', active ? 'text-ember-400' : 'text-bone-500 group-hover:text-ember-400']}>
+                      {item.num}
+                    </span>
+                    <span class="font-display text-sm tracking-wide text-bone-50">{item.label}</span>
+                    {active && <span class="chip !text-[8px] !py-0.2 !px-1.5 bg-ember-500/20 text-ember-400 border-ember-500/30 mobile-curr-pill">CURRENT</span>}
+                  </div>
+                  <p class="text-[11px] text-bone-400 leading-tight">{item.desc}</p>
+                </div>
+                <span class:list={['text-xs transition-transform group-hover:translate-x-1', active ? 'text-ember-400 font-bold' : 'text-bone-600']}>
+                  →
+                </span>
+              </a>
+            );
+          })
+        }
+      </div>
+
+      <!-- Built-in Mobile Navigation Guidance Card -->
+      <div class="mt-6 p-4 rounded-xl bg-ink-900/80 border border-bone-50/10 space-y-2.5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5 text-brass-400 font-micro text-[11px] font-semibold">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            </svg>
+            <span>HOW TO NAVIGATE THIS SITE</span>
+          </div>
+          <span class="chip chip-brass !text-[8.5px] !py-0.2 !px-1.5">HELP</span>
+        </div>
+        <ul class="text-[11px] text-bone-400 space-y-1.5 leading-relaxed font-sans">
+          <li>• <strong>Switch Dossiers:</strong> Tap any of the 6 documents above to navigate across pages.</li>
+          <li>• <strong>Page Sections:</strong> On each page, use the floating bottom dock to jump between numbered sections.</li>
+          <li>• <strong>Universal Search:</strong> Tap ⌘K below to search 11 systems, CVE disclosures &amp; tools.</li>
+        </ul>
+        <button
+          type="button"
+          id="mobile-drawer-guide-trigger"
+          class="mt-2 w-full py-2 px-3 rounded-lg bg-ink-950 border border-bone-50/15 hover:border-brass-400/50 text-brass-400 hover:text-brass-300 font-micro text-xs font-semibold flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
+        >
+          <span>Open Full Navigation &amp; Telemetry Guide (?)</span>
+          <span>→</span>
+        </button>
+      </div>
     </div>
 
-    <!-- Mobile Drawer Footer Info -->
-    <div class="mt-3 pt-2.5 border-t border-bone-50/10 flex items-center justify-between text-[10px] font-micro text-bone-500 px-2">
-      <span class="flex items-center gap-1.5">
-        <span class="w-1.5 h-1.5 rounded-full bg-moss-500"></span>
-        <span data-ist-clock>--:-- IST</span>
-      </span>
-      <span>Gandhinagar, Gujarat</span>
-    </div>
-  </div>
+    <!-- Drawer Footer Actions -->
+    <div class="mt-6 pt-4 border-t border-bone-50/10 space-y-3">
+      <div class="grid grid-cols-3 gap-2">
+        <button
+          type="button"
+          id="mobile-drawer-cmdk-btn"
+          class="flex items-center justify-center gap-1.5 p-2 rounded-xl bg-ink-900 border border-bone-50/10 text-xs font-micro text-bone-200 hover:text-ember-400 transition-colors cursor-pointer"
+        >
+          <span>Search</span>
+          <span class="text-bone-400 font-bold">⌘K</span>
+        </button>
 
-  <!-- Interactive script for mobile drawer and route sync -->
+        <button
+          type="button"
+          id="mobile-drawer-help-btn"
+          class="flex items-center justify-center gap-1.5 p-2 rounded-xl bg-ink-900 border border-bone-50/10 text-xs font-micro text-brass-400 hover:text-brass-300 transition-colors cursor-pointer"
+        >
+          <span>Guide</span>
+          <span class="font-bold">?</span>
+        </button>
+
+        <a
+          href="https://github.com/Aayushbankar"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center gap-1 p-2 rounded-xl bg-ink-900 border border-bone-50/10 text-xs font-micro text-bone-200 hover:text-ember-400 transition-colors"
+        >
+          <span>GitHub</span>
+          <span class="text-ember-400">↗</span>
+        </a>
+      </div>
+
+      <div class="flex items-center justify-between text-[10px] font-micro text-bone-500 px-1 pt-1">
+        <span class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-moss-500"></span>
+          <span data-ist-clock>--:-- IST</span>
+        </span>
+        <span>Gandhinagar, Gujarat</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Interactive script for mobile drawer, backdrop, and route sync -->
   <script is:inline>
     (function () {
       function setupNav() {
         var toggle = document.getElementById('mobile-nav-toggle');
         var drawer = document.getElementById('mobile-nav-drawer');
+        var backdrop = document.getElementById('mobile-nav-backdrop');
+        var closeBtn = document.getElementById('mobile-drawer-close');
+        var cmdkBtn = document.getElementById('mobile-drawer-cmdk-btn');
+        var guideTrigger = document.getElementById('mobile-drawer-guide-trigger');
+        var helpBtn = document.getElementById('mobile-drawer-help-btn');
         var icon = document.getElementById('nav-arrow-icon');
-        if (!toggle || !drawer) return;
+        if (!toggle || !drawer || !backdrop) return;
 
         function closeDrawer() {
-          drawer.classList.add('hidden');
+          drawer.classList.add('translate-x-full');
+          backdrop.classList.add('hidden');
+          backdrop.classList.remove('opacity-100');
           toggle.setAttribute('aria-expanded', 'false');
           if (icon) icon.classList.remove('rotate-180');
+          document.body.style.overflow = '';
         }
 
         function openDrawer() {
-          drawer.classList.remove('hidden');
+          drawer.classList.remove('translate-x-full');
+          backdrop.classList.remove('hidden');
+          requestAnimationFrame(function () {
+            backdrop.classList.add('opacity-100');
+          });
           toggle.setAttribute('aria-expanded', 'true');
           if (icon) icon.classList.add('rotate-180');
+          document.body.style.overflow = 'hidden';
         }
 
         toggle.onclick = function (e) {
           e.stopPropagation();
-          var isHidden = drawer.classList.contains('hidden');
-          if (isHidden) {
-            openDrawer();
-          } else {
+          var isOpen = !drawer.classList.contains('translate-x-full');
+          if (isOpen) {
             closeDrawer();
+          } else {
+            openDrawer();
           }
         };
+
+        if (closeBtn) {
+          closeBtn.onclick = function (e) {
+            e.stopPropagation();
+            closeDrawer();
+          };
+        }
+
+        backdrop.onclick = function () {
+          closeDrawer();
+        };
+
+        if (cmdkBtn) {
+          cmdkBtn.onclick = function () {
+            closeDrawer();
+            var searchTrigger = document.getElementById('navbar-cmdk-btn') || document.getElementById('dossier-cmdk-trigger');
+            if (searchTrigger) searchTrigger.click();
+          };
+        }
+
+        function triggerGuideModal() {
+          closeDrawer();
+          var guideBtn = document.getElementById('dossier-guide-btn') || document.getElementById('dossier-mobile-guide-btn');
+          if (guideBtn) guideBtn.click();
+        }
+
+        if (guideTrigger) guideTrigger.onclick = triggerGuideModal;
+        if (helpBtn) helpBtn.onclick = triggerGuideModal;
 
         drawer.querySelectorAll('a').forEach(function (a) {
           a.onclick = function () {
@@ -198,16 +337,31 @@ const activeItem = navItems.find((item) => isRouteActive(item.href)) || navItems
           };
         });
 
-        document.addEventListener('click', function (e) {
-          if (!drawer.contains(e.target) && !toggle.contains(e.target)) {
-            closeDrawer();
-          }
-        });
+        // Close on Escape
+        if (!window.__navEscapeBound) {
+          window.__navEscapeBound = true;
+          window.addEventListener('keydown', function (e) {
+            var activeDrawer = document.getElementById('mobile-nav-drawer');
+            if (e.key === 'Escape' && activeDrawer && !activeDrawer.classList.contains('translate-x-full')) {
+              var activeToggle = document.getElementById('mobile-nav-toggle');
+              var activeBackdrop = document.getElementById('mobile-nav-backdrop');
+              activeDrawer.classList.add('translate-x-full');
+              if (activeBackdrop) {
+                activeBackdrop.classList.add('hidden');
+                activeBackdrop.classList.remove('opacity-100');
+              }
+              if (activeToggle) activeToggle.setAttribute('aria-expanded', 'false');
+              document.body.style.overflow = '';
+            }
+          });
+        }
+
+        // Expose openDrawer globally so DossierRail mobile badge can trigger it
+        window.__openMobileNavDrawer = openDrawer;
       }
 
       setupNav();
       document.addEventListener('astro:page-load', setupNav);
-      document.addEventListener('astro:after-swap', setupNav);
     })();
   </script>
 </header>

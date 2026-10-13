@@ -276,30 +276,31 @@ import { profile } from '../data/profile';
           </div>
         </article>
 
-        <!-- Card 2: Manual Ground-Truth Verification -->
+        <!-- Card 2: Empirical Verification & First-Principles Systems Truth -->
         <article class="card card-glare p-7 sm:p-8 border-t-2 border-t-moss-500 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-4">
-              <span class="font-micro text-xs text-moss-400 tracking-widest font-semibold uppercase">02 / Silicon Ground Truth</span>
-              <span class="chip chip-brass !text-[9px]">VERIFICATION PHASE</span>
+              <span class="font-micro text-xs text-moss-400 tracking-widest font-semibold uppercase">02 / Empirical Verification</span>
+              <span class="chip chip-brass !text-[9px]">FIRST-PRINCIPLES TRUTH</span>
             </div>
-            <h3 class="display text-xl sm:text-2xl text-bone-50 mb-3">Manual GDB &amp; Memory Depth</h3>
+            <h3 class="display text-xl sm:text-2xl text-bone-50 mb-3">Hermetic Testing &amp; Systems Ground Truth</h3>
             <p class="text-xs sm:text-sm text-bone-300 leading-relaxed">
-              Every struct alignment, SLUB cache allocation, and assembly instruction is verified by hand. When an AI model hallucinates a struct member displacement (e.g. 8 bytes off under GCC), I catch it with GDB breakpoint traces, memory inspection, and local micro-VM runs.
+              AI models and abstractions hallucinate boundary conditions, memory structures, and concurrency windows. My engineering methodology demands reproducible, first-principles verification: if a system claims 13,000 EPS or sub-millisecond voice latency, it must be proved through instrumented harnesses, automated regression scripts, and observable physical metrics.
             </p>
 
             <div class="mt-5 p-4 rounded-xl bg-ink-950 border border-bone-50/10 space-y-2">
-              <p class="font-micro text-[10px] text-moss-400 font-semibold uppercase tracking-wider">What I Personally Verify:</p>
+              <p class="font-micro text-[10px] text-moss-400 font-semibold uppercase tracking-wider">How I Personally Verify Systems:</p>
               <ul class="text-xs text-bone-400 space-y-1.5 list-disc list-inside">
-                <li>Exact memory offsets in SLUB (<code class="text-moss-300">kmalloc-192</code>) under KASAN</li>
-                <li>ROP gadget viability and stack pivot alignment under RETPOLINE</li>
-                <li>Real-world latency, cache footprint, and zero-copy data integrity</li>
+                <li><strong>Hermetic Environments:</strong> Building deterministic test runners, micro-VMs, and isolated lab scripts so every experiment is 100% reproducible.</li>
+                <li><strong>First-Principles Profiling:</strong> Measuring cache line footprints, lock contention, CPU cycle efficiency, and zero-copy data flow under real workload pressure.</li>
+                <li><strong>Diagnostic Sanitizers:</strong> Catching silent memory corruptions and race conditions using KASAN, Valgrind, UBSan, and eBPF kernel tracepoints.</li>
+                <li><strong>Documented Failure Paths:</strong> Openly cataloging dead ends, compiler bugs, and retraction registers alongside verified wins.</li>
               </ul>
             </div>
           </div>
 
           <div class="mt-6 pt-4 border-t border-bone-50/10 flex items-center justify-between font-micro text-xs text-bone-500">
-            <span>Proof: Empirical Logs</span>
+            <span>Proof: Reproducible Testbenches</span>
             <span class="text-moss-400">100% Deterministic</span>
           </div>
         </article>

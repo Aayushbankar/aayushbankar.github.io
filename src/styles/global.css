@@ -627,6 +627,37 @@
   .dossier-action-btn.sfx-active #sound-label {
     color: var(--color-moss-500);
   }
+  .dossier-action-btn,
+  .dossier-top-btn {
+    position: relative;
+  }
+  .rail-action-tooltip {
+    position: absolute;
+    left: calc(100% + 0.65rem);
+    top: 50%;
+    transform: translateY(-50%) translateX(-4px);
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    padding: 0.22rem 0.55rem;
+    border-radius: 6px;
+    background: rgba(18, 16, 15, 0.96);
+    border: 1px solid rgba(237, 232, 220, 0.18);
+    font-family: var(--font-micro);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-bone-100);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.75);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 70;
+  }
+  .dossier-action-btn:hover .rail-action-tooltip,
+  .dossier-top-btn:hover .rail-action-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
 
   /* Scroll depth gauge & jump to top */
   .dossier-top-btn {
