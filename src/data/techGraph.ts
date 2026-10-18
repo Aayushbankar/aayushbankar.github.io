@@ -276,15 +276,6 @@ export const techNodes: TechNode[] = [
     artifactUrl: '/systems/wolvie',
   },
   {
-    id: 'jarvis-agent',
-    label: 'JARVIS Local Research Agent',
-    cluster: 'edge-ai',
-    level: 'Autonomous Tool Use',
-    summary: 'Autonomous locally-hosted research agent orchestrated by a ReAct loop against local llama.cpp.',
-    evidence: 'Automated web search, file parsing, shell execution, and rich terminal reporting.',
-    artifactUrl: '/systems/jarvis-agent',
-  },
-  {
     id: 'privata-rag',
     label: 'Privata Offline RAG',
     cluster: 'edge-ai',
@@ -404,9 +395,7 @@ export const techEdges: TechEdge[] = [
   { source: 'rig-8gb', target: 'llama-cpp', relation: '4.2GB Memory RSS Ceiling' },
   { source: 'rig-8gb', target: 'wolvie-assistant', relation: 'Physical Execution Rig' },
   { source: 'llama-cpp', target: 'wolvie-assistant', relation: 'Offline Reasoning Engine' },
-  { source: 'llama-cpp', target: 'jarvis-agent', relation: 'Local ReAct Inference' },
   { source: 'llama-cpp', target: 'privata-rag', relation: 'Offline Vector Ingestion' },
-  { source: 'kafka-gpt2', target: 'jarvis-agent', relation: 'Literature Synthesis' },
 
   // Web & Infrastructure connections
   { source: 'it-portal', target: 'linux-hosting', relation: 'Zero-Budget Deployment' },

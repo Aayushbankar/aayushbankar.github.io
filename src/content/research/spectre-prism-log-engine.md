@@ -20,7 +20,7 @@ SPECTRE-PRISM was architected to solve this problem by establishing a **5-Plane 
 ┌────────────────────────────────────────────────────────────────┐
 │  Plane 1: INGESTION (Zero-Copy SIMD Ring Buffer)               │
 │  • 13,247 events/s/core sustained                                │
-│  • AVX-512/AVX2 delimiter scan • lock-free MPSC • mmap-backed  │
+│  • AVX2 SIMD delimiter scan • lock-free MPSC • mmap-backed      │
 └────────────────────────────┬───────────────────────────────────┘
                              ▼
 ┌────────────────────────────────────────────────────────────────┐
@@ -53,7 +53,7 @@ SPECTRE-PRISM was architected to solve this problem by establishing a **5-Plane 
 
 To sustain **13,247 events per second per core** on consumer hardware (i5-8350U), the ingestion plane completely avoids heap allocation during parsing:
 
-- **AVX-512 / AVX2 vector instructions** scan incoming byte streams for delimiter boundaries (`\n`, `\r`, `\0`, custom). 64-byte vector loads process 64 bytes per instruction.
+- **AVX2 SIMD vector instructions** scan incoming byte streams for delimiter boundaries (`\n`, `\r`, `\0`, custom). 32-byte vector loads process 32 bytes per instruction.
 - **Token string views** are passed by reference (offset + length) rather than copied into heap strings. Zero allocations per event.
 - **Lock-free MPSC ring buffer** backed by `mmap` shared memory prevents GC pauses and thread contention. Producer (network receiver) → Consumer (parser) with cache-line-aligned head/tail pointers.
 - **SIMD delimiter scan kernel** (pseudocode):

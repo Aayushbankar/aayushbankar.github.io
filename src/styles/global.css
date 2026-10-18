@@ -713,6 +713,13 @@
     box-shadow: 0 16px 40px -6px rgba(0, 0, 0, 0.88), 0 0 0 1px rgba(255, 77, 28, 0.08);
     font-family: var(--font-micro);
     user-select: none;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    will-change: transform, opacity;
+  }
+  .dossier-rail-mobile.nav-hidden {
+    transform: translate(-50%, calc(100% + 2.5rem));
+    opacity: 0;
+    pointer-events: none;
   }
   @media (min-width: 1024px) {
     .dossier-rail-mobile {
@@ -790,7 +797,10 @@
 
   @media (max-width: 1023px) {
     body {
-      padding-bottom: 5.5rem;
+      padding-bottom: max(6.5rem, calc(5rem + env(safe-area-inset-bottom, 0px)));
+    }
+    main {
+      padding-bottom: max(6.5rem, calc(5rem + env(safe-area-inset-bottom, 0px))) !important;
     }
   }
 

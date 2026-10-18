@@ -28,7 +28,7 @@
   <circle cx="72" cy="29" r="3.5" fill="#ef4444">
     <animate attributeName="opacity" values="1;0.2;1" dur="1.8s" repeatCount="indefinite"/>
   </circle>
-  <text x="84" y="33" font-size="9.5" letter-spacing="1.8" fill="#ede8dc">MEDIA INTELLIGENCE &#183; RENDER DEPLOYED</text>
+  <text x="84" y="33" font-size="9.5" letter-spacing="1.8" fill="#ede8dc">MEDIA INTELLIGENCE &#183; REPO OPEN-SOURCE</text>
 
   <text x="24" y="72" font-size="22" font-weight="800" letter-spacing="1.2" fill="#ede8dc">YT_STLK ENGINE</text>
   <text x="24" y="93" font-size="10" letter-spacing="2" fill="#ef4444">PLAYLIST SURVEILLANCE &#183; DELTA TRACKER</text>
@@ -36,17 +36,17 @@
 
   <text class="d" x="24" y="124">Automated creator channel playlist and video delta tracker.</text>
   <text class="d" x="24" y="141">Detects unlisted uploads and stealth playlist reorganization.</text>
-  <text class="d" x="24" y="158">Production deployed on Render with zero quota-exhaustion logic.</text>
+  <text class="d" x="24" y="158">Engineered with intelligent zero quota-exhaustion logic.</text>
   <text class="d" x="24" y="175">Background scheduler with SQLite diffing &amp; webhook alerts.</text>
 
   <g>
     <rect x="24" y="196" width="68" height="17" rx="3.5" fill="#2b1113" stroke="#7f1d1d"/><text class="chip" x="58" y="208" text-anchor="middle">PYTHON</text>
     <rect x="98" y="196" width="60" height="17" rx="3.5" fill="#2b1113" stroke="#7f1d1d"/><text class="chip" x="128" y="208" text-anchor="middle">FLASK</text>
-    <rect x="164" y="196" width="68" height="17" rx="3.5" fill="#2b1113" stroke="#7f1d1d"/><text class="chip" x="198" y="208" text-anchor="middle">RENDER</text>
+    <rect x="164" y="196" width="68" height="17" rx="3.5" fill="#2b1113" stroke="#7f1d1d"/><text class="chip" x="198" y="208" text-anchor="middle">SQLITE</text>
     <rect x="238" y="196" width="76" height="17" rx="3.5" fill="#2b1113" stroke="#7f1d1d"/><text class="chip" x="276" y="208" text-anchor="middle">YOUTUBE</text>
   </g>
 
-  <text x="556" y="234" font-size="9.5" letter-spacing="1.6" fill="#6b675f" text-anchor="end">stkher.onrender.com</text>
+  <text x="556" y="234" font-size="9.5" letter-spacing="1.6" fill="#6b675f" text-anchor="end">github.com/Aayushbankar/yt_stlk</text>
 </g>
 
 <!-- Surveillance radar / delta graphic -->

@@ -11,7 +11,7 @@ import { profile } from '../data/profile';
   title="About & Reality — Aayush Bankar"
   description="18-year-old curious generalist builder exploring systems, web architecture, security, and offline AI. AI-augmented speed with manual ground-truth verification."
 >
-  <div class="wrap-wide py-10 sm:py-16">
+  <div class="wrap-wide pt-10 pb-28 sm:py-16">
     <!-- ═══════════════════════════════════════════════════════════════
          MOBILE CYBERDECK DECK CONTROLLER (Tactile 4-Tab Switcher)
          Philosophy · Methodology · Career Trajectory · Silicon Skills
@@ -500,9 +500,19 @@ import { profile } from '../data/profile';
           indicator.textContent = tabLabels[tabId];
         }
 
+        function revealSection(sec) {
+          if (!sec) return;
+          sec.style.display = 'block';
+          sec.style.opacity = '1';
+          sec.querySelectorAll('[data-reveal], [data-reveal-grid] > *').forEach((el) => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          });
+        }
+
         if (tabId === 'philosophy') {
-          if (profileSec) profileSec.style.display = 'block';
-          if (hardwareSec) hardwareSec.style.display = 'block';
+          revealSection(profileSec);
+          revealSection(hardwareSec);
           if (credsSec) credsSec.style.display = 'none';
           if (ethosSec) ethosSec.style.display = 'none';
           if (trajSec) trajSec.style.display = 'none';
@@ -510,14 +520,14 @@ import { profile } from '../data/profile';
           if (profileSec) profileSec.style.display = 'none';
           if (hardwareSec) hardwareSec.style.display = 'none';
           if (credsSec) credsSec.style.display = 'none';
-          if (ethosSec) ethosSec.style.display = 'block';
+          revealSection(ethosSec);
           if (trajSec) trajSec.style.display = 'none';
         } else if (tabId === 'trajectory') {
           if (profileSec) profileSec.style.display = 'none';
           if (hardwareSec) hardwareSec.style.display = 'none';
-          if (credsSec) credsSec.style.display = 'block';
+          revealSection(credsSec);
           if (ethosSec) ethosSec.style.display = 'none';
-          if (trajSec) trajSec.style.display = 'block';
+          revealSection(trajSec);
           if (careerPanel) {
             careerPanel.classList.remove('hidden');
             careerPanel.style.opacity = '1';
@@ -530,7 +540,7 @@ import { profile } from '../data/profile';
           if (hardwareSec) hardwareSec.style.display = 'none';
           if (credsSec) credsSec.style.display = 'none';
           if (ethosSec) ethosSec.style.display = 'none';
-          if (trajSec) trajSec.style.display = 'block';
+          revealSection(trajSec);
           if (careerPanel) careerPanel.classList.add('hidden');
           if (techPanel) {
             techPanel.classList.remove('hidden');

@@ -217,7 +217,9 @@ function railSpy(signal) {
     );
   }
 
-  if (!sectionLinks.length) return;
+  const mobileRail = document.querySelector('.dossier-rail-mobile');
+  let lastScrollY = window.scrollY || window.pageYOffset;
+  let currentItem = sectionLinks[0] || null;
 
   let ticking = false;
 
@@ -227,17 +229,38 @@ function railSpy(signal) {
     const vh = window.innerHeight;
     const docHeight = document.documentElement.scrollHeight;
 
+    // Mobile dock auto-hide on downward scroll to prevent obscuring text/buttons
+    if (mobileRail) {
+      const delta = scrollY - lastScrollY;
+      if (scrollY <= 32) {
+        mobileRail.classList.remove('nav-hidden');
+      } else if (delta > 8) {
+        mobileRail.classList.add('nav-hidden');
+      } else if (delta < -6) {
+        mobileRail.classList.remove('nav-hidden');
+      }
+      lastScrollY = scrollY;
+    }
+
     // Scroll depth readout & progress line
     const maxScroll = Math.max(1, docHeight - vh);
     const pct = Math.min(100, Math.max(0, Math.round((scrollY / maxScroll) * 100)));
     if (depthVal) depthVal.textContent = `${pct}%`;
     if (progressLine) progressLine.style.height = `${pct}%`;
 
+    if (!sectionLinks.length) return;
+
+    const mobileSecText = document.getElementById('dossier-mobile-active-sec-text');
+
     // If near bottom of page, activate the last section
     if (scrollY + vh >= docHeight - 120) {
       const last = sectionLinks[sectionLinks.length - 1];
+      currentItem = last;
       if (activeSecName && activeSecName.textContent !== last.label) {
         activeSecName.textContent = last.label;
+      }
+      if (mobileSecText && mobileSecText.textContent !== last.label) {
+        mobileSecText.textContent = last.label;
       }
       sectionLinks.forEach(({ id, link }) => {
         const isActive = id === last.id;
@@ -249,7 +272,7 @@ function railSpy(signal) {
 
     // Focal point is 38% from top of viewport
     const focusY = vh * 0.38;
-    let currentItem = sectionLinks[0];
+    currentItem = sectionLinks[0];
 
     for (const item of sectionLinks) {
       const rect = item.sec.getBoundingClientRect();
@@ -261,7 +284,6 @@ function railSpy(signal) {
     if (activeSecName && activeSecName.textContent !== currentItem.label) {
       activeSecName.textContent = currentItem.label;
     }
-    const mobileSecText = document.getElementById('dossier-mobile-active-sec-text');
     if (mobileSecText && mobileSecText.textContent !== currentItem.label) {
       mobileSecText.textContent = currentItem.label;
     }
@@ -314,7 +336,9 @@ function railSpy(signal) {
   if (prevSecBtn && nextSecBtn) {
     prevSecBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const currentIdx = sectionLinks.findIndex(item => item.id === currentItem.id);
+      if (!sectionLinks.length) return;
+      const cur = currentItem || sectionLinks[0];
+      const currentIdx = sectionLinks.findIndex(item => item.id === cur.id);
       if (currentIdx > 0) {
         const prevTarget = sectionLinks[currentIdx - 1].sec;
         playSelect();
@@ -324,8 +348,10 @@ function railSpy(signal) {
 
     nextSecBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const currentIdx = sectionLinks.findIndex(item => item.id === currentItem.id);
-      if (currentIdx < sectionLinks.length - 1) {
+      if (!sectionLinks.length) return;
+      const cur = currentItem || sectionLinks[0];
+      const currentIdx = sectionLinks.findIndex(item => item.id === cur.id);
+      if (currentIdx >= 0 && currentIdx < sectionLinks.length - 1) {
         const nextTarget = sectionLinks[currentIdx + 1].sec;
         playSelect();
         nextTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });

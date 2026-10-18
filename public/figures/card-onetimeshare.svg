@@ -37,7 +37,7 @@
   <text class="d" x="24" y="124">Zero-knowledge ephemeral secret and file payload store.</text>
   <text class="d" x="24" y="141">Atomic Redis MULTI/EXEC pipeline prevents race downloads.</text>
   <text class="d" x="24" y="158">Automated self-destruction triggered on initial fetch.</text>
-  <text class="d" x="24" y="175">Deployed in production on Render with Docker Compose.</text>
+  <text class="d" x="24" y="175">Engineered with Docker Compose and Redis atomic isolation.</text>
 
   <g>
     <rect x="24" y="196" width="70" height="17" rx="3.5" fill="#241e10" stroke="#7a5d12"/><text class="chip" x="59" y="208" text-anchor="middle">PYTHON</text>
