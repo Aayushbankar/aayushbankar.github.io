@@ -16,7 +16,7 @@ export const collab = {
   subheadline: 'Open for software engineering internships, junior systems roles, open research collaborations, and hackathons.',
   availability: {
     status: 'Open to Roles & Projects',
-    note: '18-year-old student and generalist builder based in Gandhinagar, Gujarat. Open for software engineering internships, junior systems/web roles, open research collaborations, and hackathon teams.',
+    note: '18-year-old diploma student and AI-augmented systems builder based in Gandhinagar, Gujarat. Open for software engineering internships, junior systems/web roles, empirical security research collaborations, and hackathon teams.',
     location: 'Gandhinagar, Gujarat, India (IST / UTC+5:30)',
   },
   services: [

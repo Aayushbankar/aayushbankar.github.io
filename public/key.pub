@@ -1,0 +1,18 @@
+# ==============================================================================
+# DEMONSTRATION SPECIFICATION — NO REAL CRYPTOGRAPHIC MATERIAL OR PII
+# ==============================================================================
+# This is a synthetic mock public key block for portfolio UI demo purposes.
+# No active private keys or sensitive PII are exposed or stored.
+# For verified vulnerability disclosures or confidential security inquiries:
+# Contact: aayushbankar42@gmail.com to establish an ephemeral secure session.
+# ==============================================================================
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: MockPGP v2.4 (Demonstration Spec)
+Comment: DEMO KEY ONLY — NO REAL PII / PRIVATE MATERIAL STORED
+Comment: Synthetic demonstration block for UI preview only.
+Fingerprint: 8F2A 4C19 E70B 31D8 99A2 55F4 B6D1 88E0 2C3F A914
+Key-ID: 0x2C3FA914 [SAMPLE SPEC]
+Cipher: RSA-4096 / Ed25519 (Synthetic Block)
+Notice: For confidential vulnerability disclosures, request an ephemeral key session via email.
+-----END PGP PUBLIC KEY BLOCK-----

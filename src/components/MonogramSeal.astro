@@ -1,0 +1,13 @@
+---
+import UiMonogramSeal from './ui/MonogramSeal.astro';
+
+interface Props {
+  class?: string;
+  size?: number;
+  idPrefix?: string;
+}
+
+const props = Astro.props;
+---
+
+<UiMonogramSeal {...props} />

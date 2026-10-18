@@ -2,9 +2,10 @@
 interface Props {
   class?: string;
   size?: number;
+  idPrefix?: string;
 }
 
-const { class: className = '', size = 320 } = Astro.props;
+const { class: className = '', size = 320, idPrefix = 'seal' } = Astro.props;
 ---
 
 <div class:list={['relative flex items-center justify-center select-none group', className]}>
@@ -22,47 +23,47 @@ const { class: className = '', size = 320 } = Astro.props;
   >
     <defs>
       <!-- Gradients -->
-      <radialGradient id="seal-bg" cx="50%" cy="50%" r="50%">
+      <radialGradient id={`${idPrefix}-bg`} cx="50%" cy="50%" r="50%">
         <stop offset="0%" stop-color="#1c1c18" />
         <stop offset="70%" stop-color="#141412" />
         <stop offset="100%" stop-color="#0c0c0b" />
       </radialGradient>
 
-      <linearGradient id="brass-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <linearGradient id={`${idPrefix}-brass-grad`} x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="#e2c582" />
         <stop offset="50%" stop-color="#c8a24b" />
         <stop offset="100%" stop-color="#8c6d28" />
       </linearGradient>
 
-      <linearGradient id="ember-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <linearGradient id={`${idPrefix}-ember-grad`} x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="#ff7a45" />
         <stop offset="100%" stop-color="#ff4d1c" />
       </linearGradient>
 
       <!-- Circular text paths -->
       <path
-        id="text-path-top"
+        id={`${idPrefix}-text-path-top`}
         d="M 40,160 A 120,120 0 0,1 280,160"
         fill="none"
       />
       <path
-        id="text-path-bottom"
+        id={`${idPrefix}-text-path-bottom`}
         d="M 280,160 A 120,120 0 0,1 40,160"
         fill="none"
       />
 
       <!-- Subtle background grid pattern -->
-      <pattern id="seal-grid" width="16" height="16" patternUnits="userSpaceOnUse">
+      <pattern id={`${idPrefix}-grid`} width="16" height="16" patternUnits="userSpaceOnUse">
         <path d="M 16 0 L 0 0 0 16" fill="none" stroke="#ede8dc" stroke-width="0.35" stroke-opacity="0.08" />
       </pattern>
     </defs>
 
     <!-- Outer Seal Disc -->
-    <circle cx="160" cy="160" r="154" fill="url(#seal-bg)" stroke="#2a2a26" stroke-width="1.5" />
-    <circle cx="160" cy="160" r="154" fill="url(#seal-grid)" />
+    <circle cx="160" cy="160" r="154" fill={`url(#${idPrefix}-bg)`} stroke="#2a2a26" stroke-width="1.5" />
+    <circle cx="160" cy="160" r="154" fill={`url(#${idPrefix}-grid)`} />
 
     <!-- Outer Beaded / Cog Ring -->
-    <circle cx="160" cy="160" r="148" fill="none" stroke="url(#brass-grad)" stroke-width="1.2" stroke-opacity="0.8" />
+    <circle cx="160" cy="160" r="148" fill="none" stroke={`url(#${idPrefix}-brass-grad)`} stroke-width="1.2" stroke-opacity="0.8" />
     <circle
       cx="160"
       cy="160"
@@ -82,20 +83,20 @@ const { class: className = '', size = 320 } = Astro.props;
 
     <!-- Circular Monogram Typography -->
     <text font-family="'JetBrains Mono', monospace" font-size="8.5" letter-spacing="3.2" fill="#a8a29a" text-anchor="middle">
-      <textPath href="#text-path-top" startOffset="50%">
+      <textPath href={`#${idPrefix}-text-path-top`} startOffset="50%">
         AAYUSH BANKAR · OFFENSIVE RESEARCH
       </textPath>
     </text>
 
     <text font-family="'JetBrains Mono', monospace" font-size="8.5" letter-spacing="3.2" fill="#a8a29a" text-anchor="middle">
-      <textPath href="#text-path-bottom" startOffset="50%">
+      <textPath href={`#${idPrefix}-text-path-bottom`} startOffset="50%">
         GANDHINAGAR · 23.2156° N 72.6369° E
       </textPath>
     </text>
 
     <!-- Inner Framing Circle -->
     <circle cx="160" cy="160" r="98" fill="#141412" stroke="#2a2a26" stroke-width="1" />
-    <circle cx="160" cy="160" r="94" fill="none" stroke="url(#brass-grad)" stroke-width="0.8" stroke-opacity="0.6" stroke-dasharray="4 4" />
+    <circle cx="160" cy="160" r="94" fill="none" stroke={`url(#${idPrefix}-brass-grad)`} stroke-width="0.8" stroke-opacity="0.6" stroke-dasharray="4 4" />
 
     <!-- Center Reticle / Compass Crosshairs -->
     <line x1="160" y1="74" x2="160" y2="86" stroke="#c8a24b" stroke-width="1" stroke-opacity="0.7" />
@@ -139,14 +140,14 @@ const { class: className = '', size = 320 } = Astro.props;
         font-size="74"
         font-weight="600"
         font-style="italic"
-        fill="url(#brass-grad)"
+        fill={`url(#${idPrefix}-brass-grad)`}
         fill-opacity="0.95"
       >
         B
       </text>
 
       <!-- Ember Focal Accent Spark -->
-      <circle cx="-1" cy="6" r="3.5" fill="url(#ember-grad)">
+      <circle cx="-1" cy="6" r="3.5" fill={`url(#${idPrefix}-ember-grad)`}>
         <animate attributeName="opacity" values="1;0.4;1" dur="2.4s" repeatCount="indefinite" />
       </circle>
     </g>

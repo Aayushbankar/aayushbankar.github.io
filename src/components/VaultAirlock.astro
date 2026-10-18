@@ -1,0 +1,537 @@
+---
+import UiMonogramSeal from './ui/MonogramSeal.astro';
+---
+
+<!-- Vault / Airlock Page Transition Lockup -->
+<div
+  id="vault-airlock"
+  data-astro-transition-persist="vault-airlock"
+  transition:persist="vault-airlock"
+  class="fixed inset-0 z-[120] select-none overflow-hidden"
+  aria-hidden="true"
+  data-state="idle"
+>
+  <!-- Left Blast Door Panel -->
+  <div
+    id="vault-door-left"
+    class="vault-panel absolute top-0 bottom-0 left-0 bg-[#0c0c0b] border-r border-brass-500/30 flex flex-col justify-between"
+  >
+    <!-- Dark titanium subtle mesh overlay wrapper (clips background only) -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#ede8dc_1px,transparent_1px)] [background-size:24px_24px]"></div>
+      <div class="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-bone-50/[0.04] to-transparent"></div>
+      <div class="absolute top-0 bottom-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-brass-500/60 to-transparent"></div>
+    </div>
+
+    <!-- Header Telemetry Stencil -->
+    <div class="relative p-5 sm:p-8 flex items-center gap-2.5">
+      <span class="w-2 h-2 rounded-full bg-ember-500 animate-pulse"></span>
+      <span class="font-mono text-[9px] sm:text-[10px] tracking-widest uppercase text-bone-500">
+        AIRLOCK // SEC-01 // LOW-LEVEL ARCH
+      </span>
+    </div>
+
+    <!-- Interlocking Mechanical Latches — Upper Cluster (above seal) -->
+    <div class="vault-latch-left-cluster absolute right-[1.5px] top-[22%] -translate-y-1/2 flex flex-col gap-2.5 pr-0.5 opacity-90 pointer-events-none">
+      <div class="w-2.5 h-6 bg-brass-500/80 rounded-l-sm border-l border-brass-400"></div>
+      <div class="vault-latch-tooth w-4 h-9 bg-ember-500/90 rounded-l-sm shadow-[0_0_10px_rgba(255,77,28,0.7)] transition-all duration-200"></div>
+      <div class="w-2.5 h-6 bg-brass-500/80 rounded-l-sm border-l border-brass-400"></div>
+    </div>
+
+    <!-- Left Half of Monogram Seal Assembly (Mechanically welded to left blast door seam) -->
+    <div
+      id="vault-door-seal-left"
+      class="vault-seal-half pointer-events-none absolute right-[1.5px] top-1/2 -translate-y-1/2 flex items-center justify-center"
+      style="transform: translate3d(50%, -50%, 0);"
+    >
+      <div
+        class="vault-seal-bracket relative flex items-center justify-center p-2 sm:p-3 rounded-full border border-brass-500/40 bg-[#0c0c0b]/95 shadow-[0_0_60px_rgba(0,0,0,0.95),0_0_35px_rgba(255,77,28,0.35)] backdrop-blur-md"
+      >
+        <UiMonogramSeal size={220} idPrefix="airlock-seal-l" class="w-32 h-32 sm:w-44 sm:h-44 md:w-52 md:h-52" />
+      </div>
+    </div>
+
+    <!-- Interlocking Mechanical Latches — Lower Cluster (below seal) -->
+    <div class="vault-latch-left-cluster absolute right-[1.5px] top-[78%] -translate-y-1/2 flex flex-col gap-2.5 pr-0.5 opacity-90 pointer-events-none">
+      <div class="w-2.5 h-6 bg-brass-500/80 rounded-l-sm border-l border-brass-400"></div>
+      <div class="vault-latch-tooth w-4 h-9 bg-ember-500/90 rounded-l-sm shadow-[0_0_10px_rgba(255,77,28,0.7)] transition-all duration-200"></div>
+      <div class="w-2.5 h-6 bg-brass-500/80 rounded-l-sm border-l border-brass-400"></div>
+    </div>
+
+    <!-- Footer Telemetry -->
+    <div class="relative p-5 sm:p-8 font-mono text-[8.5px] sm:text-[9.5px] text-bone-600 tracking-wider">
+      VAULT STATUS: <span class="text-brass-400 font-semibold">ENGAGED</span> · <span class="text-bone-500">0x9F4E</span>
+    </div>
+  </div>
+
+  <!-- Right Blast Door Panel -->
+  <div
+    id="vault-door-right"
+    class="vault-panel absolute top-0 bottom-0 right-0 bg-[#0c0c0b] border-l border-brass-500/30 flex flex-col justify-between"
+  >
+    <!-- Dark titanium subtle mesh overlay wrapper (clips background only) -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#ede8dc_1px,transparent_1px)] [background-size:24px_24px]"></div>
+      <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-bone-50/[0.04] to-transparent"></div>
+      <div class="absolute top-0 bottom-0 left-0 w-[1px] bg-gradient-to-b from-transparent via-brass-500/60 to-transparent"></div>
+    </div>
+
+    <!-- Header Telemetry Stencil -->
+    <div class="relative p-5 sm:p-8 flex items-center justify-end gap-2.5">
+      <span class="font-mono text-[9px] sm:text-[10px] tracking-widest uppercase text-bone-500">
+        PROTOCOL 0x7F // SEC-TRANSIT
+      </span>
+      <span class="w-2 h-2 rounded-full bg-brass-400"></span>
+    </div>
+
+    <!-- Interlocking Mechanical Latches — Upper Cluster (staggered mating slots) -->
+    <div class="vault-latch-right-cluster absolute left-[1.5px] top-[22%] -translate-y-1/2 flex flex-col gap-2.5 pl-0.5 opacity-90 pointer-events-none">
+      <div class="w-3.5 h-8 bg-brass-500/80 rounded-r-sm border-r border-brass-400"></div>
+      <div class="vault-latch-tooth w-2.5 h-6 bg-ember-500/90 rounded-r-sm shadow-[0_0_10px_rgba(255,77,28,0.7)] transition-all duration-200"></div>
+      <div class="w-3.5 h-8 bg-brass-500/80 rounded-r-sm border-r border-brass-400"></div>
+    </div>
+
+    <!-- Right Half of Monogram Seal Assembly (Mechanically welded to right blast door seam) -->
+    <div
+      id="vault-door-seal-right"
+      class="vault-seal-half pointer-events-none absolute left-[1.5px] top-1/2 -translate-y-1/2 flex items-center justify-center"
+      style="transform: translate3d(-50%, -50%, 0);"
+    >
+      <div
+        class="vault-seal-bracket relative flex items-center justify-center p-2 sm:p-3 rounded-full border border-brass-500/40 bg-[#0c0c0b]/95 shadow-[0_0_60px_rgba(0,0,0,0.95),0_0_35px_rgba(255,77,28,0.35)] backdrop-blur-md"
+      >
+        <UiMonogramSeal size={220} idPrefix="airlock-seal-r" class="w-32 h-32 sm:w-44 sm:h-44 md:w-52 md:h-52" />
+      </div>
+    </div>
+
+    <!-- Interlocking Mechanical Latches — Lower Cluster (staggered mating slots) -->
+    <div class="vault-latch-right-cluster absolute left-[1.5px] top-[78%] -translate-y-1/2 flex flex-col gap-2.5 pl-0.5 opacity-90 pointer-events-none">
+      <div class="w-3.5 h-8 bg-brass-500/80 rounded-r-sm border-r border-brass-400"></div>
+      <div class="vault-latch-tooth w-2.5 h-6 bg-ember-500/90 rounded-r-sm shadow-[0_0_10px_rgba(255,77,28,0.7)] transition-all duration-200"></div>
+      <div class="w-3.5 h-8 bg-brass-500/80 rounded-r-sm border-r border-brass-400"></div>
+    </div>
+
+    <!-- Footer Telemetry -->
+    <div class="relative p-5 sm:p-8 font-mono text-[8.5px] sm:text-[9.5px] text-bone-600 tracking-wider text-right">
+      LAT: 23.2156° N · LON: 72.6369° E
+    </div>
+  </div>
+
+  <!-- Center Seam High-Voltage Energy Line -->
+  <div
+    id="vault-seam"
+    class="pointer-events-none"
+  ></div>
+
+  <!-- Shockwave Clamp Radial Halo (Centered on Seam) -->
+  <div
+    id="vault-seal-flare"
+    class="pointer-events-none absolute left-1/2 top-1/2 w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-to-r from-ember-500/40 via-brass-500/50 to-ember-500/40 blur-2xl"
+  ></div>
+</div>
+
+<style>
+  /* Base state */
+  #vault-airlock {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #vault-airlock[data-state='closing'],
+  #vault-airlock[data-state='locked'],
+  #vault-airlock[data-state='unlatching'] {
+    visibility: visible;
+    opacity: 1 !important;
+    pointer-events: auto;
+  }
+
+  #vault-airlock[data-state='opening'] {
+    visibility: visible;
+    opacity: 1 !important;
+    pointer-events: none;
+  }
+
+  #vault-airlock[data-state='idle'] {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Blast Door Panels: Overlap by 1.5px each to guarantee zero subpixel seam crack */
+  #vault-door-left {
+    width: calc(50% + 1.5px);
+    transform: translate3d(calc(-100% - 24px), 0, 0);
+    opacity: 1 !important;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  #vault-door-right {
+    width: calc(50% + 1.5px);
+    transform: translate3d(calc(100% + 24px), 0, 0);
+    opacity: 1 !important;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  /* Seal Halves — Mounted onto door edges and clipped to their respective sides */
+  .vault-seal-half {
+    will-change: transform;
+    backface-visibility: hidden;
+    opacity: 1 !important;
+  }
+
+  #vault-door-seal-left {
+    clip-path: polygon(0% 0%, calc(50% + 0.5px) 0%, calc(50% + 0.5px) 100%, 0% 100%);
+  }
+
+  #vault-door-seal-right {
+    clip-path: polygon(calc(50% - 0.5px) 0%, 100% 0%, 100% 100%, calc(50% - 0.5px) 100%);
+  }
+
+  .vault-seal-bracket {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: scale(1);
+    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Center Seam Energy Line */
+  #vault-seam {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    transform: translate3d(-50%, 0, 0);
+    opacity: 0;
+    background: linear-gradient(to bottom, transparent, #ff4d1c 20%, #ff4d1c 80%, transparent);
+    box-shadow: 0 0 16px rgba(255, 77, 28, 0.9);
+  }
+
+  #vault-seal-flare {
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale(0.75);
+    transition: transform 520ms ease-out, opacity 520ms ease-out;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     CLOSING (Doors slide inward to center, seal forms)
+     Deliberate mechanical timing: 520ms
+     Heavy industrial inertia curve
+     ───────────────────────────────────────────────────────────── */
+  #vault-airlock[data-state='closing'] #vault-door-left,
+  #vault-airlock[data-state='closing'] #vault-door-right {
+    transform: translate3d(0, 0, 0);
+    transition: transform 520ms cubic-bezier(0.65, 0.05, 0.25, 1);
+  }
+
+  #vault-airlock[data-state='closing'] #vault-seam {
+    opacity: 1;
+    transition: opacity 220ms ease 300ms;
+  }
+
+  #vault-airlock[data-state='closing'] #vault-seal-flare {
+    opacity: 0.9;
+    transform: translate3d(-50%, -50%, 0) scale(1.4);
+    transition: transform 520ms ease-out, opacity 520ms ease-out;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     LOCKED (Holding state while document prepares)
+     Settled locking stage: ~340ms
+     ───────────────────────────────────────────────────────────── */
+  #vault-airlock[data-state='locked'] #vault-door-left,
+  #vault-airlock[data-state='locked'] #vault-door-right {
+    transform: translate3d(0, 0, 0);
+  }
+
+  #vault-airlock[data-state='locked'] #vault-seam {
+    opacity: 1;
+  }
+
+  #vault-airlock[data-state='locked'] #vault-seal-flare {
+    opacity: 0.45;
+    transform: translate3d(-50%, -50%, 0) scale(1.05);
+    transition: opacity 320ms ease, transform 320ms ease;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     STEP A: UNLATCHING / DISENGAGING (~180ms)
+     Before doors move, central "AB" seal unlocks (teeth release,
+     energy pulse cuts off) with pneumatic audio.
+     Doors and seal remain 100% fully opaque!
+     ───────────────────────────────────────────────────────────── */
+  #vault-airlock[data-state='unlatching'] #vault-door-left,
+  #vault-airlock[data-state='unlatching'] #vault-door-right {
+    transform: translate3d(0, 0, 0);
+  }
+
+  #vault-airlock[data-state='unlatching'] #vault-seam {
+    opacity: 0;
+    transition: opacity 120ms ease;
+  }
+
+  #vault-airlock[data-state='unlatching'] .vault-seal-bracket {
+    transform: scale(1.035);
+    transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #vault-airlock[data-state='unlatching'] #vault-seal-flare {
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale(1.1);
+    transition: opacity 160ms ease, transform 160ms ease;
+  }
+
+  #vault-airlock[data-state='unlatching'] .vault-latch-left-cluster {
+    transform: translate3d(-6px, -50%, 0);
+    transition: transform 180ms ease-out;
+  }
+
+  #vault-airlock[data-state='unlatching'] .vault-latch-right-cluster {
+    transform: translate3d(6px, -50%, 0);
+    transition: transform 180ms ease-out;
+  }
+
+  #vault-airlock[data-state='unlatching'] .vault-latch-tooth {
+    box-shadow: 0 0 2px rgba(255, 77, 28, 0.2);
+    transition: box-shadow 180ms ease-out;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     STEP B: OPENING (Doors Part & Slide Open: 600ms)
+     Heavy mechanical glide with smooth deceleration off-screen.
+     Doors and seal remain 100% fully opaque throughout entire slide!
+     ───────────────────────────────────────────────────────────── */
+  #vault-airlock[data-state='opening'] #vault-door-left {
+    transform: translate3d(calc(-100% - 24px), 0, 0);
+    transition: transform 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  #vault-airlock[data-state='opening'] #vault-door-right {
+    transform: translate3d(calc(100% + 24px), 0, 0);
+    transition: transform 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  #vault-airlock[data-state='opening'] .vault-seal-bracket {
+    transform: scale(1.035);
+  }
+
+  #vault-airlock[data-state='opening'] #vault-seam {
+    opacity: 0;
+  }
+
+  #vault-airlock[data-state='opening'] #vault-seal-flare {
+    opacity: 0;
+  }
+
+  #vault-airlock[data-state='opening'] .vault-latch-left-cluster {
+    transform: translate3d(-6px, -50%, 0);
+  }
+
+  #vault-airlock[data-state='opening'] .vault-latch-right-cluster {
+    transform: translate3d(6px, -50%, 0);
+  }
+
+  #vault-airlock[data-state='opening'] .vault-latch-tooth {
+    box-shadow: 0 0 2px rgba(255, 77, 28, 0.2);
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     PREFERS-REDUCED-MOTION FALLBACK
+     ───────────────────────────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    #vault-airlock {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  import { playAirlockLatch, playAirlockRelease, ensureAudioContext } from '../scripts/audio.js';
+
+  (function initVaultAirlock() {
+    if (typeof window === 'undefined') return;
+    if ((window as any).__VAULT_AIRLOCK_INITIALIZED__) return;
+    (window as any).__VAULT_AIRLOCK_INITIALIZED__ = true;
+
+    const CLOSE_DURATION_MS = 520;
+    const SETTLE_HOLD_MS = 340;
+    const UNLATCH_DURATION_MS = 180;
+    const OPEN_DURATION_MS = 600;
+    let watchdogTimer: any = null;
+    let unlatchTimer: any = null;
+    let openingTimer: any = null;
+    let latchTimeout: any = null;
+    let closeTimer: any = null;
+    let holdTimer: any = null;
+    let hasUAVisualTransition = false;
+
+    // Detect browser-native visual swipe transitions (e.g. Safari back/forward swipe)
+    window.addEventListener('popstate', (e: any) => {
+      if (e && e.hasUAVisualTransition) {
+        hasUAVisualTransition = true;
+        setTimeout(() => {
+          hasUAVisualTransition = false;
+        }, 800);
+      }
+    });
+
+    function getAirlock() {
+      return document.getElementById('vault-airlock');
+    }
+
+    function isReducedMotion() {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    function forceResetIdle() {
+      clearTimeout(watchdogTimer);
+      clearTimeout(unlatchTimer);
+      clearTimeout(openingTimer);
+      clearTimeout(latchTimeout);
+      clearTimeout(closeTimer);
+      clearTimeout(holdTimer);
+      const airlock = getAirlock();
+      if (airlock) {
+        airlock.setAttribute('data-state', 'idle');
+      }
+    }
+
+    function triggerUnlockSequence() {
+      clearTimeout(watchdogTimer);
+      clearTimeout(unlatchTimer);
+      clearTimeout(openingTimer);
+      const airlock = getAirlock();
+      if (!airlock) return;
+
+      const state = airlock.getAttribute('data-state');
+      if (state !== 'closing' && state !== 'locked') return;
+
+      // Step A: Unlatch / Disengage (~180ms)
+      // Before doors move, central seal unlocks (teeth release, energy pulse cuts off)
+      airlock.setAttribute('data-state', 'unlatching');
+
+      // Pneumatic audio release
+      try {
+        playAirlockRelease();
+      } catch (e) {}
+
+      // Step B: Doors Part & Slide Open (~600ms)
+      unlatchTimer = setTimeout(() => {
+        if (airlock.getAttribute('data-state') !== 'unlatching') return;
+        airlock.setAttribute('data-state', 'opening');
+
+        // Only transition to 'idle' (visibility: hidden) AFTER slide transition has 100% completed
+        openingTimer = setTimeout(() => {
+          if (airlock.getAttribute('data-state') === 'opening') {
+            airlock.setAttribute('data-state', 'idle');
+          }
+        }, OPEN_DURATION_MS + 40);
+      }, UNLATCH_DURATION_MS);
+    }
+
+    // Intercept navigation preparation: close doors before DOM swap
+    document.addEventListener('astro:before-preparation', (event: any) => {
+      if (isReducedMotion()) return;
+      if (hasUAVisualTransition) return;
+
+      // Skip intra-page anchor links or identical URLs
+      if (event.from && event.to) {
+        if (
+          event.from.origin === event.to.origin &&
+          event.from.pathname === event.to.pathname &&
+          event.from.search === event.to.search
+        ) {
+          return;
+        }
+      }
+
+      const airlock = getAirlock();
+      if (!airlock) return;
+
+      const originalLoader = event.loader;
+      event.loader = async () => {
+        if (event.signal && event.signal.aborted) {
+          forceResetIdle();
+          return;
+        }
+
+        // Unlock Web Audio context within user interaction frame
+        try {
+          ensureAudioContext();
+        } catch (e) {}
+
+        // Trigger door closing
+        airlock.setAttribute('data-state', 'closing');
+
+        // Play authoritative mechanical latch impact as blast doors contact (~440ms in)
+        clearTimeout(latchTimeout);
+        latchTimeout = setTimeout(() => {
+          const state = airlock.getAttribute('data-state');
+          if (state === 'closing' || state === 'locked') {
+            try {
+              playAirlockLatch();
+            } catch (e) {}
+          }
+        }, 440);
+
+        // Abort handler if Astro or user cancels navigation
+        const abortHandler = () => {
+          forceResetIdle();
+        };
+        if (event.signal) {
+          event.signal.addEventListener('abort', abortHandler, { once: true });
+        }
+
+        // Arm watchdog timer (fallback to ensure user never gets trapped)
+        clearTimeout(watchdogTimer);
+        watchdogTimer = setTimeout(() => {
+          const state = airlock.getAttribute('data-state');
+          if (state === 'closing' || state === 'locked') {
+            triggerUnlockSequence();
+          }
+        }, 4000);
+
+        // Await door closing transition (520ms) and settled locking stage (340ms) in parallel with document fetch
+        const closeAndLockPromise = new Promise<void>((resolve) => {
+          closeTimer = setTimeout(() => {
+            const state = airlock.getAttribute('data-state');
+            if (state === 'closing') {
+              airlock.setAttribute('data-state', 'locked');
+            }
+            holdTimer = setTimeout(resolve, SETTLE_HOLD_MS);
+          }, CLOSE_DURATION_MS);
+        });
+
+        try {
+          await Promise.all([originalLoader(), closeAndLockPromise]);
+          airlock.setAttribute('data-state', 'locked');
+        } catch (err) {
+          forceResetIdle();
+          throw err;
+        } finally {
+          if (event.signal) {
+            event.signal.removeEventListener('abort', abortHandler);
+          }
+        }
+      };
+    });
+
+    // When DOM is swapped to destination page: begin two-step unlocking sequence
+    document.addEventListener('astro:after-swap', () => {
+      triggerUnlockSequence();
+    });
+
+    // Safety net: on initial load or interrupted navigation, ensure sequence completes or resets
+    document.addEventListener('astro:page-load', () => {
+      const airlock = getAirlock();
+      if (!airlock) return;
+      const state = airlock.getAttribute('data-state');
+      if (state === 'closing' || state === 'locked') {
+        triggerUnlockSequence();
+      }
+    });
+  })();
+</script>

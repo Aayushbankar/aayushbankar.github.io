@@ -12,7 +12,7 @@ import { collab } from '../data/collab';
 const posts = await getCollection('research');
 const latestPosts = posts
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-  .slice(0, 3);
+  .slice(0, 4);
 
 const counts = [
   { k: String(allSystems.length), v: 'Systems shipped', href: '/systems' },
@@ -37,8 +37,8 @@ const heroName = ['AAYUSH', 'BANKAR'];
 ---
 
 <BaseLayout
-  title="Aayush Bankar — Systems Security & Low-Level Engineering"
-  description="Ground-truth security research, Linux kernel & Android vulnerability notes, and high-performance verifiable architectures."
+  title="Aayush Bankar — AI-Augmented Systems Builder · Empirical Security Researcher"
+  description="18-year-old diploma student directing modern AI agent workflows to architect, scaffold, and empirically verify complex technical systems."
 >
 
   <!-- ═══════════════════════════════════════════════════════════════
@@ -67,7 +67,7 @@ const heroName = ['AAYUSH', 'BANKAR'];
           <MonogramSeal class="w-32 h-32 sm:w-44 sm:h-44 lg:w-68 lg:h-68" />
           <div class="mt-4 space-y-1">
             <p class="font-micro text-[11px] tracking-[0.16em] uppercase text-bone-300 font-semibold">
-              Generalist Builder &amp; Systems Researcher
+              AI-Augmented Systems Builder · Empirical Security Researcher
             </p>
             <p class="font-micro text-[10px] tracking-[0.14em] uppercase text-bone-500">
               Gandhinagar, Gujarat · 23.2156° N, 72.6369° E
@@ -90,28 +90,32 @@ const heroName = ['AAYUSH', 'BANKAR'];
           </h1>
 
           <p class="font-display italic text-[clamp(1.3rem,2.4vw,1.9rem)] text-bone-50 mt-4 leading-tight hero-fade">
-            Building systems, breaking assumptions, and <em class="text-ember-400">proving it with code.</em>
+            Directing AI agent workflows to architect systems, <em class="text-ember-400">proving every layer with code.</em>
           </p>
 
           <p class="lede mt-3 !max-w-2xl text-[14px] sm:text-base hero-fade">
-            18-year-old student and generalist builder from Gandhinagar, Gujarat. Exploring across low-level systems,
-            production web architecture, offline edge AI, and security research — directing AI models to scaffold fast,
-            while personally diving deep to verify how things actually work under the hood.
+            18-year-old diploma student from Gandhinagar, Gujarat, directing modern AI agent workflows to architect, scaffold,
+            and empirically verify complex technical systems — grounded in OS fundamentals, QEMU/GDB testbenches, edge AI pipelines,
+            and high-craft UI. Scaffolding at AI speed, verified down to silicon truth.
           </p>
 
           <!-- CTAs -->
           <div class="flex flex-wrap items-center gap-3 mt-6 hero-fade">
             <a href="/systems" class="btn btn-primary">Explore All {allSystems.length} Systems →</a>
             <a href="/research" class="btn btn-ghost">Vulnerability Field Notes (4) →</a>
+            <a href="/research/ai-augmented-systems-engineering" class="btn btn-ghost !border-brass-500/40 !text-brass-300 hover:!text-bone-50">
+              <span class="w-1.5 h-1.5 rounded-full bg-brass-400 animate-pulse"></span>
+              Engineering Philosophy ↗
+            </a>
             <a href="/about" class="btn btn-ghost">About &amp; How I Work ↗</a>
           </div>
 
           <!-- Credential Badges -->
           <div class="flex flex-wrap gap-2 mt-5 hero-fade">
-            <span class="chip chip-brass">Generalist Builder</span>
+            <span class="chip chip-brass">AI-Augmented Systems Builder</span>
+            <span class="chip">Empirical Security Researcher</span>
             <span class="chip">Full-Stack &amp; Web</span>
-            <span class="chip">Systems &amp; Security</span>
-            <span class="chip">Offline AI &amp; Audio</span>
+            <span class="chip">Edge AI &amp; Audio</span>
             <span class="chip chip-ember">SIH 2026 · National Screening</span>
           </div>
 
@@ -545,6 +549,23 @@ const heroName = ['AAYUSH', 'BANKAR'];
             </div>
           </a>
         ))}
+      </div>
+
+      <!-- Engineering Philosophy Callout -->
+      <div class="mt-6 p-5 sm:p-6 rounded-2xl bg-ink-950/90 border border-brass-500/30 card-glare flex flex-col sm:flex-row sm:items-center justify-between gap-4" data-reveal>
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-brass-400 animate-pulse"></span>
+            <span class="font-micro text-[10px] text-brass-400 font-bold uppercase tracking-widest">Published Methodology</span>
+          </div>
+          <h4 class="font-display text-base sm:text-lg text-bone-50">AI-Augmented Systems Engineering</h4>
+          <p class="text-xs text-bone-400 max-w-xl">
+            A 5-phase empirical blueprint for orchestrating multi-agent LLMs in kernel vulnerability reproduction and verifiable systems without losing technical depth.
+          </p>
+        </div>
+        <a href="/research/ai-augmented-systems-engineering" class="btn btn-primary !py-2 !px-4 text-xs font-semibold whitespace-nowrap shrink-0">
+          Read Engineering Philosophy →
+        </a>
       </div>
     </div>
   </section>

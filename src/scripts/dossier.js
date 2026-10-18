@@ -468,6 +468,23 @@ function setupCommandPalette(signal) {
     });
 
     if (firstVisible) firstVisible.classList.add('selected');
+
+    // Dynamically toggle group titles based on whether any child items are visible
+    const groupTitles = results.querySelectorAll('.cmdk-group-title');
+    groupTitles.forEach((title) => {
+      let next = title.nextElementSibling;
+      let hasVisible = false;
+      while (next && !next.classList.contains('cmdk-group-title')) {
+        if (next.classList.contains('.cmdk-item') || next.matches('.cmdk-item')) {
+          if (next.style.display !== 'none') {
+            hasVisible = true;
+            break;
+          }
+        }
+        next = next.nextElementSibling;
+      }
+      title.style.display = hasVisible ? '' : 'none';
+    });
   }
 
   if (input) {
@@ -516,6 +533,7 @@ function setupCommandPalette(signal) {
     (e) => {
       const item = e.target.closest('.cmdk-item');
       if (item) {
+        e.preventDefault();
         executeItem(item);
       }
     },
@@ -550,7 +568,16 @@ function setupCommandPalette(signal) {
     } else if (item.href) {
       playSelect();
       closePalette();
-      window.location.href = item.href;
+      if (item.hasAttribute('download')) {
+        const dlLink = document.createElement('a');
+        dlLink.href = item.href;
+        dlLink.download = item.getAttribute('download') || '';
+        document.body.appendChild(dlLink);
+        dlLink.click();
+        document.body.removeChild(dlLink);
+      } else {
+        window.location.href = item.href;
+      }
     }
   }
 }

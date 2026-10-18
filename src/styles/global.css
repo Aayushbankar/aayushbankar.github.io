@@ -1304,3 +1304,12 @@
     transform: none;
   }
 }
+
+/* Vault Airlock: bypass default browser root crossfade so mechanical doors handle visual transit cleanly */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0s !important;
+  }
+}

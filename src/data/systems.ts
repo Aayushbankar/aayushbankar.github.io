@@ -183,13 +183,13 @@ export const allSystems: SystemProject[] = [
     name: 'Wolvie',
     category: 'Local Edge Voice Pipeline',
     domain: 'Edge AI & Pipelines',
-    status: 'Active Project',
+    status: 'Exploratory Prototype / Architectural Lab',
     badgeType: 'brass',
-    tagline: 'Sub-Second Offline Voice Assistant Pipeline',
+    tagline: 'Proof-of-Concept Offline Voice Loop Exploring Local GGUF Quantization & WebRTC on 8GB Hardware',
     description:
-      'An offline conversational voice assistant pipeline built for consumer laptops. Chains Silero Voice Activity Detection, faster-whisper speech recognition, llama.cpp quantized models, and Piper neural TTS over WebRTC audio streaming, achieving ~530ms round-trip latency without external APIs.',
+      'An exploratory proof-of-concept offline voice loop built as an architectural feasibility study on constrained 8GB consumer hardware. Orchestrates Silero Voice Activity Detection, faster-whisper INT8 speech recognition, llama.cpp quantized models, and Piper neural TTS over WebRTC, exploring local conversational latency boundaries without external cloud APIs.',
     overview:
-      'Wolvie provides a 100% private, on-device conversational voice interface without cloud dependencies or telemetry leaks. By breaking traditional monolithic voice agents into a tightly buffered micro-pipeline, audio travels from local microphone capture (Opus 48 kHz mono over WebRTC) directly into an INT8 Silero VAD segmenter. Detected speech is transcribed via faster-whisper in ~180ms, fed immediately into a local llama.cpp 7B Q4_K_M server running on CPU at 23 tok/s, and synthesized by Piper neural TTS in 95ms. The resulting round-trip latency (~530ms) delivers natural conversational pacing without GPU hardware acceleration.',
+      'Wolvie is an exploratory prototype and architectural feasibility laboratory investigating whether a private, sub-second conversational voice assistant loop can run entirely offline on standard 8GB consumer hardware (Intel Core i5-8350U, no dedicated GPU). By orchestrating a tightly buffered micro-pipeline, incoming audio from WebRTC microphone capture (Opus 48 kHz mono) is evaluated by an INT8 Silero VAD segmenter, transcribed via faster-whisper INT8 in ~180ms, fed into a local quantized llama.cpp 7B Q4_K_M server running on CPU at ~23 tok/s (~220ms), and synthesized by Piper neural TTS in ~95ms. The project established empirical benchmarks for edge quantization viability and latency trade-offs on resource-constrained systems.',
     plateImage: '/figures/card-wolvie.svg',
     benchmarks: [
       {
@@ -231,7 +231,7 @@ export const allSystems: SystemProject[] = [
       { key: 'Token Generation Speed', value: '23 tokens/second on Intel Core i5-8350U (4-core / 8-thread)' },
       { key: 'Speech Synthesis', value: 'Piper v1.2.0 neural vocoder (22 kHz Opus output, MOS 4.2)' },
       { key: 'Audio Transport', value: 'WebRTC getUserMedia + Opus audio track (32 kbps mono)' },
-      { key: 'Privacy & Cloud State', value: '100% offline, zero network egress, air-gapped operation' },
+      { key: 'Status & Feasibility', value: 'Exploratory Prototype / Architectural Lab (100% offline on 8GB)' },
     ],
     pipeline: [
       {
@@ -564,11 +564,11 @@ export const allSystems: SystemProject[] = [
     domain: 'Production & Platforms',
     status: 'Live in Production',
     badgeType: 'moss',
-    tagline: 'Zero-Cost Serverless Campus Portal Serving 500+ Daily Users',
+    tagline: 'Zero-Cost Static Campus Web Platform Serving 500+ Daily Users',
     description:
-      'The official digital platform for the Information Technology Department at Government Polytechnic Gandhinagar. Engineered from scratch with a serverless thick-client architecture utilizing Google Drive API as a headless CMS, delivering institutional notices, syllabus repositories, and student portals at $0 hosting expense.',
+      'The official digital platform for the Information Technology Department at Government Polytechnic Gandhinagar. Built with a Thick-Client Architecture utilizing Jekyll static compilation, HTML5, CSS3, and vanilla JavaScript client-side routing, hosted on GitHub Pages with 0 cost while serving 500+ daily campus users.',
     overview:
-      'Built and maintained as the official primary web presence for the IT Department at Govt. Polytechnic Gandhinagar. Because government educational departments typically lack recurring cloud hosting budgets, this project architected a thick-client headless CMS solution: faculty members update circulars, exam schedules, and learning materials inside standard Google Drive folders, and the front-end fetches and renders these assets securely via Google Drive REST APIs and client-side caching. Deployed via GitHub Pages with automated CI/CD, delivering high availability to 500+ daily students and faculty members at zero operating cost.',
+      'Built and maintained as the official primary web presence for the IT Department at Govt. Polytechnic Gandhinagar. Designed for zero recurring infrastructure overhead, the platform implements a thick-client architecture with Jekyll static site compilation, semantic HTML5, CSS3, and modular vanilla JavaScript client-side routing. Deployed via GitHub Pages with automated CI/CD at ₹0 hosting cost, delivering institutional circulars, academic syllabi, and student resources with sub-400ms loading speeds to 500+ daily campus users.',
     plateImage: '/figures/card-itgpg.svg',
     benchmarks: [
       {
@@ -579,7 +579,7 @@ export const allSystems: SystemProject[] = [
       {
         label: 'Hosting Cost',
         value: '₹0.00 / month',
-        detail: 'Permanent zero-cost architecture utilizing GitHub Pages & Google APIs',
+        detail: 'Permanent zero-cost architecture hosted on GitHub Pages static edge',
       },
       {
         label: 'Production Uptime',
@@ -593,21 +593,22 @@ export const allSystems: SystemProject[] = [
       },
     ],
     specSheet: [
-      { key: 'Static Site Generator', value: 'Jekyll with automated GitHub Pages edge deployment' },
-      { key: 'Headless CMS', value: 'Google Drive API integration for real-time document publishing' },
-      { key: 'Frontend Engineering', value: 'Modular Vanilla JavaScript, semantic HTML5, Bootstrap 5.3' },
-      { key: 'Caching Layer', value: 'Client-side LocalStorage and SessionStorage caching for circulars' },
+      { key: 'Architecture', value: 'Thick-Client Architecture with vanilla JavaScript client-side routing' },
+      { key: 'Static Compilation', value: 'Jekyll static compilation with automated GitHub Pages edge deployment' },
+      { key: 'Frontend Stack', value: 'HTML5, CSS3, and modular Vanilla JavaScript (Zero framework overhead)' },
+      { key: 'Hosting & CDN', value: 'GitHub Pages with 0 cost (Permanent zero infrastructure budget)' },
+      { key: 'Active Scale', value: 'Serving 500+ daily campus users (students, faculty, and administration)' },
       { key: 'Accessibility & Mobile', value: 'Responsive across 320px to 4K displays with ARIA standards' },
       { key: 'Status', value: 'Official departmental website currently active in production' },
       { key: 'Live URL', value: 'https://itgpg.github.io/it/' },
     ],
-    tech: ['Jekyll', 'GitHub Pages', 'Bootstrap 5.3', 'Google Drive API', 'Vanilla JavaScript'],
+    tech: ['Jekyll', 'GitHub Pages', 'HTML5', 'CSS3', 'Vanilla JavaScript'],
     repoUrl: 'https://github.com/itgpg/it',
     liveUrl: 'https://itgpg.github.io/it/',
     highlights: [
       'Official departmental web portal for Government Polytechnic Gandhinagar.',
-      'Sustains 500+ daily active student users with 99.98% uptime at $0 hosting expense.',
-      'Allows non-technical faculty to publish circulars directly through Google Drive.',
+      'Sustains 500+ daily active campus users with 99.98% uptime at $0 hosting expense.',
+      'Thick-client routing in vanilla JavaScript with Jekyll static compilation.',
     ],
     verification: 'Live in production, serving hundreds of students and faculty members daily.',
   },

@@ -168,6 +168,15 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
           <span class="w-2 h-2 rounded-full bg-moss-500"></span>
           <span class="text-bone-400 uppercase tracking-wider">100% Locally Reproducible</span>
         </div>
+        <span class="text-bone-700 hidden sm:inline">/</span>
+        <a
+          href="/evidence/CVE-2026-46242_Technical_Writeup.pdf"
+          download="CVE-2026-46242_Technical_Writeup.pdf"
+          class="chip chip-brass hover:!border-ember-500 hover:!text-ember-300 transition-colors inline-flex items-center gap-1.5"
+        >
+          <span>📄</span>
+          <span>Download Whitepaper (26p LaTeX PDF) ↓</span>
+        </a>
       </div>
     </header>
 
@@ -251,6 +260,16 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
                 {track.articleSlug && (
                   <a href={`/research/${track.articleSlug}`} class="btn btn-ghost w-full text-center !py-2 !text-xs block">
                     Read Complete Field Note &amp; Teardown →
+                  </a>
+                )}
+
+                {track.id === 'bad-epoll' && (
+                  <a
+                    href="/evidence/CVE-2026-46242_Technical_Writeup.pdf"
+                    download="CVE-2026-46242_Technical_Writeup.pdf"
+                    class="btn btn-primary w-full text-center !py-2.5 !text-xs font-semibold block"
+                  >
+                    Download Whitepaper (26p LaTeX PDF) ↓
                   </a>
                 )}
               </div>
@@ -446,6 +465,16 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
                           class="text-brass-400 hover:text-bone-50 font-semibold transition-colors flex items-center gap-1 text-xs py-1"
                         >
                           [Ledger ↗]
+                        </a>
+                      )}
+                      {post.id === 'cve-2026-46242-bad-epoll' && (
+                        <a
+                          href="/evidence/CVE-2026-46242_Technical_Writeup.pdf"
+                          download="CVE-2026-46242_Technical_Writeup.pdf"
+                          class="btn btn-ghost !py-1.5 !px-2.5 !text-[10px] sm:!text-[11px] flex items-center gap-1 text-ember-400 hover:text-bone-50 border-ember-500/40"
+                          title="Download 26-page LaTeX whitepaper PDF"
+                        >
+                          <span>Whitepaper (26p PDF) ↓</span>
                         </a>
                       )}
                       <a
